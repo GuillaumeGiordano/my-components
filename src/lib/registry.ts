@@ -62,6 +62,11 @@ export const categories: ComponentCategory[] = [
 				slug: 'tooltip',
 				label: 'Tooltip',
 				description: 'Info-bulle accessible sur hover/focus, 4 positions, flèche CSS'
+			},
+			{
+				slug: 'collapse',
+				label: 'Collapse',
+				description: 'Accordéon natif <details>/<summary> avec animation CSS fluide'
 			}
 		]
 	},
