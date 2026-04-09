@@ -1,0 +1,103 @@
+/* ==========================================================================
+   DESIGN TOKENS — modifier ici pour personnaliser par client
+   ========================================================================== */
+
+:root {
+  /* -------------------------------------------------------------------
+     COULEURS — FOND
+     ------------------------------------------------------------------- */
+  --bg-base:    #ffffff;   /* fond principal de la page            */
+  --bg-subtle:  #f8fafc;   /* sidebar, header                      */
+  --bg-muted:   #f1f5f9;   /* preview stage, zones grisées         */
+  --bg-hover:   #e2e8f0;   /* survol d'éléments interactifs        */
+
+  /* -------------------------------------------------------------------
+     COULEURS — BORDURES
+     ------------------------------------------------------------------- */
+  --border:       #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  /* -------------------------------------------------------------------
+     COULEURS — TEXTE
+     ------------------------------------------------------------------- */
+  --text-base:    #1e293b;  /* texte principal                      */
+  --text-muted:   #475569;  /* texte secondaire                     */
+  --text-subtle:  #94a3b8;  /* texte tertiaire, placeholders        */
+  --text-heading: #0f172a;  /* titres                               */
+
+  /* -------------------------------------------------------------------
+     COULEURS — PRIMAIRE (changer ici pour adapter à un client)
+     ------------------------------------------------------------------- */
+  --primary:          #2563eb;  /* couleur d'accentuation principale  */
+  --primary-hover:    #1d4ed8;  /* hover sur éléments primaires       */
+  --primary-fg:       #ffffff;  /* texte sur fond primaire            */
+  --primary-subtle:   #dbeafe;  /* fond primaire léger                */
+  --primary-subtle-fg:#1d4ed8;  /* texte sur fond primaire léger      */
+
+  /* -------------------------------------------------------------------
+     COULEURS — FOOTER (sombre par défaut, indépendant du thème)
+     ------------------------------------------------------------------- */
+  --footer-bg:          #0f172a;
+  --footer-text:        #cbd5e1;
+  --footer-text-muted:  #94a3b8;
+  --footer-text-subtle: #475569;
+  --footer-border:      #1e293b;
+  --footer-brand:       #ffffff;
+
+  /* -------------------------------------------------------------------
+     FORME
+     ------------------------------------------------------------------- */
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   8px;
+  --radius-xl:   10px;
+  --radius-full: 9999px;
+
+  /* -------------------------------------------------------------------
+     OMBRES
+     ------------------------------------------------------------------- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  /* -------------------------------------------------------------------
+     TYPOGRAPHIE
+     ------------------------------------------------------------------- */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+
+  /* -------------------------------------------------------------------
+     TRANSITIONS
+     ------------------------------------------------------------------- */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease;
+}
+
+/* ==========================================================================
+   MODE SOMBRE — les composants basculent automatiquement
+   ========================================================================== */
+
+.dark {
+  --bg-base:    #0f172a;
+  --bg-subtle:  #1e293b;
+  --bg-muted:   #1e293b;
+  --bg-hover:   #334155;
+
+  --border:       #334155;
+  --border-strong: #475569;
+
+  --text-base:    #f1f5f9;
+  --text-muted:   #94a3b8;
+  --text-subtle:  #64748b;
+  --text-heading: #f8fafc;
+
+  --primary:          #3b82f6;
+  --primary-hover:    #2563eb;
+  --primary-fg:       #ffffff;
+  --primary-subtle:   #1e3a8a;
+  --primary-subtle-fg:#93c5fd;
+
+  /* Le footer devient encore plus sombre en dark mode */
+  --footer-bg:          #020617;
+  --footer-border:      #0f172a;
+}

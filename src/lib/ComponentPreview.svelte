@@ -46,19 +46,20 @@
 	.preview-root {
 		display: flex;
 		flex-direction: column;
-		gap: 0;
-		border: 1px solid #e2e8f0;
-		border-radius: 8px;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
 		overflow: hidden;
-		background: #fff;
+		background: var(--bg-base);
+		transition: border-color var(--transition-base);
 	}
 
 	.toolbar {
 		display: flex;
 		gap: 4px;
 		padding: 8px 12px;
-		background: #f8fafc;
-		border-bottom: 1px solid #e2e8f0;
+		background: var(--bg-subtle);
+		border-bottom: 1px solid var(--border);
+		transition: background var(--transition-base), border-color var(--transition-base);
 	}
 
 	.toolbar-btn {
@@ -67,52 +68,51 @@
 		gap: 6px;
 		padding: 6px 12px;
 		border: 1px solid transparent;
-		border-radius: 6px;
+		border-radius: var(--radius-md);
 		background: transparent;
 		cursor: pointer;
 		font-size: 13px;
-		color: #64748b;
-		transition: all 0.15s ease;
+		color: var(--text-muted);
+		transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
 	}
 
 	.toolbar-btn:hover {
-		background: #e2e8f0;
-		color: #1e293b;
+		background: var(--bg-hover);
+		color: var(--text-base);
 	}
 
 	.toolbar-btn.active {
-		background: #fff;
-		border-color: #e2e8f0;
-		color: #1e293b;
+		background: var(--bg-base);
+		border-color: var(--border);
+		color: var(--text-base);
 		font-weight: 500;
-		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+		box-shadow: var(--shadow-sm);
 	}
 
 	.width-hint {
 		font-size: 11px;
-		color: #94a3b8;
-		font-family: monospace;
+		color: var(--text-subtle);
+		font-family: var(--font-mono);
 	}
 
 	.preview-stage {
 		padding: 24px;
-		background: #f1f5f9;
+		background: var(--bg-muted);
 		min-height: 200px;
 		display: flex;
 		justify-content: center;
+		transition: background var(--transition-base);
 	}
 
 	.preview-frame {
 		width: 100%;
-		background: #fff;
-		border-radius: 4px;
-		transition: max-width 0.3s ease;
+		background: var(--bg-base);
+		border-radius: var(--radius-sm);
+		transition: max-width var(--transition-base), background var(--transition-base);
 		overflow: hidden;
 	}
 
 	.preview-frame.has-max-width {
-		box-shadow:
-			0 4px 6px -1px rgba(0, 0, 0, 0.1),
-			0 2px 4px -1px rgba(0, 0, 0, 0.06);
+		box-shadow: var(--shadow-md);
 	}
 </style>

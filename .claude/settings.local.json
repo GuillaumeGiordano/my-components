@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(npx sv:*)",
-      "Bash(printf '\\\\n\\\\n')"
+      "Bash(printf '\\\\n\\\\n')",
+      "Bash(printf 'y\\\\n\\\\n')"
     ]
   }
 }

@@ -1,19 +1,22 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 	import { categories } from '$lib/registry';
-	import favicon from '$lib/assets/favicon.svg';
+	import { theme } from '$lib/theme.svelte';
+	import ThemeToggle from '$lib/components/ui/ThemeToggle.svelte';
+	import '../app.css';
 
 	let { children } = $props();
-</script>
 
-<svelte:head>
-	<link rel="icon" href={favicon} />
-</svelte:head>
+	// Init theme on client only (localStorage + prefers-color-scheme)
+	onMount(() => theme.init());
+</script>
 
 <div class="app">
 	<aside class="sidebar">
 		<div class="sidebar-header">
 			<a href="/" class="logo">🧩 My Components</a>
+			<ThemeToggle />
 		</div>
 
 		<nav class="sidebar-nav">
@@ -50,48 +53,41 @@
 </div>
 
 <style>
-	:global(*, *::before, *::after) {
-		box-sizing: border-box;
-		margin: 0;
-		padding: 0;
-	}
-
-	:global(body) {
-		font-family:
-			-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-		color: #1e293b;
-		background: #fff;
-	}
-
 	.app {
 		display: flex;
 		min-height: 100vh;
+		background: var(--bg-base);
 	}
 
 	.sidebar {
 		width: 240px;
 		flex-shrink: 0;
-		border-right: 1px solid #e2e8f0;
-		background: #f8fafc;
+		border-right: 1px solid var(--border);
+		background: var(--bg-subtle);
 		display: flex;
 		flex-direction: column;
 		position: sticky;
 		top: 0;
 		height: 100vh;
 		overflow-y: auto;
+		transition:
+			background var(--transition-base),
+			border-color var(--transition-base);
 	}
 
 	.sidebar-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		padding: 20px 16px 16px;
-		border-bottom: 1px solid #e2e8f0;
+		border-bottom: 1px solid var(--border);
 	}
 
 	.logo {
-		font-size: 16px;
+		font-size: 15px;
 		font-weight: 700;
-		color: #1e293b;
+		color: var(--text-base);
 		text-decoration: none;
-		display: block;
 	}
 
 	.sidebar-nav {
@@ -104,7 +100,7 @@
 	.empty-hint {
 		padding: 16px 8px;
 		font-size: 13px;
-		color: #94a3b8;
+		color: var(--text-subtle);
 		line-height: 1.6;
 	}
 
@@ -117,39 +113,39 @@
 
 	.nav-category {
 		padding: 6px 8px;
-		font-size: 12px;
-		font-weight: 600;
+		font-size: 11px;
+		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		color: #64748b;
+		letter-spacing: 0.06em;
+		color: var(--text-subtle);
 		text-decoration: none;
-		border-radius: 4px;
-		transition: background 0.1s;
+		border-radius: var(--radius-md);
+		transition: background var(--transition-fast), color var(--transition-fast);
 	}
 
 	.nav-category:hover,
 	.nav-category.active {
-		background: #e2e8f0;
-		color: #1e293b;
+		background: var(--bg-hover);
+		color: var(--text-base);
 	}
 
 	.nav-component {
 		padding: 5px 8px 5px 16px;
 		font-size: 13px;
-		color: #475569;
+		color: var(--text-muted);
 		text-decoration: none;
-		border-radius: 4px;
-		transition: background 0.1s;
+		border-radius: var(--radius-md);
+		transition: background var(--transition-fast), color var(--transition-fast);
 	}
 
 	.nav-component:hover {
-		background: #e2e8f0;
-		color: #1e293b;
+		background: var(--bg-hover);
+		color: var(--text-base);
 	}
 
 	.nav-component.active {
-		background: #dbeafe;
-		color: #1d4ed8;
+		background: var(--primary-subtle);
+		color: var(--primary-subtle-fg);
 		font-weight: 500;
 	}
 

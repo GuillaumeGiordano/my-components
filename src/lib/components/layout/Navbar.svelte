@@ -22,7 +22,6 @@
 	<div class="navbar-inner">
 		<a href="/" class="navbar-brand">{brand}</a>
 
-		<!-- Desktop nav -->
 		<nav class="navbar-links" aria-label="Navigation principale">
 			{#each links as link}
 				<a href={link.href} class="nav-link">{link.label}</a>
@@ -34,7 +33,6 @@
 				<a href={ctaHref} class="btn-cta">{ctaLabel}</a>
 			{/if}
 
-			<!-- Hamburger (mobile) -->
 			<button
 				class="hamburger"
 				aria-label="Toggle menu"
@@ -50,7 +48,6 @@
 		</div>
 	</div>
 
-	<!-- Mobile menu -->
 	{#if menuOpen}
 		<nav class="mobile-menu" aria-label="Navigation mobile">
 			{#each links as link}
@@ -65,9 +62,12 @@
 
 <style>
 	.navbar {
-		background: #fff;
-		border-bottom: 1px solid #e2e8f0;
+		background: var(--bg-base);
+		border-bottom: 1px solid var(--border);
 		position: relative;
+		transition:
+			background var(--transition-base),
+			border-color var(--transition-base);
 	}
 
 	.navbar-inner {
@@ -81,9 +81,10 @@
 	.navbar-brand {
 		font-size: 18px;
 		font-weight: 700;
-		color: #1e293b;
+		color: var(--text-heading);
 		text-decoration: none;
 		flex-shrink: 0;
+		transition: color var(--transition-fast);
 	}
 
 	.navbar-links {
@@ -95,15 +96,15 @@
 	.nav-link {
 		padding: 6px 12px;
 		font-size: 14px;
-		color: #475569;
+		color: var(--text-muted);
 		text-decoration: none;
-		border-radius: 6px;
-		transition: background 0.15s, color 0.15s;
+		border-radius: var(--radius-md);
+		transition: background var(--transition-fast), color var(--transition-fast);
 	}
 
 	.nav-link:hover {
-		background: #f1f5f9;
-		color: #1e293b;
+		background: var(--bg-muted);
+		color: var(--text-base);
 	}
 
 	.navbar-actions {
@@ -117,15 +118,15 @@
 		padding: 8px 16px;
 		font-size: 14px;
 		font-weight: 500;
-		color: #fff;
-		background: #2563eb;
+		color: var(--primary-fg);
+		background: var(--primary);
 		text-decoration: none;
-		border-radius: 6px;
-		transition: background 0.15s;
+		border-radius: var(--radius-md);
+		transition: background var(--transition-fast);
 	}
 
 	.btn-cta:hover {
-		background: #1d4ed8;
+		background: var(--primary-hover);
 	}
 
 	.hamburger {
@@ -136,36 +137,37 @@
 		background: transparent;
 		border: none;
 		cursor: pointer;
-		border-radius: 4px;
-		color: #475569;
-		transition: color 0.15s, background 0.15s;
+		border-radius: var(--radius-md);
+		color: var(--text-muted);
+		transition: color var(--transition-fast), background var(--transition-fast);
 	}
 
 	.hamburger:hover {
-		color: #1e293b;
-		background: #f1f5f9;
+		color: var(--text-base);
+		background: var(--bg-muted);
 	}
 
 	.mobile-menu {
 		display: flex;
 		flex-direction: column;
 		padding: 8px 16px 16px;
-		border-top: 1px solid #f1f5f9;
+		border-top: 1px solid var(--border);
 		gap: 2px;
+		background: var(--bg-base);
 	}
 
 	.mobile-link {
 		padding: 10px 8px;
 		font-size: 15px;
-		color: #475569;
+		color: var(--text-muted);
 		text-decoration: none;
-		border-radius: 6px;
-		transition: background 0.15s;
+		border-radius: var(--radius-md);
+		transition: background var(--transition-fast), color var(--transition-fast);
 	}
 
 	.mobile-link:hover {
-		background: #f1f5f9;
-		color: #1e293b;
+		background: var(--bg-muted);
+		color: var(--text-base);
 	}
 
 	.mobile-cta {
@@ -173,18 +175,20 @@
 		padding: 10px;
 		font-size: 15px;
 		font-weight: 500;
-		color: #fff;
-		background: #2563eb;
+		color: var(--primary-fg);
+		background: var(--primary);
 		text-decoration: none;
-		border-radius: 6px;
+		border-radius: var(--radius-md);
 		text-align: center;
+		transition: background var(--transition-fast);
+	}
+
+	.mobile-cta:hover {
+		background: var(--primary-hover);
 	}
 
 	@media (max-width: 640px) {
-		.navbar-links {
-			display: none;
-		}
-
+		.navbar-links,
 		.btn-cta {
 			display: none;
 		}

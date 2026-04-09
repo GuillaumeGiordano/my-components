@@ -22,7 +22,7 @@
 		aria-label={collapsed ? 'Ouvrir le menu' : 'Réduire le menu'}
 		onclick={() => (collapsed = !collapsed)}
 	>
-		<ChevronLeft size={14} class={collapsed ? 'rotated' : ''} />
+		<ChevronLeft size={14} />
 	</button>
 
 	<nav class="sidebar-nav">
@@ -59,10 +59,13 @@
 		display: flex;
 		flex-direction: column;
 		width: 220px;
-		background: #f8fafc;
-		border-right: 1px solid #e2e8f0;
+		background: var(--bg-subtle);
+		border-right: 1px solid var(--border);
 		padding: 16px 0;
-		transition: width 0.25s ease;
+		transition:
+			width var(--transition-base),
+			background var(--transition-base),
+			border-color var(--transition-base);
 		position: relative;
 		min-height: 300px;
 	}
@@ -77,26 +80,30 @@
 		right: -12px;
 		width: 24px;
 		height: 24px;
-		background: #fff;
-		border: 1px solid #e2e8f0;
-		border-radius: 50%;
+		background: var(--bg-base);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-full);
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		cursor: pointer;
-		color: #64748b;
+		color: var(--text-muted);
 		z-index: 1;
-		transition: color 0.15s, box-shadow 0.15s;
 		padding: 0;
+		transition:
+			color var(--transition-fast),
+			box-shadow var(--transition-fast),
+			background var(--transition-base),
+			border-color var(--transition-base);
 	}
 
 	.collapse-btn:hover {
-		color: #1e293b;
-		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+		color: var(--text-base);
+		box-shadow: var(--shadow-md);
 	}
 
 	.collapse-btn :global(svg) {
-		transition: transform 0.25s ease;
+		transition: transform var(--transition-base);
 	}
 
 	.sidebar.collapsed .collapse-btn :global(svg) {
@@ -107,7 +114,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 16px;
-		padding: 8px 8px;
+		padding: 8px;
 		overflow: hidden;
 	}
 
@@ -123,7 +130,7 @@
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
-		color: #94a3b8;
+		color: var(--text-subtle);
 		white-space: nowrap;
 	}
 
@@ -133,22 +140,22 @@
 		gap: 10px;
 		padding: 8px;
 		font-size: 14px;
-		color: #475569;
+		color: var(--text-muted);
 		text-decoration: none;
-		border-radius: 6px;
+		border-radius: var(--radius-md);
 		white-space: nowrap;
-		transition: background 0.15s, color 0.15s;
+		transition: background var(--transition-fast), color var(--transition-fast);
 		min-width: 0;
 	}
 
 	.sidebar-link:hover {
-		background: #e2e8f0;
-		color: #1e293b;
+		background: var(--bg-hover);
+		color: var(--text-base);
 	}
 
 	.sidebar-link.active {
-		background: #dbeafe;
-		color: #1d4ed8;
+		background: var(--primary-subtle);
+		color: var(--primary-subtle-fg);
 		font-weight: 500;
 	}
 

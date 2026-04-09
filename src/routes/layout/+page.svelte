@@ -34,12 +34,12 @@
 	h1 {
 		font-size: 26px;
 		font-weight: 700;
-		color: #0f172a;
+		color: var(--text-heading);
 	}
 
 	.subtitle {
 		margin-top: -16px;
-		color: #64748b;
+		color: var(--text-muted);
 		font-size: 15px;
 	}
 
@@ -54,27 +54,31 @@
 		flex-direction: column;
 		gap: 6px;
 		padding: 20px;
-		border: 1px solid #e2e8f0;
-		border-radius: 10px;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-xl);
 		text-decoration: none;
 		color: inherit;
-		transition: border-color 0.15s, box-shadow 0.15s;
+		background: var(--bg-base);
+		transition:
+			border-color var(--transition-fast),
+			box-shadow var(--transition-fast),
+			background var(--transition-base);
 	}
 
 	.component-card:hover {
-		border-color: #93c5fd;
-		box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+		border-color: var(--primary);
+		box-shadow: var(--shadow-md);
 	}
 
 	.component-card h2 {
 		font-size: 15px;
 		font-weight: 600;
-		color: #1e293b;
+		color: var(--text-base);
 	}
 
 	.component-card p {
 		font-size: 13px;
-		color: #64748b;
+		color: var(--text-muted);
 		line-height: 1.5;
 	}
 </style>

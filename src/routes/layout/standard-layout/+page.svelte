@@ -5,6 +5,7 @@
 	import Sidebar from '$lib/components/layout/Sidebar.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
 	import { LayoutDashboard, FolderOpen, Users } from '@lucide/svelte';
+	import '$lib/styles/demo-page.css';
 
 	const navLinks = [
 		{ label: 'Accueil', href: '#' },
@@ -51,18 +52,15 @@
 				{#snippet header()}
 					<Navbar brand="Acme" links={navLinks} ctaLabel="Action" ctaHref="#" />
 				{/snippet}
-
 				{#snippet sidebar()}
 					<Sidebar groups={sidebarGroups} />
 				{/snippet}
-
 				{#snippet main()}
 					<div class="demo-content">
 						<h3>Contenu principal</h3>
-						<p>Cet espace est prévu pour le contenu de la page. La sidebar est à gauche, la navbar en haut, le footer en bas.</p>
+						<p>Sidebar à gauche, navbar en haut, footer en bas.</p>
 					</div>
 				{/snippet}
-
 				{#snippet footer()}
 					<Footer brand="Acme" columns={footerColumns} copyright="© 2026 Acme" />
 				{/snippet}
@@ -77,14 +75,12 @@
 				{#snippet header()}
 					<Navbar brand="Acme" links={navLinks} />
 				{/snippet}
-
 				{#snippet main()}
 					<div class="demo-content">
 						<h3>Contenu pleine largeur</h3>
-						<p>Layout sans sidebar — idéal pour les pages de contenu ou les landing pages.</p>
+						<p>Layout sans sidebar — idéal pour les pages de contenu.</p>
 					</div>
 				{/snippet}
-
 				{#snippet footer()}
 					<Footer brand="Acme" copyright="© 2026 Acme" />
 				{/snippet}
@@ -106,7 +102,7 @@
 			</tbody>
 		</table>
 
-		<h2 style="margin-top: 20px;">Props</h2>
+		<h2>Props</h2>
 		<table>
 			<thead>
 				<tr><th>Prop</th><th>Type</th><th>Défaut</th><th>Description</th></tr>
@@ -119,91 +115,22 @@
 </div>
 
 <style>
-	.page {
-		display: flex;
-		flex-direction: column;
-		gap: 32px;
-	}
-
-	.page-header h1 {
-		font-size: 26px;
-		font-weight: 700;
-		color: #0f172a;
-		margin-bottom: 6px;
-	}
-
-	.page-header p {
-		color: #64748b;
-		font-size: 15px;
-	}
-
-	.variant {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-	}
-
-	.variant h2 {
-		font-size: 14px;
-		font-weight: 600;
-		color: #64748b;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-	}
-
 	.demo-content {
 		display: flex;
 		flex-direction: column;
 		gap: 8px;
+		padding: 4px 0;
 	}
 
 	.demo-content h3 {
 		font-size: 16px;
 		font-weight: 600;
-		color: #1e293b;
+		color: var(--text-base);
 	}
 
 	.demo-content p {
 		font-size: 14px;
-		color: #64748b;
+		color: var(--text-muted);
 		line-height: 1.6;
-	}
-
-	.props-table h2 {
-		font-size: 16px;
-		font-weight: 600;
-		color: #1e293b;
-		margin-bottom: 12px;
-	}
-
-	table {
-		width: 100%;
-		border-collapse: collapse;
-		font-size: 13px;
-	}
-
-	th {
-		text-align: left;
-		padding: 8px 12px;
-		background: #f8fafc;
-		border-bottom: 1px solid #e2e8f0;
-		color: #475569;
-		font-weight: 600;
-	}
-
-	td {
-		padding: 8px 12px;
-		border-bottom: 1px solid #f1f5f9;
-		color: #1e293b;
-	}
-
-	td:first-child {
-		font-family: monospace;
-		color: #7c3aed;
-	}
-
-	td:nth-child(2) {
-		font-family: monospace;
-		color: #0369a1;
 	}
 </style>

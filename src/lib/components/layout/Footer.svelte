@@ -49,8 +49,11 @@
 
 <style>
 	.footer {
-		background: #0f172a;
-		color: #cbd5e1;
+		background: var(--footer-bg);
+		color: var(--footer-text);
+		transition:
+			background var(--transition-base),
+			color var(--transition-base);
 	}
 
 	.footer-inner {
@@ -71,12 +74,12 @@
 	.brand-name {
 		font-size: 18px;
 		font-weight: 700;
-		color: #fff;
+		color: var(--footer-brand);
 	}
 
 	.tagline {
 		font-size: 14px;
-		color: #94a3b8;
+		color: var(--footer-text-muted);
 		line-height: 1.6;
 		max-width: 240px;
 	}
@@ -99,7 +102,7 @@
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
-		color: #fff;
+		color: var(--footer-brand);
 	}
 
 	.col-links {
@@ -111,23 +114,23 @@
 
 	.footer-link {
 		font-size: 14px;
-		color: #94a3b8;
+		color: var(--footer-text-muted);
 		text-decoration: none;
-		transition: color 0.15s;
+		transition: color var(--transition-fast);
 	}
 
 	.footer-link:hover {
-		color: #e2e8f0;
+		color: var(--footer-text);
 	}
 
 	.footer-bottom {
 		padding: 16px 32px;
-		border-top: 1px solid #1e293b;
+		border-top: 1px solid var(--footer-border);
 	}
 
 	.copyright {
 		font-size: 13px;
-		color: #475569;
+		color: var(--footer-text-subtle);
 	}
 
 	@media (max-width: 640px) {

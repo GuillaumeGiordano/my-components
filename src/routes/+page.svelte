@@ -46,11 +46,11 @@
 	h1 {
 		font-size: 28px;
 		font-weight: 700;
-		color: #0f172a;
+		color: var(--text-heading);
 	}
 
 	.subtitle {
-		color: #64748b;
+		color: var(--text-muted);
 		font-size: 15px;
 		margin-top: -16px;
 	}
@@ -61,10 +61,10 @@
 		align-items: center;
 		gap: 8px;
 		padding: 64px 24px;
-		border: 2px dashed #e2e8f0;
-		border-radius: 12px;
+		border: 2px dashed var(--border);
+		border-radius: var(--radius-xl);
 		text-align: center;
-		color: #64748b;
+		color: var(--text-muted);
 	}
 
 	.empty-icon {
@@ -74,7 +74,7 @@
 
 	.hint {
 		font-size: 13px;
-		color: #94a3b8;
+		color: var(--text-subtle);
 	}
 
 	.category-grid {
@@ -88,27 +88,31 @@
 		flex-direction: column;
 		gap: 8px;
 		padding: 20px;
-		border: 1px solid #e2e8f0;
-		border-radius: 10px;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-xl);
 		text-decoration: none;
 		color: inherit;
-		transition: box-shadow 0.15s ease, border-color 0.15s ease;
+		background: var(--bg-base);
+		transition:
+			box-shadow var(--transition-fast),
+			border-color var(--transition-fast),
+			background var(--transition-base);
 	}
 
 	.category-card:hover {
-		border-color: #93c5fd;
-		box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+		border-color: var(--primary);
+		box-shadow: var(--shadow-md);
 	}
 
 	.category-card h2 {
 		font-size: 16px;
 		font-weight: 600;
-		color: #1e293b;
+		color: var(--text-base);
 	}
 
 	.count {
 		font-size: 12px;
-		color: #94a3b8;
+		color: var(--text-subtle);
 	}
 
 	.category-card ul {
@@ -121,11 +125,11 @@
 
 	.category-card li {
 		font-size: 13px;
-		color: #475569;
+		color: var(--text-muted);
 	}
 
 	.more {
-		color: #94a3b8;
+		color: var(--text-subtle);
 		font-style: italic;
 	}
 </style>
