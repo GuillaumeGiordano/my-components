@@ -1,36 +1,34 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import { ChevronDown } from "@lucide/svelte";
-  import { slide } from "svelte/transition";
-  import { cubicOut } from "svelte/easing";
 
   let {
     name,
     title,
     variant = "default",
+    isOpen = false,
     children,
   }: {
     name?: string;
     title: string;
     variant?: "default" | "bordered" | "card";
+    isOpen?: boolean;
     children: Snippet;
   } = $props();
 
-  let isOpen = $state(false);
+  let detailOpen = $derived(() => (isOpen ? "open" : ""));
 </script>
 
 <details {name} class="my-collapse {variant}">
-  <summary class="summary" onclick={() => (isOpen = !isOpen)}>
+  <summary class="summary">
     <span class="summary-title">{title}</span>
     <span class="chevron-wrap" aria-hidden="true">
       <ChevronDown size={16} />
     </span>
   </summary>
 
-  <div class="content" transition:slide={{ duration: 280, easing: cubicOut }}>
-    <div class="inner">
-      {@render children()}
-    </div>
+  <div class="inner">
+    {@render children()}
   </div>
 </details>
 
@@ -76,20 +74,68 @@
         color var(--transition-fast);
     }
 
-    .chevron-wrap.open {
+    &[open] .chevron-wrap {
       transform: rotate(180deg);
       color: var(--primary);
     }
 
-    /* ---- Content ---- */
-    .content {
+    /* ---- Content animation via ::details-content ---- */
+    &::details-content {
+      block-size: 0;
+      display: block;
       overflow: hidden;
     }
 
-    &[open] {
-      .chevron-wrap {
-        transform: rotate(180deg);
-        color: var(--primary);
+    @media (prefers-reduced-motion: no-preference) {
+      &::details-content {
+        transition-property: block-size, content-visibility;
+        transition-behavior: allow-discrete;
+        transition-duration: 0.3s;
+      }
+    }
+
+    &[open]::details-content {
+      block-size: auto;
+      /* calc-size permet d'animer vers une hauteur auto — non supporté partout */
+      block-size: calc-size(max-content, size);
+    }
+
+    /* ---- Inner padding ---- */
+    .inner {
+      padding: 0 16px 14px;
+    }
+
+    /* ---- Variants ---- */
+    &.bordered {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+
+      summary {
+        border-radius: var(--radius-md) var(--radius-md) 0 0;
+      }
+
+      &[open] summary {
+        border-bottom: 1px solid var(--border);
+        border-radius: var(--radius-md) var(--radius-md) 0 0;
+      }
+    }
+
+    &.card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+
+      summary {
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      }
+
+      &[open] summary {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .inner {
+        padding: 12px 16px 16px;
       }
     }
   }
