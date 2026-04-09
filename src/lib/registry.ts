@@ -13,6 +13,17 @@ export type ComponentCategory = {
 // Add new categories and components here as you create them
 export const categories: ComponentCategory[] = [
 	{
+		slug: 'buttons',
+		label: 'Buttons',
+		components: [
+			{
+				slug: 'button',
+				label: 'Button',
+				description: '5 variants, 3 tailles, loading/disabled, icônes, rendu en lien'
+			}
+		]
+	},
+	{
 		slug: 'layout',
 		label: 'Layout',
 		components: [

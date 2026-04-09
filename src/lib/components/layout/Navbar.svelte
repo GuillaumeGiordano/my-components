@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Menu, X } from '@lucide/svelte';
+	import Button from '$lib/components/buttons/Button.svelte';
 
 	type NavLink = { label: string; href: string };
 
@@ -30,21 +31,20 @@
 
 		<div class="navbar-actions">
 			{#if ctaLabel}
-				<a href={ctaHref} class="btn-cta">{ctaLabel}</a>
+				<span class="cta-desktop">
+					<Button href={ctaHref} size="sm">{ctaLabel}</Button>
+				</span>
 			{/if}
 
-			<button
-				class="hamburger"
-				aria-label="Toggle menu"
-				aria-expanded={menuOpen}
-				onclick={() => (menuOpen = !menuOpen)}
-			>
-				{#if menuOpen}
-					<X size={20} />
-				{:else}
-					<Menu size={20} />
-				{/if}
-			</button>
+			<span class="hamburger-wrap">
+				<Button
+					variant="ghost"
+					icon={menuOpen ? X : Menu}
+					onclick={() => (menuOpen = !menuOpen)}
+					aria-label="Toggle menu"
+					aria-expanded={menuOpen}
+				/>
+			</span>
 		</div>
 	</div>
 
@@ -54,7 +54,9 @@
 				<a href={link.href} class="mobile-link" onclick={() => (menuOpen = false)}>{link.label}</a>
 			{/each}
 			{#if ctaLabel}
-				<a href={ctaHref} class="mobile-cta">{ctaLabel}</a>
+				<span class="cta-mobile">
+					<Button href={ctaHref} size="md">{ctaLabel}</Button>
+				</span>
 			{/if}
 		</nav>
 	{/if}
@@ -110,41 +112,12 @@
 	.navbar-actions {
 		display: flex;
 		align-items: center;
-		gap: 12px;
+		gap: 8px;
 		margin-left: auto;
 	}
 
-	.btn-cta {
-		padding: 8px 16px;
-		font-size: 14px;
-		font-weight: 500;
-		color: var(--primary-fg);
-		background: var(--primary);
-		text-decoration: none;
-		border-radius: var(--radius-md);
-		transition: background var(--transition-fast);
-	}
-
-	.btn-cta:hover {
-		background: var(--primary-hover);
-	}
-
-	.hamburger {
+	.hamburger-wrap {
 		display: none;
-		align-items: center;
-		justify-content: center;
-		padding: 6px;
-		background: transparent;
-		border: none;
-		cursor: pointer;
-		border-radius: var(--radius-md);
-		color: var(--text-muted);
-		transition: color var(--transition-fast), background var(--transition-fast);
-	}
-
-	.hamburger:hover {
-		color: var(--text-base);
-		background: var(--bg-muted);
 	}
 
 	.mobile-menu {
@@ -170,30 +143,24 @@
 		color: var(--text-base);
 	}
 
-	.mobile-cta {
+	.cta-mobile {
+		display: block;
 		margin-top: 8px;
-		padding: 10px;
-		font-size: 15px;
-		font-weight: 500;
-		color: var(--primary-fg);
-		background: var(--primary);
-		text-decoration: none;
-		border-radius: var(--radius-md);
-		text-align: center;
-		transition: background var(--transition-fast);
 	}
 
-	.mobile-cta:hover {
-		background: var(--primary-hover);
+	/* Full-width CTA in mobile menu */
+	.cta-mobile :global(.btn) {
+		width: 100%;
+		justify-content: center;
 	}
 
 	@media (max-width: 640px) {
 		.navbar-links,
-		.btn-cta {
+		.cta-desktop {
 			display: none;
 		}
 
-		.hamburger {
+		.hamburger-wrap {
 			display: flex;
 		}
 	}
