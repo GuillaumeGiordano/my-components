@@ -1,12 +1,13 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { Smartphone, Tablet, Monitor } from '@lucide/svelte';
 
 	type Breakpoint = 'mobile' | 'tablet' | 'desktop';
 
-	const BREAKPOINTS: Record<Breakpoint, { label: string; width: string; icon: string }> = {
-		mobile: { label: 'Mobile', width: '375px', icon: '📱' },
-		tablet: { label: 'Tablette', width: '768px', icon: '📟' },
-		desktop: { label: 'Desktop', width: '100%', icon: '🖥️' }
+	const BREAKPOINTS: Record<Breakpoint, { label: string; width: string; icon: typeof Smartphone }> = {
+		mobile: { label: 'Mobile', width: '375px', icon: Smartphone },
+		tablet: { label: 'Tablette', width: '768px', icon: Tablet },
+		desktop: { label: 'Desktop', width: '100%', icon: Monitor }
 	};
 
 	let { children }: { children: Snippet } = $props();
@@ -15,16 +16,16 @@
 
 <div class="preview-root">
 	<div class="toolbar">
-		{#each Object.entries(BREAKPOINTS) as [key, { label, icon }]}
+		{#each Object.entries(BREAKPOINTS) as [key, { label, width, icon: Icon }]}
 			<button
 				class="toolbar-btn"
 				class:active={breakpoint === key}
 				onclick={() => (breakpoint = key as Breakpoint)}
 			>
-				<span class="icon">{icon}</span>
+				<Icon size={15} />
 				<span class="label">{label}</span>
 				{#if key !== 'desktop'}
-					<span class="width-hint">{BREAKPOINTS[key as Breakpoint].width}</span>
+					<span class="width-hint">{width}</span>
 				{/if}
 			</button>
 		{/each}

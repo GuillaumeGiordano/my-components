@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { Menu, X } from '@lucide/svelte';
+
 	type NavLink = { label: string; href: string };
 
 	let {
@@ -18,7 +20,7 @@
 
 <header class="navbar">
 	<div class="navbar-inner">
-		<a href={ctaHref} class="navbar-brand">{brand}</a>
+		<a href="/" class="navbar-brand">{brand}</a>
 
 		<!-- Desktop nav -->
 		<nav class="navbar-links" aria-label="Navigation principale">
@@ -39,9 +41,11 @@
 				aria-expanded={menuOpen}
 				onclick={() => (menuOpen = !menuOpen)}
 			>
-				<span></span>
-				<span></span>
-				<span></span>
+				{#if menuOpen}
+					<X size={20} />
+				{:else}
+					<Menu size={20} />
+				{/if}
 			</button>
 		</div>
 	</div>
@@ -126,26 +130,20 @@
 
 	.hamburger {
 		display: none;
-		flex-direction: column;
-		gap: 5px;
+		align-items: center;
+		justify-content: center;
 		padding: 6px;
 		background: transparent;
 		border: none;
 		cursor: pointer;
 		border-radius: 4px;
+		color: #475569;
+		transition: color 0.15s, background 0.15s;
 	}
 
-	.hamburger span {
-		display: block;
-		width: 20px;
-		height: 2px;
-		background: #475569;
-		border-radius: 2px;
-		transition: background 0.15s;
-	}
-
-	.hamburger:hover span {
-		background: #1e293b;
+	.hamburger:hover {
+		color: #1e293b;
+		background: #f1f5f9;
 	}
 
 	.mobile-menu {
@@ -182,7 +180,6 @@
 		text-align: center;
 	}
 
-	/* Show hamburger and hide desktop links below 640px */
 	@media (max-width: 640px) {
 		.navbar-links {
 			display: none;

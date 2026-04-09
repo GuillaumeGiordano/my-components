@@ -1,5 +1,8 @@
 <script lang="ts">
-	type SidebarItem = { label: string; href: string; icon?: string };
+	import type { Component } from 'svelte';
+	import { ChevronLeft } from '@lucide/svelte';
+
+	type SidebarItem = { label: string; href: string; icon?: Component };
 	type SidebarGroup = { label: string; items: SidebarItem[] };
 
 	let {
@@ -19,20 +22,7 @@
 		aria-label={collapsed ? 'Ouvrir le menu' : 'Réduire le menu'}
 		onclick={() => (collapsed = !collapsed)}
 	>
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			width="16"
-			height="16"
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			stroke-width="2"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-			class:rotated={collapsed}
-		>
-			<polyline points="15 18 9 12 15 6"></polyline>
-		</svg>
+		<ChevronLeft size={14} class={collapsed ? 'rotated' : ''} />
 	</button>
 
 	<nav class="sidebar-nav">
@@ -50,7 +40,9 @@
 						title={collapsed ? item.label : undefined}
 					>
 						{#if item.icon}
-							<span class="item-icon">{item.icon}</span>
+							<span class="item-icon">
+								<svelte:component this={item.icon} size={16} />
+							</span>
 						{/if}
 						{#if !collapsed}
 							<span class="item-label">{item.label}</span>
@@ -103,11 +95,11 @@
 		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 	}
 
-	.collapse-btn svg {
+	.collapse-btn :global(svg) {
 		transition: transform 0.25s ease;
 	}
 
-	.collapse-btn svg.rotated {
+	.sidebar.collapsed .collapse-btn :global(svg) {
 		transform: rotate(180deg);
 	}
 
@@ -161,10 +153,11 @@
 	}
 
 	.item-icon {
-		font-size: 16px;
 		flex-shrink: 0;
 		width: 20px;
-		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.item-label {

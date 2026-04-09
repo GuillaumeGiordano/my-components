@@ -1,22 +1,23 @@
 <script lang="ts">
 	import ComponentPreview from '$lib/ComponentPreview.svelte';
 	import Sidebar from '$lib/components/layout/Sidebar.svelte';
+	import { LayoutDashboard, BarChart2, FileText, User, Lock, Bell } from '@lucide/svelte';
 
 	const groups = [
 		{
 			label: 'Général',
 			items: [
-				{ label: 'Tableau de bord', href: '#', icon: '🏠' },
-				{ label: 'Analytiques', href: '#', icon: '📊' },
-				{ label: 'Rapports', href: '#', icon: '📄' }
+				{ label: 'Tableau de bord', href: '#', icon: LayoutDashboard },
+				{ label: 'Analytiques', href: '#', icon: BarChart2 },
+				{ label: 'Rapports', href: '#', icon: FileText }
 			]
 		},
 		{
 			label: 'Paramètres',
 			items: [
-				{ label: 'Profil', href: '#', icon: '👤' },
-				{ label: 'Sécurité', href: '#', icon: '🔒' },
-				{ label: 'Notifications', href: '#', icon: '🔔' }
+				{ label: 'Profil', href: '#', icon: User },
+				{ label: 'Sécurité', href: '#', icon: Lock },
+				{ label: 'Notifications', href: '#', icon: Bell }
 			]
 		}
 	];

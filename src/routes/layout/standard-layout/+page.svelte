@@ -4,6 +4,7 @@
 	import Navbar from '$lib/components/layout/Navbar.svelte';
 	import Sidebar from '$lib/components/layout/Sidebar.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
+	import { LayoutDashboard, FolderOpen, Users } from '@lucide/svelte';
 
 	const navLinks = [
 		{ label: 'Accueil', href: '#' },
@@ -15,9 +16,9 @@
 		{
 			label: 'Navigation',
 			items: [
-				{ label: 'Tableau de bord', href: '#', icon: '🏠' },
-				{ label: 'Projets', href: '#', icon: '📁' },
-				{ label: 'Équipe', href: '#', icon: '👥' }
+				{ label: 'Tableau de bord', href: '#', icon: LayoutDashboard },
+				{ label: 'Projets', href: '#', icon: FolderOpen },
+				{ label: 'Équipe', href: '#', icon: Users }
 			]
 		}
 	];
