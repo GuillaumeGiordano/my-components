@@ -48,7 +48,6 @@
 		flex-direction: column;
 		border: 1px solid var(--border);
 		border-radius: var(--radius-lg);
-		overflow: hidden;
 		background: var(--bg-base);
 		transition: border-color var(--transition-base);
 	}
@@ -59,6 +58,7 @@
 		padding: 8px 12px;
 		background: var(--bg-subtle);
 		border-bottom: 1px solid var(--border);
+		border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 		transition: background var(--transition-base), border-color var(--transition-base);
 	}
 
@@ -101,6 +101,7 @@
 		min-height: 200px;
 		display: flex;
 		justify-content: center;
+		border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 		transition: background var(--transition-base);
 	}
 
@@ -109,7 +110,6 @@
 		background: var(--bg-base);
 		border-radius: var(--radius-sm);
 		transition: max-width var(--transition-base), background var(--transition-base);
-		overflow: hidden;
 	}
 
 	.preview-frame.has-max-width {
