@@ -79,14 +79,29 @@ export const categories: ComponentCategory[] = [
 				description: 'Dialog natif showModal() — centré, drawer, bottom-sheet — focus trap natif'
 			},
 			{
-				slug: 'button-action',
-				label: 'Button Action',
-				description: 'Bouton d’action avec icône et texte, 3 variantes visuelles'
+				slug: 'badge',
+				label: 'Badge',
+				description: 'Étiquette compacte, 5 variantes de couleur, tailles sm/md, point animé optionnel'
 			},
 			{
-				slug: 'navbar-mobile',
-				label: 'Navbar Mobile',
-				description: 'Barre de navigation pour les appareils mobiles'
+				slug: 'card',
+				label: 'Card',
+				description: 'Conteneur polyvalent avec bordure, ombre, hover et padding configurable'
+			},
+			{
+				slug: 'avatar',
+				label: 'Avatar',
+				description: 'Photo ou initiales, 5 tailles, formes circle/square, fallback automatique'
+			},
+			{
+				slug: 'input-simple',
+				label: 'Champ simple',
+				description: 'Input avec label, message d\'erreur et icône — version standalone accessible'
+			},
+			{
+				slug: 'button-action',
+				label: 'Button Action',
+				description: 'Bouton d\'action avec icône et texte, 3 variantes visuelles'
 			}
 		]
 	},
@@ -99,6 +114,62 @@ export const categories: ComponentCategory[] = [
 			{ slug: 'footer', label: 'Footer', description: 'Pied de page avec colonnes de liens' },
 			{ slug: 'standard-layout', label: 'Standard Layout', description: 'Combinaison Navbar + Sidebar + Main + Footer' },
 			{ slug: 'navbar-mobile', label: 'Navbar Mobile', description: 'Barre de navigation pour les appareils mobiles' }
+		]
+	},
+	{
+		slug: 'sections',
+		label: 'Sections',
+		components: [
+			{
+				slug: 'hero',
+				label: 'Hero',
+				description: 'Section d\'accroche avec badge, titre colorisé, description et CTAs — alignement centré ou gauche'
+			},
+			{
+				slug: 'features',
+				label: 'Features',
+				description: 'Grille de fonctionnalités avec icônes et badges — 2, 3 ou 4 colonnes'
+			},
+			{
+				slug: 'pricing',
+				label: 'Pricing',
+				description: 'Grille de tarifs avec plans, liste de features et plan mis en avant'
+			},
+			{
+				slug: 'testimonials',
+				label: 'Testimonials',
+				description: 'Grille masonry de témoignages avec avatar, note en étoiles et citation'
+			},
+			{
+				slug: 'faq',
+				label: 'FAQ',
+				description: 'Questions fréquentes en accordéon natif — 1 ou 2 colonnes'
+			},
+			{
+				slug: 'cta',
+				label: 'CTA Banner',
+				description: 'Bandeau d\'appel à l\'action centré — variantes default, primary et dark'
+			},
+			{
+				slug: 'stats',
+				label: 'Stats',
+				description: 'Grille de chiffres clés avec animation au scroll et préfixe/suffixe'
+			},
+			{
+				slug: 'team',
+				label: 'Team',
+				description: 'Grille de membres avec avatar, bio et liens sociaux'
+			},
+			{
+				slug: 'gallery',
+				label: 'Gallery',
+				description: 'Grille d\'images avec lightbox intégrée et navigation clavier'
+			},
+			{
+				slug: 'newsletter',
+				label: 'Newsletter',
+				description: 'Formulaire d\'inscription avec validation, état de succès — variantes default et card'
+			}
 		]
 	}
 ];
