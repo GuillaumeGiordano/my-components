@@ -75,6 +75,39 @@
       <Button variant="danger" onclick={close}>Supprimer</Button>
     {/snippet}
   </Modal>
+
+  <!-- BOTTOM-SHEET -->
+  <section class="variant">
+    <h2>Bottom Sheet — panneau en bas</h2>
+    <ComponentPreview>
+      <div class="demo-row">
+        <Button commandfor="bottom-sheet-modal" command="show-modal"
+          >Ouvrir le bottom sheet</Button
+        >
+      </div>
+    </ComponentPreview>
+  </section>
+
+  <Modal
+    id="bottom-sheet-modal"
+    title="Confirmer la suppression"
+    variant="bottom-sheet"
+    size="md"
+  >
+    {#snippet children()}
+      <div class="modal-content">
+        <div class="warning-icon"><Trash2 size={24} /></div>
+        <p>
+          Cette action est <strong>irréversible</strong>. Le fichier sera définitivement
+          supprimé et ne pourra pas être récupéré.
+        </p>
+      </div>
+    {/snippet}
+    {#snippet footer(close)}
+      <Button variant="outline" onclick={close}>Annuler</Button>
+      <Button variant="danger" onclick={close}>Supprimer</Button>
+    {/snippet}
+  </Modal>
 </div>
 
 <style>

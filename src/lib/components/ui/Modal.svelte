@@ -166,6 +166,9 @@
   }
 
   /* Drawer panel overrides */
+  .modal-root.drawer {
+    overflow: hidden;
+  }
   .modal-root.drawer .panel {
     border-radius: var(--radius-xl) 0 0 var(--radius-xl);
     height: 100dvh;
@@ -180,6 +183,9 @@
   }
 
   /* Bottom-sheet panel overrides */
+  .modal-root.bottom-sheet {
+    overflow: hidden;
+  }
   .modal-root.bottom-sheet .panel {
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;
     width: 100%;
