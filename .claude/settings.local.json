@@ -6,7 +6,10 @@
       "Bash(printf 'y\\\\n\\\\n')",
       "Bash(mkdir -p logo-cloud process comparison blog-grid contact split-feature video integrations download announcement)",
       "Bash(ls src/lib/components/ui/)",
-      "Bash(npx svelte-check *)"
+      "Bash(npx svelte-check *)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(grep *)"
     ]
   }
 }
