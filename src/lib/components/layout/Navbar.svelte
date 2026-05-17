@@ -1,8 +1,10 @@
 <script lang="ts">
-  import { Menu, X } from "@lucide/svelte";
+  import { Menu, Share2, Trash2, X } from "@lucide/svelte";
   import Button from "$lib/components/buttons/Button.svelte";
   import LogoGG from "../logo/LogoGG.svelte";
   import type { Snippet } from "svelte";
+  import ButtonAction from "../ui/ButtonAction.svelte";
+  import ButtonActionItem from "../ui/ButtonActionItem.svelte";
 
   type NavLink = { label: string; href: string };
 
@@ -35,6 +37,17 @@
       {#if ctaLabel}
         <span class="cta-desktop">
           <Button href={ctaHref} size="sm">{ctaLabel}</Button>
+          <ButtonAction label="Primary" variant="primary" size="sm">
+            {#snippet items(close)}
+              <ButtonActionItem label="Partager" icon={Share2} onclick={close} />
+              <ButtonActionItem
+                label="Supprimer"
+                icon={Trash2}
+                variant="danger"
+                onclick={close}
+              />
+            {/snippet}
+          </ButtonAction>
         </span>
       {/if}
 
@@ -59,7 +72,17 @@
       {/each}
       {#if ctaLabel}
         <span class="cta-mobile">
-          <Button href={ctaHref} size="md">{ctaLabel}</Button>
+          <ButtonAction label="Primary" variant="primary" size="md" addClass="w-full">
+            {#snippet items(close)}
+              <ButtonActionItem label="Partager" icon={Share2} onclick={close} />
+              <ButtonActionItem
+                label="Supprimer"
+                icon={Trash2}
+                variant="danger"
+                onclick={close}
+              />
+            {/snippet}
+          </ButtonAction>
         </span>
       {/if}
     </nav>

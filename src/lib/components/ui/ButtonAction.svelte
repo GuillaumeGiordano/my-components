@@ -10,12 +10,14 @@
     variant = "secondary",
     size = "md",
     icon: Icon,
+    addClass = "",
     items,
   }: {
     label: string;
     variant?: Variant;
     size?: Size;
     icon?: Component;
+    addClass?: string;
     items: Snippet<[() => void]>;
   } = $props();
 
@@ -24,22 +26,25 @@
   let isOpen = $state(false);
   let triggerEl: HTMLButtonElement | null = $state(null);
   let menuEl: HTMLDivElement | null = $state(null);
+  let wasOpenOnMousedown = false;
 
   function reposition() {
     if (!triggerEl || !menuEl) return;
     const rect = triggerEl.getBoundingClientRect();
     const mRect = menuEl.getBoundingClientRect();
-
     const top = rect.bottom + 6;
     const left = rect.left;
-
     menuEl.style.top = `${mRect.height + top > window.innerHeight ? rect.top - mRect.height - 6 : top}px`;
     menuEl.style.left = `${left + mRect.width > window.innerWidth ? rect.right - mRect.width : left}px`;
     menuEl.style.minWidth = `${rect.width}px`;
   }
 
+  function handleMousedown() {
+    wasOpenOnMousedown = isOpen;
+  }
+
   function openMenu() {
-    if (!triggerEl || !menuEl) return;
+    if (!triggerEl || !menuEl || wasOpenOnMousedown) return;
     menuEl.showPopover();
     reposition();
     window.addEventListener("scroll", reposition, { passive: true, capture: true });
@@ -52,9 +57,10 @@
 </script>
 
 <button
-  class="trigger btn-{variant} size-{size}"
+  class="trigger btn-{variant} size-{size} {addClass}"
   class:open={isOpen}
   bind:this={triggerEl}
+  onmousedown={handleMousedown}
   onclick={openMenu}
   aria-haspopup="menu"
   aria-expanded={isOpen}
