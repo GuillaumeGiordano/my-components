@@ -8,6 +8,7 @@
     title,
     variant = "default",
     size = "md",
+    overlayClose = false,
     children,
     footer,
   }: {
@@ -15,21 +16,44 @@
     title?: string;
     variant?: "default" | "drawer" | "bottom-sheet";
     size?: "sm" | "md" | "lg" | "full";
+    overlayClose?: boolean;
     children: Snippet;
-    footer?: Snippet;
+    footer?: Snippet<[() => void]>;
   } = $props();
 
   const titleId = uniqueId("modal");
+  let dialogEl: HTMLDialogElement | null = $state(null);
+  let panelEl: HTMLDivElement | null = $state(null);
+
+  function closeWithAnimation() {
+    if (!dialogEl?.open) return;
+    dialogEl.classList.add("is-closing");
+    panelEl?.addEventListener(
+      "animationend",
+      () => {
+        dialogEl?.classList.remove("is-closing");
+        dialogEl?.close();
+      },
+      { once: true },
+    );
+  }
+
+  function close(e: MouseEvent) {
+    if (e.target === e.currentTarget && overlayClose) closeWithAnimation();
+  }
 </script>
 
 <dialog
   class="modal-root {variant}"
   {id}
-  onclick={(e) => {
-    if (e.target === e.currentTarget) e.currentTarget.close();
+  bind:this={dialogEl}
+  oncancel={(e) => {
+    e.preventDefault();
+    closeWithAnimation();
   }}
+  onclick={(e) => close(e)}
 >
-  <div class="panel size-{size}">
+  <div class="panel size-{size}" bind:this={panelEl}>
     <div class="panel-header">
       {#if title}
         <h2 id={titleId} class="panel-title">{title}</h2>
@@ -39,8 +63,7 @@
 
       <button
         class="close-btn"
-        commandfor={id}
-        command="close"
+        onclick={closeWithAnimation}
         aria-label="Fermer la fenêtre"
       >
         <X size={18} />
@@ -53,7 +76,7 @@
 
     {#if footer}
       <div class="panel-footer">
-        {@render footer()}
+        {@render footer(closeWithAnimation)}
       </div>
     {/if}
   </div>
@@ -274,30 +297,44 @@
   @keyframes drawer-in {
     from {
       transform: translateX(100%);
+      opacity: 0;
     }
     to {
       transform: none;
+      opacity: 1;
     }
   }
 
   @keyframes drawer-out {
+    from {
+      transform: none;
+      opacity: 1;
+    }
     to {
-      transform: translateX(100%);
+      transform: translateX(35%);
+      opacity: 0;
     }
   }
 
   @keyframes sheet-in {
     from {
       transform: translateY(100%);
+      opacity: 0.6;
     }
     to {
       transform: none;
+      opacity: 1;
     }
   }
 
   @keyframes sheet-out {
+    from {
+      transform: none;
+      opacity: 1;
+    }
     to {
-      transform: translateY(100%);
+      transform: translateY(50%);
+      opacity: 0;
     }
   }
 </style>
