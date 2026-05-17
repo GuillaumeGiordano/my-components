@@ -102,6 +102,16 @@ export const categories: ComponentCategory[] = [
 				slug: 'button-action',
 				label: 'Button Action',
 				description: 'Bouton d\'action avec icône et texte, 3 variantes visuelles'
+			},
+			{
+				slug: 'alert',
+				label: 'Alert',
+				description: 'Bloc de notification inline — 4 variantes, titre optionnel, dismissible'
+			},
+			{
+				slug: 'toast',
+				label: 'Toast',
+				description: 'Notification flottante déclenchée par toast.success/error/warning/info()'
 			}
 		]
 	},

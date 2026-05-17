@@ -4,6 +4,7 @@
   import { categories } from "$lib/registry";
   import { theme } from "$lib/theme.svelte";
   import ThemeToggle from "$lib/components/ui/ThemeToggle.svelte";
+  import Toaster from "$lib/components/ui/Toaster.svelte";
   import "../app.css";
   import LogoGG from "$lib/components/logo/LogoGG.svelte";
 
@@ -53,6 +54,8 @@
     {@render children()}
   </main>
 </div>
+
+<Toaster />
 
 <style>
   .app {
