@@ -67,6 +67,16 @@ export const categories: ComponentCategory[] = [
 				slug: 'collapse',
 				label: 'Collapse',
 				description: 'Accordéon natif <details>/<summary> avec animation CSS fluide'
+			},
+			{
+				slug: 'tabs',
+				label: 'Tabs',
+				description: 'Navigation par onglets accessible, 3 variantes visuelles, flèches clavier'
+			},
+			{
+				slug: 'modal',
+				label: 'Modal',
+				description: 'Dialog natif showModal() — centré, drawer, bottom-sheet — focus trap natif'
 			}
 		]
 	},
