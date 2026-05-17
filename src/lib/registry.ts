@@ -169,6 +169,56 @@ export const categories: ComponentCategory[] = [
 				slug: 'newsletter',
 				label: 'Newsletter',
 				description: 'Formulaire d\'inscription avec validation, état de succès — variantes default et card'
+			},
+			{
+				slug: 'logo-cloud',
+				label: 'Logo Cloud',
+				description: 'Logos clients en grille statique ou défilement infini — variante muted avec hover'
+			},
+			{
+				slug: 'process',
+				label: 'Process',
+				description: 'Étapes numérotées avec connecteurs — layout horizontal ou vertical, responsive'
+			},
+			{
+				slug: 'comparison',
+				label: 'Comparison Table',
+				description: 'Tableau comparatif sticky avec check/cross/texte, catégories et tooltips'
+			},
+			{
+				slug: 'blog-grid',
+				label: 'Blog Grid',
+				description: 'Grille d\'articles avec image, badge catégorie, auteur et temps de lecture'
+			},
+			{
+				slug: 'contact',
+				label: 'Contact',
+				description: 'Formulaire de contact avec infos latérales — variantes split et centré'
+			},
+			{
+				slug: 'split-feature',
+				label: 'Split Feature',
+				description: 'Sections alternées texte + visuel avec bullets et CTA — responsive'
+			},
+			{
+				slug: 'video',
+				label: 'Video',
+				description: 'Section vidéo avec overlay play, miniature et embed YouTube/Vimeo'
+			},
+			{
+				slug: 'integrations',
+				label: 'Integrations',
+				description: 'Grille d\'intégrations avec statuts disponible/bêta/bientôt'
+			},
+			{
+				slug: 'download',
+				label: 'Download',
+				description: 'Section téléchargement avec boutons store stylisés et statistiques'
+			},
+			{
+				slug: 'announcement',
+				label: 'Announcement Bar',
+				description: 'Barre d\'annonce sticky avec 4 variantes de couleur et fermeture animée'
 			}
 		]
 	}

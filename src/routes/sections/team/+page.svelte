@@ -1,17 +1,17 @@
 <script lang="ts">
   import TeamSection from '$lib/components/sections/TeamSection.svelte';
-  import { Github, Linkedin, Twitter } from '@lucide/svelte';
+  import { Code2, Link2, X } from '@lucide/svelte';
   import '$lib/styles/demo-page.css';
 </script>
 
 <svelte:head>
-  <title>Team — Sections</title>
+  <title>Team — Sections — My Components</title>
 </svelte:head>
 
 <div class="page">
   <div class="page-header">
     <h1>Team</h1>
-    <p>Grille de membres d'équipe avec avatar, rôle, bio et liens sociaux. L'avatar utilise les initiales si aucune image n'est fournie.</p>
+    <p>Grille de membres avec avatar, rôle, bio et liens sociaux. L'avatar utilise les initiales si aucune image n'est fournie.</p>
   </div>
 
   <TeamSection
@@ -22,37 +22,37 @@
       {
         name: 'Élise Morin',
         role: 'Co-fondatrice & CEO',
-        bio: 'Ex-ingénieure chez Doctolib, Élise pilote la vision produit et la stratégie de croissance depuis la création de la société en 2021.',
+        bio: "Ex-ingénieure chez Doctolib, Élise pilote la vision produit et la stratégie de croissance depuis la création de la société en 2021.",
         links: [
-          { icon: Linkedin, href: '#', label: 'LinkedIn d\'Élise Morin' },
-          { icon: Twitter, href: '#', label: 'Twitter d\'Élise Morin' },
+          { icon: Link2, href: '#', label: 'LinkedIn' },
+          { icon: X, href: '#', label: 'Twitter' },
         ],
       },
       {
         name: 'Nathan Keller',
         role: 'Co-fondateur & CTO',
-        bio: 'Architecte logiciel spécialisé en systèmes distribués. Nathan a contribué à plusieurs projets open-source avant de co-fonder la société.',
+        bio: "Architecte logiciel spécialisé en systèmes distribués. Nathan a contribué à plusieurs projets open-source avant de co-fonder la société.",
         links: [
-          { icon: Github, href: '#', label: 'GitHub de Nathan Keller' },
-          { icon: Linkedin, href: '#', label: 'LinkedIn de Nathan Keller' },
+          { icon: Code2, href: '#', label: 'GitHub' },
+          { icon: Link2, href: '#', label: 'LinkedIn' },
         ],
       },
       {
         name: 'Yasmine Benali',
         role: 'Lead Designer',
-        bio: 'Spécialiste design système et accessibilité. Yasmine conçoit chaque composant pour être beau, utilisable et conforme RGAA dès le départ.',
+        bio: "Spécialiste design système et accessibilité. Yasmine conçoit chaque composant pour être beau, utilisable et conforme RGAA dès le départ.",
         links: [
-          { icon: Linkedin, href: '#', label: 'LinkedIn de Yasmine Benali' },
-          { icon: Twitter, href: '#', label: 'Twitter de Yasmine Benali' },
+          { icon: Link2, href: '#', label: 'LinkedIn' },
+          { icon: X, href: '#', label: 'Twitter' },
         ],
       },
       {
         name: 'Marcus Pereira',
         role: 'Senior Full-Stack Engineer',
-        bio: 'Développeur Svelte et Rust passionné. Marcus maintient l\'infrastructure de la plateforme et contribue au cœur du moteur de rendu.',
+        bio: "Développeur Svelte et Rust passionné. Marcus maintient l'infrastructure de la plateforme et contribue au coeur du moteur de rendu.",
         links: [
-          { icon: Github, href: '#', label: 'GitHub de Marcus Pereira' },
-          { icon: Linkedin, href: '#', label: 'LinkedIn de Marcus Pereira' },
+          { icon: Code2, href: '#', label: 'GitHub' },
+          { icon: Link2, href: '#', label: 'LinkedIn' },
         ],
       },
     ]}

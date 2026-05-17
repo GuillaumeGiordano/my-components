@@ -59,6 +59,7 @@
                   {#if member.links && member.links.length > 0}
                     <div class="member-links">
                       {#each member.links as link}
+                        {@const LinkIcon = link.icon}
                         <a
                           href={link.href}
                           class="social-link"
@@ -66,7 +67,7 @@
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          <link.icon size={16} />
+                          <LinkIcon size={16} />
                         </a>
                       {/each}
                     </div>
