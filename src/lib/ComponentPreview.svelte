@@ -110,6 +110,7 @@
 		background: var(--bg-base);
 		border-radius: var(--radius-sm);
 		transition: max-width var(--transition-base), background var(--transition-base);
+		container-type: inline-size;
 	}
 
 	.preview-frame.has-max-width {

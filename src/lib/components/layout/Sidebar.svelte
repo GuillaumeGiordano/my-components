@@ -1,174 +1,176 @@
 <script lang="ts">
-	import type { Component } from 'svelte';
-	import { ChevronLeft } from '@lucide/svelte';
+  import type { Component } from "svelte";
+  import { ChevronLeft } from "@lucide/svelte";
 
-	type SidebarItem = { label: string; href: string; icon?: Component };
-	type SidebarGroup = { label: string; items: SidebarItem[] };
+  type SidebarItem = { label: string; href: string; icon?: Component };
+  type SidebarGroup = { label: string; items: SidebarItem[] };
 
-	let {
-		groups = [] as SidebarGroup[],
-		collapsed = $bindable(false),
-		activeHref = ''
-	}: {
-		groups?: SidebarGroup[];
-		collapsed?: boolean;
-		activeHref?: string;
-	} = $props();
+  let {
+    groups = [] as SidebarGroup[],
+    collapsed = $bindable(false),
+    activeHref = "",
+  }: {
+    groups?: SidebarGroup[];
+    collapsed?: boolean;
+    activeHref?: string;
+  } = $props();
 </script>
 
 <aside class="sidebar" class:collapsed>
-	<button
-		class="collapse-btn"
-		aria-label={collapsed ? 'Ouvrir le menu' : 'Réduire le menu'}
-		onclick={() => (collapsed = !collapsed)}
-	>
-		<ChevronLeft size={14} />
-	</button>
+  <button
+    class="collapse-btn"
+    aria-label={collapsed ? "Ouvrir le menu" : "Réduire le menu"}
+    onclick={() => (collapsed = !collapsed)}
+  >
+    <ChevronLeft size={14} />
+  </button>
 
-	<nav class="sidebar-nav">
-		{#each groups as group}
-			<div class="group">
-				{#if !collapsed}
-					<span class="group-label">{group.label}</span>
-				{/if}
+  <nav class="sidebar-nav">
+    {#each groups as group}
+      <div class="group">
+        {#if !collapsed}
+          <span class="group-label">{group.label}</span>
+        {/if}
 
-				{#each group.items as item}
-					<a
-						href={item.href}
-						class="sidebar-link"
-						class:active={activeHref === item.href}
-						title={collapsed ? item.label : undefined}
-					>
-						{#if item.icon}
-							<span class="item-icon">
-								<svelte:component this={item.icon} size={16} />
-							</span>
-						{/if}
-						{#if !collapsed}
-							<span class="item-label">{item.label}</span>
-						{/if}
-					</a>
-				{/each}
-			</div>
-		{/each}
-	</nav>
+        {#each group.items as item}
+          <a
+            href={item.href}
+            class="sidebar-link"
+            class:active={activeHref === item.href}
+            title={collapsed ? item.label : undefined}
+          >
+            {#if item.icon}
+              <span class="item-icon">
+                <svelte:component this={item.icon} size={16} />
+              </span>
+            {/if}
+            {#if !collapsed}
+              <span class="item-label">{item.label}</span>
+            {/if}
+          </a>
+        {/each}
+      </div>
+    {/each}
+  </nav>
 </aside>
 
 <style>
-	.sidebar {
-		display: flex;
-		flex-direction: column;
-		width: 220px;
-		background: var(--bg-subtle);
-		border-right: 1px solid var(--border);
-		padding: 16px 0;
-		transition:
-			width var(--transition-base),
-			background var(--transition-base),
-			border-color var(--transition-base);
-		position: relative;
-		min-height: 300px;
-	}
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    background: var(--bg-subtle);
+    border-right: 1px solid var(--border);
+    /* padding: 16px 0; */
+    transition:
+      width var(--transition-base),
+      background var(--transition-base),
+      border-color var(--transition-base);
+    position: relative;
+    min-height: 300px;
+  }
 
-	.sidebar.collapsed {
-		width: 56px;
-	}
+  .sidebar.collapsed {
+    width: 56px;
+  }
 
-	.collapse-btn {
-		position: absolute;
-		top: 12px;
-		right: -12px;
-		width: 24px;
-		height: 24px;
-		background: var(--bg-base);
-		border: 1px solid var(--border);
-		border-radius: var(--radius-full);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		cursor: pointer;
-		color: var(--text-muted);
-		z-index: 1;
-		padding: 0;
-		transition:
-			color var(--transition-fast),
-			box-shadow var(--transition-fast),
-			background var(--transition-base),
-			border-color var(--transition-base);
-	}
+  .collapse-btn {
+    position: absolute;
+    top: 12px;
+    right: -12px;
+    width: 24px;
+    height: 24px;
+    background: var(--bg-base);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-muted);
+    z-index: 1;
+    padding: 0;
+    transition:
+      color var(--transition-fast),
+      box-shadow var(--transition-fast),
+      background var(--transition-base),
+      border-color var(--transition-base);
+  }
 
-	.collapse-btn:hover {
-		color: var(--text-base);
-		box-shadow: var(--shadow-md);
-	}
+  .collapse-btn:hover {
+    color: var(--text-base);
+    box-shadow: var(--shadow-md);
+  }
 
-	.collapse-btn :global(svg) {
-		transition: transform var(--transition-base);
-	}
+  .collapse-btn :global(svg) {
+    transition: transform var(--transition-base);
+  }
 
-	.sidebar.collapsed .collapse-btn :global(svg) {
-		transform: rotate(180deg);
-	}
+  .sidebar.collapsed .collapse-btn :global(svg) {
+    transform: rotate(180deg);
+  }
 
-	.sidebar-nav {
-		display: flex;
-		flex-direction: column;
-		gap: 16px;
-		padding: 8px;
-		overflow: hidden;
-	}
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 8px;
+    overflow: hidden;
+  }
 
-	.group {
-		display: flex;
-		flex-direction: column;
-		gap: 2px;
-	}
+  .group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
 
-	.group-label {
-		padding: 4px 8px;
-		font-size: 11px;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		color: var(--text-subtle);
-		white-space: nowrap;
-	}
+  .group-label {
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-subtle);
+    white-space: nowrap;
+  }
 
-	.sidebar-link {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		padding: 8px;
-		font-size: 14px;
-		color: var(--text-muted);
-		text-decoration: none;
-		border-radius: var(--radius-md);
-		white-space: nowrap;
-		transition: background var(--transition-fast), color var(--transition-fast);
-		min-width: 0;
-	}
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    font-size: 14px;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    white-space: nowrap;
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast);
+    min-width: 0;
+  }
 
-	.sidebar-link:hover {
-		background: var(--bg-hover);
-		color: var(--text-base);
-	}
+  .sidebar-link:hover {
+    background: var(--bg-hover);
+    color: var(--text-base);
+  }
 
-	.sidebar-link.active {
-		background: var(--primary-subtle);
-		color: var(--primary-subtle-fg);
-		font-weight: 500;
-	}
+  .sidebar-link.active {
+    background: var(--primary-subtle);
+    color: var(--primary-subtle-fg);
+    font-weight: 500;
+  }
 
-	.item-icon {
-		flex-shrink: 0;
-		width: 20px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
+  .item-icon {
+    flex-shrink: 0;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-	.item-label {
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
+  .item-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 </style>

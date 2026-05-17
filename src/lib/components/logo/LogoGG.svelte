@@ -72,11 +72,11 @@
           ? 1
           : 0}; white-space: nowrap;"
       >
-        G2 Web Dev ©
+        G2 Web Dev
       </strong>
 
       <span
-        class="mt-1 block truncate text-[16px] leading-none"
+        class="mt-1 block truncate text-[12px] leading-none"
         style="max-width: {open
           ? '180px'
           : '0px'}; transition: max-width 320ms ease .04s, opacity 200ms ease .04s; opacity: {open
