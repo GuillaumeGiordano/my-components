@@ -4,6 +4,7 @@
   import { categories } from "$lib/registry";
   import { theme } from "$lib/theme.svelte";
   import ThemeToggle from "$lib/components/ui/ThemeToggle.svelte";
+  import ThemePicker from "$lib/components/ui/ThemePicker.svelte";
   import Toaster from "$lib/components/ui/Toaster.svelte";
   import "../app.css";
   import LogoGG from "$lib/components/logo/LogoGG.svelte";
@@ -48,6 +49,8 @@
         {/each}
       {/if}
     </nav>
+
+    <ThemePicker />
   </aside>
 
   <main class="content">

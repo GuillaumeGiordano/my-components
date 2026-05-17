@@ -1,42 +1,66 @@
-// Theme store — persists preference in localStorage, applies .dark class on <html>
+// Theme store — persists dark/light + color theme in localStorage
 
-type Theme = 'light' | 'dark';
+type Mode = 'light' | 'dark';
+export type ColorTheme = 'default' | 'violet' | 'emerald' | 'rose' | 'orange' | 'slate';
+
+export const COLOR_THEMES: { id: ColorTheme; label: string; color: string }[] = [
+	{ id: 'default', label: 'Blue',    color: '#2563eb' },
+	{ id: 'violet',  label: 'Violet',  color: '#7c3aed' },
+	{ id: 'emerald', label: 'Emerald', color: '#059669' },
+	{ id: 'rose',    label: 'Rose',    color: '#e11d48' },
+	{ id: 'orange',  label: 'Orange',  color: '#ea580c' },
+	{ id: 'slate',   label: 'Slate',   color: '#475569' },
+];
+
+const THEME_CLASSES = COLOR_THEMES.map((t) => `theme-${t.id}`);
 
 function createTheme() {
-	// $state is reactive — reading it in a $derived or template is tracked
-	let current = $state<Theme>('light');
+	let mode = $state<Mode>('light');
+	let colorTheme = $state<ColorTheme>('default');
 
 	function init() {
-		// Read stored preference, fallback to system preference
-		const stored = localStorage.getItem('theme') as Theme | null;
+		const storedMode = localStorage.getItem('theme') as Mode | null;
+		const storedColor = localStorage.getItem('color-theme') as ColorTheme | null;
 		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-		current = stored ?? (prefersDark ? 'dark' : 'light');
-		apply(current);
+
+		mode = storedMode ?? (prefersDark ? 'dark' : 'light');
+		colorTheme = storedColor ?? 'default';
+
+		applyMode(mode);
+		applyColor(colorTheme);
 	}
 
-	function apply(theme: Theme) {
-		if (theme === 'dark') {
-			document.documentElement.classList.add('dark');
-		} else {
-			document.documentElement.classList.remove('dark');
+	function applyMode(m: Mode) {
+		document.documentElement.classList.toggle('dark', m === 'dark');
+	}
+
+	function applyColor(c: ColorTheme) {
+		// Remove all theme classes then add the new one
+		document.documentElement.classList.remove(...THEME_CLASSES);
+		if (c !== 'default') {
+			document.documentElement.classList.add(`theme-${c}`);
 		}
 	}
 
 	function toggle() {
-		current = current === 'light' ? 'dark' : 'light';
-		localStorage.setItem('theme', current);
-		apply(current);
+		mode = mode === 'light' ? 'dark' : 'light';
+		localStorage.setItem('theme', mode);
+		applyMode(mode);
+	}
+
+	function setColor(c: ColorTheme) {
+		colorTheme = c;
+		localStorage.setItem('color-theme', c);
+		applyColor(c);
 	}
 
 	return {
-		get current() {
-			return current;
-		},
-		get isDark() {
-			return current === 'dark';
-		},
+		get current()     { return mode; },
+		get isDark()      { return mode === 'dark'; },
+		get colorTheme()  { return colorTheme; },
 		init,
-		toggle
+		toggle,
+		setColor,
 	};
 }
 
