@@ -91,6 +91,6 @@
 
 <style>
   .link-logo path {
-    fill: hsl(var(--colortheme));
+    fill: var(--text-base);
   }
 </style>

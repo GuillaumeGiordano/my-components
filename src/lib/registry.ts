@@ -40,6 +40,26 @@ export const categories: ComponentCategory[] = [
 				slug: 'date',
 				label: 'Date',
 				description: 'Sélecteur de date simple et plage de dates (start–end)'
+			},
+			{
+				slug: 'number-input',
+				label: 'Number Input',
+				description: 'Champ numérique avec boutons +/− — min, max, step configurables'
+			},
+			{
+				slug: 'slider',
+				label: 'Slider',
+				description: 'Curseur de valeur numérique — min/max/step, formatage personnalisé'
+			},
+			{
+				slug: 'otp',
+				label: 'OTP Input',
+				description: 'Saisie de code de vérification 4–6 chiffres — coller, navigation clavier'
+			},
+			{
+				slug: 'tag-input',
+				label: 'Tag Input',
+				description: 'Saisie de tags — Entrée ou virgule pour valider, Backspace pour supprimer'
 			}
 		]
 	},
@@ -112,6 +132,71 @@ export const categories: ComponentCategory[] = [
 				slug: 'toast',
 				label: 'Toast',
 				description: 'Notification flottante déclenchée par toast.success/error/warning/info()'
+			},
+			{
+				slug: 'spinner',
+				label: 'Spinner',
+				description: 'Indicateur de chargement circulaire — 5 tailles, 3 couleurs'
+			},
+			{
+				slug: 'skeleton',
+				label: 'Skeleton',
+				description: 'Placeholder shimmer animé — rect, text, circle'
+			},
+			{
+				slug: 'progress',
+				label: 'Progress',
+				description: 'Barre linéaire et anneau circulaire — 4 couleurs, 3 tailles'
+			},
+			{
+				slug: 'breadcrumb',
+				label: 'Breadcrumb',
+				description: 'Fil d\'Ariane accessible avec icône home et collapse automatique'
+			},
+			{
+				slug: 'empty-state',
+				label: 'Empty State',
+				description: 'Placeholder affiché quand une liste est vide — icône, titre, CTA'
+			},
+			{
+				slug: 'stepper',
+				label: 'Stepper',
+				description: 'Indicateur multi-étapes — horizontal/vertical, numéroté/pointillé'
+			},
+			{
+				slug: 'table',
+				label: 'Table',
+				description: 'Tableau de données avec tri, sélection par checkbox'
+			},
+			{
+				slug: 'pagination',
+				label: 'Pagination',
+				description: 'Navigation entre pages avec collapse automatique des numéros intermédiaires'
+			},
+			{
+				slug: 'divider',
+				label: 'Divider',
+				description: 'Séparateur horizontal/vertical avec label optionnel'
+			},
+			{
+				slug: 'kbd',
+				label: 'Kbd',
+				description: 'Affichage de raccourcis clavier stylisés'
+			},
+			{
+				slug: 'rating',
+				label: 'Rating',
+				description: 'Évaluation par étoiles — interactif ou lecture seule, 1 à N étoiles'
+			},
+			{
+				slug: 'copy-button',
+				label: 'Copy Button',
+				description: 'Bouton copier avec feedback visuel automatique après 2 secondes'
+			},
+			{
+				slug: 'timeline',
+				label: 'Timeline',
+				description: 'Historique chronologique vertical avec icônes et variantes de couleur'
 			}
 		]
 	},
@@ -229,6 +314,26 @@ export const categories: ComponentCategory[] = [
 				slug: 'announcement',
 				label: 'Announcement Bar',
 				description: 'Barre d\'annonce sticky avec 4 variantes de couleur et fermeture animée'
+			},
+			{
+				slug: 'cookie',
+				label: 'Cookie Banner',
+				description: 'Bannière de consentement RGPD — 3 positions, persistance localStorage'
+			},
+			{
+				slug: 'error',
+				label: 'Error / 404',
+				description: 'Page d\'erreur plein écran — code, titre, description, CTA secondaire'
+			},
+			{
+				slug: 'coming-soon',
+				label: 'Coming Soon',
+				description: 'Page de lancement avec compte à rebours et formulaire d\'inscription'
+			},
+			{
+				slug: 'onboarding',
+				label: 'Onboarding',
+				description: 'Écran de bienvenue multi-étapes — Stepper + navigation + visuel'
 			}
 		]
 	}
