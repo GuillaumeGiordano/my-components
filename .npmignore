@@ -1,0 +1,17 @@
+# Source & doc app — not part of the distributed package
+src/routes/
+src/app.css
+src/app.html
+static/
+
+# Dev config
+.svelte-kit/
+node_modules/
+vite.config.*
+svelte.config.js
+tsconfig.json
+.env*
+
+# Misc
+*.log
+.DS_Store
