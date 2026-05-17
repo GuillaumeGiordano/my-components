@@ -25,7 +25,7 @@
   <section class="variant">
     <h2>Avec CTA</h2>
     <ComponentPreview>
-      <Navbar {links} ctaLabel="Démarrer" ctaHref="#">
+      <Navbar {links} ctaLabel="Démarrer">
         {#snippet brand()}
           <LogoGG width={34} height={34} />
         {/snippet}
@@ -53,7 +53,6 @@
           { label: "Contact", href: "#" },
         ]}
         ctaLabel="Me contacter"
-        ctaHref="#"
       >
         {#snippet brand()}
           <LogoGG width={34} height={34} />
@@ -76,7 +75,6 @@
             >Texte du bouton CTA (masqué si vide)</td
           ></tr
         >
-        <tr><td>ctaHref</td><td>string</td><td>'#'</td><td>URL du bouton CTA</td></tr>
       </tbody>
     </table>
   </div>

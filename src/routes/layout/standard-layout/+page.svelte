@@ -50,7 +50,7 @@
     <ComponentPreview>
       <StandardLayout>
         {#snippet header()}
-          <Navbar links={navLinks} ctaLabel="Action" ctaHref="#">
+          <Navbar links={navLinks} ctaLabel="Action">
             {#snippet brand()}
               <span class="text-lg font-bold">Acme</span>
             {/snippet}

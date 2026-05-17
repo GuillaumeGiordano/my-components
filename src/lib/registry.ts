@@ -82,6 +82,11 @@ export const categories: ComponentCategory[] = [
 				slug: 'button-action',
 				label: 'Button Action',
 				description: 'Bouton d’action avec icône et texte, 3 variantes visuelles'
+			},
+			{
+				slug: 'navbar-mobile',
+				label: 'Navbar Mobile',
+				description: 'Barre de navigation pour les appareils mobiles'
 			}
 		]
 	},
@@ -92,7 +97,8 @@ export const categories: ComponentCategory[] = [
 			{ slug: 'navbar', label: 'Navbar', description: 'Barre de navigation responsive avec menu hamburger' },
 			{ slug: 'sidebar', label: 'Sidebar', description: 'Navigation latérale collapsible avec groupes' },
 			{ slug: 'footer', label: 'Footer', description: 'Pied de page avec colonnes de liens' },
-			{ slug: 'standard-layout', label: 'Standard Layout', description: 'Combinaison Navbar + Sidebar + Main + Footer' }
+			{ slug: 'standard-layout', label: 'Standard Layout', description: 'Combinaison Navbar + Sidebar + Main + Footer' },
+			{ slug: 'navbar-mobile', label: 'Navbar Mobile', description: 'Barre de navigation pour les appareils mobiles' }
 		]
 	}
 ];
