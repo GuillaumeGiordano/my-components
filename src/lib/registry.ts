@@ -77,6 +77,11 @@ export const categories: ComponentCategory[] = [
 				slug: 'modal',
 				label: 'Modal',
 				description: 'Dialog natif showModal() — centré, drawer, bottom-sheet — focus trap natif'
+			},
+			{
+				slug: 'button-action',
+				label: 'Button Action',
+				description: 'Bouton d’action avec icône et texte, 3 variantes visuelles'
 			}
 		]
 	},
