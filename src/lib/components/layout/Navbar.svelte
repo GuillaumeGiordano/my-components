@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Menu, Share2, Trash2, X } from "@lucide/svelte";
   import Button from "$lib/components/buttons/Button.svelte";
-  import LogoGG from "../logo/LogoGG.svelte";
   import type { Snippet } from "svelte";
   import ButtonAction from "../ui/ButtonAction.svelte";
   import ButtonActionItem from "../ui/ButtonActionItem.svelte";
@@ -11,12 +10,10 @@
   let {
     links = [] as NavLink[],
     ctaLabel = "",
-    ctaHref = "#",
     brand,
   }: {
     links?: NavLink[];
     ctaLabel?: string;
-    ctaHref?: string;
     brand?: Snippet;
   } = $props();
 
@@ -36,8 +33,7 @@
     <div class="navbar-actions">
       {#if ctaLabel}
         <span class="cta-desktop">
-          <Button href={ctaHref} size="sm">{ctaLabel}</Button>
-          <ButtonAction label="Primary" variant="primary" size="sm">
+          <ButtonAction label={ctaLabel} variant="primary" size="sm">
             {#snippet items(close)}
               <ButtonActionItem label="Partager" icon={Share2} onclick={close} />
               <ButtonActionItem
@@ -66,13 +62,13 @@
   {#if menuOpen}
     <nav class="mobile-menu" aria-label="Navigation mobile">
       {#each links as link}
-        <a href={link.href} class="mobile-link" onclick={() => (menuOpen = false)}
-          >{link.label}</a
-        >
+        <a href={link.href} class="mobile-link" onclick={() => (menuOpen = false)}>
+          {link.label}
+        </a>
       {/each}
       {#if ctaLabel}
         <span class="cta-mobile">
-          <ButtonAction label="Primary" variant="primary" size="md" addClass="w-full">
+          <ButtonAction label={ctaLabel} variant="primary" size="md" addClass="w-full">
             {#snippet items(close)}
               <ButtonActionItem label="Partager" icon={Share2} onclick={close} />
               <ButtonActionItem
