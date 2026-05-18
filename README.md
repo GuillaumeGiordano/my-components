@@ -40,3 +40,28 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+
+# 1. Dans my-components — builder + versionner + pousser
+
+cd "C:\Users\guigo\Projet Web\my-components"
+npm run package
+npm version patch
+git push origin main --tags
+
+# 2. Dans le projet consommateur — réinstaller
+
+cd "C:\Users\guigo\Projet Web\test_project_my_component\crevettes-shop"
+npm install github:GuillaumeGiordano/my-components
+
+▎ Le npm version patch fait deux choses en une : il bumpe la version dans package.json et crée le git tag
+▎ automatiquement. Le git push --tags pousse les deux (commit + tag).
+
+Si tu n'as pas besoin de versionner à chaque itération (phase de dev active), tu peux simplifier à :
+
+# my-components
+
+npm run package && git add -A && git commit -m "fix: navbar" && git push
+
+# crevettes-shop
+
+npm install github:GuillaumeGiordano/my-components

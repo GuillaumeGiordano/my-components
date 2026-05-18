@@ -94,6 +94,7 @@
       background var(--transition-base),
       border-color var(--transition-base);
     top: 0;
+    z-index: 99;
   }
 
   .navbar-inner {
@@ -173,7 +174,7 @@
     justify-content: center;
   }
 
-  @container (max-width: 640px) {
+  @media (max-width: 640px) {
     .navbar-links,
     .cta-desktop {
       display: none;
