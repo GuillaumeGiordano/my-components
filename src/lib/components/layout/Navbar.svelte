@@ -89,10 +89,11 @@
   .navbar {
     background: var(--bg-base);
     border-bottom: 1px solid var(--border);
-    position: relative;
+    position: sticky;
     transition:
       background var(--transition-base),
       border-color var(--transition-base);
+    top: 0;
   }
 
   .navbar-inner {

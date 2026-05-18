@@ -1,13 +1,14 @@
 <script lang="ts">
-  import Badge from '$lib/components/ui/Badge.svelte';
-  import Avatar from '$lib/components/ui/Avatar.svelte';
-  import Card from '$lib/components/ui/Card.svelte';
+  import Badge from "$lib/components/ui/Badge.svelte";
+  import Avatar from "$lib/components/ui/Avatar.svelte";
+  import Card from "$lib/components/ui/Card.svelte";
 
   let {
     badge,
     title,
     description,
     testimonials,
+    addClass,
   }: {
     badge?: string;
     title: string;
@@ -20,6 +21,7 @@
       content: string;
       rating?: number;
     }>;
+    addClass?: string;
   } = $props();
 
   // Build an array of 5 stars filled/empty
@@ -28,7 +30,7 @@
   }
 </script>
 
-<section class="testimonials">
+<section class="testimonials {addClass}">
   <div class="testimonials-inner">
     <!-- Header -->
     <div class="section-header">
@@ -51,14 +53,16 @@
               {#if t.rating}
                 <div class="stars" aria-label="{t.rating} étoiles sur 5">
                   {#each stars(t.rating) as filled}
-                    <span class="star" class:filled>{filled ? '★' : '☆'}</span>
+                    <span class="star" class:filled>{filled ? "★" : "☆"}</span>
                   {/each}
                 </div>
               {/if}
 
               <!-- Quote -->
               <blockquote class="quote">
-                <span class="quote-mark">"</span>{t.content}<span class="quote-mark">"</span>
+                <span class="quote-mark">"</span>{t.content}<span class="quote-mark"
+                  >"</span
+                >
               </blockquote>
 
               <!-- Author -->
@@ -67,7 +71,8 @@
                 <div class="author-info">
                   <span class="author-name">{t.name}</span>
                   <span class="author-role">
-                    {t.role}{#if t.company} · {t.company}{/if}
+                    {t.role}{#if t.company}
+                      · {t.company}{/if}
                   </span>
                 </div>
               </div>
