@@ -1,0 +1,26 @@
+import type { Component } from 'svelte';
+type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search' | 'date' | 'time';
+type $$ComponentProps = {
+    id?: string;
+    name?: string;
+    label: string;
+    type?: InputType;
+    value?: string;
+    placeholder?: string;
+    hint?: string;
+    error?: string;
+    required?: boolean;
+    disabled?: boolean;
+    readonly?: boolean;
+    icon?: Component;
+    iconRight?: Component;
+    autocomplete?: string;
+    minlength?: number;
+    maxlength?: number;
+    min?: string | number;
+    max?: string | number;
+    pattern?: string;
+};
+declare const Input: Component<$$ComponentProps, {}, "value">;
+type Input = ReturnType<typeof Input>;
+export default Input;
