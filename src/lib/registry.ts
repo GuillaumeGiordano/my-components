@@ -261,6 +261,11 @@ export const categories: ComponentCategory[] = [
 				description: 'Grille d\'images avec lightbox intégrée et navigation clavier'
 			},
 			{
+				slug: 'image-cards',
+				label: 'Image Cards',
+				description: 'Grille de cartes full-image avec overlay sombre, accent coloré et texte — 2 à 4 colonnes'
+			},
+			{
 				slug: 'newsletter',
 				label: 'Newsletter',
 				description: 'Formulaire d\'inscription avec validation, état de succès — variantes default et card'

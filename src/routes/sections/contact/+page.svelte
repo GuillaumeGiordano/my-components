@@ -1,6 +1,7 @@
 <script lang="ts">
   import '$lib/styles/demo-page.css';
   import ContactSection from '$lib/components/sections/ContactSection.svelte';
+  import ContactSectionV2 from '$lib/components/sections/ContactSectionV2.svelte';
   import { Mail, Phone, MapPin } from '@lucide/svelte';
 
   const contactInfo = [
@@ -59,6 +60,19 @@
       description="Vous avez une question, un retour ou une demande spécifique ? Remplissez ce formulaire et nous vous répondrons rapidement."
       onsubmit={handleSubmit}
       variant="centered"
+    />
+  </section>
+
+  <section class="variant">
+    <h2>V2 — Avec carte Google Maps</h2>
+    <ContactSectionV2
+      badge="Nous trouver"
+      title="Venez nous rendre visite."
+      description="Notre équipe est disponible du lundi au vendredi, de 9h à 18h. Nous vous répondrons dans les 24 heures ouvrées."
+      info={contactInfo}
+      onsubmit={handleSubmit}
+      mapSrc="https://maps.google.com/maps?q=42+rue+de+Rivoli+75001+Paris&output=embed&hl=fr&z=15"
+      mapLabel="42 rue de Rivoli, Paris"
     />
   </section>
 </div>
