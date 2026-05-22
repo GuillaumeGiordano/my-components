@@ -65,3 +65,22 @@ npm run package && git add -A && git commit -m "fix: navbar" && git push
 # crevettes-shop
 
 npm install github:GuillaumeGiordano/my-components
+
+Le workflow mis en place
+
+- my-components (GitHub) → librairie de composants versionnée, avec le dossier package/ commité pour les installs
+  GitHub
+- AquaShrimp (GitHub) → projet SvelteKit déployé sur Vercel, mis à jour automatiquement à chaque push sur main
+
+Pour la suite, si tu modifies un composant dans my-components :
+
+# Dans my-components
+
+npm run package
+git add -A && git commit -m "..." && git push
+
+# Dans AquaShrimp (pour récupérer la nouvelle version)
+
+pnpm install github:GuillaumeGiordano/my-components
+git add pnpm-lock.yaml && git commit -m "chore: update @guillaumeg/ui" && git push
+Vercel redéploie automatiquement dès que tu pushes sur main.
