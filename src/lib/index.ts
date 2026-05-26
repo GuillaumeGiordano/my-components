@@ -21,6 +21,8 @@ export { default as FormTextarea }        from './components/forms/Textarea.svel
 
 // ─── UI ──────────────────────────────────────────────────────────────────────
 export { default as Alert }               from './components/ui/Alert.svelte';
+export { default as Chatbot }             from './components/ui/Chatbot.svelte';
+export type { ChatMessage }               from './components/ui/Chatbot.svelte';
 export { default as Avatar }              from './components/ui/Avatar.svelte';
 export { default as Badge }               from './components/ui/Badge.svelte';
 export { default as Breadcrumb }          from './components/ui/Breadcrumb.svelte';
@@ -90,4 +92,4 @@ export { default as VideoSection }        from './components/sections/VideoSecti
 export { toast }                          from './stores/toast';
 export type { Toast, ToastVariant }       from './stores/toast';
 export { theme, THEMES, COLOR_THEMES }    from './theme.svelte';
-export type { Theme, ColorTheme, ShapeVariant, ShadowVariant, TypographyVariant } from './theme.svelte';
+export type { Theme, ColorTheme, ShapeVariant, ShadowVariant, TypographyVariant, FontVariant, TransitionVariant, TextureVariant, TrackingVariant } from './theme.svelte';

@@ -197,6 +197,11 @@ export const categories: ComponentCategory[] = [
 				slug: 'timeline',
 				label: 'Timeline',
 				description: 'Historique chronologique vertical avec icônes et variantes de couleur'
+			},
+			{
+				slug: 'chatbot',
+				label: 'Chatbot',
+				description: 'Widget conversationnel flottant — branchez votre propre handler IA (Claude, OpenAI…)'
 			}
 		]
 	},
