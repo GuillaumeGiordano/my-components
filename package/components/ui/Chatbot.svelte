@@ -1,29 +1,29 @@
 <script lang="ts">
-  import { MessageCircle, X, Send, Bot } from '@lucide/svelte';
+  import { MessageCircle, X, Send, Bot } from "@lucide/svelte";
 
-  export type ChatMessage = { role: 'user' | 'assistant'; content: string };
+  export type ChatMessage = { role: "user" | "assistant"; content: string };
 
   let {
     onMessage,
-    title = 'Assistant',
-    placeholder = 'Posez une question…',
-    initialMessage = '',
-    position = 'bottom-right',
+    title = "Assistant",
+    placeholder = "Posez une question…",
+    initialMessage = "",
+    position = "bottom-right",
   }: {
     onMessage: (history: ChatMessage[]) => Promise<string>;
     title?: string;
     placeholder?: string;
     initialMessage?: string;
-    position?: 'bottom-right' | 'bottom-left';
+    position?: "bottom-right" | "bottom-left";
   } = $props();
 
   let open = $state(false);
   let loading = $state(false);
-  let input = $state('');
+  let input = $state("");
   let messagesEl: HTMLDivElement | null = $state(null);
 
   const messages = $state<ChatMessage[]>(
-    initialMessage ? [{ role: 'assistant', content: initialMessage }] : []
+    initialMessage ? [{ role: "assistant", content: initialMessage }] : [],
   );
 
   function scrollToBottom() {
@@ -36,8 +36,8 @@
     const text = input.trim();
     if (!text || loading) return;
 
-    input = '';
-    messages.push({ role: 'user', content: text });
+    input = "";
+    messages.push({ role: "user", content: text });
     loading = true;
 
     // Scroll after user message renders
@@ -46,9 +46,12 @@
 
     try {
       const reply = await onMessage([...messages]);
-      messages.push({ role: 'assistant', content: reply });
+      messages.push({ role: "assistant", content: reply });
     } catch {
-      messages.push({ role: 'assistant', content: 'Une erreur est survenue. Veuillez réessayer.' });
+      messages.push({
+        role: "assistant",
+        content: "Une erreur est survenue. Veuillez réessayer.",
+      });
     } finally {
       loading = false;
       await Promise.resolve();
@@ -57,7 +60,7 @@
   }
 
   function onKeydown(e: KeyboardEvent) {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       send();
     }
@@ -69,7 +72,7 @@
   <button
     class="toggle-btn"
     onclick={() => (open = !open)}
-    aria-label={open ? 'Fermer le chat' : 'Ouvrir le chat'}
+    aria-label={open ? "Fermer le chat" : "Ouvrir le chat"}
     aria-expanded={open}
   >
     {#if open}
@@ -101,7 +104,7 @@
 
         {#each messages as msg}
           <div class="message {msg.role}">
-            {#if msg.role === 'assistant'}
+            {#if msg.role === "assistant"}
               <span class="avatar"><Bot size={14} /></span>
             {/if}
             <div class="bubble">{msg.content}</div>
@@ -147,13 +150,19 @@
     bottom: 24px;
     z-index: 1000;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: flex-end;
     gap: 12px;
   }
 
-  .chatbot-root.bottom-right { right: 24px; align-items: flex-end; }
-  .chatbot-root.bottom-left  { left: 24px;  align-items: flex-start; }
+  .chatbot-root.bottom-right {
+    right: 24px;
+    align-items: flex-end;
+  }
+  .chatbot-root.bottom-left {
+    left: 24px;
+    align-items: flex-start;
+  }
 
   /* ── Toggle button ── */
   .toggle-btn {
@@ -168,11 +177,19 @@
     align-items: center;
     justify-content: center;
     box-shadow: var(--shadow-lg);
-    transition: background var(--transition-fast), transform var(--transition-fast);
+    transition:
+      background var(--transition-fast),
+      transform var(--transition-fast);
     flex-shrink: 0;
 
-    &:hover { background: var(--primary-hover); transform: scale(1.06); }
-    &:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+    &:hover {
+      background: var(--primary-hover);
+      transform: scale(1.06);
+    }
+    &:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 3px;
+    }
   }
 
   /* ── Panel ── */
@@ -234,10 +251,18 @@
     cursor: pointer;
     color: var(--text-subtle);
     border-radius: var(--radius-md);
-    transition: background var(--transition-fast), color var(--transition-fast);
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast);
 
-    &:hover { background: var(--bg-hover); color: var(--text-base); }
-    &:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+    &:hover {
+      background: var(--bg-hover);
+      color: var(--text-base);
+    }
+    &:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
   }
 
   /* ── Messages ── */
@@ -316,8 +341,12 @@
       background: var(--text-subtle);
       animation: dot-bounce 1.2s ease-in-out infinite;
 
-      &:nth-child(2) { animation-delay: 0.2s; }
-      &:nth-child(3) { animation-delay: 0.4s; }
+      &:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      &:nth-child(3) {
+        animation-delay: 0.4s;
+      }
     }
   }
 
@@ -351,8 +380,13 @@
       border-color: var(--primary);
     }
 
-    &::placeholder { color: var(--text-subtle); }
-    &:disabled { opacity: 0.5; cursor: not-allowed; }
+    &::placeholder {
+      color: var(--text-subtle);
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 
   .send-btn {
@@ -367,21 +401,45 @@
     color: var(--primary-fg);
     cursor: pointer;
     flex-shrink: 0;
-    transition: background var(--transition-fast), opacity var(--transition-fast);
+    transition:
+      background var(--transition-fast),
+      opacity var(--transition-fast);
 
-    &:hover:not(:disabled) { background: var(--primary-hover); }
-    &:disabled { opacity: 0.4; cursor: not-allowed; }
-    &:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+    &:hover:not(:disabled) {
+      background: var(--primary-hover);
+    }
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    &:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
   }
 
   /* ── Animations ── */
   @keyframes slide-up {
-    from { opacity: 0; transform: translateY(12px) scale(0.97); }
-    to   { opacity: 1; transform: none; }
+    from {
+      opacity: 0;
+      transform: translateY(12px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 
   @keyframes dot-bounce {
-    0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
-    40%            { transform: translateY(-5px); opacity: 1; }
+    0%,
+    80%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.4;
+    }
+    40% {
+      transform: translateY(-5px);
+      opacity: 1;
+    }
   }
 </style>
