@@ -103,87 +103,194 @@
 }
 
 /* ==========================================================================
-   THÈMES COULEUR — s'appliquent via .theme-* sur <html>
-   Chaque thème redéfinit uniquement les variables primaires.
-   Compatible dark mode : .dark.theme-* surcharge la version sombre.
+   TYPOGRAPHIE — tokens pour les axes de thème
    ========================================================================== */
 
-/* --- Violet ---------------------------------------------------------------- */
-.theme-violet {
-  --primary:          #7c3aed;
-  --primary-hover:    #6d28d9;
-  --primary-fg:       #ffffff;
-  --primary-subtle:   #ede9fe;
-  --primary-subtle-fg:#5b21b6;
-}
-.dark.theme-violet {
-  --primary:          #a78bfa;
-  --primary-hover:    #8b5cf6;
-  --primary-fg:       #ffffff;
-  --primary-subtle:   #2e1065;
-  --primary-subtle-fg:#c4b5fd;
+:root {
+  --heading-weight:   700;
+  --heading-tracking: -0.025em;
+  --leading-base:     1.6;
+  --font-size-base:   16px;
 }
 
-/* --- Emerald --------------------------------------------------------------- */
-.theme-emerald {
-  --primary:          #059669;
-  --primary-hover:    #047857;
-  --primary-fg:       #ffffff;
-  --primary-subtle:   #d1fae5;
-  --primary-subtle-fg:#065f46;
-}
-.dark.theme-emerald {
-  --primary:          #34d399;
-  --primary-hover:    #10b981;
-  --primary-fg:       #022c22;
-  --primary-subtle:   #022c22;
-  --primary-subtle-fg:#6ee7b7;
+/* ==========================================================================
+   THÈMES VISUELS — classes appliquées sur <html> par theme.svelte.ts
+   Les couleurs primaires sont injectées en JS via style.setProperty().
+   ========================================================================== */
+
+/* ── Forme / border-radius ──────────────────────────────────────────────── */
+
+.shape-sharp {
+  --radius-sm:  2px;
+  --radius-md:  3px;
+  --radius-lg:  4px;
+  --radius-xl:  6px;
 }
 
-/* --- Rose ------------------------------------------------------------------ */
-.theme-rose {
-  --primary:          #e11d48;
-  --primary-hover:    #be123c;
-  --primary-fg:       #ffffff;
-  --primary-subtle:   #ffe4e6;
-  --primary-subtle-fg:#9f1239;
-}
-.dark.theme-rose {
-  --primary:          #fb7185;
-  --primary-hover:    #f43f5e;
-  --primary-fg:       #ffffff;
-  --primary-subtle:   #4c0519;
-  --primary-subtle-fg:#fda4af;
+.shape-rounded {
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  20px;
 }
 
-/* --- Orange ---------------------------------------------------------------- */
-.theme-orange {
-  --primary:          #ea580c;
-  --primary-hover:    #c2410c;
-  --primary-fg:       #ffffff;
-  --primary-subtle:   #ffedd5;
-  --primary-subtle-fg:#9a3412;
-}
-.dark.theme-orange {
-  --primary:          #fb923c;
-  --primary-hover:    #f97316;
-  --primary-fg:       #ffffff;
-  --primary-subtle:   #431407;
-  --primary-subtle-fg:#fdba74;
+.shape-pill {
+  --radius-sm:  10px;
+  --radius-md:  20px;
+  --radius-lg:  32px;
+  --radius-xl:  48px;
 }
 
-/* --- Slate (neutre) -------------------------------------------------------- */
-.theme-slate {
-  --primary:          #475569;
-  --primary-hover:    #334155;
-  --primary-fg:       #ffffff;
-  --primary-subtle:   #f1f5f9;
-  --primary-subtle-fg:#1e293b;
+/* ── Ombres ─────────────────────────────────────────────────────────────── */
+
+.shadow-flat {
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
 }
-.dark.theme-slate {
-  --primary:          #94a3b8;
-  --primary-hover:    #cbd5e1;
-  --primary-fg:       #0f172a;
-  --primary-subtle:   #1e293b;
-  --primary-subtle-fg:#cbd5e1;
+
+.shadow-elevated {
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.22);
+}
+
+/* ── Typographie ────────────────────────────────────────────────────────── */
+
+/* Tight : titres lourds et serrés */
+.type-tight {
+  --heading-weight:   800;
+  --heading-tracking: -0.04em;
+  --leading-base:     1.45;
+}
+
+/* Relaxed : titres légers et aérés */
+.type-relaxed {
+  --heading-weight:   600;
+  --heading-tracking: -0.01em;
+  --leading-base:     1.75;
+}
+
+/* Global heading override — s'applique à tous les h1-h4 dans l'app */
+.type-tight h1, .type-tight h2, .type-tight h3, .type-tight h4,
+.type-relaxed h1, .type-relaxed h2, .type-relaxed h3, .type-relaxed h4 {
+  font-weight: var(--heading-weight) !important;
+  letter-spacing: var(--heading-tracking) !important;
+}
+
+/* Line-height sur le body */
+.type-tight   body, .type-tight   p { line-height: var(--leading-base); }
+.type-relaxed body, .type-relaxed p { line-height: var(--leading-base); }
+
+/* ==========================================================================
+   POLICES — tokens et classes de thème
+   ========================================================================== */
+
+:root {
+  --font-display: var(--font-sans);
+  --font-body:    var(--font-sans);
+  --tracking-body: 0em;
+}
+
+/* Apply display font to all headings globally */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display, inherit);
+}
+
+/* Apply tracking globally — cascades via inheritance */
+html {
+  letter-spacing: var(--tracking-body);
+}
+
+/* Monospace — Tron, Matrix, Corporate */
+.font-mono {
+  --font-display: ui-monospace, 'Cascadia Code', Consolas, 'Courier New', monospace;
+  --font-body:    ui-monospace, 'Cascadia Code', Consolas, 'Courier New', monospace;
+  font-family: var(--font-body);
+}
+
+/* Condensed bold — Dark Side, Deadpool, Man of Steel, Gotham */
+.font-condensed {
+  --font-display: Impact, 'Arial Narrow', 'Franklin Gothic Medium', sans-serif;
+}
+
+/* Geometric soft — Nature, DeLorean, Playful, Warm */
+.font-geometric {
+  --font-display: 'Trebuchet MS', 'Century Gothic', Futura, sans-serif;
+  --font-body:    'Trebuchet MS', 'Century Gothic', Futura, sans-serif;
+  font-family: var(--font-body);
+}
+
+/* ==========================================================================
+   TRANSITIONS — personnalité d'interaction
+   ========================================================================== */
+
+.transition-instant {
+  --transition-fast: 0.04s ease;
+  --transition-base: 0.07s ease;
+}
+
+.transition-snappy {
+  --transition-fast: 0.08s ease;
+  --transition-base: 0.13s ease;
+}
+
+.transition-smooth {
+  --transition-fast: 0.25s ease;
+  --transition-base: 0.4s ease;
+}
+
+/* Spring — légère inertie dépassement sur la fin */
+.transition-spring {
+  --transition-fast: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-base: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ==========================================================================
+   ESPACEMENT DES LETTRES — corps de texte
+   ========================================================================== */
+
+.tracking-wide       { --tracking-body:  0.04em; }
+.tracking-tight-body { --tracking-body: -0.01em; }
+
+/* ==========================================================================
+   TEXTURE DE FOND
+   Overlay fixe via pseudo-élément sur <html> — pointer-events: none
+   --texture-color est injecté en JS selon le thème et le mode
+   ========================================================================== */
+
+html.texture-dots::before,
+html.texture-lines::before,
+html.texture-grid::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+html.texture-dots::before {
+  background-image: radial-gradient(
+    circle,
+    var(--texture-color, rgba(0, 0, 0, 0.055)) 1px,
+    transparent 1px
+  );
+  background-size: 20px 20px;
+}
+
+html.texture-lines::before {
+  background-image: repeating-linear-gradient(
+    0deg,
+    var(--texture-color, rgba(0, 0, 0, 0.04)) 0px,
+    var(--texture-color, rgba(0, 0, 0, 0.04)) 1px,
+    transparent 1px,
+    transparent 28px
+  );
+}
+
+html.texture-grid::before {
+  background-image:
+    linear-gradient(var(--texture-color, rgba(0, 0, 0, 0.05)) 1px, transparent 1px),
+    linear-gradient(90deg, var(--texture-color, rgba(0, 0, 0, 0.05)) 1px, transparent 1px);
+  background-size: 24px 24px;
 }

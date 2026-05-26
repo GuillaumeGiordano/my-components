@@ -185,6 +185,11 @@ export const categories = [
                 slug: 'timeline',
                 label: 'Timeline',
                 description: 'Historique chronologique vertical avec icônes et variantes de couleur'
+            },
+            {
+                slug: 'chatbot',
+                label: 'Chatbot',
+                description: 'Widget conversationnel flottant — branchez votre propre handler IA (Claude, OpenAI…)'
             }
         ]
     },
@@ -247,6 +252,11 @@ export const categories = [
                 slug: 'gallery',
                 label: 'Gallery',
                 description: 'Grille d\'images avec lightbox intégrée et navigation clavier'
+            },
+            {
+                slug: 'image-cards',
+                label: 'Image Cards',
+                description: 'Grille de cartes full-image avec overlay sombre, accent coloré et texte — 2 à 4 colonnes'
             },
             {
                 slug: 'newsletter',

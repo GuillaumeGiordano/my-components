@@ -19,6 +19,7 @@ export { default as TagInput } from './components/forms/TagInput.svelte';
 export { default as FormTextarea } from './components/forms/Textarea.svelte';
 // ─── UI ──────────────────────────────────────────────────────────────────────
 export { default as Alert } from './components/ui/Alert.svelte';
+export { default as Chatbot } from './components/ui/Chatbot.svelte';
 export { default as Avatar } from './components/ui/Avatar.svelte';
 export { default as Badge } from './components/ui/Badge.svelte';
 export { default as Breadcrumb } from './components/ui/Breadcrumb.svelte';
@@ -58,6 +59,7 @@ export { default as BlogGridSection } from './components/sections/BlogGridSectio
 export { default as ComingSoonSection } from './components/sections/ComingSoonSection.svelte';
 export { default as ComparisonSection } from './components/sections/ComparisonSection.svelte';
 export { default as ContactSection } from './components/sections/ContactSection.svelte';
+export { default as ContactSectionV2 } from './components/sections/ContactSectionV2.svelte';
 export { default as CookieBanner } from './components/sections/CookieBanner.svelte';
 export { default as CTABannerSection } from './components/sections/CTABannerSection.svelte';
 export { default as DownloadSection } from './components/sections/DownloadSection.svelte';
@@ -65,7 +67,10 @@ export { default as Error404Section } from './components/sections/Error404Sectio
 export { default as FAQSection } from './components/sections/FAQSection.svelte';
 export { default as FeaturesSection } from './components/sections/FeaturesSection.svelte';
 export { default as GallerySection } from './components/sections/GallerySection.svelte';
+export { default as GallerySectionV2 } from './components/sections/GallerySectionV2.svelte';
 export { default as HeroSection } from './components/sections/HeroSection.svelte';
+export { default as HeroSectionV2 } from './components/sections/HeroSectionV2.svelte';
+export { default as ImageCardsSection } from './components/sections/ImageCardsSection.svelte';
 export { default as IntegrationsSection } from './components/sections/IntegrationsSection.svelte';
 export { default as LogoCloudSection } from './components/sections/LogoCloudSection.svelte';
 export { default as NewsletterSection } from './components/sections/NewsletterSection.svelte';
@@ -79,4 +84,4 @@ export { default as TestimonialsSection } from './components/sections/Testimonia
 export { default as VideoSection } from './components/sections/VideoSection.svelte';
 // ─── Stores & theme ──────────────────────────────────────────────────────────
 export { toast } from './stores/toast';
-export { theme, COLOR_THEMES } from './theme.svelte';
+export { theme, THEMES, COLOR_THEMES } from './theme.svelte';
