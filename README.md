@@ -60,7 +60,7 @@ Si tu n'as pas besoin de versionner à chaque itération (phase de dev active), 
 
 # my-components
 
-npm run package && git add -A && git commit -m "fix: navbar" && git push
+pnpm run package && git add -A && git commit -m "add new components" && git push
 
 # crevettes-shop
 
