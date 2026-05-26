@@ -1,35 +1,7 @@
 <script lang="ts">
   import '$lib/styles/demo-page.css';
   import Chatbot from '$lib/components/ui/Chatbot.svelte';
-  import type { KnowledgeEntry } from '$lib/components/ui/Chatbot.svelte';
-
-  // Ta base de connaissances — remplace avec tes propres Q/R
-  const knowledge: KnowledgeEntry[] = [
-    {
-      question: 'Quels sont vos horaires ?',
-      answer: 'Nous sommes ouverts du lundi au vendredi de 9h à 18h, et le samedi de 10h à 14h.',
-    },
-    {
-      question: 'Comment retourner un article ?',
-      answer: 'Vous avez 30 jours à compter de la réception pour retourner tout article non utilisé et dans son emballage d\'origine. Contactez-nous par email pour obtenir l\'étiquette de retour.',
-    },
-    {
-      question: 'Quels modes de paiement acceptez-vous ?',
-      answer: 'Nous acceptons les cartes Visa, Mastercard, American Express, ainsi que PayPal et le virement bancaire.',
-    },
-    {
-      question: 'Livrez-vous à l\'étranger ?',
-      answer: 'Oui, nous livrons dans toute l\'Europe. Les délais varient de 3 à 7 jours ouvrés selon le pays. Les frais de port sont offerts dès 80€ d\'achat.',
-    },
-    {
-      question: 'Comment contacter le service client ?',
-      answer: 'Vous pouvez nous joindre par email à support@exemple.com ou par téléphone au 01 23 45 67 89, du lundi au vendredi de 9h à 17h.',
-    },
-    {
-      question: 'Où en est ma commande ?',
-      answer: 'Un email avec le numéro de suivi vous est envoyé dès l\'expédition. Vous pouvez suivre votre colis directement sur le site du transporteur.',
-    },
-  ];
+  import knowledge from './knowledge.json';
 </script>
 
 <svelte:head>
@@ -48,10 +20,10 @@
   <section class="variant">
     <h2>Démo active</h2>
     <p class="hint">
-      Le chatbot est en bas à droite. Il utilise les Q/R définies dans
-      <code>knowledge</code>. Nécessite <code>ANTHROPIC_API_KEY</code> dans <code>.env</code>.
+      Le chatbot est en bas à droite. Il répond sur G2webdev et tous les composants de la bibliothèque.
+      Nécessite <code>GROQ_API_KEY</code> dans <code>.env</code>.
     </p>
-    <p class="hint">Essaie : <em>"Vous livrez en Espagne ?"</em> ou <em>"Comment vous payer ?"</em></p>
+    <p class="hint">Essaie : <em>"Quels services propose G2webdev ?"</em> ou <em>"Comment utiliser le composant Modal ?"</em></p>
   </section>
 
   <section class="variant">
@@ -81,18 +53,51 @@
   </section>
 
   <section class="variant">
-    <h2>Configuration requise</h2>
-    <pre class="code-block"><code
-># .env
+    <h2>Configuration — Groq (actif, gratuit)</h2>
+    <ol class="steps">
+      <li>Crée un compte sur <strong>console.groq.com</strong> (connexion Google suffisante)</li>
+      <li>Va dans <strong>API Keys → Create API Key</strong> et copie la clé</li>
+      <li>Ajoute-la dans ton <code>.env</code> :</li>
+    </ol>
+    <pre class="code-block"><code># .env
+GROQ_API_KEY=gsk_...   # console.groq.com → API Keys</code></pre>
+    <p class="hint">Modèle utilisé : <code>llama-3.3-70b-versatile</code> — très capable, généreux en tokens gratuits.</p>
+  </section>
+
+  <section class="variant">
+    <h2>Configuration — Anthropic Claude (optionnel, payant)</h2>
+    <ol class="steps">
+      <li>Crée un compte sur <strong>console.anthropic.com</strong></li>
+      <li>Va dans <strong>API Keys</strong> et génère une clé</li>
+      <li>Ajoute des crédits dans <strong>Plans &amp; Billing</strong> (min. $5)</li>
+      <li>Ajoute la clé dans ton <code>.env</code> :</li>
+    </ol>
+    <pre class="code-block"><code># .env
 ANTHROPIC_API_KEY=sk-ant-...   # console.anthropic.com → API Keys</code></pre>
+    <p class="hint">
+      Pour basculer sur Anthropic, modifie une ligne dans
+      <code>src/routes/api/chat/+server.ts</code> :
+    </p>
+    <pre class="code-block"><code>// Remplacer :
+const content = await callGroq(system, messages);
+// Par :
+const content = await callAnthropic(system, messages);</code></pre>
+  </section>
+
+  <section class="variant">
+    <h2>Redémarrage requis</h2>
+    <p class="hint">
+      Vite ne relit pas <code>.env</code> à chaud. Après chaque modification de la clé,
+      redémarre le serveur : <code>Ctrl+C</code> puis <code>npm run dev</code>.
+    </p>
   </section>
 </div>
 
 <!-- Le composant est fixed — il flotte sur la page -->
 <Chatbot
   {knowledge}
-  title="Support"
-  initialMessage="Bonjour ! Posez-moi une question sur nos services."
+  title="G2webdev — Assistant"
+  initialMessage="Bonjour ! Je peux vous renseigner sur G2webdev et les composants de la bibliothèque. Comment puis-je vous aider ?"
 />
 
 <style>
@@ -113,6 +118,16 @@ ANTHROPIC_API_KEY=sk-ant-...   # console.anthropic.com → API Keys</code></pre>
   .hint em {
     font-style: italic;
     color: var(--primary);
+  }
+
+  .steps {
+    padding-left: 20px;
+    margin: 0 0 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--text-muted);
   }
 
   .code-block {

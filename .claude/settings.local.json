@@ -11,7 +11,12 @@
       "Bash(npm run *)",
       "Bash(grep *)",
       "WebFetch(domain:nicepage.com)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)",
+      "Bash(curl -s http://localhost:5173/ui/chatbot)",
+      "PowerShell(Get-NetTCPConnection *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/ui/chatbot)",
+      "Bash(curl *)"
     ]
   }
 }

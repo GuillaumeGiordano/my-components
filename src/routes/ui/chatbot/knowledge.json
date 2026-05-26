@@ -1,0 +1,151 @@
+[
+  {
+    "question": "Qu'est-ce que G2webdev ?",
+    "answer": "G2webdev est une entreprise spécialisée dans la création d'applications web sur mesure. Nous concevons et développons des solutions digitales modernes, performantes et adaptées aux besoins de chaque client."
+  },
+  {
+    "question": "Quels services propose G2webdev ?",
+    "answer": "G2webdev propose : la création de sites vitrines et d'applications web sur mesure, le développement front-end et full-stack, l'intégration de design UI/UX, et la maintenance d'applications existantes."
+  },
+  {
+    "question": "Quelles technologies utilisez-vous ?",
+    "answer": "Nous travaillons principalement avec SvelteKit, TypeScript, Tailwind CSS et Node.js. Nous utilisons également notre propre bibliothèque de composants UI (@guillaumeg/ui) pour accélérer le développement."
+  },
+  {
+    "question": "Comment démarrer un projet avec G2webdev ?",
+    "answer": "Contactez-nous par email ou via le formulaire de contact pour décrire votre projet. Nous vous répondons sous 48h pour organiser un premier échange gratuit afin de comprendre vos besoins et vous proposer un devis."
+  },
+  {
+    "question": "Quels sont vos tarifs ?",
+    "answer": "Nos tarifs sont établis sur devis selon la complexité du projet. Chaque projet est unique, nous privilégions une tarification transparente adaptée à votre budget. Contactez-nous pour une estimation gratuite."
+  },
+  {
+    "question": "Comment contacter G2webdev ?",
+    "answer": "Vous pouvez nous contacter par email à contact@g2webdev.fr ou via le formulaire de contact sur notre site. Nous répondons sous 48h ouvrées."
+  },
+  {
+    "question": "Où est situé G2webdev ?",
+    "answer": "G2webdev est une entreprise française. Nous travaillons en remote et pouvons collaborer avec des clients partout en France et à l'international."
+  },
+  {
+    "question": "Faites-vous de la maintenance d'applications ?",
+    "answer": "Oui, nous proposons des contrats de maintenance pour les applications que nous développons ou celles que vous possédez déjà : mises à jour, corrections de bugs, évolutions fonctionnelles."
+  },
+
+  {
+    "question": "Qu'est-ce que la bibliothèque @guillaumeg/ui ?",
+    "answer": "@guillaumeg/ui est une bibliothèque de composants Svelte 5 créée par G2webdev. Elle regroupe plus de 50 composants UI réutilisables : formulaires, layout, sections marketing et éléments d'interface, tous thémables et accessibles."
+  },
+  {
+    "question": "Comment installer la bibliothèque de composants ?",
+    "answer": "Installez la bibliothèque via npm : `npm install github:GuillaumeGiordano/my-components`. Ensuite importez les tokens CSS dans votre layout : `import '@guillaumeg/ui/styles/tokens.css'`. Les composants s'importent avec : `import { Button, Card } from '@guillaumeg/ui'`."
+  },
+  {
+    "question": "Quels frameworks sont supportés ?",
+    "answer": "La bibliothèque est construite avec Svelte 5 (runes mode) et nécessite SvelteKit. Elle utilise Tailwind CSS 4 et les icônes Lucide."
+  },
+  {
+    "question": "Quels composants de formulaire sont disponibles ?",
+    "answer": "Les composants de formulaire disponibles sont : Input (champ texte, textarea, checkbox, radio group), Select (natif, multi-choix, avec recherche), FileInput (glisser-déposer), Switch, DatePicker, DateRangePicker, NumberInput (avec boutons +/−), Slider, OtpInput et TagInput."
+  },
+  {
+    "question": "Comment fonctionne le composant Button ?",
+    "answer": "Le Button propose 5 variantes (primary, outline, ghost, danger, link), 3 tailles (sm, md, lg), les états loading et disabled, la possibilité d'ajouter des icônes à gauche ou droite, et peut se rendre en balise <a> avec la prop `href`."
+  },
+  {
+    "question": "Quels composants UI sont disponibles ?",
+    "answer": "Les composants UI disponibles sont : Tooltip, Collapse (accordéon), Tabs, Modal (dialog, drawer, bottom-sheet), Badge, Card, Avatar, Input simple, ButtonAction, Alert, Toast, Spinner, Skeleton, Progress, Breadcrumb, EmptyState, Stepper, Table, Pagination, Divider, Kbd, Rating, CopyButton, Timeline et Chatbot."
+  },
+  {
+    "question": "Comment fonctionne le composant Modal ?",
+    "answer": "Le Modal utilise la balise native <dialog> avec showModal(). Il supporte 3 variantes : centré (défaut), drawer (panel latéral), bottom-sheet (panel bas). Il inclut un focus trap natif, une animation d'ouverture/fermeture et se ferme avec Échap."
+  },
+  {
+    "question": "Comment afficher une notification Toast ?",
+    "answer": "Importez le store `toast` depuis '@guillaumeg/ui' et appelez `toast.success('Message')`, `toast.error('Erreur')`, `toast.warning('Attention')` ou `toast.info('Info')`. Ajoutez le composant <Toaster /> une seule fois dans votre layout."
+  },
+  {
+    "question": "Comment fonctionne le composant Avatar ?",
+    "answer": "L'Avatar affiche une photo ou des initiales en fallback automatique. Il propose 5 tailles (xs à xl) et deux formes : circle (rond) et square (carré). Si l'image ne charge pas, les initiales sont affichées automatiquement."
+  },
+  {
+    "question": "À quoi sert le composant Skeleton ?",
+    "answer": "Le Skeleton affiche un placeholder animé (shimmer) pendant le chargement des données. Il existe en 3 formes : rect (rectangle), text (ligne de texte) et circle (cercle pour les avatars). Idéal pour éviter les sauts de mise en page."
+  },
+  {
+    "question": "Comment fonctionne le composant Progress ?",
+    "answer": "Le Progress affiche la progression d'une tâche sous deux formes : une barre linéaire horizontale ou un anneau circulaire (donut). Il propose 4 couleurs (primary, success, warning, danger) et 3 tailles."
+  },
+  {
+    "question": "À quoi sert le composant Stepper ?",
+    "answer": "Le Stepper est un indicateur multi-étapes pour les formulaires ou tunnels. Il peut être affiché horizontalement ou verticalement, numéroté ou avec des points. Idéal pour les onboarding ou formulaires en plusieurs étapes."
+  },
+  {
+    "question": "Comment fonctionne le composant Table ?",
+    "answer": "Le Table affiche des données tabulaires avec tri par colonne (clic sur l'en-tête) et sélection de lignes par checkbox. Il accepte un tableau de colonnes avec clé, label et fonction de rendu optionnelle."
+  },
+  {
+    "question": "Comment fonctionne le composant Chatbot ?",
+    "answer": "Le Chatbot est un widget conversationnel flottant (bulle en bas de page). Il accepte une prop `knowledge` (tableau de Q/R JSON) pour répondre depuis une base de données, ou un callback `onMessage` pour une intégration personnalisée. Il se connecte à l'API Groq ou Anthropic via l'endpoint /api/chat."
+  },
+  {
+    "question": "Quels composants de layout sont disponibles ?",
+    "answer": "Les composants de layout disponibles sont : Navbar (barre de navigation responsive avec hamburger), NavbarMobile, Sidebar (navigation latérale collapsible avec groupes), Footer et StandardLayout (combinaison Navbar + Sidebar + Main + Footer)."
+  },
+  {
+    "question": "Comment fonctionne la Navbar ?",
+    "answer": "La Navbar est une barre de navigation responsive. Elle se replie en menu hamburger sur mobile. Elle accepte un logo, des liens de navigation et des actions (boutons, thème toggle). La Navbar est sticky par défaut."
+  },
+  {
+    "question": "Comment fonctionne la Sidebar ?",
+    "answer": "La Sidebar est une navigation latérale collapsible. Elle supporte les groupes de liens avec titres de section, les icônes par lien, et peut être réduite à une version icône seule. Elle s'intègre dans le StandardLayout."
+  },
+  {
+    "question": "Quelles sections marketing sont disponibles ?",
+    "answer": "Les sections marketing disponibles sont : Hero, HeroV2, Features, Pricing, Testimonials, FAQ, CTA Banner, Stats, Team, Gallery, GalleryV2, ImageCards, Newsletter, LogoCloud, Process, ComparisonTable, BlogGrid, Contact, ContactV2, SplitFeature, Video, Integrations, Download, AnnouncementBar, CookieBanner, Error/404, ComingSoon et Onboarding."
+  },
+  {
+    "question": "Comment fonctionne le composant Hero ?",
+    "answer": "La section Hero est une zone d'accroche principale pour une landing page. Elle inclut un badge, un titre avec mot colorisé, une description et deux boutons CTA. L'alignement peut être centré ou aligné à gauche. HeroV2 propose une variante avec fond coloré ou image."
+  },
+  {
+    "question": "Comment fonctionne la section Pricing ?",
+    "answer": "La section Pricing affiche une grille de plans tarifaires. Chaque plan peut avoir un nom, un prix, une liste de fonctionnalités avec check/cross, et un bouton CTA. Un plan peut être mis en avant visuellement. Elle supporte un toggle mensuel/annuel."
+  },
+  {
+    "question": "Comment fonctionne la section FAQ ?",
+    "answer": "La section FAQ affiche des questions fréquentes dans un accordéon natif (<details>/<summary>). Elle peut s'afficher en 1 ou 2 colonnes. L'animation d'ouverture est fluide en CSS pur, sans JavaScript."
+  },
+  {
+    "question": "À quoi sert la section CookieBanner ?",
+    "answer": "Le CookieBanner est une bannière de consentement RGPD. Elle se positionne en bas, en haut ou en bas à gauche de l'écran. Le choix de l'utilisateur est persisté dans localStorage. Elle propose des boutons Accepter, Refuser et Personnaliser."
+  },
+  {
+    "question": "Comment fonctionne la section Stats ?",
+    "answer": "La section Stats affiche une grille de chiffres clés (ex : 500+ clients, 98% satisfaction). Les valeurs s'animent au scroll avec un compteur progressif. Chaque stat peut avoir un préfixe, un suffixe et une description."
+  },
+  {
+    "question": "Comment fonctionne la section Gallery ?",
+    "answer": "La section Gallery affiche une grille d'images avec une lightbox intégrée. On peut naviguer entre les images avec les flèches clavier ou les boutons. GalleryV2 propose un masonry layout et un zoom au hover."
+  },
+  {
+    "question": "À quoi sert le composant AnnouncementBar ?",
+    "answer": "L'AnnouncementBar est une barre d'annonce sticky en haut de page. Elle propose 4 variantes de couleur (info, success, warning, danger) et peut être fermée avec une animation. Idéale pour les promotions ou alertes importantes."
+  },
+  {
+    "question": "Comment fonctionne le composant Coming Soon ?",
+    "answer": "La section ComingSoon est une page de lancement plein écran. Elle affiche un compte à rebours jusqu'à une date cible et intègre un formulaire d'inscription email pour notifier les visiteurs à l'ouverture."
+  },
+  {
+    "question": "Comment fonctionne le composant Onboarding ?",
+    "answer": "Le composant Onboarding est un écran de bienvenue multi-étapes. Il combine un Stepper, du contenu par étape, une navigation Précédent/Suivant et un visuel latéral. Idéal pour guider un nouvel utilisateur à la première connexion."
+  },
+  {
+    "question": "Comment personnaliser les couleurs et le thème ?",
+    "answer": "Tous les composants utilisent des variables CSS (tokens) définies dans tokens.css. Importez ce fichier et redéfinissez les variables `--primary`, `--bg-base`, `--border`, etc. pour adapter l'ensemble de la bibliothèque à votre charte graphique. Le mode sombre s'active avec la classe `.dark` sur `<html>`."
+  },
+  {
+    "question": "La bibliothèque est-elle accessible ?",
+    "answer": "Oui, les composants respectent les standards d'accessibilité : rôles ARIA appropriés, navigation au clavier, focus visible, contrastes suffisants. Les composants de formulaire sont conformes aux recommandations RGAA."
+  }
+]
