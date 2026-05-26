@@ -89,5 +89,5 @@ export { default as VideoSection }        from './components/sections/VideoSecti
 // ─── Stores & theme ──────────────────────────────────────────────────────────
 export { toast }                          from './stores/toast';
 export type { Toast, ToastVariant }       from './stores/toast';
-export { theme, COLOR_THEMES }            from './theme.svelte';
-export type { ColorTheme }                from './theme.svelte';
+export { theme, THEMES, COLOR_THEMES }    from './theme.svelte';
+export type { Theme, ColorTheme, ShapeVariant, ShadowVariant, TypographyVariant } from './theme.svelte';
