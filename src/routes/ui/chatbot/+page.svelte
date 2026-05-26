@@ -1,37 +1,35 @@
 <script lang="ts">
   import '$lib/styles/demo-page.css';
   import Chatbot from '$lib/components/ui/Chatbot.svelte';
-  import type { ChatMessage } from '$lib/components/ui/Chatbot.svelte';
+  import type { KnowledgeEntry } from '$lib/components/ui/Chatbot.svelte';
 
-  // Mock handler — simule un délai et retourne une réponse fictive
-  async function mockOnMessage(history: ChatMessage[]): Promise<string> {
-    await new Promise((r) => setTimeout(r, 900));
-    const last = history.at(-1)?.content ?? '';
-    return `Vous avez dit : "${last}". Connectez un vrai handler pour une réponse IA.`;
-  }
-
-  /*
-  // Exemple avec l'API Anthropic (depuis un endpoint SvelteKit) :
-  async function claudeOnMessage(history: ChatMessage[]): Promise<string> {
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: history }),
-    });
-    const data = await res.json();
-    return data.content;
-  }
-
-  // Votre endpoint /api/chat/+server.ts :
-  // import Anthropic from '@anthropic-ai/sdk';
-  // const client = new Anthropic({ apiKey: import.meta.env.ANTHROPIC_API_KEY });
-  // const response = await client.messages.create({
-  //   model: 'claude-opus-4-7',
-  //   max_tokens: 1024,
-  //   messages: body.messages,
-  // });
-  // return json({ content: response.content[0].text });
-  */
+  // Ta base de connaissances — remplace avec tes propres Q/R
+  const knowledge: KnowledgeEntry[] = [
+    {
+      question: 'Quels sont vos horaires ?',
+      answer: 'Nous sommes ouverts du lundi au vendredi de 9h à 18h, et le samedi de 10h à 14h.',
+    },
+    {
+      question: 'Comment retourner un article ?',
+      answer: 'Vous avez 30 jours à compter de la réception pour retourner tout article non utilisé et dans son emballage d\'origine. Contactez-nous par email pour obtenir l\'étiquette de retour.',
+    },
+    {
+      question: 'Quels modes de paiement acceptez-vous ?',
+      answer: 'Nous acceptons les cartes Visa, Mastercard, American Express, ainsi que PayPal et le virement bancaire.',
+    },
+    {
+      question: 'Livrez-vous à l\'étranger ?',
+      answer: 'Oui, nous livrons dans toute l\'Europe. Les délais varient de 3 à 7 jours ouvrés selon le pays. Les frais de port sont offerts dès 80€ d\'achat.',
+    },
+    {
+      question: 'Comment contacter le service client ?',
+      answer: 'Vous pouvez nous joindre par email à support@exemple.com ou par téléphone au 01 23 45 67 89, du lundi au vendredi de 9h à 17h.',
+    },
+    {
+      question: 'Où en est ma commande ?',
+      answer: 'Un email avec le numéro de suivi vous est envoyé dès l\'expédition. Vous pouvez suivre votre colis directement sur le site du transporteur.',
+    },
+  ];
 </script>
 
 <svelte:head>
@@ -42,57 +40,59 @@
   <div class="page-header">
     <h1>Chatbot</h1>
     <p>
-      Widget conversationnel flottant — provider-agnostic. Passez un callback
-      <code>onMessage</code> pour le brancher sur Claude, OpenAI ou n'importe quelle API.
+      Widget conversationnel avec base de connaissances JSON. L'IA répond
+      <strong>uniquement</strong> depuis tes données — rien d'inventé.
     </p>
   </div>
 
   <section class="variant">
-    <h2>Démo (mock)</h2>
-    <p class="hint">Le chatbot est visible en bas à droite de la page.</p>
+    <h2>Démo active</h2>
+    <p class="hint">
+      Le chatbot est en bas à droite. Il utilise les Q/R définies dans
+      <code>knowledge</code>. Nécessite <code>ANTHROPIC_API_KEY</code> dans <code>.env</code>.
+    </p>
+    <p class="hint">Essaie : <em>"Vous livrez en Espagne ?"</em> ou <em>"Comment vous payer ?"</em></p>
   </section>
 
   <section class="variant">
-    <h2>Branchement Anthropic API</h2>
+    <h2>Structure du JSON</h2>
     <pre class="code-block"><code
->// 1. Installer le SDK
-npm install @anthropic-ai/sdk
+>const knowledge = [
+  &#123;
+    question: "Quels sont vos horaires ?",
+    answer:   "Ouvert lundi–vendredi 9h–18h.",
+  &#125;,
+  &#123;
+    question: "Comment retourner un article ?",
+    answer:   "30 jours, emballage d'origine. Email pour l'étiquette.",
+  &#125;,
+  // ... autant d'entrées que nécessaire
+];
 
-// 2. Créer src/routes/api/chat/+server.ts
-import Anthropic from '@anthropic-ai/sdk';
-import &#123; json &#125; from '@sveltejs/kit';
+&lt;Chatbot
+  &#123;knowledge&#125;
+  title="Support"
+  initialMessage="Bonjour ! Comment puis-je vous aider ?"
+/&gt;</code></pre>
+    <p class="hint">
+      Tu peux aussi charger le JSON depuis un fichier :
+      <code>import knowledge from './faq.json'</code>
+    </p>
+  </section>
 
-const client = new Anthropic(&#123; apiKey: import.meta.env.ANTHROPIC_API_KEY &#125;);
-
-export async function POST(&#123; request &#125;) &#123;
-  const &#123; messages &#125; = await request.json();
-  const response = await client.messages.create(&#123;
-    model: 'claude-opus-4-7',
-    max_tokens: 1024,
-    messages,
-  &#125;);
-  return json(&#123; content: response.content[0].text &#125;);
-&#125;
-
-// 3. Brancher le composant
-async function onMessage(history) &#123;
-  const res = await fetch('/api/chat', &#123;
-    method: 'POST',
-    headers: &#123; 'Content-Type': 'application/json' &#125;,
-    body: JSON.stringify(&#123; messages: history &#125;),
-  &#125;);
-  const data = await res.json();
-  return data.content;
-&#125;
-</code></pre>
+  <section class="variant">
+    <h2>Configuration requise</h2>
+    <pre class="code-block"><code
+># .env
+ANTHROPIC_API_KEY=sk-ant-...   # console.anthropic.com → API Keys</code></pre>
   </section>
 </div>
 
-<!-- Le composant est positionné fixed — il vit en dehors du flux de la page -->
+<!-- Le composant est fixed — il flotte sur la page -->
 <Chatbot
-  onMessage={mockOnMessage}
-  title="Assistant"
-  initialMessage="Bonjour ! Je suis un mock. Connectez l'API Claude pour de vraies réponses."
+  {knowledge}
+  title="Support"
+  initialMessage="Bonjour ! Posez-moi une question sur nos services."
 />
 
 <style>
@@ -107,6 +107,12 @@ async function onMessage(history) &#123;
   .hint {
     font-size: 14px;
     color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  .hint em {
+    font-style: italic;
+    color: var(--primary);
   }
 
   .code-block {
@@ -118,6 +124,7 @@ async function onMessage(history) &#123;
     font-size: 13px;
     line-height: 1.6;
     white-space: pre;
+    margin-top: 12px;
   }
 
   .code-block code {

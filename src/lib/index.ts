@@ -22,7 +22,7 @@ export { default as FormTextarea }        from './components/forms/Textarea.svel
 // ─── UI ──────────────────────────────────────────────────────────────────────
 export { default as Alert }               from './components/ui/Alert.svelte';
 export { default as Chatbot }             from './components/ui/Chatbot.svelte';
-export type { ChatMessage }               from './components/ui/Chatbot.svelte';
+export type { ChatMessage, KnowledgeEntry } from './components/ui/Chatbot.svelte';
 export { default as Avatar }              from './components/ui/Avatar.svelte';
 export { default as Badge }               from './components/ui/Badge.svelte';
 export { default as Breadcrumb }          from './components/ui/Breadcrumb.svelte';

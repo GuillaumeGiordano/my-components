@@ -2,15 +2,20 @@
   import { MessageCircle, X, Send, Bot } from '@lucide/svelte';
 
   export type ChatMessage = { role: 'user' | 'assistant'; content: string };
+  export type KnowledgeEntry = { question: string; answer: string };
 
   let {
     onMessage,
+    knowledge,
+    apiEndpoint = '/api/chat',
     title = 'Assistant',
     placeholder = 'Posez une question…',
     initialMessage = '',
     position = 'bottom-right',
   }: {
-    onMessage: (history: ChatMessage[]) => Promise<string>;
+    onMessage?: (history: ChatMessage[]) => Promise<string>;
+    knowledge?: KnowledgeEntry[];
+    apiEndpoint?: string;
     title?: string;
     placeholder?: string;
     initialMessage?: string;
@@ -32,6 +37,17 @@
     }
   }
 
+  async function fetchKnowledge(history: ChatMessage[]): Promise<string> {
+    const res = await fetch(apiEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: history, knowledge }),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    return data.content;
+  }
+
   async function send() {
     const text = input.trim();
     if (!text || loading) return;
@@ -40,12 +56,18 @@
     messages.push({ role: 'user', content: text });
     loading = true;
 
-    // Scroll after user message renders
     await Promise.resolve();
     scrollToBottom();
 
     try {
-      const reply = await onMessage([...messages]);
+      let reply: string;
+      if (knowledge && knowledge.length > 0) {
+        reply = await fetchKnowledge([...messages]);
+      } else if (onMessage) {
+        reply = await onMessage([...messages]);
+      } else {
+        reply = 'Aucune source de réponse configurée (knowledge ou onMessage requis).';
+      }
       messages.push({ role: 'assistant', content: reply });
     } catch {
       messages.push({ role: 'assistant', content: 'Une erreur est survenue. Veuillez réessayer.' });
