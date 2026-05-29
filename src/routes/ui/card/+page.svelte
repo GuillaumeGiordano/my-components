@@ -101,7 +101,7 @@
         {#snippet header()}
           <div class="card-head-row">
             <span class="card-title">En-tête seul</span>
-            <Badge variant="info">Nouveau</Badge>
+            <Badge variant="info" label="Nouveau" />
           </div>
         {/snippet}
         <p class="card-text">Le snippet <code>#header</code> ajoute un bloc séparé au-dessus du corps.</p>
@@ -148,7 +148,7 @@
         {#snippet header()}
           <div class="card-head-row">
             <span class="card-title">Profil</span>
-            <Badge variant="success">Actif</Badge>
+            <Badge variant="success" label="Actif" />
           </div>
         {/snippet}
 
@@ -203,7 +203,7 @@
         />
         <div class="article-body">
           <div class="article-meta">
-            <Badge variant="default">Dev</Badge>
+            <Badge variant="default" label="Dev" />
             <span class="article-date"><Clock size={12} /> 5 min de lecture</span>
           </div>
           <p class="article-title">Svelte 5 — les runes expliquées en profondeur</p>

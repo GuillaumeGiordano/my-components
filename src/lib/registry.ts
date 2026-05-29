@@ -113,12 +113,7 @@ export const categories: ComponentCategory[] = [
 				label: 'Avatar',
 				description: 'Photo ou initiales, 5 tailles, formes circle/square, fallback automatique'
 			},
-			{
-				slug: 'input-simple',
-				label: 'Champ simple',
-				description: 'Input avec label, message d\'erreur et icône — version standalone accessible'
-			},
-			{
+{
 				slug: 'button-action',
 				label: 'Button Action',
 				description: 'Bouton d\'action avec icône et texte, 3 variantes visuelles'

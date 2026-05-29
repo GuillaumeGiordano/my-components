@@ -6,6 +6,9 @@
   import Button from "$lib/components/buttons/Button.svelte";
   import { MapPin, Link } from "@lucide/svelte";
 
+  type AvatarSize = "xs" | "sm" | "md" | "lg" | "xl";
+  const SIZES: AvatarSize[] = ["xs", "sm", "md", "lg", "xl"];
+
   const TEAM = [
     { name: "Marie Dupont",    role: "CEO & Co-fondatrice",    location: "Paris" },
     { name: "Thomas Renard",   role: "CTO",                    location: "Lyon" },
@@ -36,7 +39,7 @@
     <p class="hint">De <code>xs</code> (24 px) à <code>xl</code> (72 px).</p>
 
     <div class="size-row">
-      {#each ["xs", "sm", "md", "lg", "xl"] as size}
+      {#each SIZES as size}
         <div class="size-col">
           <Avatar name="Guillaume G" {size} />
           <span class="size-label">{size}</span>
@@ -54,7 +57,7 @@
       <div class="shape-group">
         <p class="group-label">Circle</p>
         <div class="avatars-inline">
-          {#each ["xs", "sm", "md", "lg", "xl"] as size}
+          {#each SIZES as size}
             <Avatar name="Marie Dupont" {size} shape="circle" />
           {/each}
         </div>
@@ -62,7 +65,7 @@
       <div class="shape-group">
         <p class="group-label">Square</p>
         <div class="avatars-inline">
-          {#each ["xs", "sm", "md", "lg", "xl"] as size}
+          {#each SIZES as size}
             <Avatar name="Marie Dupont" {size} shape="square" />
           {/each}
         </div>
@@ -165,7 +168,7 @@
           {#snippet header()}
             <div class="team-card-head">
               <Avatar name={member.name} size="lg" />
-              <Badge variant="default">Actif</Badge>
+              <Badge variant="default" label="Actif" />
             </div>
           {/snippet}
 

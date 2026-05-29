@@ -34,7 +34,6 @@ export { default as Collapse }            from './components/ui/Collapse.svelte'
 export { default as CopyButton }          from './components/ui/CopyButton.svelte';
 export { default as Divider }             from './components/ui/Divider.svelte';
 export { default as EmptyState }          from './components/ui/EmptyState.svelte';
-export { default as Input }               from './components/ui/Input.svelte';
 export { default as Kbd }                 from './components/ui/Kbd.svelte';
 export { default as Modal }               from './components/ui/Modal.svelte';
 export { default as Pagination }          from './components/ui/Pagination.svelte';
@@ -45,7 +44,6 @@ export { default as Spinner }             from './components/ui/Spinner.svelte';
 export { default as Stepper }             from './components/ui/Stepper.svelte';
 export { default as Table }               from './components/ui/Table.svelte';
 export { default as Tabs }                from './components/ui/Tabs.svelte';
-export { default as UiTextarea }          from './components/ui/Textarea.svelte';
 export { default as ThemePicker }         from './components/ui/ThemePicker.svelte';
 export { default as ThemeToggle }         from './components/ui/ThemeToggle.svelte';
 export { default as ScrollToTop }         from './components/ui/ScrollToTop.svelte';
