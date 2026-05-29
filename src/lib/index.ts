@@ -48,6 +48,7 @@ export { default as Tabs }                from './components/ui/Tabs.svelte';
 export { default as UiTextarea }          from './components/ui/Textarea.svelte';
 export { default as ThemePicker }         from './components/ui/ThemePicker.svelte';
 export { default as ThemeToggle }         from './components/ui/ThemeToggle.svelte';
+export { default as ScrollToTop }         from './components/ui/ScrollToTop.svelte';
 export { default as Timeline }            from './components/ui/Timeline.svelte';
 export { default as Toaster }             from './components/ui/Toaster.svelte';
 export { default as Tooltip }             from './components/ui/Tooltip.svelte';

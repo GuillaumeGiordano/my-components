@@ -194,6 +194,11 @@ export const categories: ComponentCategory[] = [
 				description: 'Bouton copier avec feedback visuel automatique après 2 secondes'
 			},
 			{
+				slug: 'scroll-to-top',
+				label: 'Scroll To Top',
+				description: 'Bouton fixe de retour en haut — apparaît après 300px de scroll, animation fluide'
+			},
+			{
 				slug: 'timeline',
 				label: 'Timeline',
 				description: 'Historique chronologique vertical avec icônes et variantes de couleur'
