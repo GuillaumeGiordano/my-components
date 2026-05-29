@@ -223,7 +223,8 @@ export const categories: ComponentCategory[] = [
 			{ slug: 'sidebar', label: 'Sidebar', description: 'Navigation latérale collapsible avec groupes' },
 			{ slug: 'footer', label: 'Footer', description: 'Pied de page avec colonnes de liens' },
 			{ slug: 'standard-layout', label: 'Standard Layout', description: 'Combinaison Navbar + Sidebar + Main + Footer' },
-			{ slug: 'navbar-mobile', label: 'Navbar Mobile', description: 'Barre de navigation pour les appareils mobiles' }
+			{ slug: 'navbar-mobile', label: 'Navbar Mobile', description: 'Barre de navigation pour les appareils mobiles' },
+			{ slug: 'navbar-mobile-radial', label: 'Navbar Mobile Radial', description: 'Bouton flottant en bas à droite — menu radial en arc avec animation staggerée' }
 		]
 	},
 	{

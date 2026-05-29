@@ -56,7 +56,9 @@ export { default as Tooltip }             from './components/ui/Tooltip.svelte';
 // ─── Layout ──────────────────────────────────────────────────────────────────
 export { default as Footer }              from './components/layout/Footer.svelte';
 export { default as Navbar }              from './components/layout/Navbar.svelte';
-export { default as NavbarMobile }        from './components/layout/NavbarMobile.svelte';
+export { default as NavbarMobile }              from './components/layout/NavbarMobile.svelte';
+export { default as NavbarMobileRadial }        from './components/layout/NavbarMobileRadial.svelte';
+export type { RadialNavItem }                   from './components/layout/NavbarMobileRadial.svelte';
 export { default as Sidebar }             from './components/layout/Sidebar.svelte';
 export { default as StandardLayout }      from './components/layout/StandardLayout.svelte';
 
