@@ -202,6 +202,11 @@ export const categories: ComponentCategory[] = [
 				slug: 'chatbot',
 				label: 'Chatbot',
 				description: 'Widget conversationnel flottant — branchez votre propre handler IA (Claude, OpenAI…)'
+			},
+			{
+				slug: 'carousel',
+				label: 'Carousel',
+				description: 'Carrousel de diapositives — flèches, points, autoplay, swipe tactile, navigation clavier'
 			}
 		]
 	},
@@ -220,6 +225,11 @@ export const categories: ComponentCategory[] = [
 		slug: 'sections',
 		label: 'Sections',
 		components: [
+			{
+				slug: 'about',
+				label: 'About',
+				description: '3 variantes : split texte+visuel, mission+stats animées+valeurs, story fondateur+timeline jalons'
+			},
 			{
 				slug: 'hero',
 				label: 'Hero',

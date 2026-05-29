@@ -21,6 +21,7 @@ export { default as FormTextarea }        from './components/forms/Textarea.svel
 
 // ─── UI ──────────────────────────────────────────────────────────────────────
 export { default as Alert }               from './components/ui/Alert.svelte';
+export { default as Carousel }            from './components/ui/Carousel.svelte';
 export { default as Chatbot }             from './components/ui/Chatbot.svelte';
 export type { ChatMessage, KnowledgeEntry } from './components/ui/Chatbot.svelte';
 export { default as Avatar }              from './components/ui/Avatar.svelte';
@@ -59,6 +60,9 @@ export { default as Sidebar }             from './components/layout/Sidebar.svel
 export { default as StandardLayout }      from './components/layout/StandardLayout.svelte';
 
 // ─── Sections ────────────────────────────────────────────────────────────────
+export { default as AboutSection }        from './components/sections/AboutSection.svelte';
+export { default as AboutSectionV2 }      from './components/sections/AboutSectionV2.svelte';
+export { default as AboutSectionV3 }      from './components/sections/AboutSectionV3.svelte';
 export { default as AnnouncementBar }     from './components/sections/AnnouncementBar.svelte';
 export { default as BlogGridSection }     from './components/sections/BlogGridSection.svelte';
 export { default as ComingSoonSection }   from './components/sections/ComingSoonSection.svelte';
