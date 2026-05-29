@@ -354,6 +354,11 @@ export const categories: ComponentCategory[] = [
 				slug: 'onboarding',
 				label: 'Onboarding',
 				description: 'Écran de bienvenue multi-étapes — Stepper + navigation + visuel'
+			},
+			{
+				slug: 'premium-hero',
+				label: '✦ Premium Hero',
+				description: 'Hero dark ultra-animé — orbes flottants, scroll reveal mot par mot, bento 3D tilt, bouton magnétique, bordure shimmer'
 			}
 		]
 	}

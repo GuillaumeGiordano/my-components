@@ -84,6 +84,8 @@ export { default as IntegrationsSection } from './components/sections/Integratio
 export { default as LogoCloudSection }    from './components/sections/LogoCloudSection.svelte';
 export { default as NewsletterSection }   from './components/sections/NewsletterSection.svelte';
 export { default as OnboardingSection }   from './components/sections/OnboardingSection.svelte';
+export { default as PremiumHeroSection }  from './components/sections/PremiumHeroSection.svelte';
+export type { PremiumCard }               from './components/sections/PremiumHeroSection.svelte';
 export { default as PricingSection }      from './components/sections/PricingSection.svelte';
 export { default as ProcessSection }      from './components/sections/ProcessSection.svelte';
 export { default as SplitFeatureSection } from './components/sections/SplitFeatureSection.svelte';
