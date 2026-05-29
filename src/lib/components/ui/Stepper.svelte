@@ -46,7 +46,8 @@
 					{/if}
 				</div>
 
-				{#if !isLast}
+				<!-- Connector: vertical only — horizontal uses ::before / ::after on .step -->
+				{#if !isLast && orientation === 'vertical'}
 					<div class="step__connector"></div>
 				{/if}
 			</div>
@@ -87,6 +88,7 @@
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
+		position: relative; /* needed for connector pseudo-elements */
 	}
 
 	.stepper--vertical .step {
@@ -96,7 +98,7 @@
 		flex: none;
 	}
 
-	/* ---- Indicator (bubble + connector) --------------------------------- */
+	/* ---- Indicator (bubble + vertical connector) ------------------------ */
 	.step__indicator {
 		display: flex;
 		align-items: center;
@@ -105,9 +107,7 @@
 
 	.stepper--horizontal .step__indicator {
 		flex-direction: row;
-		width: 100%;
 		justify-content: center;
-		position: relative;
 	}
 
 	.stepper--vertical .step__indicator {
@@ -157,40 +157,57 @@
 		color: var(--primary-fg);
 	}
 
-	/* Connector line */
-	.step__connector {
-		background: var(--border-strong);
-		transition: background var(--transition-base);
-	}
-
-	.stepper--horizontal .step__connector {
-		height: 2px;
-		flex: 1;
-	}
-
-	/* In horizontal layout the connector must span between bubbles */
-	.stepper--horizontal .step__indicator {
-		gap: 0;
-	}
-
-	.stepper--horizontal .step:not(:last-child) .step__indicator::after {
+	/* ---- Horizontal connectors (pseudo-elements on .step) -------------- */
+	/*
+	 * Each step contributes two half-lines:
+	 *   ::before = left half  (hidden on first step)
+	 *   ::after  = right half (hidden on last step)
+	 * Together they form a continuous line from bubble centre to bubble centre.
+	 */
+	.stepper--horizontal .step:not(:first-child)::before,
+	.stepper--horizontal .step:not(:last-child)::after {
 		content: '';
-		display: block;
+		position: absolute;
+		top: 15px; /* (32px bubble / 2) - 1px for line centre */
 		height: 2px;
-		flex: 1;
 		background: var(--border-strong);
 		transition: background var(--transition-base);
 	}
 
-	.stepper--horizontal .step--done:not(:last-child) .step__indicator::after {
+	.stepper--horizontal .step:not(:first-child)::before {
+		left: 0;
+		right: 50%;
+	}
+
+	.stepper--horizontal .step:not(:last-child)::after {
+		left: 50%;
+		right: 0;
+	}
+
+	/* Dotted variant: smaller bubble — adjust top */
+	.stepper--horizontal.stepper--dotted .step:not(:first-child)::before,
+	.stepper--horizontal.stepper--dotted .step:not(:last-child)::after {
+		top: 4px; /* (12px bubble / 2) - 2px */
+	}
+
+	/* Colored connectors:
+	   - done step  → both halves are primary
+	   - active step → left half is primary (connects to previous done step)
+	*/
+	.stepper--horizontal .step--done::before,
+	.stepper--horizontal .step--done::after,
+	.stepper--horizontal .step--active::before {
 		background: var(--primary);
 	}
 
-	.stepper--vertical .step__connector {
+	/* ---- Vertical connector --------------------------------------------- */
+	.step__connector {
 		width: 2px;
 		min-height: 32px;
 		flex: 1;
 		margin: 4px 0;
+		background: var(--border-strong);
+		transition: background var(--transition-base);
 	}
 
 	.step--done .step__connector,

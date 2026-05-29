@@ -60,7 +60,7 @@ Si tu n'as pas besoin de versionner à chaque itération (phase de dev active), 
 
 # my-components
 
-pnpm run package && git add -A && git commit -m "add new components" && git push
+pnpm run package && git add -A && git commit -m "maj" && git push
 
 # crevettes-shop
 
