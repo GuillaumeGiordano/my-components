@@ -1,6 +1,7 @@
 <script lang="ts">
   import { ChevronLeft } from '@lucide/svelte';
   import type { Component } from 'svelte';
+  import { browser } from '$app/environment';
   import SidebarItem from '$lib/components/ui/SidebarItem.svelte';
   import type { SidebarSubItem } from '$lib/components/ui/SidebarItem.svelte';
 
@@ -23,20 +24,43 @@
     groups = [] as SidebarGroup[],
     collapsed = $bindable(false),
     activeHref = '',
+    shortkey = '[',
   }: {
     groups?: SidebarGroup[];
     collapsed?: boolean;
     activeHref?: string;
+    shortkey?: string | false;
   } = $props();
+
+  // Keyboard shortcut — ignored when focus is inside an input/textarea
+  $effect(() => {
+    if (!browser || !shortkey) return;
+
+    function onKeydown(e: KeyboardEvent) {
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || (e.target as HTMLElement)?.isContentEditable) return;
+      if (e.key === shortkey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        collapsed = !collapsed;
+      }
+    }
+
+    window.addEventListener('keydown', onKeydown);
+    return () => window.removeEventListener('keydown', onKeydown);
+  });
 </script>
 
 <aside class="sidebar" class:collapsed>
   <button
     class="collapse-btn"
-    aria-label={collapsed ? 'Ouvrir le menu' : 'Réduire le menu'}
+    aria-label="{collapsed ? 'Ouvrir' : 'Réduire'} le menu{shortkey ? ` (${shortkey})` : ''}"
+    title="{collapsed ? 'Ouvrir' : 'Réduire'} le menu{shortkey ? ` · ${shortkey}` : ''}"
     onclick={() => (collapsed = !collapsed)}
   >
     <ChevronLeft size={14} />
+    {#if shortkey}
+      <span class="shortkey-hint">{shortkey}</span>
+    {/if}
   </button>
 
   <nav class="sidebar-nav" aria-label="Navigation principale">
@@ -117,6 +141,37 @@
   .collapse-btn :global(svg) {
     transition: transform var(--transition-base);
   }
+
+  /* Kbd hint — visible au hover du bouton toggle */
+  .shortkey-hint {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-heading);
+    color: var(--bg-base);
+    font-size: 11px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: var(--text-heading);
+    }
+  }
+
+  .collapse-btn:hover .shortkey-hint { opacity: 1; }
 
   .sidebar.collapsed .collapse-btn :global(svg) {
     transform: rotate(180deg);
