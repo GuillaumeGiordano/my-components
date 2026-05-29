@@ -63,6 +63,7 @@
 	.split-feature-section {
 		display: flex;
 		flex-direction: column;
+		background: var(--bg-base);
 	}
 
 	/* --- Row --- */

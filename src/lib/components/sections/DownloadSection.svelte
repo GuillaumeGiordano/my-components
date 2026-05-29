@@ -127,7 +127,7 @@
 <style>
 	.download-section {
 		padding: 100px 24px;
-		background: var(--bg-subtle);
+		background: var(--bg-base);
 	}
 
 	.container {

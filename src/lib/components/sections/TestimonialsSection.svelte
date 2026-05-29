@@ -87,7 +87,7 @@
 <style>
   .testimonials {
     padding: 88px 24px;
-    background: var(--bg-subtle);
+    background: var(--bg-base);
   }
 
   .testimonials-inner {

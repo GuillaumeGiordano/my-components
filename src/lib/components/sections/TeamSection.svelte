@@ -85,6 +85,7 @@
 <style>
   .team {
     padding: 88px 24px;
+    background: var(--bg-base);
   }
 
   .team-inner {

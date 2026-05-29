@@ -84,6 +84,7 @@
     padding: 96px 24px 80px;
     position: relative;
     overflow: hidden;
+    background: var(--bg-base);
   }
 
   /* Subtle radial gradient in the background */

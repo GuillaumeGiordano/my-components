@@ -84,6 +84,7 @@
   .about {
     padding: 96px 64px;
     border-top: 1px solid var(--border);
+    background: var(--bg-base);
   }
 
   .about-inner {

@@ -130,6 +130,7 @@
 <style>
   .gallery {
     padding: 88px 24px;
+    background: var(--bg-base);
   }
 
   .gallery-inner {

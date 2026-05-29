@@ -65,6 +65,7 @@
 <style>
   .features {
     padding: 88px 24px;
+    background: var(--bg-base);
   }
 
   .features-inner {

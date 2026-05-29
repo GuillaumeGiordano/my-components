@@ -23,47 +23,53 @@
   } = $props();
 </script>
 
-{#if badge || title || description}
-  <div class="section-header">
-    {#if badge}
-      <Badge label={badge} variant="primary" dot />
-    {/if}
-    {#if title}
-      <h2 class="section-title">{title}</h2>
-    {/if}
-    {#if description}
-      <p class="section-description">{description}</p>
-    {/if}
-  </div>
-{/if}
-
-<div class="cards-grid" style="--cols: {columns}">
-  {#each cards as card}
-    <div
-      class="image-card"
-      style="background-image: url('{card.src}')"
-      role="img"
-      aria-label={card.alt}
-    >
-      <div class="card-overlay" aria-hidden="true"></div>
-      <div class="card-content">
-        <div class="card-accent"></div>
-        <h3 class="card-title">{card.title}</h3>
-        {#if card.text}
-          <p class="card-text">{card.text}</p>
-        {/if}
-        {#if card.href}
-          <a href={card.href} class="card-link">
-            <span>En savoir plus</span>
-            <ArrowRight size={14} strokeWidth={2} />
-          </a>
-        {/if}
-      </div>
+<section class="image-cards-section">
+  {#if badge || title || description}
+    <div class="section-header">
+      {#if badge}
+        <Badge label={badge} variant="primary" dot />
+      {/if}
+      {#if title}
+        <h2 class="section-title">{title}</h2>
+      {/if}
+      {#if description}
+        <p class="section-description">{description}</p>
+      {/if}
     </div>
-  {/each}
-</div>
+  {/if}
+
+  <div class="cards-grid" style="--cols: {columns}">
+    {#each cards as card}
+      <div
+        class="image-card"
+        style="background-image: url('{card.src}')"
+        role="img"
+        aria-label={card.alt}
+      >
+        <div class="card-overlay" aria-hidden="true"></div>
+        <div class="card-content">
+          <div class="card-accent"></div>
+          <h3 class="card-title">{card.title}</h3>
+          {#if card.text}
+            <p class="card-text">{card.text}</p>
+          {/if}
+          {#if card.href}
+            <a href={card.href} class="card-link">
+              <span>En savoir plus</span>
+              <ArrowRight size={14} strokeWidth={2} />
+            </a>
+          {/if}
+        </div>
+      </div>
+    {/each}
+  </div>
+</section>
 
 <style>
+  .image-cards-section {
+    background: var(--bg-base);
+  }
+
   /* ── Optional header ── */
   .section-header {
     display: flex;
