@@ -2,8 +2,8 @@
   import type { Component } from 'svelte';
   import Badge from '../ui/Badge.svelte';
   import Card from '../ui/Card.svelte';
-  import Input from '../ui/Input.svelte';
-  import Textarea from '../ui/Textarea.svelte';
+  import Input from '../forms/Input.svelte';
+  import Textarea from '../forms/Textarea.svelte';
   import Button from '../buttons/Button.svelte';
   import { Send, CheckCircle, MapPin } from '@lucide/svelte';
 

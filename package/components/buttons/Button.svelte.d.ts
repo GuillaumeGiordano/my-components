@@ -1,6 +1,6 @@
-import type { Component, Snippet } from 'svelte';
-type Variant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
-type Size = 'sm' | 'md' | 'lg';
+import type { Component, Snippet } from "svelte";
+type Variant = "primary" | "secondary" | "outline" | "ghost" | "danger";
+type Size = "sm" | "md" | "lg";
 type $$ComponentProps = {
     variant?: Variant;
     size?: Size;

@@ -19,6 +19,7 @@ export { default as TagInput } from './components/forms/TagInput.svelte';
 export { default as FormTextarea } from './components/forms/Textarea.svelte';
 // ─── UI ──────────────────────────────────────────────────────────────────────
 export { default as Alert } from './components/ui/Alert.svelte';
+export { default as Carousel } from './components/ui/Carousel.svelte';
 export { default as Chatbot } from './components/ui/Chatbot.svelte';
 export { default as Avatar } from './components/ui/Avatar.svelte';
 export { default as Badge } from './components/ui/Badge.svelte';
@@ -30,7 +31,6 @@ export { default as Collapse } from './components/ui/Collapse.svelte';
 export { default as CopyButton } from './components/ui/CopyButton.svelte';
 export { default as Divider } from './components/ui/Divider.svelte';
 export { default as EmptyState } from './components/ui/EmptyState.svelte';
-export { default as Input } from './components/ui/Input.svelte';
 export { default as Kbd } from './components/ui/Kbd.svelte';
 export { default as Modal } from './components/ui/Modal.svelte';
 export { default as Pagination } from './components/ui/Pagination.svelte';
@@ -41,9 +41,10 @@ export { default as Spinner } from './components/ui/Spinner.svelte';
 export { default as Stepper } from './components/ui/Stepper.svelte';
 export { default as Table } from './components/ui/Table.svelte';
 export { default as Tabs } from './components/ui/Tabs.svelte';
-export { default as UiTextarea } from './components/ui/Textarea.svelte';
 export { default as ThemePicker } from './components/ui/ThemePicker.svelte';
 export { default as ThemeToggle } from './components/ui/ThemeToggle.svelte';
+export { default as ScrollToTop } from './components/ui/ScrollToTop.svelte';
+export { default as SidebarItem } from './components/ui/SidebarItem.svelte';
 export { default as Timeline } from './components/ui/Timeline.svelte';
 export { default as Toaster } from './components/ui/Toaster.svelte';
 export { default as Tooltip } from './components/ui/Tooltip.svelte';
@@ -54,6 +55,9 @@ export { default as NavbarMobile } from './components/layout/NavbarMobile.svelte
 export { default as Sidebar } from './components/layout/Sidebar.svelte';
 export { default as StandardLayout } from './components/layout/StandardLayout.svelte';
 // ─── Sections ────────────────────────────────────────────────────────────────
+export { default as AboutSection } from './components/sections/AboutSection.svelte';
+export { default as AboutSectionV2 } from './components/sections/AboutSectionV2.svelte';
+export { default as AboutSectionV3 } from './components/sections/AboutSectionV3.svelte';
 export { default as AnnouncementBar } from './components/sections/AnnouncementBar.svelte';
 export { default as BlogGridSection } from './components/sections/BlogGridSection.svelte';
 export { default as ComingSoonSection } from './components/sections/ComingSoonSection.svelte';
@@ -75,6 +79,7 @@ export { default as IntegrationsSection } from './components/sections/Integratio
 export { default as LogoCloudSection } from './components/sections/LogoCloudSection.svelte';
 export { default as NewsletterSection } from './components/sections/NewsletterSection.svelte';
 export { default as OnboardingSection } from './components/sections/OnboardingSection.svelte';
+export { default as PremiumHeroSection } from './components/sections/PremiumHeroSection.svelte';
 export { default as PricingSection } from './components/sections/PricingSection.svelte';
 export { default as ProcessSection } from './components/sections/ProcessSection.svelte';
 export { default as SplitFeatureSection } from './components/sections/SplitFeatureSection.svelte';

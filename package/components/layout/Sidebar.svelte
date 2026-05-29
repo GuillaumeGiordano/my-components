@@ -1,31 +1,69 @@
 <script lang="ts">
-  import type { Component } from "svelte";
-  import { ChevronLeft } from "@lucide/svelte";
+  import { ChevronLeft } from '@lucide/svelte';
+  import type { Component } from 'svelte';
+  import { browser } from '$app/environment';
+  import SidebarItem from '../ui/SidebarItem.svelte';
+  import type { SidebarSubItem } from '../ui/SidebarItem.svelte';
 
-  type SidebarItem = { label: string; href: string; icon?: Component };
-  type SidebarGroup = { label: string; items: SidebarItem[] };
+  type SidebarLink = {
+    label: string;
+    href?: string;
+    icon: Component;
+    badge?: number | string;
+    active?: boolean;
+    children?: SidebarSubItem[];
+    onclick?: () => void;
+  };
+
+  type SidebarGroup = {
+    label: string;
+    items: SidebarLink[];
+  };
 
   let {
     groups = [] as SidebarGroup[],
     collapsed = $bindable(false),
-    activeHref = "",
+    activeHref = '',
+    shortkey = '[',
   }: {
     groups?: SidebarGroup[];
     collapsed?: boolean;
     activeHref?: string;
+    shortkey?: string | false;
   } = $props();
+
+  // Keyboard shortcut — ignored when focus is inside an input/textarea
+  $effect(() => {
+    if (!browser || !shortkey) return;
+
+    function onKeydown(e: KeyboardEvent) {
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || (e.target as HTMLElement)?.isContentEditable) return;
+      if (e.key === shortkey && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        collapsed = !collapsed;
+      }
+    }
+
+    window.addEventListener('keydown', onKeydown);
+    return () => window.removeEventListener('keydown', onKeydown);
+  });
 </script>
 
 <aside class="sidebar" class:collapsed>
   <button
     class="collapse-btn"
-    aria-label={collapsed ? "Ouvrir le menu" : "Réduire le menu"}
+    aria-label="{collapsed ? 'Ouvrir' : 'Réduire'} le menu{shortkey ? ` (${shortkey})` : ''}"
+    title="{collapsed ? 'Ouvrir' : 'Réduire'} le menu{shortkey ? ` · ${shortkey}` : ''}"
     onclick={() => (collapsed = !collapsed)}
   >
     <ChevronLeft size={14} />
+    {#if shortkey}
+      <span class="shortkey-hint">{shortkey}</span>
+    {/if}
   </button>
 
-  <nav class="sidebar-nav">
+  <nav class="sidebar-nav" aria-label="Navigation principale">
     {#each groups as group}
       <div class="group">
         {#if !collapsed}
@@ -33,21 +71,16 @@
         {/if}
 
         {#each group.items as item}
-          <a
+          <SidebarItem
+            icon={item.icon}
+            label={item.label}
             href={item.href}
-            class="sidebar-link"
-            class:active={activeHref === item.href}
-            title={collapsed ? item.label : undefined}
-          >
-            {#if item.icon}
-              <span class="item-icon">
-                <svelte:component this={item.icon} size={16} />
-              </span>
-            {/if}
-            {#if !collapsed}
-              <span class="item-label">{item.label}</span>
-            {/if}
-          </a>
+            active={item.active ?? activeHref === item.href}
+            {collapsed}
+            badge={item.badge}
+            children={item.children}
+            onclick={item.onclick}
+          />
         {/each}
       </div>
     {/each}
@@ -61,7 +94,6 @@
     width: 220px;
     background: var(--bg-subtle);
     border-right: 1px solid var(--border);
-    /* padding: 16px 0; */
     transition:
       width var(--transition-base),
       background var(--transition-base),
@@ -70,10 +102,9 @@
     min-height: 300px;
   }
 
-  .sidebar.collapsed {
-    width: 56px;
-  }
+  .sidebar.collapsed { width: 56px; }
 
+  /* ── Toggle button ── */
   .collapse-btn {
     position: absolute;
     top: 12px;
@@ -88,34 +119,72 @@
     justify-content: center;
     cursor: pointer;
     color: var(--text-muted);
-    z-index: 1;
+    z-index: 10;
     padding: 0;
     transition:
       color var(--transition-fast),
       box-shadow var(--transition-fast),
       background var(--transition-base),
       border-color var(--transition-base);
-  }
 
-  .collapse-btn:hover {
-    color: var(--text-base);
-    box-shadow: var(--shadow-md);
+    &:hover {
+      color: var(--text-base);
+      box-shadow: var(--shadow-md);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
   }
 
   .collapse-btn :global(svg) {
     transition: transform var(--transition-base);
   }
 
+  /* Kbd hint — visible au hover du bouton toggle */
+  .shortkey-hint {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-heading);
+    color: var(--bg-base);
+    font-size: 11px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: var(--text-heading);
+    }
+  }
+
+  .collapse-btn:hover .shortkey-hint { opacity: 1; }
+
   .sidebar.collapsed .collapse-btn :global(svg) {
     transform: rotate(180deg);
   }
 
+  /* ── Nav ── */
   .sidebar-nav {
     display: flex;
     flex-direction: column;
     gap: 16px;
     padding: 8px;
     overflow: hidden;
+    margin-top: 4px;
   }
 
   .group {
@@ -132,45 +201,6 @@
     letter-spacing: 0.06em;
     color: var(--text-subtle);
     white-space: nowrap;
-  }
-
-  .sidebar-link {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px;
-    font-size: 14px;
-    color: var(--text-muted);
-    text-decoration: none;
-    border-radius: var(--radius-md);
-    white-space: nowrap;
-    transition:
-      background var(--transition-fast),
-      color var(--transition-fast);
-    min-width: 0;
-  }
-
-  .sidebar-link:hover {
-    background: var(--bg-hover);
-    color: var(--text-base);
-  }
-
-  .sidebar-link.active {
-    background: var(--primary-subtle);
-    color: var(--primary-subtle-fg);
-    font-weight: 500;
-  }
-
-  .item-icon {
-    flex-shrink: 0;
-    width: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .item-label {
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin-bottom: 2px;
   }
 </style>

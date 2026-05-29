@@ -1,17 +1,23 @@
-import type { Component } from "svelte";
-type SidebarItem = {
+import type { Component } from 'svelte';
+import type { SidebarSubItem } from '../ui/SidebarItem.svelte';
+type SidebarLink = {
     label: string;
-    href: string;
-    icon?: Component;
+    href?: string;
+    icon: Component;
+    badge?: number | string;
+    active?: boolean;
+    children?: SidebarSubItem[];
+    onclick?: () => void;
 };
 type SidebarGroup = {
     label: string;
-    items: SidebarItem[];
+    items: SidebarLink[];
 };
 type $$ComponentProps = {
     groups?: SidebarGroup[];
     collapsed?: boolean;
     activeHref?: string;
+    shortkey?: string | false;
 };
 declare const Sidebar: Component<$$ComponentProps, {}, "collapsed">;
 type Sidebar = ReturnType<typeof Sidebar>;

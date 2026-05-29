@@ -102,11 +102,6 @@ export const categories = [
                 description: 'Photo ou initiales, 5 tailles, formes circle/square, fallback automatique'
             },
             {
-                slug: 'input-simple',
-                label: 'Champ simple',
-                description: 'Input avec label, message d\'erreur et icône — version standalone accessible'
-            },
-            {
                 slug: 'button-action',
                 label: 'Button Action',
                 description: 'Bouton d\'action avec icône et texte, 3 variantes visuelles'
@@ -182,6 +177,16 @@ export const categories = [
                 description: 'Bouton copier avec feedback visuel automatique après 2 secondes'
             },
             {
+                slug: 'sidebar-item',
+                label: 'Sidebar Item',
+                description: 'Bouton de navigation sidebar — icône, label, badge notif, collapse avec sous-items, tooltip en mode réduit'
+            },
+            {
+                slug: 'scroll-to-top',
+                label: 'Scroll To Top',
+                description: 'Bouton fixe de retour en haut — apparaît après 300px de scroll, animation fluide'
+            },
+            {
                 slug: 'timeline',
                 label: 'Timeline',
                 description: 'Historique chronologique vertical avec icônes et variantes de couleur'
@@ -190,6 +195,11 @@ export const categories = [
                 slug: 'chatbot',
                 label: 'Chatbot',
                 description: 'Widget conversationnel flottant — branchez votre propre handler IA (Claude, OpenAI…)'
+            },
+            {
+                slug: 'carousel',
+                label: 'Carousel',
+                description: 'Carrousel de diapositives — flèches, points, autoplay, swipe tactile, navigation clavier'
             }
         ]
     },
@@ -208,6 +218,11 @@ export const categories = [
         slug: 'sections',
         label: 'Sections',
         components: [
+            {
+                slug: 'about',
+                label: 'About',
+                description: '3 variantes : split texte+visuel, mission+stats animées+valeurs, story fondateur+timeline jalons'
+            },
             {
                 slug: 'hero',
                 label: 'Hero',
@@ -332,6 +347,11 @@ export const categories = [
                 slug: 'onboarding',
                 label: 'Onboarding',
                 description: 'Écran de bienvenue multi-étapes — Stepper + navigation + visuel'
+            },
+            {
+                slug: 'premium-hero',
+                label: '✦ Premium Hero',
+                description: 'Hero dark ultra-animé — orbes flottants, scroll reveal mot par mot, bento 3D tilt, bouton magnétique, bordure shimmer'
             }
         ]
     }
