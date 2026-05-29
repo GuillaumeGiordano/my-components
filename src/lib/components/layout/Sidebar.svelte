@@ -1,14 +1,28 @@
 <script lang="ts">
-  import type { Component } from "svelte";
-  import { ChevronLeft } from "@lucide/svelte";
+  import { ChevronLeft } from '@lucide/svelte';
+  import type { Component } from 'svelte';
+  import SidebarItem from '$lib/components/ui/SidebarItem.svelte';
+  import type { SidebarSubItem } from '$lib/components/ui/SidebarItem.svelte';
 
-  type SidebarItem = { label: string; href: string; icon?: Component };
-  type SidebarGroup = { label: string; items: SidebarItem[] };
+  type SidebarLink = {
+    label: string;
+    href?: string;
+    icon: Component;
+    badge?: number | string;
+    active?: boolean;
+    children?: SidebarSubItem[];
+    onclick?: () => void;
+  };
+
+  type SidebarGroup = {
+    label: string;
+    items: SidebarLink[];
+  };
 
   let {
     groups = [] as SidebarGroup[],
     collapsed = $bindable(false),
-    activeHref = "",
+    activeHref = '',
   }: {
     groups?: SidebarGroup[];
     collapsed?: boolean;
@@ -19,13 +33,13 @@
 <aside class="sidebar" class:collapsed>
   <button
     class="collapse-btn"
-    aria-label={collapsed ? "Ouvrir le menu" : "Réduire le menu"}
+    aria-label={collapsed ? 'Ouvrir le menu' : 'Réduire le menu'}
     onclick={() => (collapsed = !collapsed)}
   >
     <ChevronLeft size={14} />
   </button>
 
-  <nav class="sidebar-nav">
+  <nav class="sidebar-nav" aria-label="Navigation principale">
     {#each groups as group}
       <div class="group">
         {#if !collapsed}
@@ -33,21 +47,16 @@
         {/if}
 
         {#each group.items as item}
-          <a
+          <SidebarItem
+            icon={item.icon}
+            label={item.label}
             href={item.href}
-            class="sidebar-link"
-            class:active={activeHref === item.href}
-            title={collapsed ? item.label : undefined}
-          >
-            {#if item.icon}
-              <span class="item-icon">
-                <svelte:component this={item.icon} size={16} />
-              </span>
-            {/if}
-            {#if !collapsed}
-              <span class="item-label">{item.label}</span>
-            {/if}
-          </a>
+            active={item.active ?? activeHref === item.href}
+            {collapsed}
+            badge={item.badge}
+            children={item.children}
+            onclick={item.onclick}
+          />
         {/each}
       </div>
     {/each}
@@ -61,7 +70,6 @@
     width: 220px;
     background: var(--bg-subtle);
     border-right: 1px solid var(--border);
-    /* padding: 16px 0; */
     transition:
       width var(--transition-base),
       background var(--transition-base),
@@ -70,10 +78,9 @@
     min-height: 300px;
   }
 
-  .sidebar.collapsed {
-    width: 56px;
-  }
+  .sidebar.collapsed { width: 56px; }
 
+  /* ── Toggle button ── */
   .collapse-btn {
     position: absolute;
     top: 12px;
@@ -88,18 +95,23 @@
     justify-content: center;
     cursor: pointer;
     color: var(--text-muted);
-    z-index: 1;
+    z-index: 10;
     padding: 0;
     transition:
       color var(--transition-fast),
       box-shadow var(--transition-fast),
       background var(--transition-base),
       border-color var(--transition-base);
-  }
 
-  .collapse-btn:hover {
-    color: var(--text-base);
-    box-shadow: var(--shadow-md);
+    &:hover {
+      color: var(--text-base);
+      box-shadow: var(--shadow-md);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
   }
 
   .collapse-btn :global(svg) {
@@ -110,12 +122,14 @@
     transform: rotate(180deg);
   }
 
+  /* ── Nav ── */
   .sidebar-nav {
     display: flex;
     flex-direction: column;
     gap: 16px;
     padding: 8px;
     overflow: hidden;
+    margin-top: 4px;
   }
 
   .group {
@@ -132,45 +146,6 @@
     letter-spacing: 0.06em;
     color: var(--text-subtle);
     white-space: nowrap;
-  }
-
-  .sidebar-link {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px;
-    font-size: 14px;
-    color: var(--text-muted);
-    text-decoration: none;
-    border-radius: var(--radius-md);
-    white-space: nowrap;
-    transition:
-      background var(--transition-fast),
-      color var(--transition-fast);
-    min-width: 0;
-  }
-
-  .sidebar-link:hover {
-    background: var(--bg-hover);
-    color: var(--text-base);
-  }
-
-  .sidebar-link.active {
-    background: var(--primary-subtle);
-    color: var(--primary-subtle-fg);
-    font-weight: 500;
-  }
-
-  .item-icon {
-    flex-shrink: 0;
-    width: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .item-label {
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin-bottom: 2px;
   }
 </style>

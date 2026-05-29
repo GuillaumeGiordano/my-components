@@ -194,6 +194,11 @@ export const categories: ComponentCategory[] = [
 				description: 'Bouton copier avec feedback visuel automatique après 2 secondes'
 			},
 			{
+				slug: 'sidebar-item',
+				label: 'Sidebar Item',
+				description: 'Bouton de navigation sidebar — icône, label, badge notif, collapse avec sous-items, tooltip en mode réduit'
+			},
+			{
 				slug: 'scroll-to-top',
 				label: 'Scroll To Top',
 				description: 'Bouton fixe de retour en haut — apparaît après 300px de scroll, animation fluide'
