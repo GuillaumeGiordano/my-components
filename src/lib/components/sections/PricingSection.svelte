@@ -97,6 +97,7 @@
 <style>
   .pricing {
     padding: 88px 24px;
+    background: var(--bg-base);
   }
 
   .pricing-inner {

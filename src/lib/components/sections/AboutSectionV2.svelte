@@ -117,7 +117,7 @@
   .about-v2 {
     padding: 96px 64px;
     border-top: 1px solid var(--border);
-    background: var(--bg-subtle);
+    background: var(--bg-base);
   }
 
   .inner {

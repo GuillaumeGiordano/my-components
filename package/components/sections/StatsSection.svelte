@@ -136,6 +136,7 @@
 <style>
   .stats {
     padding: 80px 24px;
+    background: var(--bg-base);
   }
 
   .stats-inner {
