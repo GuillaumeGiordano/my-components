@@ -49,6 +49,8 @@ export { default as SidebarItem } from './components/ui/SidebarItem.svelte';
 export { default as Timeline } from './components/ui/Timeline.svelte';
 export { default as Toaster } from './components/ui/Toaster.svelte';
 export { default as Tooltip } from './components/ui/Tooltip.svelte';
+// ─── Logo ────────────────────────────────────────────────────────────────────
+export { default as LogoGG } from './components/logo/LogoGG.svelte';
 // ─── Layout ──────────────────────────────────────────────────────────────────
 export { default as Footer } from './components/layout/Footer.svelte';
 export { default as Navbar } from './components/layout/Navbar.svelte';

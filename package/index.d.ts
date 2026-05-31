@@ -49,6 +49,7 @@ export type { SidebarSubItem } from './components/ui/SidebarItem.svelte';
 export { default as Timeline } from './components/ui/Timeline.svelte';
 export { default as Toaster } from './components/ui/Toaster.svelte';
 export { default as Tooltip } from './components/ui/Tooltip.svelte';
+export { default as LogoGG } from './components/logo/LogoGG.svelte';
 export { default as Footer } from './components/layout/Footer.svelte';
 export { default as Navbar } from './components/layout/Navbar.svelte';
 export { default as NavbarMobile } from './components/layout/NavbarMobile.svelte';
