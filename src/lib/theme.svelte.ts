@@ -450,6 +450,50 @@ function applyThemeClasses(t: Theme) {
   if (t.tracking   !== 'default') root.classList.add(`tracking-${t.tracking}`);
 }
 
+// ── Cache localStorage (read by the inline script in app.html) ────────────
+
+function saveThemeCache(t: Theme, m: 'light' | 'dark') {
+  const classes: string[] = [];
+  if (t.shape      !== 'default') classes.push(`shape-${t.shape}`);
+  if (t.shadow     !== 'default') classes.push(`shadow-${t.shadow}`);
+  if (t.typography !== 'default') classes.push(`type-${t.typography}`);
+  if (t.font       !== 'sans')    classes.push(`font-${t.font}`);
+  if (t.transition !== 'default') classes.push(`transition-${t.transition}`);
+  if (t.texture    !== 'none')    classes.push(`texture-${t.texture}`);
+  if (t.tracking   !== 'default') classes.push(`tracking-${t.tracking}`);
+  localStorage.setItem('theme-classes', classes.join(' '));
+
+  const colors = m === 'dark' ? t.dark  : t.light;
+  const bg     = m === 'dark' ? t.bgDark    : t.bgLight;
+  const border = m === 'dark' ? t.borderDark : t.borderLight;
+
+  const vars: [string, string][] = [
+    ['--primary',           colors.primary],
+    ['--primary-hover',     colors.primaryHover],
+    ['--primary-fg',        colors.primaryFg],
+    ['--primary-subtle',    colors.primarySubtle],
+    ['--primary-subtle-fg', colors.primarySubtleFg],
+  ];
+  if (bg) {
+    vars.push(
+      ['--bg-base',   bg.base],
+      ['--bg-subtle', bg.subtle],
+      ['--bg-muted',  bg.muted],
+      ['--bg-hover',  bg.hover],
+    );
+  }
+  if (border) {
+    vars.push(
+      ['--border',        border.border],
+      ['--border-strong', border.borderStrong],
+    );
+  }
+  if (t.textureColor) {
+    vars.push(['--texture-color', m === 'dark' ? t.textureColor.dark : t.textureColor.light]);
+  }
+  localStorage.setItem('theme-vars', JSON.stringify(vars));
+}
+
 // ── Store ──────────────────────────────────────────────────────────────────
 
 function createTheme() {
@@ -467,6 +511,7 @@ function createTheme() {
     document.documentElement.classList.toggle('dark', mode === 'dark');
     applyThemeClasses(activeTheme);
     injectThemeVars(activeTheme, mode);
+    saveThemeCache(activeTheme, mode);
   }
 
   function toggle() {
@@ -474,6 +519,7 @@ function createTheme() {
     localStorage.setItem('theme', mode);
     document.documentElement.classList.toggle('dark', mode === 'dark');
     injectThemeVars(activeTheme, mode);
+    saveThemeCache(activeTheme, mode);
   }
 
   function setTheme(id: string) {
@@ -482,6 +528,7 @@ function createTheme() {
     localStorage.setItem('visual-theme', id);
     applyThemeClasses(t);
     injectThemeVars(t, mode);
+    saveThemeCache(t, mode);
   }
 
   return {
@@ -495,6 +542,18 @@ function createTheme() {
 }
 
 export const theme = createTheme();
+
+/**
+ * Inline script to paste inside <head> in app.html (before %sveltekit.head%).
+ * Reads the theme cache from localStorage and applies classes + CSS vars on <html>
+ * before the first paint, preventing any flash of unstyled theme.
+ *
+ * Usage in app.html:
+ *   <script>{@html THEME_INIT_SCRIPT}<\/script>
+ *
+ * Or copy-paste the content directly into a <script> tag in your app.html.
+ */
+export const THEME_INIT_SCRIPT = `(function(){var d=document.documentElement;var m=localStorage.getItem('theme');var dark=m?m==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(dark)d.classList.add('dark');var cls=localStorage.getItem('theme-classes');if(cls)cls.split(' ').forEach(function(c){if(c)d.classList.add(c);});try{var vars=JSON.parse(localStorage.getItem('theme-vars')||'null');if(vars)vars.forEach(function(v){d.style.setProperty(v[0],v[1]);});}catch(e){}})();`;
 
 /** @deprecated Use THEMES instead */
 export const COLOR_THEMES = THEMES.map((t) => ({ id: t.id as any, label: t.label, color: t.light.primary }));
