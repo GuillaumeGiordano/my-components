@@ -16,9 +16,9 @@
   }: Props = $props();
 </script>
 
-<div class="flex items-center {addClass}" {...others}>
+<div class="logo-root {addClass}" {...others}>
   <!-- svelte-ignore a11y_consider_explicit_label -->
-  <a class="link-logo flex" href="https://guillaumegiordano.fr" target="_blank">
+  <a class="logo-link" href="https://guillaumegiordano.fr" target="_blank">
     <svg
       version="1.0"
       xmlns="http://www.w3.org/2000/svg"
@@ -61,27 +61,17 @@
     </svg>
   </a>
 
-  <!-- Title: animated max-width + opacity to avoid wrapping when sidebar collapses -->
-  <div class="my-auto flex flex-col overflow-hidden font-serif">
-    <div class="ml-2 overflow-hidden" style="display:inline-block;">
+  <div class="logo-text">
+    <div class="logo-text-inner">
       <strong
-        class="block truncate text-[20px] text-left leading-none font-extrabold"
-        style="max-width: {open
-          ? '180px'
-          : '0px'}; transition: max-width 300ms ease, opacity 200ms ease; opacity: {open
-          ? 1
-          : 0}; white-space: nowrap;"
+        class="logo-name"
+        style="max-width: {open ? '180px' : '0px'}; opacity: {open ? 1 : 0};"
       >
         G2 Web Dev
       </strong>
-
       <span
-        class="mt-1 block truncate text-[12px] leading-none"
-        style="max-width: {open
-          ? '180px'
-          : '0px'}; transition: max-width 320ms ease .04s, opacity 200ms ease .04s; opacity: {open
-          ? 1
-          : 0}; white-space: nowrap;"
+        class="logo-sub"
+        style="max-width: {open ? '180px' : '0px'}; opacity: {open ? 1 : 0};"
       >
         by Guillaume Giordano
       </span>
@@ -90,7 +80,56 @@
 </div>
 
 <style>
-  .link-logo path {
+  .logo-root {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-link {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .logo-link path {
     fill: var(--text-base);
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: var(--font-serif);
+    margin: auto 0;
+  }
+
+  .logo-text-inner {
+    margin-left: 8px;
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  .logo-name {
+    display: block;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-heading);
+    transition: max-width 300ms ease, opacity 200ms ease;
+  }
+
+  .logo-sub {
+    display: block;
+    font-size: 12px;
+    line-height: 1;
+    margin-top: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-muted);
+    transition: max-width 320ms ease 40ms, opacity 200ms ease 40ms;
   }
 </style>
