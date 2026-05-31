@@ -93,4 +93,4 @@ export { default as TestimonialsSection } from './components/sections/Testimonia
 export { default as VideoSection } from './components/sections/VideoSection.svelte';
 // ─── Stores & theme ──────────────────────────────────────────────────────────
 export { toast } from './stores/toast';
-export { theme, THEMES, COLOR_THEMES } from './theme.svelte';
+export { theme, THEMES, COLOR_THEMES, THEME_INIT_SCRIPT } from './theme.svelte';
