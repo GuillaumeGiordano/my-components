@@ -16,6 +16,9 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
+	"svelte": "./package/index.js",
+	"types": "./package/index.d.ts",
+	"main": "./package/index.js",
 	"exports": {
 		".": {
 			"types": "./package/index.d.ts",

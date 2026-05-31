@@ -200,6 +200,11 @@ export const categories = [
                 slug: 'carousel',
                 label: 'Carousel',
                 description: 'Carrousel de diapositives — flèches, points, autoplay, swipe tactile, navigation clavier'
+            },
+            {
+                slug: 'speed-dial',
+                label: 'Speed Dial',
+                description: 'Bouton FAB fixe qui déploie un menu vertical vers le haut — items icône avec label au hover'
             }
         ]
     },
