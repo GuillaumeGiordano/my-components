@@ -2,7 +2,10 @@
   import ComponentPreview from "$lib/ComponentPreview.svelte";
   import Navbar from "$lib/components/layout/Navbar.svelte";
   import LogoGG from "$lib/components/logo/LogoGG.svelte";
+  import ButtonAction from "$lib/components/ui/ButtonAction.svelte";
+  import ButtonActionItem from "$lib/components/ui/ButtonActionItem.svelte";
   import "$lib/styles/demo-page.css";
+  import { Share2, Trash2 } from "@lucide/svelte";
 
   const links = [
     { label: "Accueil", href: "#" },
@@ -25,9 +28,23 @@
   <section class="variant">
     <h2>Avec CTA</h2>
     <ComponentPreview>
-      <Navbar {links} ctaLabel="Démarrer">
+      <Navbar {links}>
         {#snippet brand()}
           <LogoGG width={34} height={34} />
+        {/snippet}
+
+        {#snippet actionBtn()}
+          <ButtonAction label="Action" variant="primary" size="icon-only" icon={Share2}>
+            {#snippet items(close)}
+              <ButtonActionItem label="Partager" icon={Share2} onclick={close} />
+              <ButtonActionItem
+                label="Supprimer"
+                icon={Trash2}
+                variant="danger"
+                onclick={close}
+              />
+            {/snippet}
+          </ButtonAction>
         {/snippet}
       </Navbar>
     </ComponentPreview>
@@ -52,7 +69,6 @@
           { label: "Travaux", href: "#" },
           { label: "Contact", href: "#" },
         ]}
-        ctaLabel="Me contacter"
       >
         {#snippet brand()}
           <LogoGG width={34} height={34} />

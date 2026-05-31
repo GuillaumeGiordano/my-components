@@ -2,19 +2,17 @@
   import { Menu, Share2, Trash2, X } from "@lucide/svelte";
   import Button from "$lib/components/buttons/Button.svelte";
   import type { Snippet } from "svelte";
-  import ButtonAction from "../ui/ButtonAction.svelte";
-  import ButtonActionItem from "../ui/ButtonActionItem.svelte";
 
   type NavLink = { label: string; href: string };
 
   let {
     links = [] as NavLink[],
-    ctaLabel = "",
     brand,
+    actionBtn,
   }: {
     links?: NavLink[];
-    ctaLabel?: string;
     brand?: Snippet;
+    actionBtn?: Snippet;
   } = $props();
 
   let menuOpen = $state(false);
@@ -31,23 +29,18 @@
     </nav>
 
     <div class="navbar-actions">
-      {#if ctaLabel}
+      {#if actionBtn}
         <span class="cta-desktop">
-          <ButtonAction label={ctaLabel} variant="primary" size="sm">
-            {#snippet items(close)}
-              <ButtonActionItem label="Partager" icon={Share2} onclick={close} />
-              <ButtonActionItem
-                label="Supprimer"
-                icon={Trash2}
-                variant="danger"
-                onclick={close}
-              />
-            {/snippet}
-          </ButtonAction>
+          {@render actionBtn?.()}
         </span>
       {/if}
 
       <span class="hamburger-wrap">
+        {#if actionBtn}
+          <span class="cta-mobile">
+            {@render actionBtn?.()}
+          </span>
+        {/if}
         <Button
           variant="ghost"
           icon={menuOpen ? X : Menu}
@@ -66,21 +59,6 @@
           {link.label}
         </a>
       {/each}
-      {#if ctaLabel}
-        <span class="cta-mobile">
-          <ButtonAction label={ctaLabel} variant="primary" size="md" addClass="w-full">
-            {#snippet items(close)}
-              <ButtonActionItem label="Partager" icon={Share2} onclick={close} />
-              <ButtonActionItem
-                label="Supprimer"
-                icon={Trash2}
-                variant="danger"
-                onclick={close}
-              />
-            {/snippet}
-          </ButtonAction>
-        </span>
-      {/if}
     </nav>
   {/if}
 </header>
@@ -98,6 +76,8 @@
   }
 
   .navbar-inner {
+    max-width: 1200px;
+    margin: auto;
     display: flex;
     align-items: center;
     gap: 32px;
@@ -165,13 +145,25 @@
 
   .cta-mobile {
     display: block;
-    margin-top: 8px;
   }
 
   /* Full-width CTA in mobile menu */
   .cta-mobile :global(.btn) {
     width: 100%;
     justify-content: center;
+  }
+
+  @container (max-width: 640px) {
+    .navbar-links,
+    .cta-desktop {
+      display: none;
+    }
+
+    .hamburger-wrap {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
   }
 
   @media (max-width: 640px) {
@@ -182,6 +174,8 @@
 
     .hamburger-wrap {
       display: flex;
+      align-items: center;
+      gap: 4px;
     }
   }
 </style>
