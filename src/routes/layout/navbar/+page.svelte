@@ -1,5 +1,6 @@
 <script lang="ts">
   import ComponentPreview from "$lib/ComponentPreview.svelte";
+  import Button from "$lib/components/buttons/Button.svelte";
   import Navbar from "$lib/components/layout/Navbar.svelte";
   import LogoGG from "$lib/components/logo/LogoGG.svelte";
   import ButtonAction from "$lib/components/ui/ButtonAction.svelte";
@@ -34,17 +35,20 @@
         {/snippet}
 
         {#snippet actionBtn()}
-          <ButtonAction label="Action" variant="primary" size="icon-only" icon={Share2}>
-            {#snippet items(close)}
-              <ButtonActionItem label="Partager" icon={Share2} onclick={close} />
-              <ButtonActionItem
-                label="Supprimer"
-                icon={Trash2}
-                variant="danger"
-                onclick={close}
-              />
-            {/snippet}
-          </ButtonAction>
+          <div class="action-wrapper">
+            <Button variant="primary" size="sm">06 76 55 34 76</Button>
+            <ButtonAction label="Action" variant="primary" size="icon-only" icon={Share2}>
+              {#snippet items(close)}
+                <ButtonActionItem label="Partager" icon={Share2} onclick={close} />
+                <ButtonActionItem
+                  label="Supprimer"
+                  icon={Trash2}
+                  variant="danger"
+                  onclick={close}
+                />
+              {/snippet}
+            </ButtonAction>
+          </div>
         {/snippet}
       </Navbar>
     </ComponentPreview>
@@ -95,3 +99,12 @@
     </table>
   </div>
 </div>
+
+<style lang="scss">
+  .action-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+</style>

@@ -2,6 +2,8 @@
   import { Menu, Share2, Trash2, X } from "@lucide/svelte";
   import Button from "$lib/components/buttons/Button.svelte";
   import type { Snippet } from "svelte";
+  import ButtonAction from "../ui/ButtonAction.svelte";
+  import ButtonActionItem from "../ui/ButtonActionItem.svelte";
 
   type NavLink = { label: string; href: string };
 
@@ -24,8 +26,22 @@
 
     <nav class="navbar-links" aria-label="Navigation principale">
       {#each links as link}
-        <a href={link.href} class="nav-link">{link.label}</a>
+        <!-- <a href={link.href} class="nav-link">{link.label}</a> -->
+        <Button aria-label={link.label} variant="ghost" size="sm" href={link.href}>
+          {link.label}
+        </Button>
       {/each}
+      <ButtonAction label="menu" variant="primary" size="sm">
+        {#snippet items(close)}
+          <ButtonActionItem label="Partager" icon={Share2} onclick={close} />
+          <ButtonActionItem
+            label="Supprimer"
+            icon={Trash2}
+            variant="danger"
+            onclick={close}
+          />
+        {/snippet}
+      </ButtonAction>
     </nav>
 
     <div class="navbar-actions">
