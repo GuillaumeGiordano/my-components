@@ -569,8 +569,8 @@
   }
 
   .cta-mobile :global(.btn) {
-    width: 100%;
-    justify-content: center;
+    /* width: 100%; */
+    /* justify-content: center; */
   }
 
   @container (max-width: 640px) {
