@@ -1,13 +1,23 @@
-import type { Snippet } from "svelte";
-type NavLink = {
+import type { Component, Snippet } from "svelte";
+export type NavSubItem = {
     label: string;
     href: string;
+    icon?: Component;
+    active?: boolean;
+};
+export type NavItem = {
+    icon?: Component;
+    label: string;
+    href?: string;
+    active?: boolean;
+    badge?: number | string;
+    children?: NavSubItem[];
 };
 type $$ComponentProps = {
-    links?: NavLink[];
-    ctaLabel?: string;
+    items?: NavItem[];
     brand?: Snippet;
+    actionBtn?: Snippet;
 };
-declare const Navbar: import("svelte").Component<$$ComponentProps, {}, "">;
+declare const Navbar: Component<$$ComponentProps, {}, "">;
 type Navbar = ReturnType<typeof Navbar>;
 export default Navbar;

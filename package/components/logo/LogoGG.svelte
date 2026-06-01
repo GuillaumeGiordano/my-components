@@ -91,7 +91,7 @@
   }
 
   .logo-link path {
-    fill: var(--text-base);
+    fill: var(--primary);
   }
 
   .logo-text {
@@ -117,8 +117,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--text-heading);
-    transition: max-width 300ms ease, opacity 200ms ease;
+    color: var(--primary);
+    transition:
+      max-width 300ms ease,
+      opacity 200ms ease;
   }
 
   .logo-sub {
@@ -129,7 +131,9 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--text-muted);
-    transition: max-width 320ms ease 40ms, opacity 200ms ease 40ms;
+    color: var(--primary);
+    transition:
+      max-width 320ms ease 40ms,
+      opacity 200ms ease 40ms;
   }
 </style>

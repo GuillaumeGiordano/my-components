@@ -1,6 +1,6 @@
 import type { Snippet, Component } from "svelte";
 type Variant = "primary" | "secondary" | "outline" | "ghost" | "danger";
-type Size = "sm" | "md" | "lg";
+type Size = "sm" | "md" | "lg" | "icon-only";
 type $$ComponentProps = {
     label: string;
     variant?: Variant;

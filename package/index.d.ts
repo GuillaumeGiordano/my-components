@@ -52,6 +52,7 @@ export { default as Tooltip } from './components/ui/Tooltip.svelte';
 export { default as LogoGG } from './components/logo/LogoGG.svelte';
 export { default as Footer } from './components/layout/Footer.svelte';
 export { default as Navbar } from './components/layout/Navbar.svelte';
+export type { NavItem, NavSubItem } from './components/layout/Navbar.svelte';
 export { default as NavbarMobile } from './components/layout/NavbarMobile.svelte';
 export { default as NavbarMobileRadial } from './components/layout/NavbarMobileRadial.svelte';
 export type { RadialNavItem } from './components/layout/NavbarMobileRadial.svelte';

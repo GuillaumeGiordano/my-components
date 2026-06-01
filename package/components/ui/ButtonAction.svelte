@@ -3,7 +3,7 @@
   import { ChevronDown } from "@lucide/svelte";
 
   type Variant = "primary" | "secondary" | "outline" | "ghost" | "danger";
-  type Size = "sm" | "md" | "lg";
+  type Size = "sm" | "md" | "lg" | "icon-only";
 
   let {
     label,
@@ -21,7 +21,7 @@
     items: Snippet<[() => void]>;
   } = $props();
 
-  const iconSizes: Record<Size, number> = { sm: 14, md: 15, lg: 17 };
+  const iconSizes: Record<Size, number> = { sm: 14, md: 15, lg: 17, "icon-only": 15 };
 
   let isOpen = $state(false);
   let triggerEl: HTMLButtonElement | null = $state(null);
@@ -65,9 +65,12 @@
   aria-haspopup="menu"
   aria-expanded={isOpen}
 >
-  {#if Icon}<Icon size={iconSizes[size]} />{/if}
-  <span>{label}</span>
-  <span class="chevron"><ChevronDown size={iconSizes[size]} /></span>
+  {#if Icon}
+    <Icon size={iconSizes[size]} />
+  {:else}
+    <span>{label}</span>
+    <span class="chevron"><ChevronDown size={iconSizes[size]} /></span>
+  {/if}
 </button>
 
 <div
@@ -125,6 +128,15 @@
     padding: 11px 22px;
     font-size: 15px;
     border-radius: var(--radius-lg);
+  }
+  .size-icon-only {
+    font-size: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   /* variants */
