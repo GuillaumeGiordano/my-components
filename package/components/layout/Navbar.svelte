@@ -1,7 +1,9 @@
 <script lang="ts">
   import type { Component, Snippet } from "svelte";
   import { Menu, X, ChevronDown } from "@lucide/svelte";
-  import { slide } from "svelte/transition";
+  import { slide, fly, fade } from "svelte/transition";
+  import { cubicOut } from "svelte/easing";
+  import { browser } from "$app/environment";
 
   export type NavSubItem = {
     label: string;
@@ -23,19 +25,99 @@
     items = [],
     brand,
     actionBtn,
+    mobileMenu = "drawer",
   }: {
     items?: NavItem[];
     brand?: Snippet;
     actionBtn?: Snippet;
+    mobileMenu?: "drawer" | "popover" | "fullscreen";
   } = $props();
 
   let menuOpen = $state(false);
   let mobileOpenIndex = $state<number | null>(null);
 
+  function close() {
+    menuOpen = false;
+    mobileOpenIndex = null;
+  }
+
   function toggleMobileItem(i: number) {
     mobileOpenIndex = mobileOpenIndex === i ? null : i;
   }
+
+  $effect(() => {
+    if (!browser) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  });
 </script>
+
+<!-- ── Mobile items (shared across all 3 modes) ── -->
+{#snippet mobileItems()}
+  {#each items as item, i}
+    {@const hasChildren = !!item.children?.length}
+    {@const showBadge =
+      item.badge !== undefined && item.badge !== null && item.badge !== ""}
+    {@const subOpen = mobileOpenIndex === i}
+
+    <div class="mobile-item-wrap">
+      {#if item.href && !hasChildren}
+        <a
+          href={item.href}
+          class="mobile-link"
+          class:active={item.active}
+          onclick={close}
+        >
+          {#if item.icon}<span class="mobile-icon"><item.icon size={16} /></span>{/if}
+          <span>{item.label}</span>
+          {#if showBadge}<span class="nav-badge">{item.badge}</span>{/if}
+        </a>
+      {:else}
+        <button
+          type="button"
+          class="mobile-link"
+          class:active={item.active}
+          onclick={() => (hasChildren ? toggleMobileItem(i) : close())}
+          aria-expanded={hasChildren ? subOpen : undefined}
+        >
+          {#if item.icon}<span class="mobile-icon"><item.icon size={16} /></span>{/if}
+          <span>{item.label}</span>
+          {#if showBadge}<span class="nav-badge">{item.badge}</span>{/if}
+          {#if hasChildren}
+            <span class="mobile-chevron" class:rotated={subOpen}>
+              <ChevronDown size={14} />
+            </span>
+          {/if}
+        </button>
+      {/if}
+
+      {#if hasChildren && subOpen}
+        <div class="mobile-sub-items" transition:slide={{ duration: 180 }}>
+          {#each item.children! as child}
+            <a
+              href={child.href}
+              class="mobile-sub-link"
+              class:active={child.active}
+              onclick={close}
+            >
+              {#if child.icon}
+                <span class="mobile-sub-icon"><child.icon size={14} /></span>
+              {:else}
+                <span class="mobile-sub-dot"></span>
+              {/if}
+              <span>{child.label}</span>
+            </a>
+          {/each}
+        </div>
+      {/if}
+    </div>
+  {/each}
+{/snippet}
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
 
 <header class="navbar">
   <div class="navbar-inner">
@@ -43,7 +125,7 @@
 
     <!-- ── Desktop nav ── -->
     <nav class="navbar-links" aria-label="Navigation principale">
-      {#each items as item, i}
+      {#each items as item}
         {@const hasChildren = !!item.children?.length}
         {@const showBadge =
           item.badge !== undefined && item.badge !== null && item.badge !== ""}
@@ -56,13 +138,9 @@
               class:active={item.active}
               aria-current={item.active ? "page" : undefined}
             >
-              {#if item.icon}
-                <span class="nav-icon"><item.icon size={16} /></span>
-              {/if}
+              {#if item.icon}<span class="nav-icon"><item.icon size={16} /></span>{/if}
               <span class="nav-label">{item.label}</span>
-              {#if showBadge}
-                <span class="nav-badge">{item.badge}</span>
-              {/if}
+              {#if showBadge}<span class="nav-badge">{item.badge}</span>{/if}
             </a>
           {:else}
             <button
@@ -71,20 +149,15 @@
               class:active={item.active}
               aria-haspopup={hasChildren ? "true" : undefined}
             >
-              {#if item.icon}
-                <span class="nav-icon"><item.icon size={16} /></span>
-              {/if}
+              {#if item.icon}<span class="nav-icon"><item.icon size={16} /></span>{/if}
               <span class="nav-label">{item.label}</span>
-              {#if showBadge}
-                <span class="nav-badge">{item.badge}</span>
-              {/if}
+              {#if showBadge}<span class="nav-badge">{item.badge}</span>{/if}
               {#if hasChildren}
                 <span class="nav-chevron"><ChevronDown size={13} /></span>
               {/if}
             </button>
           {/if}
 
-          <!-- Dropdown (desktop) -->
           {#if hasChildren}
             <div class="dropdown" role="menu">
               {#each item.children! as child}
@@ -114,7 +187,6 @@
       {#if actionBtn}
         <span class="cta-desktop">{@render actionBtn()}</span>
       {/if}
-
       <span class="hamburger-wrap">
         {#if actionBtn}
           <span class="cta-mobile">{@render actionBtn()}</span>
@@ -129,7 +201,7 @@
           aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
           aria-expanded={menuOpen}
         >
-          {#if menuOpen}
+          {#if menuOpen && mobileMenu === "fullscreen"}
             <X size={20} />
           {:else}
             <Menu size={20} />
@@ -138,90 +210,68 @@
       </span>
     </div>
   </div>
-
-  <!-- ── Mobile menu ── -->
-  {#if menuOpen}
-    <nav
-      class="mobile-menu"
-      aria-label="Navigation mobile"
-      transition:slide={{ duration: 200 }}
-    >
-      {#each items as item, i}
-        {@const hasChildren = !!item.children?.length}
-        {@const showBadge =
-          item.badge !== undefined && item.badge !== null && item.badge !== ""}
-        {@const mobileOpen = mobileOpenIndex === i}
-
-        <div class="mobile-item-wrap">
-          {#if item.href && !hasChildren}
-            <a
-              href={item.href}
-              class="mobile-link"
-              class:active={item.active}
-              onclick={() => {
-                menuOpen = false;
-                mobileOpenIndex = null;
-              }}
-            >
-              {#if item.icon}
-                <span class="mobile-icon"><item.icon size={16} /></span>
-              {/if}
-              <span>{item.label}</span>
-              {#if showBadge}
-                <span class="nav-badge">{item.badge}</span>
-              {/if}
-            </a>
-          {:else}
-            <button
-              type="button"
-              class="mobile-link"
-              class:active={item.active}
-              onclick={() => (hasChildren ? toggleMobileItem(i) : (menuOpen = false))}
-              aria-expanded={hasChildren ? mobileOpen : undefined}
-            >
-              {#if item.icon}
-                <span class="mobile-icon"><item.icon size={16} /></span>
-              {/if}
-              <span>{item.label}</span>
-              {#if showBadge}
-                <span class="nav-badge">{item.badge}</span>
-              {/if}
-              {#if hasChildren}
-                <span class="mobile-chevron" class:rotated={mobileOpen}>
-                  <ChevronDown size={14} />
-                </span>
-              {/if}
-            </button>
-          {/if}
-
-          <!-- Sub-items mobile -->
-          {#if hasChildren && mobileOpen}
-            <div class="mobile-sub-items" transition:slide={{ duration: 180 }}>
-              {#each item.children! as child}
-                <a
-                  href={child.href}
-                  class="mobile-sub-link"
-                  class:active={child.active}
-                  onclick={() => {
-                    menuOpen = false;
-                    mobileOpenIndex = null;
-                  }}
-                >
-                  {#if child.icon}
-                    <span class="mobile-sub-icon"><child.icon size={14} /></span>
-                  {:else}
-                    <span class="mobile-sub-dot"></span>
-                  {/if}
-                  <span>{child.label}</span>
-                </a>
-              {/each}
-            </div>
-          {/if}
-        </div>
-      {/each}
-    </nav>
-  {/if}
 </header>
+
+<!-- ── DRAWER ── slide depuis la droite + backdrop -->
+{#if menuOpen && mobileMenu === "drawer"}
+  <div
+    class="backdrop"
+    transition:fade={{ duration: 220 }}
+    onclick={close}
+    role="presentation"
+    aria-hidden="true"
+  ></div>
+  <nav
+    class="mobile-drawer"
+    aria-label="Navigation mobile"
+    transition:fly={{ x: 300, duration: 260, easing: cubicOut }}
+  >
+    <div class="drawer-header">
+      {#if brand}{@render brand()}{/if}
+      <button type="button" class="drawer-close" onclick={close} aria-label="Fermer">
+        <X size={20} />
+      </button>
+    </div>
+    <div class="drawer-items">
+      {@render mobileItems()}
+    </div>
+    {#if actionBtn}
+      <div class="drawer-footer">{@render actionBtn()}</div>
+    {/if}
+  </nav>
+{/if}
+
+<!-- ── POPOVER ── dropdown flottant sous le hamburger -->
+{#if menuOpen && mobileMenu === "popover"}
+  <nav
+    class="mobile-popover"
+    aria-label="Navigation mobile"
+    transition:fly={{ y: -8, duration: 180 }}
+  >
+    {@render mobileItems()}
+  </nav>
+{/if}
+
+<!-- ── FULLSCREEN ── overlay plein écran -->
+{#if menuOpen && mobileMenu === "fullscreen"}
+  <div
+    class="mobile-fullscreen"
+    transition:fade={{ duration: 200 }}
+    role="dialog"
+    aria-modal="true"
+    aria-label="Navigation mobile"
+  >
+    <button type="button" class="fs-close" onclick={close} aria-label="Fermer">
+      <X size={24} />
+    </button>
+    <nav class="fs-items">
+      {@render mobileItems()}
+    </nav>
+    {#if actionBtn}
+      <div class="fs-footer">{@render actionBtn()}</div>
+    {/if}
+  </div>
+{/if}
 
 <style>
   /* ── Navbar ── */
@@ -230,7 +280,7 @@
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
-    z-index: 99;
+    z-index: 100;
     transition:
       background var(--transition-base),
       border-color var(--transition-base);
@@ -258,12 +308,16 @@
     position: relative;
   }
 
-  /* Show dropdown on hover + focus-within (keyboard) */
   .nav-item-wrap.has-dropdown:hover .dropdown,
   .nav-item-wrap.has-dropdown:focus-within .dropdown {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
+  }
+
+  .nav-item-wrap.has-dropdown:hover .nav-chevron,
+  .nav-item-wrap.has-dropdown:focus-within .nav-chevron {
+    transform: rotate(180deg);
   }
 
   .nav-link {
@@ -273,7 +327,6 @@
     padding: 6px 10px;
     border-radius: var(--radius-md);
     font-size: 14px;
-    font-weight: 400;
     color: var(--text-muted);
     text-decoration: none;
     background: none;
@@ -288,12 +341,10 @@
       background: var(--bg-hover);
       color: var(--text-base);
     }
-
     &:focus-visible {
       outline: 2px solid var(--primary);
       outline-offset: 2px;
     }
-
     &.active {
       background: var(--primary-subtle);
       color: var(--primary-subtle-fg);
@@ -306,7 +357,6 @@
     align-items: center;
     flex-shrink: 0;
   }
-
   .nav-label {
     line-height: 1;
   }
@@ -324,7 +374,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    line-height: 1;
   }
 
   .nav-chevron {
@@ -334,12 +383,7 @@
     transition: transform var(--transition-fast);
   }
 
-  .nav-item-wrap.has-dropdown:hover .nav-chevron,
-  .nav-item-wrap.has-dropdown:focus-within .nav-chevron {
-    transform: rotate(180deg);
-  }
-
-  /* ── Dropdown ── */
+  /* ── Desktop dropdown ── */
   .dropdown {
     position: absolute;
     top: calc(100% + 6px);
@@ -353,8 +397,7 @@
     display: flex;
     flex-direction: column;
     gap: 1px;
-    z-index: 100;
-    /* Hidden by default */
+    z-index: 101;
     opacity: 0;
     pointer-events: none;
     transform: translateY(-6px);
@@ -380,12 +423,10 @@
       background: var(--bg-hover);
       color: var(--text-base);
     }
-
     &:focus-visible {
       outline: 2px solid var(--primary);
       outline-offset: 1px;
     }
-
     &.active {
       color: var(--primary);
       font-weight: 500;
@@ -412,14 +453,13 @@
     background: var(--primary);
   }
 
-  /* ── Actions ── */
+  /* ── Actions / hamburger ── */
   .navbar-actions {
     display: flex;
     align-items: center;
     gap: 8px;
     margin-left: auto;
   }
-
   .hamburger-wrap {
     display: none;
   }
@@ -443,23 +483,13 @@
       background: var(--bg-hover);
       color: var(--text-base);
     }
-
     &:focus-visible {
       outline: 2px solid var(--primary);
       outline-offset: 2px;
     }
   }
 
-  /* ── Mobile menu ── */
-  .mobile-menu {
-    display: flex;
-    flex-direction: column;
-    padding: 8px 12px 12px;
-    border-top: 1px solid var(--border);
-    gap: 2px;
-    background: var(--bg-base);
-  }
-
+  /* ── Shared mobile items ── */
   .mobile-item-wrap {
     display: flex;
     flex-direction: column;
@@ -487,7 +517,6 @@
       background: var(--bg-hover);
       color: var(--text-base);
     }
-
     &.active {
       background: var(--primary-subtle);
       color: var(--primary-subtle-fg);
@@ -513,7 +542,6 @@
     transform: rotate(180deg);
   }
 
-  /* Sub-items mobile */
   .mobile-sub-items {
     display: flex;
     flex-direction: column;
@@ -541,7 +569,6 @@
       background: var(--bg-hover);
       color: var(--text-base);
     }
-
     &.active {
       color: var(--primary);
       font-weight: 500;
@@ -568,17 +595,180 @@
     background: var(--primary);
   }
 
-  .cta-mobile :global(.btn) {
-    /* width: 100%; */
-    /* justify-content: center; */
+  /* ── Backdrop ── */
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    z-index: 199;
   }
 
+  /* ── DRAWER ── */
+  .mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    background: var(--bg-base);
+    border-left: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .drawer-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-md);
+    border: none;
+    background: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    margin-left: auto;
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast);
+
+    &:hover {
+      background: var(--bg-hover);
+      color: var(--text-base);
+    }
+  }
+
+  .drawer-items {
+    flex: 1;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .drawer-footer {
+    padding: 12px 16px 20px;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .drawer-footer :global(.btn) {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* ── POPOVER ── */
+  .mobile-popover {
+    position: fixed;
+    top: 68px;
+    right: 16px;
+    width: 260px;
+    max-height: calc(100vh - 84px);
+    overflow-y: auto;
+    background: var(--bg-base);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    z-index: 200;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  /* ── FULLSCREEN ── */
+  .mobile-fullscreen {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-base);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .fs-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    border: none;
+    background: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast);
+
+    &:hover {
+      background: var(--bg-hover);
+      color: var(--text-base);
+    }
+  }
+
+  .fs-items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 32px 32px;
+    gap: 4px;
+  }
+
+  /* Bigger items in fullscreen */
+  .mobile-fullscreen .mobile-link {
+    font-size: 22px;
+    font-weight: 500;
+    padding: 14px 12px;
+  }
+
+  .mobile-fullscreen .mobile-sub-link {
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+
+  .mobile-fullscreen .mobile-icon :global(svg) {
+    width: 22px;
+    height: 22px;
+  }
+
+  .fs-footer {
+    padding: 16px 32px 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .fs-footer :global(.btn) {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* .cta-mobile :global(.btn) { width: 100%; justify-content: center; } */
+
+  /* ── Responsive ── */
   @container (max-width: 640px) {
     .navbar-links,
     .cta-desktop {
       display: none;
     }
-
     .hamburger-wrap {
       display: flex;
       align-items: center;
@@ -586,13 +776,11 @@
     }
   }
 
-  /* ── Responsive ── */
   @media (max-width: 640px) {
     .navbar-links,
     .cta-desktop {
       display: none;
     }
-
     .hamburger-wrap {
       display: flex;
       align-items: center;

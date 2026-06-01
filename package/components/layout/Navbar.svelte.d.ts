@@ -17,6 +17,7 @@ type $$ComponentProps = {
     items?: NavItem[];
     brand?: Snippet;
     actionBtn?: Snippet;
+    mobileMenu?: "drawer" | "popover" | "fullscreen";
 };
 declare const Navbar: Component<$$ComponentProps, {}, "">;
 type Navbar = ReturnType<typeof Navbar>;
