@@ -168,9 +168,9 @@
 
 <style>
   .chatbot-root {
-    /* position: fixed;
+    position: fixed;
     bottom: 24px;
-    z-index: 1000; */
+    z-index: 1000;
     display: flex;
     flex-direction: column-reverse;
     align-items: flex-end;
@@ -178,12 +178,12 @@
   }
 
   .chatbot-root.bottom-right {
-    /* right: 24px;
-    align-items: flex-end; */
+    right: 24px;
+    align-items: flex-end;
   }
   .chatbot-root.bottom-left {
-    /* left: 24px;
-    align-items: flex-start; */
+    left: 24px;
+    align-items: flex-start;
   }
 
   /* ── Toggle button ── */
