@@ -28,12 +28,8 @@
 
 <style>
   .scroll-top {
-    /* position: fixed;
-    bottom: 28px;
-    right: 24px;
-    z-index: 50; */
-    width: 44px;
-    height: 44px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     background: var(--primary);
     color: var(--primary-fg);

@@ -13,7 +13,6 @@ type $$ComponentProps = {
     title?: string;
     placeholder?: string;
     initialMessage?: string;
-    position?: "bottom-right" | "bottom-left";
 };
 declare const Chatbot: import("svelte").Component<$$ComponentProps, {}, "">;
 type Chatbot = ReturnType<typeof Chatbot>;
