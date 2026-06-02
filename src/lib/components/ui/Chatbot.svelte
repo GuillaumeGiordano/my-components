@@ -11,7 +11,6 @@
     title = "Assistant",
     placeholder = "Posez une question…",
     initialMessage = "",
-    position = "bottom-right",
   }: {
     onMessage?: (history: ChatMessage[]) => Promise<string>;
     knowledge?: KnowledgeEntry[];
@@ -19,7 +18,6 @@
     title?: string;
     placeholder?: string;
     initialMessage?: string;
-    position?: "bottom-right" | "bottom-left";
   } = $props();
 
   let open = $state(false);
@@ -89,7 +87,7 @@
   }
 </script>
 
-<div class="chatbot-root {position}">
+<div class="chatbot-root">
   <!-- Floating toggle button -->
   <button
     class="toggle-btn"
@@ -168,22 +166,10 @@
 
 <style>
   .chatbot-root {
-    /* position: fixed;
-    bottom: 24px;
-    z-index: 1000; */
     display: flex;
     flex-direction: column-reverse;
     align-items: flex-end;
     gap: 12px;
-  }
-
-  .chatbot-root.bottom-right {
-    /* right: 24px;
-    align-items: flex-end; */
-  }
-  .chatbot-root.bottom-left {
-    /* left: 24px;
-    align-items: flex-start; */
   }
 
   /* ── Toggle button ── */
