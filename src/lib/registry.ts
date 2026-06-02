@@ -214,6 +214,16 @@ export const categories: ComponentCategory[] = [
 				description: 'Carrousel de diapositives — flèches, points, autoplay, swipe tactile, navigation clavier'
 			},
 			{
+				slug: 'section-scrollbar',
+				label: 'Section Scrollbar',
+				description: 'Barre de scroll verticale avec points de section cliquables et thumb draggable — synchronisée avec la page'
+			},
+			{
+				slug: 'nav-section-wheel',
+				label: 'Nav Section Wheel',
+				description: 'Roue de navigation verticale fixée sur le bord droit — 3 sections visibles, coupée en haut/bas, synchronisée avec le scroll'
+			},
+			{
 				slug: 'speed-dial',
 				label: 'Speed Dial',
 				description: 'Bouton FAB fixe qui déploie un menu vertical vers le haut — items icône avec label au hover'
