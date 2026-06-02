@@ -1,6 +1,7 @@
 <script lang="ts">
-  import '$lib/styles/demo-page.css';
-  import ScrollToTop from '$lib/components/ui/ScrollToTop.svelte';
+  import "$lib/styles/demo-page.css";
+  import ScrollToTop from "$lib/components/ui/ScrollToTop.svelte";
+  import FloatingGroup from "$lib/FloatingGroup.svelte";
 </script>
 
 <svelte:head>
@@ -10,18 +11,22 @@
 <div class="page">
   <div class="page-header">
     <h1>Scroll To Top</h1>
-    <p>Bouton fixe qui apparaît après 300px de scroll et ramène en haut de page en douceur. Fais défiler cette page pour le voir apparaître en bas à droite.</p>
+    <p>
+      Bouton fixe qui apparaît après 300px de scroll et ramène en haut de page en douceur.
+      Fais défiler cette page pour le voir apparaître en bas à droite.
+    </p>
   </div>
 
   <section class="variant">
     <h2>Utilisation</h2>
     <pre class="code-block"><code
->&lt;script&gt;
+        >&lt;script&gt;
   import &#123; ScrollToTop &#125; from '@guillaumeg/ui';
 &lt;/script&gt;
 
 &lt;!-- À placer une seule fois dans le layout ou la page --&gt;
-&lt;ScrollToTop /&gt;</code></pre>
+&lt;ScrollToTop /&gt;</code
+      ></pre>
   </section>
 
   <section class="variant">
@@ -42,14 +47,16 @@
       <p class="filler">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur.
       </p>
     </section>
   {/each}
 </div>
-
-<ScrollToTop />
+<FloatingGroup position="right">
+  <ScrollToTop />
+</FloatingGroup>
 
 <style>
   code {
@@ -72,7 +79,10 @@
     margin-top: 12px;
   }
 
-  .code-block code { background: none; padding: 0; }
+  .code-block code {
+    background: none;
+    padding: 0;
+  }
 
   .info-list {
     display: flex;

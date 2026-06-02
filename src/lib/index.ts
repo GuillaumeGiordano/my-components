@@ -40,6 +40,7 @@ export { default as Pagination }          from './components/ui/Pagination.svelt
 export { default as Progress }            from './components/ui/Progress.svelte';
 export { default as Rating }              from './components/ui/Rating.svelte';
 export { default as Skeleton }            from './components/ui/Skeleton.svelte';
+export { default as FloatingGroup }       from './FloatingGroup.svelte';
 export { default as SpeedDial }           from './components/ui/SpeedDial.svelte';
 export type { SpeedDialItem }             from './components/ui/SpeedDial.svelte';
 export { default as Spinner }             from './components/ui/Spinner.svelte';

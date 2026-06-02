@@ -1,7 +1,8 @@
 <script lang="ts">
-  import '$lib/styles/demo-page.css';
-  import Chatbot from '$lib/components/ui/Chatbot.svelte';
-  import knowledge from './knowledge.json';
+  import "$lib/styles/demo-page.css";
+  import Chatbot from "$lib/components/ui/Chatbot.svelte";
+  import knowledge from "./knowledge.json";
+  import FloatingGroup from "$lib/FloatingGroup.svelte";
 </script>
 
 <svelte:head>
@@ -20,16 +21,19 @@
   <section class="variant">
     <h2>Démo active</h2>
     <p class="hint">
-      Le chatbot est en bas à droite. Il répond sur G2webdev et tous les composants de la bibliothèque.
-      Nécessite <code>GROQ_API_KEY</code> dans <code>.env</code>.
+      Le chatbot est en bas à droite. Il répond sur G2webdev et tous les composants de la
+      bibliothèque. Nécessite <code>GROQ_API_KEY</code> dans <code>.env</code>.
     </p>
-    <p class="hint">Essaie : <em>"Quels services propose G2webdev ?"</em> ou <em>"Comment utiliser le composant Modal ?"</em></p>
+    <p class="hint">
+      Essaie : <em>"Quels services propose G2webdev ?"</em> ou
+      <em>"Comment utiliser le composant Modal ?"</em>
+    </p>
   </section>
 
   <section class="variant">
     <h2>Structure du JSON</h2>
     <pre class="code-block"><code
->const knowledge = [
+        >const knowledge = [
   &#123;
     question: "Quels sont vos horaires ?",
     answer:   "Ouvert lundi–vendredi 9h–18h.",
@@ -45,7 +49,8 @@
   &#123;knowledge&#125;
   title="Support"
   initialMessage="Bonjour ! Comment puis-je vous aider ?"
-/&gt;</code></pre>
+/&gt;</code
+      ></pre>
     <p class="hint">
       Tu peux aussi charger le JSON depuis un fichier :
       <code>import knowledge from './faq.json'</code>
@@ -55,13 +60,20 @@
   <section class="variant">
     <h2>Configuration — Groq (actif, gratuit)</h2>
     <ol class="steps">
-      <li>Crée un compte sur <strong>console.groq.com</strong> (connexion Google suffisante)</li>
+      <li>
+        Crée un compte sur <strong>console.groq.com</strong> (connexion Google suffisante)
+      </li>
       <li>Va dans <strong>API Keys → Create API Key</strong> et copie la clé</li>
       <li>Ajoute-la dans ton <code>.env</code> :</li>
     </ol>
-    <pre class="code-block"><code># .env
-GROQ_API_KEY=gsk_...   # console.groq.com → API Keys</code></pre>
-    <p class="hint">Modèle utilisé : <code>llama-3.3-70b-versatile</code> — très capable, généreux en tokens gratuits.</p>
+    <pre class="code-block"><code
+        ># .env
+GROQ_API_KEY=gsk_...   # console.groq.com → API Keys</code
+      ></pre>
+    <p class="hint">
+      Modèle utilisé : <code>llama-3.3-70b-versatile</code> — très capable, généreux en tokens
+      gratuits.
+    </p>
   </section>
 
   <section class="variant">
@@ -72,16 +84,20 @@ GROQ_API_KEY=gsk_...   # console.groq.com → API Keys</code></pre>
       <li>Ajoute des crédits dans <strong>Plans &amp; Billing</strong> (min. $5)</li>
       <li>Ajoute la clé dans ton <code>.env</code> :</li>
     </ol>
-    <pre class="code-block"><code># .env
-ANTHROPIC_API_KEY=sk-ant-...   # console.anthropic.com → API Keys</code></pre>
+    <pre class="code-block"><code
+        ># .env
+ANTHROPIC_API_KEY=sk-ant-...   # console.anthropic.com → API Keys</code
+      ></pre>
     <p class="hint">
       Pour basculer sur Anthropic, modifie une ligne dans
       <code>src/routes/api/chat/+server.ts</code> :
     </p>
-    <pre class="code-block"><code>// Remplacer :
+    <pre class="code-block"><code
+        >// Remplacer :
 const content = await callGroq(system, messages);
 // Par :
-const content = await callAnthropic(system, messages);</code></pre>
+const content = await callAnthropic(system, messages);</code
+      ></pre>
   </section>
 
   <section class="variant">
@@ -94,11 +110,13 @@ const content = await callAnthropic(system, messages);</code></pre>
 </div>
 
 <!-- Le composant est fixed — il flotte sur la page -->
-<Chatbot
-  {knowledge}
-  title="G2webdev — Assistant"
-  initialMessage="Bonjour ! Je peux vous renseigner sur G2webdev et les composants de la bibliothèque. Comment puis-je vous aider ?"
-/>
+<FloatingGroup position="right">
+  <Chatbot
+    {knowledge}
+    title="G2webdev — Assistant"
+    initialMessage="Bonjour ! Je peux vous renseigner sur G2webdev et les composants de la bibliothèque. Comment puis-je vous aider ?"
+  />
+</FloatingGroup>
 
 <style>
   code {
