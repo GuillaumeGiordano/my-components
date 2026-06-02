@@ -202,6 +202,16 @@ export const categories = [
                 description: 'Carrousel de diapositives — flèches, points, autoplay, swipe tactile, navigation clavier'
             },
             {
+                slug: 'section-scrollbar',
+                label: 'Section Scrollbar',
+                description: 'Barre de scroll verticale avec points de section cliquables et thumb draggable — synchronisée avec la page'
+            },
+            {
+                slug: 'nav-section-wheel',
+                label: 'Nav Section Wheel',
+                description: 'Roue de navigation verticale fixée sur le bord droit — 3 sections visibles, coupée en haut/bas, synchronisée avec le scroll'
+            },
+            {
                 slug: 'speed-dial',
                 label: 'Speed Dial',
                 description: 'Bouton FAB fixe qui déploie un menu vertical vers le haut — items icône avec label au hover'
@@ -222,7 +232,8 @@ export const categories = [
             { slug: 'footer', label: 'Footer', description: 'Pied de page avec colonnes de liens' },
             { slug: 'standard-layout', label: 'Standard Layout', description: 'Combinaison Navbar + Sidebar + Main + Footer' },
             { slug: 'navbar-mobile', label: 'Navbar Mobile', description: 'Barre de navigation pour les appareils mobiles' },
-            { slug: 'navbar-mobile-radial', label: 'Navbar Mobile Radial', description: 'Bouton flottant en bas à droite — menu radial en arc avec animation staggerée' }
+            { slug: 'navbar-mobile-radial', label: 'Navbar Mobile Radial', description: 'Bouton flottant en bas à droite — menu radial en arc avec animation staggerée' },
+            { slug: 'navbar-mobile-wheel', label: 'Navbar Mobile Wheel', description: 'Roue rotative flottante — 3 items visibles, snap automatique, synchronisée avec le scroll de la page' }
         ]
     },
     {

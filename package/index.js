@@ -38,6 +38,8 @@ export { default as Progress } from './components/ui/Progress.svelte';
 export { default as Rating } from './components/ui/Rating.svelte';
 export { default as Skeleton } from './components/ui/Skeleton.svelte';
 export { default as FloatingGroup } from './FloatingGroup.svelte';
+export { default as NavSectionWheel } from './components/ui/NavSectionWheel.svelte';
+export { default as SectionScrollbar } from './components/ui/SectionScrollbar.svelte';
 export { default as SpeedDial } from './components/ui/SpeedDial.svelte';
 export { default as Spinner } from './components/ui/Spinner.svelte';
 export { default as Stepper } from './components/ui/Stepper.svelte';
@@ -57,6 +59,7 @@ export { default as Footer } from './components/layout/Footer.svelte';
 export { default as Navbar } from './components/layout/Navbar.svelte';
 export { default as NavbarMobile } from './components/layout/NavbarMobile.svelte';
 export { default as NavbarMobileRadial } from './components/layout/NavbarMobileRadial.svelte';
+export { default as NavbarMobileWheel } from './components/layout/NavbarMobileWheel.svelte';
 export { default as Sidebar } from './components/layout/Sidebar.svelte';
 export { default as StandardLayout } from './components/layout/StandardLayout.svelte';
 // ─── Sections ────────────────────────────────────────────────────────────────
