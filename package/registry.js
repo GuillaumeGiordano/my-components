@@ -205,6 +205,11 @@ export const categories = [
                 slug: 'speed-dial',
                 label: 'Speed Dial',
                 description: 'Bouton FAB fixe qui déploie un menu vertical vers le haut — items icône avec label au hover'
+            },
+            {
+                slug: 'floating-group',
+                label: 'Floating Group',
+                description: 'Conteneur fixe bas gauche/droite pour regrouper plusieurs éléments flottants (SpeedDial, ScrollToTop…)'
             }
         ]
     },
