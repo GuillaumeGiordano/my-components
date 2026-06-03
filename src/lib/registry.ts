@@ -237,6 +237,11 @@ export const categories: ComponentCategory[] = [
 				slug: 'floating-group',
 				label: 'Floating Group',
 				description: 'Conteneur fixe bas gauche/droite pour regrouper plusieurs éléments flottants (SpeedDial, ScrollToTop…)'
+			},
+			{
+				slug: 'typewriter',
+				label: 'Type Writer',
+				description: 'Préfixe statique + mots animés lettre par lettre en boucle — effet machine à écrire'
 			}
 		]
 	},

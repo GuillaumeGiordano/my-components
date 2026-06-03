@@ -58,6 +58,7 @@ export { default as ScrollToTop }         from './components/ui/ScrollToTop.svel
 export { default as SidebarItem }         from './components/ui/SidebarItem.svelte';
 export type { SidebarSubItem }            from './components/ui/SidebarItem.svelte';
 export { default as Timeline }            from './components/ui/Timeline.svelte';
+export { default as TypeWriter }          from './components/ui/TypeWriter.svelte';
 export { default as Toaster }             from './components/ui/Toaster.svelte';
 export { default as Tooltip }             from './components/ui/Tooltip.svelte';
 
