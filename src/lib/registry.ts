@@ -242,6 +242,46 @@ export const categories: ComponentCategory[] = [
 				slug: 'typewriter',
 				label: 'Type Writer',
 				description: 'Préfixe statique + mots animés lettre par lettre en boucle — effet machine à écrire'
+			},
+			{
+				slug: 'glow-card',
+				label: 'Glow Card',
+				description: 'Carte avec une lueur colorée qui suit la position du curseur — pseudo-element + CSS custom properties'
+			},
+			{
+				slug: 'spotlight',
+				label: 'Spotlight',
+				description: 'Section sombre avec un halo lumineux qui suit la souris — effet torche'
+			},
+			{
+				slug: 'word-cloud',
+				label: 'Word Cloud',
+				description: 'Nuage de mots — taille proportionnelle au poids, rotation déterministe, hover interactif'
+			},
+			{
+				slug: 'konami-code',
+				label: 'Konami Code',
+				description: 'Déclenche un easter egg quand l\'utilisateur tape une séquence de touches configurable'
+			},
+			{
+				slug: 'drag-sort',
+				label: 'Drag Sort',
+				description: 'Liste réordonnée par glisser-déposer — HTML5 natif, composant générique <T>, sans dépendance'
+			},
+			{
+				slug: 'swipe-card',
+				label: 'Swipe Card',
+				description: 'Cartes empilées swipables gauche/droite — Pointer Events, rotation physique, générique <T>'
+			},
+			{
+				slug: 'infinite-scroll',
+				label: 'Infinite Scroll',
+				description: 'Sentinel IntersectionObserver qui déclenche le chargement des données suivantes automatiquement'
+			},
+			{
+				slug: 'particle-background',
+				label: 'Particle Background',
+				description: 'Réseau de particules animées sur canvas — rebond sur les bords, connexions selon la distance'
 			}
 		]
 	},
