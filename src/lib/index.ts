@@ -75,6 +75,26 @@ export { default as MatrixBackground }    from './components/ui/MatrixBackground
 export { default as NoiseBackground }     from './components/ui/NoiseBackground.svelte';
 export { default as StarfieldBackground } from './components/ui/StarfieldBackground.svelte';
 export { default as OceanBackground }     from './components/ui/OceanBackground.svelte';
+// ─── Fun / interactive ────────────────────────────────────────────────────────
+export { default as FireBackground }      from './components/ui/FireBackground.svelte';
+export { default as RainBackground }      from './components/ui/RainBackground.svelte';
+export { default as SnowBackground }      from './components/ui/SnowBackground.svelte';
+export { default as ThunderBackground }   from './components/ui/ThunderBackground.svelte';
+export { default as SandBackground }      from './components/ui/SandBackground.svelte';
+export { default as NeonGridBackground }  from './components/ui/NeonGridBackground.svelte';
+export { default as GlitchText }          from './components/ui/GlitchText.svelte';
+export { default as NeonText }            from './components/ui/NeonText.svelte';
+export { default as ScrambleText }        from './components/ui/ScrambleText.svelte';
+export { default as MorphText }           from './components/ui/MorphText.svelte';
+export { default as CursorTrail }         from './components/ui/CursorTrail.svelte';
+export { default as MagneticButton }      from './components/ui/MagneticButton.svelte';
+export { default as Tilt3D }              from './components/ui/Tilt3D.svelte';
+export { default as ScratchCard }         from './components/ui/ScratchCard.svelte';
+export { default as CountUp }             from './components/ui/CountUp.svelte';
+export { default as ConfettiButton }      from './components/ui/ConfettiButton.svelte';
+export { default as CommandPalette }      from './components/ui/CommandPalette.svelte';
+export type { CommandItem }               from './components/ui/CommandPalette.svelte';
+export { default as Marquee }             from './components/ui/Marquee.svelte';
 export { default as Toaster }             from './components/ui/Toaster.svelte';
 export { default as Tooltip }             from './components/ui/Tooltip.svelte';
 

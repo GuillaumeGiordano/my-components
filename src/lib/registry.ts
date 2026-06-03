@@ -322,6 +322,96 @@ export const categories: ComponentCategory[] = [
 				slug: 'ocean-background',
 				label: 'Ocean Background',
 				description: 'Fond marin animé — rayons lumineux, caustiques par interférence sinusoïdale, bulles flottantes. 3 profondeurs.'
+			},
+			{
+				slug: 'fire-background',
+				label: 'Fire Background',
+				description: 'Flammes canvas — particules HSL jaune→orange→rouge avec turbulence sinusoïdale'
+			},
+			{
+				slug: 'rain-background',
+				label: 'Rain Background',
+				description: 'Pluie canvas — gouttes diagonales (vent configurable), ripples elliptiques à l\'impact'
+			},
+			{
+				slug: 'snow-background',
+				label: 'Snow Background',
+				description: 'Flocons canvas — oscillation sinusoïdale par phase individuelle, vent configurable'
+			},
+			{
+				slug: 'thunder-background',
+				label: 'Thunder Background',
+				description: 'Orage canvas — éclairs par déplacement récursif, flash de scène, timing aléatoire'
+			},
+			{
+				slug: 'sand-background',
+				label: 'Sand Background',
+				description: 'Tempête de sable canvas — grains elliptiques avec parallaxe de profondeur, turbulence sinusoïdale'
+			},
+			{
+				slug: 'neon-grid-background',
+				label: 'Neon Grid Background',
+				description: 'Grille synthwave perspective animée — lignes convergentes, soleil rétro, glow canvas'
+			},
+			{
+				slug: 'glitch-text',
+				label: 'Glitch Text',
+				description: 'Effet glitch RGB — deux clones décalés avec clip-path aléatoire, fréquence et intensité configurables'
+			},
+			{
+				slug: 'neon-text',
+				label: 'Neon Text',
+				description: 'Lueur néon CSS — couches de text-shadow, mode pulse lent ou flicker aléatoire'
+			},
+			{
+				slug: 'scramble-text',
+				label: 'Scramble Text',
+				description: 'Lettres aléatoires avant révélation de gauche à droite — clic pour rejouer'
+			},
+			{
+				slug: 'morph-text',
+				label: 'Morph Text',
+				description: 'Transition blur entre les mots — filter:blur CSS pur, zéro canvas'
+			},
+			{
+				slug: 'cursor-trail',
+				label: 'Cursor Trail',
+				description: 'Traînée de particules qui suit le curseur — canvas fixed pointer-events:none, couleur configurable'
+			},
+			{
+				slug: 'magnetic-button',
+				label: 'Magnetic Button',
+				description: 'Bouton qui s\'attire vers le curseur dans un rayon — force proportionnelle à la proximité'
+			},
+			{
+				slug: 'tilt-3d',
+				label: 'Tilt 3D',
+				description: 'Carte pivotante en 3D selon la position du curseur — rotateX/Y + reflet glare optionnel'
+			},
+			{
+				slug: 'scratch-card',
+				label: 'Scratch Card',
+				description: 'Effet gratte-carte canvas — destination-out pour effacer, révélation automatique selon un seuil'
+			},
+			{
+				slug: 'count-up',
+				label: 'Count Up',
+				description: 'Chiffre animé de 0 à sa valeur quand il entre dans le viewport — IntersectionObserver + easing cubique'
+			},
+			{
+				slug: 'confetti-button',
+				label: 'Confetti Button',
+				description: 'Clic → pluie de confettis canvas — formes mixtes, gravité, drag, couleurs configurables'
+			},
+			{
+				slug: 'command-palette',
+				label: 'Command Palette',
+				description: 'Palette de commandes ⌘K — recherche fuzzy, navigation clavier, groupes, raccourcis'
+			},
+			{
+				slug: 'marquee',
+				label: 'Marquee',
+				description: 'Scroll horizontal infini — CSS pur, duplication seamless, pause au survol, direction configurable'
 			}
 		]
 	},
