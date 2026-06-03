@@ -67,6 +67,14 @@ export { default as ParticleBackground }  from './components/ui/ParticleBackgrou
 export { default as Spotlight }           from './components/ui/Spotlight.svelte';
 export { default as SwipeCard }           from './components/ui/SwipeCard.svelte';
 export { default as WordCloud }           from './components/ui/WordCloud.svelte';
+export { default as AuroraBackground }    from './components/ui/AuroraBackground.svelte';
+export { default as BubbleBackground }    from './components/ui/BubbleBackground.svelte';
+export { default as GeometricBackground } from './components/ui/GeometricBackground.svelte';
+export { default as GradientBackground }  from './components/ui/GradientBackground.svelte';
+export { default as MatrixBackground }    from './components/ui/MatrixBackground.svelte';
+export { default as NoiseBackground }     from './components/ui/NoiseBackground.svelte';
+export { default as StarfieldBackground } from './components/ui/StarfieldBackground.svelte';
+export { default as OceanBackground }     from './components/ui/OceanBackground.svelte';
 export { default as Toaster }             from './components/ui/Toaster.svelte';
 export { default as Tooltip }             from './components/ui/Tooltip.svelte';
 

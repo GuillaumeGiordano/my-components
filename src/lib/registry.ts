@@ -282,6 +282,46 @@ export const categories: ComponentCategory[] = [
 				slug: 'particle-background',
 				label: 'Particle Background',
 				description: 'Réseau de particules animées sur canvas — rebond sur les bords, connexions selon la distance'
+			},
+			{
+				slug: 'starfield-background',
+				label: 'Starfield Background',
+				description: 'Voyage dans les étoiles — projection 3D→2D avec traînées de motion blur sur canvas'
+			},
+			{
+				slug: 'matrix-background',
+				label: 'Matrix Background',
+				description: 'Pluie de caractères katakana style Matrix — fond semi-transparent pour les traînées, canvas'
+			},
+			{
+				slug: 'bubble-background',
+				label: 'Bubble Background',
+				description: 'Bulles transparentes qui montent avec reflet spéculaire — dérive aléatoire, canvas'
+			},
+			{
+				slug: 'noise-background',
+				label: 'Noise Background',
+				description: 'Blobs flous en mouvement lent — effet liquid noise / lava lamp coloré, canvas + blur'
+			},
+			{
+				slug: 'gradient-background',
+				label: 'Gradient Background',
+				description: 'Dégradé animé CSS pur — background-size 400%, couleurs et vitesse configurables, zéro JS runtime'
+			},
+			{
+				slug: 'aurora-background',
+				label: 'Aurora Background',
+				description: 'Aurore boréale CSS — 4 couches floues animées indépendamment, fond sombre recommandé'
+			},
+			{
+				slug: 'geometric-background',
+				label: 'Geometric Background',
+				description: 'Formes géométriques flottantes CSS — positions déterministes (stable SSR), animations indépendantes'
+			},
+			{
+				slug: 'ocean-background',
+				label: 'Ocean Background',
+				description: 'Fond marin animé — rayons lumineux, caustiques par interférence sinusoïdale, bulles flottantes. 3 profondeurs.'
 			}
 		]
 	},
