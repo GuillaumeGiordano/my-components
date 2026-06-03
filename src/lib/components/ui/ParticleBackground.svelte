@@ -1,11 +1,13 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { onMount, onDestroy } from 'svelte';
+	import { browser } from '$app/environment';
 
 	let {
 		children,
 		particleCount      = 60,
 		color              = 'var(--primary)',
+		background         = 'var(--bg-subtle)',
 		speed              = 0.6,
 		connectionDistance = 120,
 	}: {
@@ -13,6 +15,8 @@
 		particleCount?:      number;
 		/** Couleur des particules — accepte hex, rgb ou var(--css-var) */
 		color?:              string;
+		/** Fond du conteneur — doit être opaque pour que les particules soient visibles */
+		background?:         string;
 		speed?:              number;
 		connectionDistance?: number;
 	} = $props();
@@ -91,12 +95,13 @@
 	});
 
 	onDestroy(() => {
+		if (!browser) return;
 		cancelAnimationFrame(animFrame);
 		ro?.disconnect();
 	});
 </script>
 
-<div class="pb" bind:this={wrapEl}>
+<div class="pb" bind:this={wrapEl} style="background:{background}">
 	<canvas bind:this={canvas} class="pb-canvas" aria-hidden="true"></canvas>
 	{#if children}
 		<div class="pb-content">{@render children()}</div>

@@ -18,14 +18,19 @@
 		endLabel?:    string;
 	} = $props();
 
-	let sentinel: HTMLDivElement;
-	let observer: IntersectionObserver;
+	let sentinel:       HTMLDivElement;
+	let observer:       IntersectionObserver;
+	let isIntersecting = $state(false);
+
+	// Re-déclenche le chargement quand loading passe à false et que le sentinel
+	// est toujours visible (l'observer ne re-fire pas si l'état d'intersection n'a pas changé)
+	$effect(() => {
+		if (isIntersecting && !loading && hasMore) onLoadMore();
+	});
 
 	onMount(() => {
 		observer = new IntersectionObserver(
-			(entries) => {
-				if (entries[0].isIntersecting && !loading && hasMore) onLoadMore();
-			},
+			(entries) => { isIntersecting = entries[0].isIntersecting; },
 			{ rootMargin }
 		);
 		observer.observe(sentinel);

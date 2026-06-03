@@ -31,15 +31,13 @@
   </section>
 
   <section class="variant">
-    <h2>Couleur personnalisée — fond sombre</h2>
-    <div class="dark-wrap">
-      <ParticleBackground color="#818cf8" particleCount={70} connectionDistance={130}>
-        <div class="hero hero--dark">
-          <h2 class="hero-title hero-title--white">Couleur violette</h2>
-          <p class="hero-sub hero-sub--white">Passe une couleur hex directement — les variables CSS sont aussi supportées.</p>
-        </div>
-      </ParticleBackground>
-    </div>
+    <h2>Fond sombre + couleur personnalisée</h2>
+    <ParticleBackground color="#818cf8" background="#0f172a" particleCount={70} connectionDistance={130}>
+      <div class="hero">
+        <h2 class="hero-title hero-title--white">Couleur violette</h2>
+        <p class="hero-sub hero-sub--white">Passe une couleur hex + <code style="color:rgba(255,255,255,0.6)">background="#0f172a"</code> pour un fond sombre.</p>
+      </div>
+    </ParticleBackground>
   </section>
 
   <section class="variant">
@@ -47,11 +45,12 @@
     <div class="props-table">
       <div class="props-row header"><span>Prop</span><span>Type</span><span>Défaut</span><span>Description</span></div>
       {#each [
-        ['children',           'Snippet', '—',              'Contenu superposé aux particules'],
-        ['particleCount',      'number',  '60',             'Nombre de particules'],
-        ['color',              'string',  '"var(--primary)"','Couleur des particules — hex, rgb ou var()'],
-        ['speed',              'number',  '0.6',            'Vitesse de déplacement'],
-        ['connectionDistance', 'number',  '120',            'Distance max (px) pour tracer une connexion'],
+        ['children',           'Snippet', '—',                 'Contenu superposé aux particules'],
+        ['particleCount',      'number',  '60',              'Nombre de particules'],
+        ['color',              'string',  '"var(--primary)"', 'Couleur des particules — hex, rgb ou var()'],
+        ['background',         'string',  '"var(--bg-subtle)"','Fond du conteneur — doit être opaque'],
+        ['speed',              'number',  '0.6',             'Vitesse de déplacement'],
+        ['connectionDistance', 'number',  '120',             'Distance max (px) pour tracer une connexion'],
       ] as [p, t, d, desc]}
         <div class="props-row"><code>{p}</code><code class="type">{t}</code><code class="def">{d}</code><span>{desc}</span></div>
       {/each}
@@ -70,6 +69,7 @@
 </div>
 
 <style>
+  /* Pas de background ici — c'est ParticleBackground qui gère le fond */
   .hero {
     display: flex;
     flex-direction: column;
@@ -77,12 +77,10 @@
     text-align: center;
     padding: 56px 32px;
     gap: 12px;
-    background: var(--bg-subtle);
     min-height: 200px;
   }
 
   .hero--sm { padding: 36px 32px; }
-  .hero--dark { background: #0f172a; }
 
   .hero-title {
     margin: 0;
@@ -103,12 +101,6 @@
   }
 
   .hero-sub--white { color: rgba(255,255,255,0.55); }
-
-  .dark-wrap {
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    border: 1px solid var(--border);
-  }
 
   .props-table { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
   .props-row { display: grid; grid-template-columns: 170px 80px 170px 1fr; gap: 12px; padding: 10px 16px; align-items: center; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text-muted); }
