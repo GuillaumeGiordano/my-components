@@ -29,6 +29,13 @@
     goto(`?${params.toString()}`);
   }
 
+  function setPerPage(val: number) {
+    const params = new URLSearchParams($page.url.searchParams);
+    params.set('perPage', String(val));
+    params.set('page', '1');
+    goto(`?${params.toString()}`);
+  }
+
   // ── Mode callback (démo simple sans URL) ────────────────────────────
   type Row = { id: number; nom: string; statut: string; role: string };
   const ALL_DATA: Row[] = [
@@ -119,15 +126,16 @@
     </div>
 
     <!-- Pagination connectée à l'URL -->
-    {#if data.totalPages > 1}
-      <div class="pagination-wrap">
-        <Pagination
-          page={data.page}
-          total={data.totalPages}
-          onchange={setPage}
-        />
-      </div>
-    {/if}
+    <div class="pagination-wrap">
+      <Pagination
+        page={data.page}
+        total={data.totalPages}
+        perPage={data.perPage}
+        perPageOptions={[4, 8, 12]}
+        onchange={setPage}
+        onPerPageChange={setPerPage}
+      />
+    </div>
   </section>
 
   <!-- ─── Mode callback ────────────────────────────────────────────────── -->
@@ -182,6 +190,7 @@ export const load: PageLoad = ({ url }) => {
     items:      filtered.slice((page-1)*perPage, page*perPage),
     totalPages: Math.ceil(filtered.length / perPage),
     page,
+    perPage,
   };
 };
 
@@ -196,6 +205,13 @@ export const load: PageLoad = ({ url }) => {
     params.set('page', String(p));
     goto('?' + params.toString());
   }
+
+  function setPerPage(val) {
+    const params = new URLSearchParams($page.url.searchParams);
+    params.set('perPage', String(val));
+    params.set('page', '1');
+    goto('?' + params.toString());
+  }
 <\/script>
 
 <SearchFilters urlDriven collapsible columns={3}>
@@ -208,7 +224,10 @@ export const load: PageLoad = ({ url }) => {
 <Pagination
   page={data.page}
   total={data.totalPages}
+  perPage={data.perPage}
+  perPageOptions={[10, 25, 50]}
   onchange={setPage}
+  onPerPageChange={setPerPage}
 />`}</code></pre>
     </div>
   </section>
@@ -248,7 +267,8 @@ export const load: PageLoad = ({ url }) => {
       <li>Reset → efface les filtres, conserve <code>perPage</code>, revient page=1.</li>
       <li>Chargement de page / retour navigateur → champs pré-remplis depuis l'URL automatiquement.</li>
       <li>La <code>load</code> SvelteKit reçoit les searchParams → filtrage côté serveur ou client possible.</li>
-      <li>Pagination : appeler <code>goto('?...')</code> avec les filtres existants + nouveau <code>page=N</code>.</li>
+      <li>Pagination : <code>onchange</code> appelle <code>goto</code> avec les filtres existants + nouveau <code>page=N</code>.</li>
+      <li>Sélecteur par page : <code>onPerPageChange</code> met à jour <code>perPage</code> dans l'URL et remet <code>page=1</code>.</li>
       <li>Les params <code>page</code> et <code>perPage</code> sont exclus du badge "filtres actifs".</li>
     </ul>
   </section>
