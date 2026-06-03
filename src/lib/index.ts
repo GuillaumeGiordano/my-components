@@ -95,6 +95,17 @@ export { default as ConfettiButton }      from './components/ui/ConfettiButton.s
 export { default as CommandPalette }      from './components/ui/CommandPalette.svelte';
 export type { CommandItem }               from './components/ui/CommandPalette.svelte';
 export { default as Marquee }             from './components/ui/Marquee.svelte';
+// ─── Scroll interactions ──────────────────────────────────────────────────────
+export { default as StickyStory }         from './components/ui/StickyStory.svelte';
+export type { StorySlide }                from './components/ui/StickyStory.svelte';
+export { default as TextReveal }          from './components/ui/TextReveal.svelte';
+export { default as HorizontalScroll }    from './components/ui/HorizontalScroll.svelte';
+export { default as ParallaxSection }     from './components/ui/ParallaxSection.svelte';
+export { default as ZoomReveal }          from './components/ui/ZoomReveal.svelte';
+export { default as ScrollReveal }        from './components/ui/ScrollReveal.svelte';
+export { default as ScrollCounter }       from './components/ui/ScrollCounter.svelte';
+export { default as ScrollProgress }      from './components/ui/ScrollProgress.svelte';
+export type { ProgressSection }           from './components/ui/ScrollProgress.svelte';
 export { default as Toaster }             from './components/ui/Toaster.svelte';
 export { default as Tooltip }             from './components/ui/Tooltip.svelte';
 

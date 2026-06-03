@@ -412,6 +412,46 @@ export const categories: ComponentCategory[] = [
 				slug: 'marquee',
 				label: 'Marquee',
 				description: 'Scroll horizontal infini — CSS pur, duplication seamless, pause au survol, direction configurable'
+			},
+			{
+				slug: 'sticky-story',
+				label: 'Sticky Story',
+				description: 'Section qui se colle au viewport — scroll budget par slide, transitions entre slides. Style Apple / Stripe'
+			},
+			{
+				slug: 'text-reveal',
+				label: 'Text Reveal',
+				description: 'Chaque mot s\'allume en passant une ligne de lecture virtuelle synchronisée avec le scroll'
+			},
+			{
+				slug: 'horizontal-scroll',
+				label: 'Horizontal Scroll',
+				description: 'Scroll vertical → défilement horizontal piloté — technique portfolio / timeline'
+			},
+			{
+				slug: 'parallax-section',
+				label: 'Parallax Section',
+				description: 'Couche fond à vitesse réduite + contenu à vitesse normale — illusion de profondeur 3D'
+			},
+			{
+				slug: 'zoom-reveal',
+				label: 'Zoom Reveal',
+				description: 'Élément scale(0.72→1) + fade en entrant dans le viewport — easing cubique'
+			},
+			{
+				slug: 'scroll-reveal',
+				label: 'Scroll Reveal',
+				description: 'IntersectionObserver + stagger CSS via --i sur chaque enfant. 5 animations : fade-up, fade, zoom, slide-right, flip'
+			},
+			{
+				slug: 'scroll-counter',
+				label: 'Scroll Counter',
+				description: 'Nombre directement lié à la position de scroll — monte et descend avec le scroll'
+			},
+			{
+				slug: 'scroll-progress',
+				label: 'Scroll Progress',
+				description: 'Sidebar fixe : ligne de progression + dots de section cliquables avec smooth scroll'
 			}
 		]
 	},

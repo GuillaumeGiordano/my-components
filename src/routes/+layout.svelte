@@ -165,7 +165,7 @@
     flex: 1;
     padding: 32px;
     max-width: 960px;
-    overflow-x: hidden;
+    overflow-x: clip;
     margin: auto;
   }
 </style>
