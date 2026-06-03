@@ -179,6 +179,11 @@ export const categories: ComponentCategory[] = [
 				description: 'Affichage de raccourcis clavier stylisés'
 			},
 			{
+				slug: 'search-filters',
+				label: 'Search Filters',
+				description: 'Barre de filtres collapsible au-dessus d\'un tableau ou d\'une grille — champs libres via slot, grille configurable, badge filtres actifs'
+			},
+			{
 				slug: 'rating',
 				label: 'Rating',
 				description: 'Évaluation par étoiles — interactif ou lecture seule, 1 à N étoiles'
