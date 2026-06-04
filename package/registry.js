@@ -167,6 +167,11 @@ export const categories = [
                 description: 'Affichage de raccourcis clavier stylisés'
             },
             {
+                slug: 'search-filters',
+                label: 'Search Filters',
+                description: 'Barre de filtres collapsible au-dessus d\'un tableau ou d\'une grille — champs libres via slot, grille configurable, badge filtres actifs'
+            },
+            {
                 slug: 'rating',
                 label: 'Rating',
                 description: 'Évaluation par étoiles — interactif ou lecture seule, 1 à N étoiles'
@@ -220,6 +225,221 @@ export const categories = [
                 slug: 'floating-group',
                 label: 'Floating Group',
                 description: 'Conteneur fixe bas gauche/droite pour regrouper plusieurs éléments flottants (SpeedDial, ScrollToTop…)'
+            },
+            {
+                slug: 'typewriter',
+                label: 'Type Writer',
+                description: 'Préfixe statique + mots animés lettre par lettre en boucle — effet machine à écrire'
+            },
+            {
+                slug: 'glow-card',
+                label: 'Glow Card',
+                description: 'Carte avec une lueur colorée qui suit la position du curseur — pseudo-element + CSS custom properties'
+            },
+            {
+                slug: 'spotlight',
+                label: 'Spotlight',
+                description: 'Section sombre avec un halo lumineux qui suit la souris — effet torche'
+            },
+            {
+                slug: 'word-cloud',
+                label: 'Word Cloud',
+                description: 'Nuage de mots — taille proportionnelle au poids, rotation déterministe, hover interactif'
+            },
+            {
+                slug: 'konami-code',
+                label: 'Konami Code',
+                description: 'Déclenche un easter egg quand l\'utilisateur tape une séquence de touches configurable'
+            },
+            {
+                slug: 'drag-sort',
+                label: 'Drag Sort',
+                description: 'Liste réordonnée par glisser-déposer — HTML5 natif, composant générique <T>, sans dépendance'
+            },
+            {
+                slug: 'swipe-card',
+                label: 'Swipe Card',
+                description: 'Cartes empilées swipables gauche/droite — Pointer Events, rotation physique, générique <T>'
+            },
+            {
+                slug: 'infinite-scroll',
+                label: 'Infinite Scroll',
+                description: 'Sentinel IntersectionObserver qui déclenche le chargement des données suivantes automatiquement'
+            },
+            {
+                slug: 'particle-background',
+                label: 'Particle Background',
+                description: 'Réseau de particules animées sur canvas — rebond sur les bords, connexions selon la distance'
+            },
+            {
+                slug: 'starfield-background',
+                label: 'Starfield Background',
+                description: 'Voyage dans les étoiles — projection 3D→2D avec traînées de motion blur sur canvas'
+            },
+            {
+                slug: 'matrix-background',
+                label: 'Matrix Background',
+                description: 'Pluie de caractères katakana style Matrix — fond semi-transparent pour les traînées, canvas'
+            },
+            {
+                slug: 'bubble-background',
+                label: 'Bubble Background',
+                description: 'Bulles transparentes qui montent avec reflet spéculaire — dérive aléatoire, canvas'
+            },
+            {
+                slug: 'noise-background',
+                label: 'Noise Background',
+                description: 'Blobs flous en mouvement lent — effet liquid noise / lava lamp coloré, canvas + blur'
+            },
+            {
+                slug: 'gradient-background',
+                label: 'Gradient Background',
+                description: 'Dégradé animé CSS pur — background-size 400%, couleurs et vitesse configurables, zéro JS runtime'
+            },
+            {
+                slug: 'aurora-background',
+                label: 'Aurora Background',
+                description: 'Aurore boréale CSS — 4 couches floues animées indépendamment, fond sombre recommandé'
+            },
+            {
+                slug: 'geometric-background',
+                label: 'Geometric Background',
+                description: 'Formes géométriques flottantes CSS — positions déterministes (stable SSR), animations indépendantes'
+            },
+            {
+                slug: 'ocean-background',
+                label: 'Ocean Background',
+                description: 'Fond marin animé — rayons lumineux, caustiques par interférence sinusoïdale, bulles flottantes. 3 profondeurs.'
+            },
+            {
+                slug: 'fire-background',
+                label: 'Fire Background',
+                description: 'Flammes canvas — particules HSL jaune→orange→rouge avec turbulence sinusoïdale'
+            },
+            {
+                slug: 'rain-background',
+                label: 'Rain Background',
+                description: 'Pluie canvas — gouttes diagonales (vent configurable), ripples elliptiques à l\'impact'
+            },
+            {
+                slug: 'snow-background',
+                label: 'Snow Background',
+                description: 'Flocons canvas — oscillation sinusoïdale par phase individuelle, vent configurable'
+            },
+            {
+                slug: 'thunder-background',
+                label: 'Thunder Background',
+                description: 'Orage canvas — éclairs par déplacement récursif, flash de scène, timing aléatoire'
+            },
+            {
+                slug: 'sand-background',
+                label: 'Sand Background',
+                description: 'Tempête de sable canvas — grains elliptiques avec parallaxe de profondeur, turbulence sinusoïdale'
+            },
+            {
+                slug: 'neon-grid-background',
+                label: 'Neon Grid Background',
+                description: 'Grille synthwave perspective animée — lignes convergentes, soleil rétro, glow canvas'
+            },
+            {
+                slug: 'glitch-text',
+                label: 'Glitch Text',
+                description: 'Effet glitch RGB — deux clones décalés avec clip-path aléatoire, fréquence et intensité configurables'
+            },
+            {
+                slug: 'neon-text',
+                label: 'Neon Text',
+                description: 'Lueur néon CSS — couches de text-shadow, mode pulse lent ou flicker aléatoire'
+            },
+            {
+                slug: 'scramble-text',
+                label: 'Scramble Text',
+                description: 'Lettres aléatoires avant révélation de gauche à droite — clic pour rejouer'
+            },
+            {
+                slug: 'morph-text',
+                label: 'Morph Text',
+                description: 'Transition blur entre les mots — filter:blur CSS pur, zéro canvas'
+            },
+            {
+                slug: 'cursor-trail',
+                label: 'Cursor Trail',
+                description: 'Traînée de particules qui suit le curseur — canvas fixed pointer-events:none, couleur configurable'
+            },
+            {
+                slug: 'magnetic-button',
+                label: 'Magnetic Button',
+                description: 'Bouton qui s\'attire vers le curseur dans un rayon — force proportionnelle à la proximité'
+            },
+            {
+                slug: 'tilt-3d',
+                label: 'Tilt 3D',
+                description: 'Carte pivotante en 3D selon la position du curseur — rotateX/Y + reflet glare optionnel'
+            },
+            {
+                slug: 'scratch-card',
+                label: 'Scratch Card',
+                description: 'Effet gratte-carte canvas — destination-out pour effacer, révélation automatique selon un seuil'
+            },
+            {
+                slug: 'count-up',
+                label: 'Count Up',
+                description: 'Chiffre animé de 0 à sa valeur quand il entre dans le viewport — IntersectionObserver + easing cubique'
+            },
+            {
+                slug: 'confetti-button',
+                label: 'Confetti Button',
+                description: 'Clic → pluie de confettis canvas — formes mixtes, gravité, drag, couleurs configurables'
+            },
+            {
+                slug: 'command-palette',
+                label: 'Command Palette',
+                description: 'Palette de commandes ⌘K — recherche fuzzy, navigation clavier, groupes, raccourcis'
+            },
+            {
+                slug: 'marquee',
+                label: 'Marquee',
+                description: 'Scroll horizontal infini — CSS pur, duplication seamless, pause au survol, direction configurable'
+            },
+            {
+                slug: 'sticky-story',
+                label: 'Sticky Story',
+                description: 'Section qui se colle au viewport — scroll budget par slide, transitions entre slides. Style Apple / Stripe'
+            },
+            {
+                slug: 'text-reveal',
+                label: 'Text Reveal',
+                description: 'Chaque mot s\'allume en passant une ligne de lecture virtuelle synchronisée avec le scroll'
+            },
+            {
+                slug: 'horizontal-scroll',
+                label: 'Horizontal Scroll',
+                description: 'Scroll vertical → défilement horizontal piloté — technique portfolio / timeline'
+            },
+            {
+                slug: 'parallax-section',
+                label: 'Parallax Section',
+                description: 'Couche fond à vitesse réduite + contenu à vitesse normale — illusion de profondeur 3D'
+            },
+            {
+                slug: 'zoom-reveal',
+                label: 'Zoom Reveal',
+                description: 'Élément scale(0.72→1) + fade en entrant dans le viewport — easing cubique'
+            },
+            {
+                slug: 'scroll-reveal',
+                label: 'Scroll Reveal',
+                description: 'IntersectionObserver + stagger CSS via --i sur chaque enfant. 5 animations : fade-up, fade, zoom, slide-right, flip'
+            },
+            {
+                slug: 'scroll-counter',
+                label: 'Scroll Counter',
+                description: 'Nombre directement lié à la position de scroll — monte et descend avec le scroll'
+            },
+            {
+                slug: 'scroll-progress',
+                label: 'Scroll Progress',
+                description: 'Sidebar fixe : ligne de progression + dots de section cliquables avec smooth scroll'
             }
         ]
     },

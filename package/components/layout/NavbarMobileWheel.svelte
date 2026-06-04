@@ -132,7 +132,7 @@
   }
 
   // ── Drag ────────────────────────────────────────────────────────────────
-  let dragActive = false;
+  let dragActive = $state(false);
   let dragY0 = 0;
   let scroll0 = 0;
   let lastDY = 0;
@@ -227,6 +227,55 @@
     transition:fade={{ duration: 200 }}
     onclick={() => { open = false; }}
   ></div>
+
+  <!--
+    Arc SVG quart-de-cercle rainuré.
+    viewBox 105×105, centre du cercle en (105,105) = coin bas-droit du SVG = centre du FAB.
+    Arc à rayon 90px → inner edge 79px (>28px rayon FAB ✓), outer edge 101px (<170px items ✓).
+    stroke-dashoffset animé → les stries semblent défiler quand scrollPos change.
+  -->
+  <svg
+    class="qknob"
+    class:qknob--dragging={dragActive}
+    viewBox="0 0 105 105"
+    width="105"
+    height="105"
+    transition:fade={{ duration: 180 }}
+    onpointerdown={onDragStart}
+    onpointermove={onDragMove}
+    onpointerup={onDragEnd}
+    onpointercancel={onDragEnd}
+    role="slider"
+    tabindex="0"
+    aria-label="Tourner pour naviguer"
+    aria-valuenow={activeIndex}
+    aria-valuemin={0}
+    aria-valuemax={count - 1}
+    onkeydown={(e) => {
+      if (e.key === 'ArrowUp')   snapToIndex((activeIndex - 1 + count) % count);
+      if (e.key === 'ArrowDown') snapToIndex((activeIndex + 1) % count);
+    }}
+  >
+    <!-- Fond de la bague (rempli, uni) -->
+    <path class="qk-base" d="M 105 15 A 90 90 0 0 0 15 105"
+      fill="none" stroke-width="22" stroke-linecap="butt" />
+
+    <!-- Rainures animées (stries en dasharray qui défilent) -->
+    <path class="qk-ridges" d="M 105 15 A 90 90 0 0 0 15 105"
+      fill="none" stroke-width="20" stroke-linecap="butt"
+      stroke-dasharray="7 5"
+      style="stroke-dashoffset: {-scrollPos * 12}px" />
+
+    <!-- Bordures intérieure et extérieure de la bague -->
+    <path class="qk-edge" d="M 105 26 A 79 79 0 0 0 26 105"
+      fill="none" stroke-width="1" stroke-linecap="butt" />
+    <path class="qk-edge" d="M 105 4 A 101 101 0 0 0 4 105"
+      fill="none" stroke-width="1" stroke-linecap="butt" />
+
+    <!-- Zone de clic élargie (invisible) -->
+    <path d="M 105 15 A 90 90 0 0 0 15 105"
+      fill="none" stroke="transparent" stroke-width="44" />
+  </svg>
 
   <div
     class="wheel-clip"
@@ -500,4 +549,57 @@
 
   .open .fab-menu { opacity: 0; transform: rotate(90deg) scale(0.4); }
   .open .fab-close { opacity: 1; transform: rotate(0) scale(1); }
+
+  /* ── Arc SVG quart-de-cercle rainuré ──
+     right/bottom: 52px → coin bas-droit du SVG aligné sur le centre du FAB.
+     Arc à rayon 90px, entre FAB (r=28) et items (r=170).
+  ── */
+  .qknob {
+    position: fixed;
+    right: 52px;
+    bottom: 52px;
+    z-index: 999;
+    cursor: ns-resize;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: visible;
+
+    &:focus-visible { outline: none; }
+  }
+
+  /* Fond de bague — couleur neutre */
+  .qk-base {
+    stroke: color-mix(in srgb, var(--bg-hover) 85%, var(--border));
+    transition: stroke var(--transition-fast);
+  }
+
+  /* Rainures — couleur légèrement plus sombre que le fond */
+  .qk-ridges {
+    stroke: color-mix(in srgb, var(--border) 80%, transparent);
+    transition: stroke var(--transition-fast);
+  }
+
+  /* Bordures de la bague */
+  .qk-edge {
+    stroke: var(--border);
+    opacity: 0.6;
+  }
+
+  /* Hover — toute la bague prend une teinte primaire */
+  .qknob:hover .qk-base,
+  .qknob--dragging .qk-base {
+    stroke: color-mix(in srgb, var(--primary) 15%, var(--bg-hover));
+  }
+
+  .qknob:hover .qk-ridges,
+  .qknob--dragging .qk-ridges {
+    stroke: color-mix(in srgb, var(--primary) 55%, var(--border));
+  }
+
+  .qknob:hover .qk-edge,
+  .qknob--dragging .qk-edge {
+    stroke: color-mix(in srgb, var(--primary) 40%, var(--border));
+    opacity: 1;
+  }
 </style>
