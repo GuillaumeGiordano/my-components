@@ -1,4 +1,4 @@
-import type { Component } from 'svelte';
+import type { Component } from "svelte";
 export type WheelNavItem = {
     icon: Component;
     label: string;

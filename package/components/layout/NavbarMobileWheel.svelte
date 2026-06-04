@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
-  import { Menu, X } from '@lucide/svelte';
-  import { browser } from '$app/environment';
-  import { fade } from 'svelte/transition';
-  import { goto } from '$app/navigation';
+  import type { Component } from "svelte";
+  import { Menu, X } from "@lucide/svelte";
+  import { browser } from "$app/environment";
+  import { fade } from "svelte/transition";
+  import { goto } from "$app/navigation";
 
   export type WheelNavItem = {
     icon: Component;
@@ -15,8 +15,8 @@
 
   let {
     items = [],
-    activeHref = '',
-    radius = 170,
+    activeHref = "",
+    radius = 190,
   }: {
     items?: WheelNavItem[];
     activeHref?: string;
@@ -50,7 +50,7 @@
   // Item index at visual slot k
   function slotItem(k: number): number {
     const n = Math.round(scrollPos);
-    return ((n + k) % count + count) % count;
+    return (((n + k) % count) + count) % count;
   }
 
   // Visual angle for slot k (moves smoothly with scrollPos)
@@ -69,7 +69,7 @@
   }
 
   // Which item is currently active (at k=0)
-  const activeIndex = $derived(((Math.round(scrollPos)) % count + count) % count);
+  const activeIndex = $derived(((Math.round(scrollPos) % count) + count) % count);
 
   // Slots to render — dedup so the same item never appears twice
   // (needed for count < 5 where items cycle through the 5-slot window)
@@ -79,13 +79,16 @@
     const result: number[] = [];
     for (const k of [0, -1, 1, -2, 2]) {
       const i = slotItem(k);
-      if (!seen.has(i)) { seen.add(i); result.push(k); }
+      if (!seen.has(i)) {
+        seen.add(i);
+        result.push(k);
+      }
     }
     return result;
   });
 
   // Arc length per degree at this radius → items/px conversion
-  const itemsPerPx = $derived(1 / (radius * (VISUAL_STEP * Math.PI) / 180));
+  const itemsPerPx = $derived(1 / ((radius * (VISUAL_STEP * Math.PI)) / 180));
 
   let animId = 0;
 
@@ -113,7 +116,9 @@
       } else {
         scrollPos = target;
         navigateTo(items[i]);
-        setTimeout(() => { snapping = false; }, 500);
+        setTimeout(() => {
+          snapping = false;
+        }, 500);
       }
     }
     animId = requestAnimationFrame(step);
@@ -122,8 +127,10 @@
   function navigateTo(item: WheelNavItem | undefined) {
     if (!item) return;
     if (item.href) {
-      if (item.href.startsWith('#')) {
-        document.getElementById(item.href.slice(1))?.scrollIntoView({ behavior: 'smooth' });
+      if (item.href.startsWith("#")) {
+        document
+          .getElementById(item.href.slice(1))
+          ?.scrollIntoView({ behavior: "smooth" });
       } else {
         goto(item.href);
       }
@@ -171,7 +178,7 @@
 
     if (!hasMoved) {
       // Tap: navigate to tapped slot
-      const el = (e.target as HTMLElement)?.closest('[data-slot]') as HTMLElement | null;
+      const el = (e.target as HTMLElement)?.closest("[data-slot]") as HTMLElement | null;
       if (el !== null) {
         const k = parseInt(el.dataset.slot!);
         snapToIndex(slotItem(k));
@@ -180,7 +187,7 @@
     }
 
     // Inertia: project ~100ms forward
-    const projected = scrollPos + (-velPx) * 100 * itemsPerPx;
+    const projected = scrollPos + -velPx * 100 * itemsPerPx;
     const target = Math.round(projected);
     snapToIndex(((target % count) + count) % count);
   }
@@ -190,32 +197,37 @@
     if (!browser || !open) return;
     const obs: IntersectionObserver[] = [];
     items.forEach((item, i) => {
-      if (!item.href?.startsWith('#')) return;
+      if (!item.href?.startsWith("#")) return;
       const el = document.getElementById(item.href.slice(1));
       if (!el) return;
-      const o = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting && !snapping && i !== activeIndex) {
-          snapToIndex(i);
-        }
-      }, { threshold: 0.5 });
+      const o = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && !snapping && i !== activeIndex) {
+            snapToIndex(i);
+          }
+        },
+        { threshold: 0.5 },
+      );
       o.observe(el);
       obs.push(o);
     });
-    return () => obs.forEach(o => o.disconnect());
+    return () => obs.forEach((o) => o.disconnect());
   });
 
   // ── Init from activeHref ─────────────────────────────────────────────
   $effect(() => {
-    const i = items.findIndex(it => it.href === activeHref || it.active);
+    const i = items.findIndex((it) => it.href === activeHref || it.active);
     if (i >= 0) scrollPos = i;
   });
 
   // ── Keyboard ─────────────────────────────────────────────────────────
   $effect(() => {
     if (!browser) return;
-    const h = (e: KeyboardEvent) => { if (e.key === 'Escape') open = false; };
-    window.addEventListener('keydown', h);
-    return () => window.removeEventListener('keydown', h);
+    const h = (e: KeyboardEvent) => {
+      if (e.key === "Escape") open = false;
+    };
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
   });
 </script>
 
@@ -225,7 +237,9 @@
     role="presentation"
     aria-hidden="true"
     transition:fade={{ duration: 200 }}
-    onclick={() => { open = false; }}
+    onclick={() => {
+      open = false;
+    }}
   ></div>
 
   <!--
@@ -252,29 +266,53 @@
     aria-valuemin={0}
     aria-valuemax={count - 1}
     onkeydown={(e) => {
-      if (e.key === 'ArrowUp')   snapToIndex((activeIndex - 1 + count) % count);
-      if (e.key === 'ArrowDown') snapToIndex((activeIndex + 1) % count);
+      if (e.key === "ArrowUp") snapToIndex((activeIndex - 1 + count) % count);
+      if (e.key === "ArrowDown") snapToIndex((activeIndex + 1) % count);
     }}
   >
     <!-- Fond de la bague (rempli, uni) -->
-    <path class="qk-base" d="M 105 15 A 90 90 0 0 0 15 105"
-      fill="none" stroke-width="22" stroke-linecap="butt" />
+    <path
+      class="qk-base"
+      d="M 105 15 A 90 90 0 0 0 15 105"
+      fill="none"
+      stroke-width="22"
+      stroke-linecap="butt"
+    />
 
     <!-- Rainures animées (stries en dasharray qui défilent) -->
-    <path class="qk-ridges" d="M 105 15 A 90 90 0 0 0 15 105"
-      fill="none" stroke-width="20" stroke-linecap="butt"
+    <path
+      class="qk-ridges"
+      d="M 105 15 A 90 90 0 0 0 15 105"
+      fill="none"
+      stroke-width="20"
+      stroke-linecap="butt"
       stroke-dasharray="7 5"
-      style="stroke-dashoffset: {-scrollPos * 12}px" />
+      style="stroke-dashoffset: {-scrollPos * 12}px"
+    />
 
     <!-- Bordures intérieure et extérieure de la bague -->
-    <path class="qk-edge" d="M 105 26 A 79 79 0 0 0 26 105"
-      fill="none" stroke-width="1" stroke-linecap="butt" />
-    <path class="qk-edge" d="M 105 4 A 101 101 0 0 0 4 105"
-      fill="none" stroke-width="1" stroke-linecap="butt" />
+    <path
+      class="qk-edge"
+      d="M 105 26 A 79 79 0 0 0 26 105"
+      fill="none"
+      stroke-width="1"
+      stroke-linecap="butt"
+    />
+    <path
+      class="qk-edge"
+      d="M 105 4 A 101 101 0 0 0 4 105"
+      fill="none"
+      stroke-width="1"
+      stroke-linecap="butt"
+    />
 
     <!-- Zone de clic élargie (invisible) -->
-    <path d="M 105 15 A 90 90 0 0 0 15 105"
-      fill="none" stroke="transparent" stroke-width="44" />
+    <path
+      d="M 105 15 A 90 90 0 0 0 15 105"
+      fill="none"
+      stroke="transparent"
+      stroke-width="44"
+    />
   </svg>
 
   <div
@@ -309,7 +347,9 @@
             aria-label={item.label}
             onclick={(e) => e.preventDefault()}
             onpointerenter={() => (hoveredSlot = k)}
-            onpointerleave={() => { if (hoveredSlot === k) hoveredSlot = 99; }}
+            onpointerleave={() => {
+              if (hoveredSlot === k) hoveredSlot = 99;
+            }}
           >
             <span class="nav-icon"><item.icon size={20} /></span>
             <span class="nav-label">{item.label}</span>
@@ -325,7 +365,9 @@
             aria-label={item.label}
             onclick={(e) => e.preventDefault()}
             onpointerenter={() => (hoveredSlot = k)}
-            onpointerleave={() => { if (hoveredSlot === k) hoveredSlot = 99; }}
+            onpointerleave={() => {
+              if (hoveredSlot === k) hoveredSlot = 99;
+            }}
           >
             <span class="nav-icon"><item.icon size={20} /></span>
             <span class="nav-label">{item.label}</span>
@@ -342,7 +384,7 @@
     class="fab"
     class:open
     onclick={() => (open = !open)}
-    aria-label={open ? 'Fermer la navigation' : 'Ouvrir la navigation'}
+    aria-label={open ? "Fermer la navigation" : "Ouvrir la navigation"}
     aria-expanded={open}
     aria-haspopup="true"
   >
@@ -368,7 +410,10 @@
      overflow:hidden is the only clipping needed.
   ── */
   .wheel-clip {
-    position: fixed;
+    /* position: fixed; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     right: 52px;
     bottom: 52px;
     width: 320px;
@@ -380,7 +425,9 @@
     user-select: none;
     -webkit-user-select: none;
 
-    &:active { cursor: grabbing; }
+    &:active {
+      cursor: grabbing;
+    }
   }
 
   /* ── Active slot ring (always at ACTIVE_ANGLE = 135°) ── */
@@ -471,7 +518,7 @@
     z-index: 10;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       left: 100%;
       top: 50%;
@@ -498,8 +545,8 @@
 
   /* ── FAB button ── */
   .fab {
-    position: absolute;
-    inset: 0;
+    /* position: absolute;
+    inset: 0; */
     border-radius: 50%;
     background: var(--primary);
     color: var(--primary-fg);
@@ -517,6 +564,9 @@
       box-shadow var(--transition-fast);
     user-select: none;
     -webkit-user-select: none;
+    display: flex;
+    width: 52px;
+    height: 52px;
 
     &:hover {
       background: var(--primary-hover);
@@ -544,11 +594,23 @@
     pointer-events: none;
   }
 
-  .fab-menu { opacity: 1; transform: rotate(0) scale(1); }
-  .fab-close { opacity: 0; transform: rotate(-90deg) scale(0.4); }
+  .fab-menu {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+  .fab-close {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.4);
+  }
 
-  .open .fab-menu { opacity: 0; transform: rotate(90deg) scale(0.4); }
-  .open .fab-close { opacity: 1; transform: rotate(0) scale(1); }
+  .open .fab-menu {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.4);
+  }
+  .open .fab-close {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
 
   /* ── Arc SVG quart-de-cercle rainuré ──
      right/bottom: 52px → coin bas-droit du SVG aligné sur le centre du FAB.
@@ -565,7 +627,9 @@
     -webkit-user-select: none;
     overflow: visible;
 
-    &:focus-visible { outline: none; }
+    &:focus-visible {
+      outline: none;
+    }
   }
 
   /* Fond de bague — couleur neutre */
