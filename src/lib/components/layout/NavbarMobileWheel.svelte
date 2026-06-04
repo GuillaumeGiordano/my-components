@@ -410,10 +410,7 @@
      overflow:hidden is the only clipping needed.
   ── */
   .wheel-clip {
-    /* position: fixed; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: fixed;
     right: 52px;
     bottom: 52px;
     width: 320px;
@@ -535,7 +532,10 @@
 
   /* ── FAB container ── */
   .wheel-nav {
-    position: fixed;
+    /* position: fixed; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     bottom: 24px;
     right: 24px;
     width: 56px;
