@@ -2,6 +2,7 @@
   import "$lib/styles/demo-page.css";
   import NavbarMobileWheel from "$lib/components/layout/NavbarMobileWheel.svelte";
   import { Home, BarChart2, Users, Settings, Mail, FileText } from "@lucide/svelte";
+  import FloatingGroup from "$lib/FloatingGroup.svelte";
 </script>
 
 <svelte:head>
@@ -12,11 +13,11 @@
   <div class="page-header">
     <h1>Navbar Mobile Wheel</h1>
     <p>
-      FAB fixe en bas à droite qui ouvre une <strong>roue rotative</strong>.
-      3 items sont visibles dans l'arc, 2 sont coupés aux bords pour indiquer
-      qu'on peut faire tourner. L'item central (anneau prononcé) est l'item actif.
-      Faire tourner la roue scrolle la page vers la section correspondante —
-      et inversement, le scroll de la page tourne la roue.
+      FAB fixe en bas à droite qui ouvre une <strong>roue rotative</strong>. 3 items sont
+      visibles dans l'arc, 2 sont coupés aux bords pour indiquer qu'on peut faire tourner.
+      L'item central (anneau prononcé) est l'item actif. Faire tourner la roue scrolle la
+      page vers la section correspondante — et inversement, le scroll de la page tourne la
+      roue.
     </p>
   </div>
 
@@ -24,9 +25,9 @@
   <section class="variant" id="section-accueil">
     <h2>Démo — faire défiler les sections</h2>
     <p class="hint">
-      Cliquer sur le FAB (bas droite) pour ouvrir la roue. Glisser vers le haut
-      ou vers le bas pour la faire tourner, ou cliquer sur un item.
-      Faire défiler cette page met également à jour la roue.
+      Cliquer sur le FAB (bas droite) pour ouvrir la roue. Glisser vers le haut ou vers le
+      bas pour la faire tourner, ou cliquer sur un item. Faire défiler cette page met
+      également à jour la roue.
     </p>
   </section>
 
@@ -34,7 +35,8 @@
   <section class="variant" id="section-usage">
     <h2>Usage</h2>
     <div class="code-block">
-      <pre><code>{`<script>
+      <pre><code
+          >{`<script>
   import { NavbarMobileWheel } from '@guillaumeg/ui';
   import { Home, BarChart2, Users, Settings } from '@lucide/svelte';
 <\/script>
@@ -47,7 +49,8 @@
     { icon: Users,    label: 'Équipe',    href: '#equipe' },
     { icon: Settings, label: 'Paramètres', href: '#settings' },
   ]}
-/>`}</code></pre>
+/>`}</code
+        ></pre>
     </div>
   </section>
 
@@ -58,11 +61,7 @@
       <div class="props-row header">
         <span>Prop</span><span>Type</span><span>Défaut</span><span>Description</span>
       </div>
-      {#each [
-        ['items',       'WheelNavItem[]', '[]',    'Liste des items de navigation'],
-        ['activeHref',  'string',         '""',    'Href de la section active au chargement'],
-        ['radius',      'number',         '170',   'Rayon du cercle en pixels'],
-      ] as [prop, type, def, desc]}
+      {#each [["items", "WheelNavItem[]", "[]", "Liste des items de navigation"], ["activeHref", "string", '""', "Href de la section active au chargement"], ["radius", "number", "170", "Rayon du cercle en pixels"]] as [prop, type, def, desc]}
         <div class="props-row">
           <code>{prop}</code>
           <code class="type">{type}</code>
@@ -74,13 +73,15 @@
 
     <h3 style="margin-top: 24px;">Type WheelNavItem</h3>
     <div class="code-block">
-      <pre><code>{`type WheelNavItem = {
+      <pre><code
+          >{`type WheelNavItem = {
   icon: Component;       // icône Lucide
   label: string;         // label affiché au hover / item actif
   href?: string;         // ancre (#section) ou route (/page)
   active?: boolean;      // marquer actif manuellement
   onclick?: () => void;  // callback optionnel en plus de href
-}`}</code></pre>
+}`}</code
+        ></pre>
     </div>
   </section>
 
@@ -94,7 +95,9 @@
       <li>Glisser verticalement fait tourner la roue dans les deux sens.</li>
       <li>Relâcher → snap automatique sur l'item le plus proche + inertie.</li>
       <li>Un item snappe → scroll doux vers sa section (<code>scrollIntoView</code>).</li>
-      <li>Scroll manuel de la page → <code>IntersectionObserver</code> retourne la roue.</li>
+      <li>
+        Scroll manuel de la page → <code>IntersectionObserver</code> retourne la roue.
+      </li>
       <li>Cliquer un item directement → snap + navigation.</li>
     </ul>
   </section>
@@ -103,8 +106,8 @@
   <section class="variant demo-section" id="section-stats">
     <h2>Section Stats</h2>
     <p class="filler">
-      Faites défiler vers cette section — la roue se met à jour automatiquement
-      pour mettre "Stats" dans le slot actif (anneau prononcé).
+      Faites défiler vers cette section — la roue se met à jour automatiquement pour
+      mettre "Stats" dans le slot actif (anneau prononcé).
     </p>
   </section>
 
@@ -119,32 +122,34 @@
   <section class="variant demo-section" id="section-messages">
     <h2>Section Messages</h2>
     <p class="filler">
-      La synchronisation est bidirectionnelle : tourner la roue scrolle la page,
-      et scroller la page tourne la roue.
+      La synchronisation est bidirectionnelle : tourner la roue scrolle la page, et
+      scroller la page tourne la roue.
     </p>
   </section>
 
   <section class="variant demo-section" id="section-docs">
     <h2>Section Docs</h2>
     <p class="filler">
-      Avec 6 items, la roue fait un tour complet de 360° pour les parcourir tous.
-      À tout moment, 3 sont visibles + 2 partiels aux bords de l'arc.
+      Avec 6 items, la roue fait un tour complet de 360° pour les parcourir tous. À tout
+      moment, 3 sont visibles + 2 partiels aux bords de l'arc.
     </p>
   </section>
 </div>
 
 <!-- Démo live — 6 items pointant vers les sections de cette page -->
-<NavbarMobileWheel
-  activeHref="#section-accueil"
-  items={[
-    { icon: Home,     label: 'Accueil',       href: '#section-accueil' },
-    { icon: BarChart2, label: 'Stats',         href: '#section-stats' },
-    { icon: Users,    label: 'Équipe',         href: '#section-equipe' },
-    { icon: Mail,     label: 'Messages',       href: '#section-messages' },
-    { icon: FileText, label: 'Docs',           href: '#section-docs' },
-    { icon: Settings, label: 'Comportements',  href: '#section-comportements' },
-  ]}
-/>
+<FloatingGroup position="right">
+  <NavbarMobileWheel
+    activeHref="#section-accueil"
+    items={[
+      { icon: Home, label: "Accueil", href: "#section-accueil" },
+      { icon: BarChart2, label: "Stats", href: "#section-stats" },
+      { icon: Users, label: "Équipe", href: "#section-equipe" },
+      { icon: Mail, label: "Messages", href: "#section-messages" },
+      { icon: FileText, label: "Docs", href: "#section-docs" },
+      { icon: Settings, label: "Comportements", href: "#section-comportements" },
+    ]}
+  />
+</FloatingGroup>
 
 <style>
   .hint {
@@ -167,7 +172,10 @@
     overflow: auto;
   }
 
-  .code-block pre { margin: 0; padding: 20px; }
+  .code-block pre {
+    margin: 0;
+    padding: 20px;
+  }
 
   .code-block code {
     font-family: var(--font-mono);
@@ -194,7 +202,9 @@
     font-size: 13px;
     color: var(--text-muted);
 
-    &:last-child { border-bottom: none; }
+    &:last-child {
+      border-bottom: none;
+    }
     &.header {
       background: var(--bg-subtle);
       font-size: 11px;
@@ -205,9 +215,17 @@
     }
   }
 
-  .props-row code { font-family: var(--font-mono); font-size: 12px; color: var(--text-base); }
-  code.type    { color: var(--primary); }
-  code.default { color: var(--text-subtle); }
+  .props-row code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-base);
+  }
+  code.type {
+    color: var(--primary);
+  }
+  code.default {
+    color: var(--text-subtle);
+  }
 
   .notes {
     display: flex;
