@@ -24,7 +24,7 @@ Every time components are modified and need to be released:
 # In my-components — build, version, push
 npm run package
 npm version patch           # bumps package.json + creates git tag
-git push origin master --tags
+git push origin main --tags
 
 # Quick dev iteration (no versioning)
 npm run package && git add -A && git commit -m "fix: ..." && git push
