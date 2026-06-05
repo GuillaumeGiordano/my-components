@@ -9,7 +9,10 @@
     scrollAware = false,
   }: {
     children: Snippet;
-    position: "left" | "right";
+    position:
+      | "top-left"    | "top"    | "top-right"
+      | "left"                   | "right"
+      | "bottom-left" | "bottom" | "bottom-right";
     scrollAware?: boolean;
   } = $props();
 
@@ -43,7 +46,6 @@
 <style lang="scss">
   .wrapper {
     position: fixed;
-    bottom: 28px;
     z-index: 50;
     display: flex;
     flex-direction: column;
@@ -51,13 +53,15 @@
     transition: opacity 0.4s ease;
   }
 
-  .right {
-    right: 24px;
-    align-items: flex-end;
-  }
+  /* ── Corners ── */
+  .top-left     { top: 28px;    left: 24px;  align-items: flex-start; }
+  .top-right    { top: 28px;    right: 24px; align-items: flex-end; }
+  .bottom-left  { bottom: 28px; left: 24px;  align-items: flex-start; }
+  .bottom-right { bottom: 28px; right: 24px; align-items: flex-end; }
 
-  .left {
-    left: 24px;
-    align-items: flex-start;
-  }
+  /* ── Mid-sides ── */
+  .top    { top: 28px;    left: 50%; transform: translateX(-50%); align-items: center; }
+  .bottom { bottom: 28px; left: 50%; transform: translateX(-50%); align-items: center; }
+  .left   { left: 24px;   top: 50%; transform: translateY(-50%);  align-items: flex-start; }
+  .right  { right: 24px;  top: 50%; transform: translateY(-50%);  align-items: flex-end; }
 </style>

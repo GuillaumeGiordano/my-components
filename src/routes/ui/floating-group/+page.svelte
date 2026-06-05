@@ -14,8 +14,8 @@
   <div class="page-header">
     <h1>Float Wrapper</h1>
     <p>
-      Conteneur utilitaire en position fixe en bas de l'écran. Regroupe plusieurs composants
-      flottants (ScrollToTop, SpeedDial, Chatbot…) d'un même côté, empilés verticalement.
+      Conteneur utilitaire en position fixe. Regroupe plusieurs composants flottants
+      (ScrollToTop, SpeedDial, Chatbot…) dans l'un des 8 points d'ancrage de l'écran.
     </p>
   </div>
 
@@ -27,13 +27,13 @@
   import { FloatingGroup, ScrollToTop, SpeedDial } from '@guillaumeg/ui';
 <\/script>
 
-<!-- Groupe à droite : SpeedDial + ScrollToTop -->
-<FloatingGroup position="right">
+<!-- Coin bas-droite : SpeedDial + ScrollToTop -->
+<FloatingGroup position="bottom-right">
   <SpeedDial icon={Settings} items={[...]} />
   <ScrollToTop />
 </FloatingGroup>
 
-<!-- Groupe à gauche : Chatbot -->
+<!-- Milieu gauche : Chatbot -->
 <FloatingGroup position="left">
   <Chatbot ... />
 </FloatingGroup>`}</code></pre>
@@ -42,7 +42,7 @@
 
   <!-- ─── Démo ────────────────────────────────────────────────────────────── -->
   <section class="variant">
-    <h2>Démo — position="right"</h2>
+    <h2>Démo — position="bottom-right"</h2>
     <p class="hint">
       Le groupe ci-dessous est rendu en bas à droite de la page (position fixe).
       Il contient un <strong>SpeedDial</strong> et un <strong>ScrollToTop</strong>.
@@ -57,8 +57,9 @@
         <span>Prop</span><span>Type</span><span>Requis</span><span>Description</span>
       </div>
       {#each [
-        ["position", '"left" | "right"', "oui", "Côté d'ancrage — gauche ou droite de l'écran"],
-        ["children", "Snippet",          "oui", "Un ou plusieurs composants flottants"],
+        ["position", '"top-left" | "top" | "top-right" | "left" | "right" | "bottom-left" | "bottom" | "bottom-right"', "oui", "Point d'ancrage parmi les 8 positions"],
+        ["children", "Snippet", "oui", "Un ou plusieurs composants flottants"],
+        ["scrollAware", "boolean", "non", "Réduit l'opacité à 0.3 au repos, revient à 1 lors du scroll"],
       ] as [prop, type, req, desc]}
         <div class="props-row">
           <code>{prop}</code>
@@ -74,12 +75,10 @@
   <section class="variant">
     <h2>Comportements</h2>
     <ul class="notes">
-      <li>Position fixe — <code>bottom: 28px</code>, <code>z-index: 50</code>.</li>
-      <li>Les enfants sont empilés en colonne avec un gap de <code>8px</code>.</li>
-      <li><code>position="right"</code> → aligné à droite (<code>right: 24px</code>), items alignés à droite.</li>
-      <li><code>position="left"</code> → aligné à gauche (<code>left: 24px</code>), items alignés à gauche.</li>
+      <li>Position fixe, <code>z-index: 50</code>. Les enfants sont empilés en colonne avec <code>gap: 8px</code>.</li>
+      <li>Coins — <code>top-left</code>, <code>top-right</code>, <code>bottom-left</code>, <code>bottom-right</code> : ancré à <code>24px</code> du bord et <code>28px</code> du haut/bas.</li>
+      <li>Milieux de côté — <code>top</code>, <code>bottom</code> : centré horizontalement. <code>left</code>, <code>right</code> : centré verticalement.</li>
       <li>Pas de style propre sur les enfants — chaque composant gère sa propre taille et apparence.</li>
-      <li>Peut contenir plusieurs composants : SpeedDial, ScrollToTop, Chatbot, etc.</li>
     </ul>
   </section>
 
@@ -87,18 +86,17 @@
   <section class="variant">
     <h2>Exemple — deux groupes simultanés</h2>
     <div class="code-block">
-      <pre><code>{`<FloatingGroup position="right">
+      <pre><code>{`<FloatingGroup position="bottom-right">
   <SpeedDial icon={Settings} items={[...]} />
   <ScrollToTop />
 </FloatingGroup>
 
-<FloatingGroup position="left">
+<FloatingGroup position="bottom-left">
   <Chatbot onSend={handleMessage} />
 </FloatingGroup>`}</code></pre>
     </div>
     <p class="hint" style="margin-top: 12px;">
-      Chaque <code>FloatingGroup</code> est indépendant — tu peux en avoir un à gauche et un à droite
-      en même temps, sans collision.
+      Chaque <code>FloatingGroup</code> est indépendant — plusieurs peuvent coexister sans collision.
     </p>
   </section>
 
@@ -116,7 +114,7 @@
 </div>
 
 <!-- Démo live en bas à droite -->
-<FloatingGroup position="right">
+<FloatingGroup position="bottom-right">
   <SpeedDial
     icon={Settings}
     items={[

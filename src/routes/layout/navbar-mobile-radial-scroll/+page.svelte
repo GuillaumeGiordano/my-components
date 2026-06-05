@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <FloatingGroup position="right">
+    <FloatingGroup position="bottom-right">
       <NavbarMobileRadialScroll
         {activeHref}
         items={[

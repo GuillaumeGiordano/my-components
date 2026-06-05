@@ -137,7 +137,7 @@
 </div>
 
 <!-- Démo live — 6 items pointant vers les sections de cette page -->
-<FloatingGroup position="right">
+<FloatingGroup position="bottom-right">
   <NavbarMobileWheel
     activeHref="#section-accueil"
     items={[

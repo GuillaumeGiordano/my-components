@@ -60,7 +60,7 @@
   </section>
 </div>
 
-<FloatingGroup position="right">
+<FloatingGroup position="bottom-right">
   <SpeedDialBar
     nVisible={5}
     items={[

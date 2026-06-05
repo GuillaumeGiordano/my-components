@@ -310,7 +310,7 @@
   }
 
   /* ── Container ─────────────────────────────────────────────────────────
-     No position: fixed here — wrap in <FloatingGroup position="right">
+     No position: fixed here — wrap in <FloatingGroup position="bottom-right">
      for proper page-level anchoring.
   ── */
   .rnav {

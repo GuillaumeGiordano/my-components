@@ -54,7 +54,7 @@
     </section>
   {/each}
 </div>
-<FloatingGroup position="right">
+<FloatingGroup position="bottom-right">
   <ScrollToTop />
 </FloatingGroup>
 

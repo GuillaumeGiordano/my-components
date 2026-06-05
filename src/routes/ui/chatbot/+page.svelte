@@ -110,7 +110,7 @@ const content = await callAnthropic(system, messages);</code
 </div>
 
 <!-- Le composant est fixed — il flotte sur la page -->
-<FloatingGroup position="right">
+<FloatingGroup position="bottom-right">
   <Chatbot
     {knowledge}
     title="G2webdev — Assistant"
