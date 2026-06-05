@@ -232,6 +232,11 @@ export const categories: ComponentCategory[] = [
 				slug: 'speed-dial',
 				label: 'Speed Dial',
 				description: 'Bouton FAB fixe qui déploie un menu vertical vers le haut — items icône avec label au hover'
+				},
+				{
+				slug: 'speed-dial-bar',
+				label: 'Speed Dial Bar',
+				description: 'Barre fixe en bas avec scroll horizontal infini en boucle et sous-menus au-dessus'
 			},
 			{
 				slug: 'floating-group',
