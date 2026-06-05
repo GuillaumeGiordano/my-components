@@ -16,7 +16,7 @@
   let {
     items = [],
     activeHref = "",
-    radius = 110,
+    radius = 190,
   }: {
     items?: RadialNavItem[];
     activeHref?: string;
@@ -220,7 +220,7 @@
   .backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.65);
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
     z-index: 998;
@@ -228,7 +228,7 @@
 
   /* ── Container ── */
   .radial-nav {
-    position: fixed;
+    /* position: fixed; */
     bottom: 24px;
     right: 24px;
     width: 56px;
@@ -260,6 +260,9 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: none;
+    display: flex;
+    width: 52px;
+    height: 52px;
 
     &:hover {
       background: var(--primary-hover);
@@ -311,8 +314,8 @@
     position: absolute;
     bottom: 4px;
     right: 4px;
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     background: var(--bg-base);
     border: 1px solid var(--border);

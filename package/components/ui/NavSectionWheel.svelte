@@ -124,7 +124,7 @@
   }
 
   // ── Drag ────────────────────────────────────────────────────────────────
-  let dragActive = false;
+  let dragActive = $state(false);
   let dragY0 = 0;
   let scroll0 = 0;
   let lastDY = 0;
@@ -234,6 +234,51 @@
   <div class="nsw-fade nsw-fade--top"></div>
   <div class="nsw-fade nsw-fade--bottom"></div>
 
+  <!--
+    Grooved arc knob — same visual language as NavbarMobileWheel's qknob.
+    Semi-circle (180°), center at right edge / vertical center of the strip.
+    stroke-dashoffset animates with scrollPos to show the wheel turning.
+  -->
+  <svg
+    class="nsw-knob"
+    class:nsw-knob--dragging={dragActive}
+    viewBox="0 0 56 {size}"
+    width="56"
+    height={size}
+    aria-hidden="true"
+  >
+    <path
+      class="nk-base"
+      d="M 56 {size / 2 - 38} A 38 38 0 0 0 56 {size / 2 + 38}"
+      fill="none"
+      stroke-width="22"
+      stroke-linecap="butt"
+    />
+    <path
+      class="nk-ridges"
+      d="M 56 {size / 2 - 38} A 38 38 0 0 0 56 {size / 2 + 38}"
+      fill="none"
+      stroke-width="20"
+      stroke-linecap="butt"
+      stroke-dasharray="6 5"
+      style="stroke-dashoffset: {scrollPos * 11}px"
+    />
+    <path
+      class="nk-edge"
+      d="M 56 {size / 2 - 27} A 27 27 0 0 0 56 {size / 2 + 27}"
+      fill="none"
+      stroke-width="1"
+      stroke-linecap="butt"
+    />
+    <path
+      class="nk-edge"
+      d="M 56 {size / 2 - 49} A 49 49 0 0 0 56 {size / 2 + 49}"
+      fill="none"
+      stroke-width="1"
+      stroke-linecap="butt"
+    />
+  </svg>
+
   {#each visibleSlots as k}
     {@const i = slotItem(k)}
     {@const pos = slotPos(k)}
@@ -332,6 +377,46 @@
       color-mix(in srgb, var(--bg-base) 80%, transparent),
       transparent
     );
+  }
+
+  /* ── Grooved arc knob ── */
+  .nsw-knob {
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+    z-index: 6;
+  }
+
+  .nk-base {
+    stroke: color-mix(in srgb, var(--bg-hover) 85%, var(--border));
+    transition: stroke var(--transition-fast);
+  }
+
+  .nk-ridges {
+    stroke: color-mix(in srgb, var(--border) 80%, transparent);
+    transition: stroke var(--transition-fast);
+  }
+
+  .nk-edge {
+    stroke: var(--border);
+    opacity: 0.6;
+  }
+
+  .nsw-strip:hover .nk-base,
+  .nsw-knob--dragging .nk-base {
+    stroke: color-mix(in srgb, var(--primary) 15%, var(--bg-hover));
+  }
+
+  .nsw-strip:hover .nk-ridges,
+  .nsw-knob--dragging .nk-ridges {
+    stroke: color-mix(in srgb, var(--primary) 55%, var(--border));
+  }
+
+  .nsw-strip:hover .nk-edge,
+  .nsw-knob--dragging .nk-edge {
+    stroke: color-mix(in srgb, var(--primary) 40%, var(--border));
+    opacity: 1;
   }
 
   /* ── Active slot ring ── */
