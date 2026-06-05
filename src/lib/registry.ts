@@ -465,6 +465,7 @@ export const categories: ComponentCategory[] = [
 			{ slug: 'standard-layout', label: 'Standard Layout', description: 'Combinaison Navbar + Sidebar + Main + Footer' },
 			{ slug: 'navbar-mobile', label: 'Navbar Mobile', description: 'Barre de navigation pour les appareils mobiles' },
 			{ slug: 'navbar-mobile-radial', label: 'Navbar Mobile Radial', description: 'Bouton flottant en bas à droite — menu radial en arc avec animation staggerée' },
+			{ slug: 'navbar-mobile-radial-scroll', label: 'Radial Défilant', description: 'FAB radial avec 4 items visibles — glisser pour faire défiler les items en arc' },
 			{ slug: 'navbar-mobile-wheel', label: 'Navbar Mobile Wheel', description: 'Roue rotative flottante — 3 items visibles, snap automatique, synchronisée avec le scroll de la page' }
 		]
 	},

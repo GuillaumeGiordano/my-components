@@ -118,9 +118,11 @@ export { default as Navbar }              from './components/layout/Navbar.svelt
 export type { NavItem, NavSubItem }       from './components/layout/Navbar.svelte';
 export { default as NavbarMobile }              from './components/layout/NavbarMobile.svelte';
 export { default as NavbarMobileRadial }        from './components/layout/NavbarMobileRadial.svelte';
+export { default as NavbarMobileRadialScroll }  from './components/layout/NavbarMobileRadialScroll.svelte';
 export { default as NavbarMobileWheel }         from './components/layout/NavbarMobileWheel.svelte';
 export type { WheelNavItem }                    from './components/layout/NavbarMobileWheel.svelte';
 export type { RadialNavItem }                   from './components/layout/NavbarMobileRadial.svelte';
+export type { RadialScrollItem }                from './components/layout/NavbarMobileRadialScroll.svelte';
 export { default as Sidebar }             from './components/layout/Sidebar.svelte';
 export { default as StandardLayout }      from './components/layout/StandardLayout.svelte';
 
