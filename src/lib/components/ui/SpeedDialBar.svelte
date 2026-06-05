@@ -1,42 +1,42 @@
 <script lang="ts" module>
-  import type { Component } from 'svelte';
+  import type { Component } from "svelte";
 
   export type SpeedDialBarSubItem = {
-    icon:     Component;
-    label:    string;
+    icon: Component;
+    label: string;
     onclick?: () => void;
   };
 
   export type SpeedDialBarItem = {
-    icon:      Component;
-    label:     string;
-    onclick?:  () => void;
-    active?:   boolean;
+    icon: Component;
+    label: string;
+    onclick?: () => void;
+    active?: boolean;
 
     children?: SpeedDialBarSubItem[];
   };
 </script>
 
 <script lang="ts">
-  import { Settings, X } from '@lucide/svelte';
-  import { browser } from '$app/environment';
-  import { fade, fly } from 'svelte/transition';
+  import { Settings, X } from "@lucide/svelte";
+  import { browser } from "$app/environment";
+  import { fade, fly } from "svelte/transition";
 
   let {
-    items    = [],
+    items = [],
     icon: TriggerIcon = Settings,
     nVisible = 5,
   }: {
-    items?:    SpeedDialBarItem[];
+    items?: SpeedDialBarItem[];
     /** FAB trigger icon. */
-    icon?:     Component;
+    icon?: Component;
     /** Number of item slots visible simultaneously. */
     nVisible?: number;
   } = $props();
 
   // ── Geometry ──────────────────────────────────────────────────────────
   const ITEM_SIZE = 48;
-  const ITEM_GAP  = 10;
+  const ITEM_GAP = 10;
   const ITEM_STEP = ITEM_SIZE + ITEM_GAP;
 
   // Clip width = space for nVisible items + left/right padding
@@ -44,16 +44,18 @@
 
   // Scrollbar thumb geometry
   const trackWidth = $derived(count > 0 ? clipWidth - 2 * ITEM_GAP : 0);
-  const thumbW     = $derived(count > 0 ? trackWidth / count : 0);
-  const thumbX     = $derived(count > 0 ? (((scrollPos % count) + count) % count) * thumbW : 0);
+  const thumbW = $derived(count > 0 ? trackWidth / count : 0);
+  const thumbX = $derived(
+    count > 0 ? (((scrollPos % count) + count) % count) * thumbW : 0,
+  );
 
-  let open            = $state(false);
-  let scrollPos       = $state(0);
-  let openSubIdx      = $state(-1);
-  let subAnchorX      = $state(0);
+  let open = $state(false);
+  let scrollPos = $state(0);
+  let openSubIdx = $state(-1);
+  let subAnchorX = $state(0);
   let subAnchorBottom = $state(0);
 
-  const count      = $derived(items.length);
+  const count = $derived(items.length);
   const itemsPerPx = 1 / ITEM_STEP;
 
   function slotItem(k: number): number {
@@ -68,26 +70,32 @@
 
   const visibleSlots = $derived.by(() => {
     if (count === 0) return [] as number[];
-    const seen   = new Set<number>();
+    const seen = new Set<number>();
     const result: number[] = [];
     for (let k = -1; k <= nVisible; k++) {
       const i = slotItem(k);
-      if (!seen.has(i)) { seen.add(i); result.push(k); }
+      if (!seen.has(i)) {
+        seen.add(i);
+        result.push(k);
+      }
     }
     return result;
   });
 
   // ── Snap / animate ────────────────────────────────────────────────────
-  let animId   = 0;
+  let animId = 0;
   let snapping = false;
 
   function animateTo(target: number) {
     const start = scrollPos;
     const delta = target - start;
-    if (Math.abs(delta) < 0.001) { scrollPos = target; return; }
+    if (Math.abs(delta) < 0.001) {
+      scrollPos = target;
+      return;
+    }
     const dur = 280;
-    const t0  = performance.now();
-    snapping  = true;
+    const t0 = performance.now();
+    snapping = true;
     cancelAnimationFrame(animId);
 
     function step(t: number) {
@@ -97,7 +105,9 @@
         animId = requestAnimationFrame(step);
       } else {
         scrollPos = target;
-        setTimeout(() => { snapping = false; }, 150);
+        setTimeout(() => {
+          snapping = false;
+        }, 150);
       }
     }
     animId = requestAnimationFrame(step);
@@ -105,22 +115,22 @@
 
   // ── Drag ─────────────────────────────────────────────────────────────
   let dragActive = $state(false);
-  let dragX0   = 0;
-  let scroll0  = 0;
-  let lastDX   = 0;
-  let lastDT   = 0;
-  let velPx    = 0;
+  let dragX0 = 0;
+  let scroll0 = 0;
+  let lastDX = 0;
+  let lastDT = 0;
+  let velPx = 0;
   let hasMoved = false;
 
   function onDragStart(e: PointerEvent) {
     if (!open) return;
     dragActive = true;
-    hasMoved   = false;
-    dragX0     = e.clientX;
-    lastDX     = e.clientX;
-    lastDT     = Date.now();
-    scroll0    = scrollPos;
-    velPx      = 0;
+    hasMoved = false;
+    dragX0 = e.clientX;
+    lastDX = e.clientX;
+    lastDT = Date.now();
+    scroll0 = scrollPos;
+    velPx = 0;
     cancelAnimationFrame(animId);
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
   }
@@ -128,11 +138,11 @@
   function onDragMove(e: PointerEvent) {
     if (!dragActive) return;
     const now = Date.now();
-    const dt  = now - lastDT;
+    const dt = now - lastDT;
     if (dt > 0) velPx = (e.clientX - lastDX) / dt;
-    lastDX    = e.clientX;
-    lastDT    = now;
-    const dx  = e.clientX - dragX0;
+    lastDX = e.clientX;
+    lastDT = now;
+    const dx = e.clientX - dragX0;
     if (Math.abs(dx) > 5) hasMoved = true;
     scrollPos = scroll0 - dx * itemsPerPx;
   }
@@ -142,13 +152,14 @@
     dragActive = false;
 
     if (!hasMoved) {
-      const el = document.elementFromPoint(e.clientX, e.clientY)
-        ?.closest('[data-slot]') as HTMLElement | null;
+      const el = document
+        .elementFromPoint(e.clientX, e.clientY)
+        ?.closest("[data-slot]") as HTMLElement | null;
       if (el) {
-        const k    = parseInt(el.dataset.slot!);
-        const i    = slotItem(k);
+        const k = parseInt(el.dataset.slot!);
+        const i = slotItem(k);
         const rect = el.getBoundingClientRect();
-        subAnchorX      = rect.left + rect.width / 2;
+        subAnchorX = rect.left + rect.width / 2;
         subAnchorBottom = window.innerHeight - rect.top + 6;
         handleItemTap(i);
       } else {
@@ -159,10 +170,10 @@
 
     openSubIdx = -1;
 
-    const projected = scrollPos + (-velPx) * 80 * itemsPerPx;
-    const raw    = Math.round(projected);
+    const projected = scrollPos + -velPx * 80 * itemsPerPx;
+    const raw = Math.round(projected);
     const target = ((raw % count) + count) % count;
-    const k      = Math.round((scrollPos - target) / count);
+    const k = Math.round((scrollPos - target) / count);
     animateTo(target + k * count);
   }
 
@@ -190,13 +201,16 @@
   $effect(() => {
     if (!browser) return;
     const h = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        if (openSubIdx >= 0) { openSubIdx = -1; return; }
+      if (e.key === "Escape") {
+        if (openSubIdx >= 0) {
+          openSubIdx = -1;
+          return;
+        }
         open = false;
       }
     };
-    window.addEventListener('keydown', h);
-    return () => window.removeEventListener('keydown', h);
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
   });
 </script>
 
@@ -218,7 +232,9 @@
     role="presentation"
     aria-hidden="true"
     transition:fade={{ duration: 150 }}
-    onclick={() => { openSubIdx = -1; }}
+    onclick={() => {
+      openSubIdx = -1;
+    }}
   ></div>
 {/if}
 
@@ -248,58 +264,62 @@
   {/if}
 {/if}
 
-<!-- FAB + floating item tray -->
-<div class="sdb" class:open aria-label="Actions rapides">
-  <!-- Scrollable clip area — floats above the FAB -->
-  <div
-    class="sdb-clip"
-    style="--clip-width:{clipWidth}px"
-    onpointerdown={onDragStart}
-    onpointermove={onDragMove}
-    onpointerup={onDragEnd}
-    onpointercancel={onDragEnd}
-  >
-    <!-- Scroll track + thumb -->
-    <div class="sdb-track">
-      <div class="sdb-thumb" style="--thumb-w:{thumbW}px; --thumb-x:{thumbX}px"></div>
+<!-- FAB + sliding pill tray -->
+<div
+  class="sdb"
+  class:open
+  style="--clip-width:{clipWidth}px"
+  aria-label="Actions rapides"
+>
+  <!-- Pill — slides out to the left from behind the FAB -->
+  <div class="sdb-pill">
+    <div
+      class="sdb-clip"
+      onpointerdown={onDragStart}
+      onpointermove={onDragMove}
+      onpointerup={onDragEnd}
+      onpointercancel={onDragEnd}
+    >
+      <!-- Scroll track + thumb -->
+      <div class="sdb-track">
+        <div class="sdb-thumb" style="--thumb-w:{thumbW}px; --thumb-x:{thumbX}px"></div>
+      </div>
+
+      {#each visibleSlots as k}
+        {@const i = slotItem(k)}
+        {@const item = items[i]}
+        {@const x = slotX(k)}
+        {@const isActive = (item.active ?? false) || openSubIdx === i}
+        {@const hasChildren = (item.children?.length ?? 0) > 0}
+
+        {#if item}
+          <button
+            type="button"
+            class="sdb-item"
+            class:active={isActive}
+            class:has-children={hasChildren}
+            style="--x:{x}px"
+            data-slot={k}
+            aria-label={item.label}
+            aria-haspopup={hasChildren || undefined}
+            aria-expanded={hasChildren ? openSubIdx === i : undefined}
+            onclick={() => {}}
+          >
+            <span class="sdb-icon"><item.icon size={20} /></span>
+            <span class="sdb-label">{item.label}</span>
+          </button>
+        {/if}
+      {/each}
     </div>
-
-    {#each visibleSlots as k}
-      {@const i           = slotItem(k)}
-      {@const item        = items[i]}
-      {@const x           = slotX(k)}
-      {@const isActive    = (item.active ?? false) || openSubIdx === i}
-      {@const hasChildren = (item.children?.length ?? 0) > 0}
-
-      {@const delay       = open ? Math.max(0, k) * 35 : Math.max(0, nVisible - 1 - k) * 25}
-
-      {#if item}
-        <button
-          type="button"
-          class="sdb-item"
-          class:active={isActive}
-          class:has-children={hasChildren}
-          style="--x:{x}px; --delay:{delay}ms"
-          data-slot={k}
-          aria-label={item.label}
-          aria-haspopup={hasChildren || undefined}
-          aria-expanded={hasChildren ? openSubIdx === i : undefined}
-          onclick={() => {}}
-        >
-          <span class="sdb-icon"><item.icon size={20} /></span>
-          <span class="sdb-label">{item.label}</span>
-        </button>
-      {/if}
-    {/each}
   </div>
 
-  <!-- FAB -->
+  <!-- FAB — sits above the pill (z-index: 1) -->
   <button
     type="button"
     class="fab"
     class:open
     onclick={toggleOpen}
-    aria-label={open ? 'Fermer' : 'Ouvrir le menu'}
+    aria-label={open ? "Fermer" : "Ouvrir le menu"}
     aria-expanded={open}
     aria-haspopup="true"
   >
@@ -383,44 +403,63 @@
   ── */
   .sdb {
     position: relative;
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
     z-index: 998;
     user-select: none;
     -webkit-user-select: none;
   }
 
-  /* ── Clip container — floats above the FAB ── */
-  .sdb-clip {
+  /* ── Pill — slides out to the left ──────────────────────────────────────
+     border-radius: 31px left cap (pill height / 2), 28px right cap (FAB radius).
+     The FAB (z-index: 1) sits on top and masks the right end.
+  ── */
+  .sdb-pill {
     position: absolute;
-    bottom: calc(100% + 8px);
-    right: 0;
-    width: var(--clip-width);
-    height: 72px;
+    right: -3px;
+    top: 50%;
+    translate: 0 -50%;
+    height: 62px;
+    width: 0;
     overflow: hidden;
-    touch-action: none;
+    background: var(--bg-base);
+    /* border: 1px solid var(--border); */
+    border-radius: 31px 28px 28px 31px;
+    box-shadow: var(--shadow-md);
     pointer-events: none;
+    transition: width 0.38s cubic-bezier(0.34, 1.1, 0.64, 1);
   }
 
-  .open .sdb-clip {
+  .open .sdb-pill {
+    width: var(--clip-width);
     pointer-events: auto;
+  }
+
+  /* ── Clip — right-aligned inside the pill ── */
+  .sdb-clip {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--clip-width);
+    touch-action: none;
   }
 
   /* ── Scroll track + thumb ── */
   .sdb-track {
     position: absolute;
-    bottom: 6px;
+    bottom: 4px;
     left: 10px;
     right: 10px;
     height: 3px;
     background: color-mix(in srgb, var(--border) 80%, transparent);
     border-radius: 2px;
     pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.22s ease;
   }
 
-  .open .sdb-track { opacity: 1; }
+  .open .sdb-track {
+    opacity: 1;
+  }
 
   .sdb-thumb {
     position: absolute;
@@ -435,8 +474,8 @@
   }
 
   /* ── Items ──────────────────────────────────────────────────────────────
-     `translate` updates instantly for real-time scroll tracking.
-     `scale` transitions for the open/close pop animation.
+     `translate` updates instantly — real-time scroll tracking.
+     The pill's overflow:hidden handles the open/close reveal.
   ── */
   .sdb-item {
     position: absolute;
@@ -457,20 +496,14 @@
     pointer-events: none;
 
     translate: var(--x) -50%;
-    scale: 0;
-    opacity: 0;
 
     transition:
-      scale        0.32s cubic-bezier(0.34, 1.56, 0.64, 1) var(--delay, 0ms),
-      opacity      0.22s ease                               var(--delay, 0ms),
-      background   var(--transition-fast),
-      color        var(--transition-fast),
+      background var(--transition-fast),
+      color var(--transition-fast),
       border-color var(--transition-fast);
   }
 
   .open .sdb-item {
-    scale: 1;
-    opacity: 1;
     pointer-events: auto;
   }
 
@@ -478,7 +511,6 @@
     background: var(--bg-hover);
     color: var(--text-base);
     scale: 1.08;
-    transition-delay: 0ms;
   }
 
   .open .sdb-item.active {
@@ -491,9 +523,8 @@
     background: var(--primary-subtle);
   }
 
-
   .sdb-item.has-children::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 5px;
     right: 5px;
@@ -533,6 +564,7 @@
   .fab {
     position: absolute;
     inset: 0;
+    z-index: 1;
     border-radius: 50%;
     background: var(--primary);
     color: var(--primary-fg);
@@ -575,9 +607,21 @@
     pointer-events: none;
   }
 
-  .fab-open  { opacity: 1; transform: rotate(0deg)   scale(1); }
-  .fab-close { opacity: 0; transform: rotate(-90deg) scale(0.4); }
+  .fab-open {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+  .fab-close {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.4);
+  }
 
-  .open .fab-open  { opacity: 0; transform: rotate(90deg) scale(0.4); }
-  .open .fab-close { opacity: 1; transform: rotate(0deg)  scale(1); }
+  .open .fab-open {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.4);
+  }
+  .open .fab-close {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
 </style>
