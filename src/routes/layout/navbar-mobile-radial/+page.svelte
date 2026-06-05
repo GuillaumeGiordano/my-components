@@ -11,6 +11,7 @@
     Bookmark,
     ShoppingCart,
   } from "@lucide/svelte";
+  import FloatingGroup from "$lib/FloatingGroup.svelte";
 
   let activeHref = $state("/dashboard");
 </script>
@@ -49,27 +50,30 @@
       </div>
     </div>
 
-    <NavbarMobileRadial
-      {activeHref}
-      items={[
-        { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
-        { icon: Bell,            label: "Notifications", href: "/notifs" },
-        { icon: MessageCircle,   label: "Messages", href: "/messages" },
-        { icon: Settings,        label: "Paramètres", href: "/settings" },
-      ]}
-    />
+    <FloatingGroup position="right">
+      <NavbarMobileRadial
+        {activeHref}
+        items={[
+          { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
+          { icon: Bell, label: "Notifications", href: "/notifs" },
+          { icon: MessageCircle, label: "Messages", href: "/messages" },
+          { icon: Settings, label: "Paramètres", href: "/settings" },
+        ]}
+      />
+    </FloatingGroup>
   </section>
 
   <!-- ─── Variante 5 items ──────────────────────────────────────────── -->
   <section class="variant">
     <h2>Usage — 5 items, item actif</h2>
     <p class="hint">
-      Jusqu'à 5–6 items recommandés pour un arc lisible. L'item actif est mis en
-      évidence avec la couleur primaire.
+      Jusqu'à 5–6 items recommandés pour un arc lisible. L'item actif est mis en évidence
+      avec la couleur primaire.
     </p>
 
     <div class="code-block">
-      <pre><code>{`<NavbarMobileRadial
+      <pre><code
+          >{`<NavbarMobileRadial
   activeHref="/dashboard"
   items={[
     { icon: LayoutDashboard, label: "Dashboard",      href: "/dashboard" },
@@ -78,7 +82,8 @@
     { icon: Bookmark,        label: "Favoris",         href: "/bookmarks" },
     { icon: ShoppingCart,    label: "Panier",          href: "/cart"      },
   ]}
-/>`}</code></pre>
+/>`}</code
+        ></pre>
     </div>
   </section>
 
@@ -89,11 +94,7 @@
       <div class="props-row header">
         <span>Prop</span><span>Type</span><span>Défaut</span><span>Description</span>
       </div>
-      {#each [
-        ["items",      "RadialNavItem[]", "[]",       "Liste des items de navigation"],
-        ["activeHref", "string",          "''",        "URL active — colore l'item correspondant"],
-        ["radius",     "number",          "80",        "Distance (px) entre le FAB et les items"],
-      ] as [prop, type, def, desc]}
+      {#each [["items", "RadialNavItem[]", "[]", "Liste des items de navigation"], ["activeHref", "string", "''", "URL active — colore l'item correspondant"], ["radius", "number", "80", "Distance (px) entre le FAB et les items"]] as [prop, type, def, desc]}
         <div class="props-row">
           <code>{prop}</code>
           <code class="type">{type}</code>
@@ -105,13 +106,15 @@
 
     <h3 style="margin-top: 24px;">Type RadialNavItem</h3>
     <div class="code-block">
-      <pre><code>{`type RadialNavItem = {
+      <pre><code
+          >{`type RadialNavItem = {
   icon: Component;   // icône Lucide
   label: string;     // label affiché au hover / ouverture
   href?: string;     // si fourni → rendu en <a>
   active?: boolean;  // état actif forcé (sinon comparé à activeHref)
   onclick?: () => void;
-}`}</code></pre>
+}`}</code
+        ></pre>
     </div>
   </section>
 
@@ -120,7 +123,9 @@
     <h2>Comportements</h2>
     <ul class="notes">
       <li>Touche <kbd>Échap</kbd> ou clic sur le backdrop pour fermer.</li>
-      <li>Ouverture en cascade : les items apparaissent de haut en bas (index 0 = haut).</li>
+      <li>
+        Ouverture en cascade : les items apparaissent de haut en bas (index 0 = haut).
+      </li>
       <li>Fermeture en cascade inverse : dernier item disparaît en premier.</li>
       <li>Labels visibles dès que l'item a fini son animation d'entrée.</li>
       <li>
@@ -234,7 +239,9 @@
     font-size: 13px;
     color: var(--text-muted);
 
-    &:last-child { border-bottom: none; }
+    &:last-child {
+      border-bottom: none;
+    }
     &.header {
       background: var(--bg-subtle);
       font-size: 11px;
@@ -251,8 +258,12 @@
     color: var(--text-base);
   }
 
-  code.type    { color: var(--primary); }
-  code.default { color: var(--text-subtle); }
+  code.type {
+    color: var(--primary);
+  }
+  code.default {
+    color: var(--text-subtle);
+  }
 
   /* ── Notes list ── */
   .notes {
