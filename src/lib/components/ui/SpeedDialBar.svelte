@@ -12,12 +12,13 @@
     label:     string;
     onclick?:  () => void;
     active?:   boolean;
+
     children?: SpeedDialBarSubItem[];
   };
 </script>
 
 <script lang="ts">
-  import { Settings, X, ChevronLeft, ChevronRight } from '@lucide/svelte';
+  import { Settings, X } from '@lucide/svelte';
   import { browser } from '$app/environment';
   import { fade, fly } from 'svelte/transition';
 
@@ -40,6 +41,11 @@
 
   // Clip width = space for nVisible items + left/right padding
   const clipWidth = $derived(nVisible * ITEM_STEP + ITEM_GAP);
+
+  // Scrollbar thumb geometry
+  const trackWidth = $derived(count > 0 ? clipWidth - 2 * ITEM_GAP : 0);
+  const thumbW     = $derived(count > 0 ? trackWidth / count : 0);
+  const thumbX     = $derived(count > 0 ? (((scrollPos % count) + count) % count) * thumbW : 0);
 
   let open            = $state(false);
   let scrollPos       = $state(0);
@@ -106,12 +112,8 @@
   let velPx    = 0;
   let hasMoved = false;
 
-  function scrollLeft()  { animateTo(Math.round(scrollPos) - 1); }
-  function scrollRight() { animateTo(Math.round(scrollPos) + 1); }
-
   function onDragStart(e: PointerEvent) {
     if (!open) return;
-    if ((e.target as HTMLElement).closest('.sdb-arrow')) return;
     dragActive = true;
     hasMoved   = false;
     dragX0     = e.clientX;
@@ -257,8 +259,10 @@
     onpointerup={onDragEnd}
     onpointercancel={onDragEnd}
   >
-    <button class="sdb-arrow sdb-arrow--left"  onclick={scrollLeft}  aria-label="Précédent"><ChevronLeft  size={16} /></button>
-    <button class="sdb-arrow sdb-arrow--right" onclick={scrollRight} aria-label="Suivant"><ChevronRight size={16} /></button>
+    <!-- Scroll track + thumb -->
+    <div class="sdb-track">
+      <div class="sdb-thumb" style="--thumb-w:{thumbW}px; --thumb-x:{thumbX}px"></div>
+    </div>
 
     {#each visibleSlots as k}
       {@const i           = slotItem(k)}
@@ -266,6 +270,7 @@
       {@const x           = slotX(k)}
       {@const isActive    = (item.active ?? false) || openSubIdx === i}
       {@const hasChildren = (item.children?.length ?? 0) > 0}
+
       {@const delay       = open ? Math.max(0, k) * 35 : Math.max(0, nVisible - 1 - k) * 25}
 
       {#if item}
@@ -391,7 +396,7 @@
     bottom: calc(100% + 8px);
     right: 0;
     width: var(--clip-width);
-    height: 64px;
+    height: 72px;
     overflow: hidden;
     touch-action: none;
     pointer-events: none;
@@ -401,46 +406,33 @@
     pointer-events: auto;
   }
 
-  /* ── Scroll arrows ── */
-  .sdb-arrow {
+  /* ── Scroll track + thumb ── */
+  .sdb-track {
     position: absolute;
-    top: 50%;
-    translate: 0 -50%;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--bg-base);
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow-sm);
-    z-index: 2;
+    bottom: 6px;
+    left: 10px;
+    right: 10px;
+    height: 3px;
+    background: color-mix(in srgb, var(--border) 80%, transparent);
+    border-radius: 2px;
     pointer-events: none;
     opacity: 0;
-    scale: 0.7;
-    transition:
-      opacity      0.22s ease,
-      scale        0.22s ease,
-      background   var(--transition-fast),
-      color        var(--transition-fast);
+    transition: opacity 0.22s ease;
   }
 
-  .open .sdb-arrow {
-    opacity: 1;
-    scale: 1;
-    pointer-events: auto;
-  }
+  .open .sdb-track { opacity: 1; }
 
-  .sdb-arrow:hover {
-    background: var(--bg-hover);
-    color: var(--text-base);
+  .sdb-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--thumb-w);
+    translate: var(--thumb-x) 0;
+    background: var(--primary);
+    border-radius: 2px;
+    will-change: translate;
   }
-
-  .sdb-arrow--left  { left: 2px; }
-  .sdb-arrow--right { right: 2px; }
 
   /* ── Items ──────────────────────────────────────────────────────────────
      `translate` updates instantly for real-time scroll tracking.
@@ -498,6 +490,7 @@
   .open .sdb-item.active:hover {
     background: var(--primary-subtle);
   }
+
 
   .sdb-item.has-children::after {
     content: '';
