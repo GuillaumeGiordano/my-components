@@ -9,6 +9,7 @@
     title,
     description,
     members,
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
@@ -20,10 +21,12 @@
       avatar?: string;
       links?: Array<{ icon: Component; href: string; label: string }>;
     }>;
+    withBackground?: "bg-base" | "";
   } = $props();
+
 </script>
 
-<section class="team">
+<section class="team {withBackground}">
   <div class="team-inner">
     <!-- Header -->
     <div class="section-header">
@@ -217,4 +220,6 @@
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

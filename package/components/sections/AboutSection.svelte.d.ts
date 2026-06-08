@@ -19,6 +19,7 @@ type $$ComponentProps = {
     };
     imagePosition?: 'right' | 'left';
     visual?: Snippet;
+    withBackground?: "bg-base" | "";
 };
 declare const AboutSection: Component<$$ComponentProps, {}, "">;
 type AboutSection = ReturnType<typeof AboutSection>;

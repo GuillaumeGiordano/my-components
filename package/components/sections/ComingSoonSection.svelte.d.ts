@@ -6,6 +6,7 @@ type $$ComponentProps = {
     emailPlaceholder?: string;
     ctaLabel?: string;
     onsubmit?: (email: string) => void;
+    withBackground?: "bg-base" | "";
 };
 declare const ComingSoonSection: import("svelte").Component<$$ComponentProps, {}, "">;
 type ComingSoonSection = ReturnType<typeof ComingSoonSection>;

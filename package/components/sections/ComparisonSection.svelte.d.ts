@@ -18,6 +18,7 @@ type $$ComponentProps = {
         tooltip?: string;
         values: Array<string | boolean | null>;
     }>;
+    withBackground?: "bg-base" | "";
 };
 declare const ComparisonSection: Component<$$ComponentProps, {}, "">;
 type ComparisonSection = ReturnType<typeof ComparisonSection>;

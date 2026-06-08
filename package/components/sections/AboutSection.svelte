@@ -13,6 +13,7 @@
     secondaryCta,
     imagePosition = 'right',
     visual,
+    withBackground = "",
   }: {
     badge?: string;
     eyebrow?: string;
@@ -23,10 +24,12 @@
     secondaryCta?: { label: string; href: string };
     imagePosition?: 'right' | 'left';
     visual?: Snippet;
+    withBackground?: "bg-base" | "";
   } = $props();
+
 </script>
 
-<section class="about" class:image-left={imagePosition === 'left'}>
+<section class="about {withBackground}" class:image-left={imagePosition === 'left'}>
   <div class="about-inner">
 
     <div class="text-side">
@@ -195,4 +198,6 @@
     .about.image-left .text-side  { order: 1; }
     .about.image-left .visual-side { order: 2; }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

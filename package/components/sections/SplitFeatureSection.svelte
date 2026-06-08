@@ -15,13 +15,16 @@
 	};
 
 	let {
-		features
+		features,
+		withBackground = "",
 	}: {
 		features: Feature[];
+		withBackground?: "bg-base" | "";
 	} = $props();
+
 </script>
 
-<div class="split-feature-section">
+<div class="split-feature-section {withBackground}">
 	{#each features as feature, i}
 		<!-- imageFirst prop takes priority; fallback: alternate by index (even = text left) -->
 		{@const imageLeft = feature.imageFirst ?? i % 2 === 1}
@@ -170,4 +173,6 @@
 			order: 2;
 		}
 	}
+
+	.withBackground { background: var(--bg-base); }
 </style>

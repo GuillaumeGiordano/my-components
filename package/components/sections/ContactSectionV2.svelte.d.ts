@@ -18,6 +18,7 @@ type $$ComponentProps = {
         subject?: string;
         message: string;
     }) => Promise<void> | void;
+    withBackground?: "bg-base" | "";
 };
 declare const ContactSectionV2: Component<$$ComponentProps, {}, "">;
 type ContactSectionV2 = ReturnType<typeof ContactSectionV2>;

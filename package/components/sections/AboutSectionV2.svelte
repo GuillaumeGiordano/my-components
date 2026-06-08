@@ -11,6 +11,7 @@
     stats,
     values,
     columns = 2,
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
@@ -18,7 +19,9 @@
     stats?: Array<{ value: string; label: string; prefix?: string; suffix?: string }>;
     values?: Array<{ icon: Component; title: string; description: string }>;
     columns?: 2 | 3 | 4;
+    withBackground?: "bg-base" | "";
   } = $props();
+
 
   let sectionEl: HTMLElement | null = $state(null);
   let displayValues: string[] = $state((stats ?? []).map(() => '0'));
@@ -62,7 +65,7 @@
   });
 </script>
 
-<section class="about-v2" bind:this={sectionEl}>
+<section class="about-v2 {withBackground}" bind:this={sectionEl}>
   <div class="inner">
 
     <!-- Header -->
@@ -260,4 +263,6 @@
     .values-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
     .values-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

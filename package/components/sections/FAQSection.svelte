@@ -8,20 +8,23 @@
     description,
     faqs,
     columns = 1,
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
     description?: string;
     faqs: Array<{ question: string; answer: string }>;
     columns?: 1 | 2;
+    withBackground?: "bg-base" | "";
   } = $props();
+
 
   // Split faqs into columns for 2-col layout
   const leftFaqs = $derived(columns === 2 ? faqs.filter((_, i) => i % 2 === 0) : faqs);
   const rightFaqs = $derived(columns === 2 ? faqs.filter((_, i) => i % 2 !== 0) : []);
 </script>
 
-<section class="faq">
+<section class="faq {withBackground}">
   <div class="faq-inner">
     <!-- Header -->
     <div class="section-header">
@@ -170,4 +173,6 @@
       grid-template-columns: 1fr;
     }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

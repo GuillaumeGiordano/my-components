@@ -12,6 +12,7 @@ type $$ComponentProps = {
         title: string;
         description: string;
     }>;
+    withBackground?: "bg-base" | "";
 };
 declare const AboutSectionV3: import("svelte").Component<$$ComponentProps, {}, "">;
 type AboutSectionV3 = ReturnType<typeof AboutSectionV3>;

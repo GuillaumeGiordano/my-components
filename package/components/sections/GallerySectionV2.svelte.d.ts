@@ -10,6 +10,7 @@ type $$ComponentProps = {
     }>;
     columns?: 2 | 3 | 4;
     layout?: 'grid' | 'masonry' | 'featured';
+    withBackground?: "bg-base" | "";
 };
 declare const GallerySectionV2: import("svelte").Component<$$ComponentProps, {}, "">;
 type GallerySectionV2 = ReturnType<typeof GallerySectionV2>;

@@ -19,6 +19,7 @@
     secondaryCta,
     stats,
     cards = [],
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
@@ -28,7 +29,9 @@
     secondaryCta?: { label: string; href: string };
     stats?: Array<{ value: string; suffix?: string; label: string }>;
     cards?: PremiumCard[];
+    withBackground?: "bg-base" | "";
   } = $props();
+
 
   // Split title words for staggered reveal
   const words = $derived(
@@ -132,7 +135,7 @@
   });
 </script>
 
-<section class="premium" bind:this={sectionEl}>
+<section class="premium {withBackground}" bind:this={sectionEl}>
 
   <!-- ── Animated background ── -->
   <div class="bg" aria-hidden="true">
@@ -646,4 +649,6 @@
     .bento { grid-template-columns: 1fr; }
     .bento-card.large { grid-row: auto; }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

@@ -7,6 +7,7 @@ type $$ComponentProps = {
         answer: string;
     }>;
     columns?: 1 | 2;
+    withBackground?: "bg-base" | "";
 };
 declare const FAQSection: import("svelte").Component<$$ComponentProps, {}, "">;
 type FAQSection = ReturnType<typeof FAQSection>;

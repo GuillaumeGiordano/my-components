@@ -8,6 +8,7 @@
     description,
     cards = [],
     columns = 3,
+    withBackground = "",
   }: {
     badge?: string;
     title?: string;
@@ -20,10 +21,12 @@
       href?: string;
     }>;
     columns?: 2 | 3 | 4;
+    withBackground?: "bg-base" | "";
   } = $props();
+
 </script>
 
-<section class="image-cards-section">
+<section class="image-cards-section {withBackground}">
   {#if badge || title || description}
     <div class="section-header">
       {#if badge}
@@ -222,4 +225,6 @@
       padding: 28px 24px;
     }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

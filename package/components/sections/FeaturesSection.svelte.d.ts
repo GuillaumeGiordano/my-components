@@ -10,6 +10,7 @@ type $$ComponentProps = {
         badge?: string;
     }>;
     columns?: 2 | 3 | 4;
+    withBackground?: "bg-base" | "";
 };
 declare const FeaturesSection: Component<$$ComponentProps, {}, "">;
 type FeaturesSection = ReturnType<typeof FeaturesSection>;

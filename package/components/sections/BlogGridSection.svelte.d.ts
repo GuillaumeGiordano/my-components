@@ -19,6 +19,7 @@ type $$ComponentProps = {
     showCta?: boolean;
     ctaLabel?: string;
     ctaHref?: string;
+    withBackground?: "bg-base" | "";
 };
 declare const BlogGridSection: import("svelte").Component<$$ComponentProps, {}, "">;
 type BlogGridSection = ReturnType<typeof BlogGridSection>;

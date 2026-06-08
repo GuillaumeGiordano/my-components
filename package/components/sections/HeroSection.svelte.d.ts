@@ -1,4 +1,4 @@
-import type { Snippet } from 'svelte';
+import type { Snippet } from "svelte";
 type $$ComponentProps = {
     badge?: string;
     title: string;
@@ -12,7 +12,8 @@ type $$ComponentProps = {
         label: string;
         href: string;
     };
-    align?: 'left' | 'center';
+    align?: "left" | "center";
+    withBackground?: "bg-base" | "";
     visual?: Snippet;
 };
 declare const HeroSection: import("svelte").Component<$$ComponentProps, {}, "">;

@@ -9,6 +9,7 @@
     description,
     steps,
     layout = 'horizontal',
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
@@ -20,10 +21,12 @@
       badge?: string;
     }>;
     layout?: 'horizontal' | 'vertical';
+    withBackground?: "bg-base" | "";
   } = $props();
+
 </script>
 
-<section class="process">
+<section class="process {withBackground}">
   <div class="process-inner">
     <!-- Section header -->
     <div class="section-header">
@@ -339,4 +342,6 @@
       transform: none;
     }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

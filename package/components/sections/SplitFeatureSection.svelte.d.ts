@@ -13,6 +13,7 @@ type Feature = {
 };
 type $$ComponentProps = {
     features: Feature[];
+    withBackground?: "bg-base" | "";
 };
 declare const SplitFeatureSection: import("svelte").Component<$$ComponentProps, {}, "">;
 type SplitFeatureSection = ReturnType<typeof SplitFeatureSection>;

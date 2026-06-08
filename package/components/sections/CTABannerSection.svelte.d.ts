@@ -11,6 +11,7 @@ type $$ComponentProps = {
         href: string;
     };
     variant?: 'default' | 'primary' | 'dark';
+    withBackground?: "bg-base" | "";
 };
 declare const CTABannerSection: import("svelte").Component<$$ComponentProps, {}, "">;
 type CTABannerSection = ReturnType<typeof CTABannerSection>;

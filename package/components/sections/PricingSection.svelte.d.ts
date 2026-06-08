@@ -13,6 +13,7 @@ type $$ComponentProps = {
         highlighted?: boolean;
         badge?: string;
     }>;
+    withBackground?: "bg-base" | "";
 };
 declare const PricingSection: import("svelte").Component<$$ComponentProps, {}, "">;
 type PricingSection = ReturnType<typeof PricingSection>;

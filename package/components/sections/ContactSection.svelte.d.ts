@@ -16,6 +16,7 @@ type $$ComponentProps = {
         message: string;
     }) => Promise<void> | void;
     variant?: 'split' | 'centered';
+    withBackground?: "bg-base" | "";
 };
 declare const ContactSection: Component<$$ComponentProps, {}, "">;
 type ContactSection = ReturnType<typeof ContactSection>;

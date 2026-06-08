@@ -11,6 +11,7 @@ type $$ComponentProps = {
     current?: number;
     onComplete?: () => void;
     onSkip?: () => void;
+    withBackground?: "bg-base" | "";
 };
 declare const OnboardingSection: Component<$$ComponentProps, {}, "current">;
 type OnboardingSection = ReturnType<typeof OnboardingSection>;

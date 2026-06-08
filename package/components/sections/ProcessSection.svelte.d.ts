@@ -10,6 +10,7 @@ type $$ComponentProps = {
         badge?: string;
     }>;
     layout?: 'horizontal' | 'vertical';
+    withBackground?: "bg-base" | "";
 };
 declare const ProcessSection: Component<$$ComponentProps, {}, "">;
 type ProcessSection = ReturnType<typeof ProcessSection>;

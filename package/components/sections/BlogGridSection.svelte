@@ -14,6 +14,7 @@
     showCta = false,
     ctaLabel = 'Voir tous les articles',
     ctaHref,
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
@@ -32,10 +33,12 @@
     showCta?: boolean;
     ctaLabel?: string;
     ctaHref?: string;
+    withBackground?: "bg-base" | "";
   } = $props();
+
 </script>
 
-<section class="blog-grid">
+<section class="blog-grid {withBackground}">
   <div class="blog-grid-inner">
     <!-- Section header -->
     <div class="section-header">
@@ -375,4 +378,6 @@
       display: flex;
     }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

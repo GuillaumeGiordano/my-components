@@ -7,6 +7,7 @@
     logos,
     marquee = false,
     variant = 'default',
+    withBackground = "",
   }: {
     badge?: string;
     title?: string;
@@ -18,13 +19,15 @@
     }>;
     marquee?: boolean;
     variant?: 'default' | 'muted';
+    withBackground?: "bg-base" | "";
   } = $props();
+
 
   // Duplicate logos for seamless marquee loop
   const marqueeLogos = $derived([...logos, ...logos]);
 </script>
 
-<section class="logo-cloud variant-{variant}">
+<section class="logo-cloud variant-{variant} {withBackground}">
   <div class="logo-cloud-inner">
     {#if badge || title}
       <div class="section-header">
@@ -249,4 +252,6 @@
       font-size: 15px;
     }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

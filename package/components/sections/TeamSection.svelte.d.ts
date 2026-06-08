@@ -14,6 +14,7 @@ type $$ComponentProps = {
             label: string;
         }>;
     }>;
+    withBackground?: "bg-base" | "";
 };
 declare const TeamSection: Component<$$ComponentProps, {}, "">;
 type TeamSection = ReturnType<typeof TeamSection>;

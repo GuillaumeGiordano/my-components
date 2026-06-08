@@ -8,6 +8,7 @@ type $$ComponentProps = {
         caption?: string;
     }>;
     columns?: 2 | 3 | 4;
+    withBackground?: "bg-base" | "";
 };
 declare const GallerySection: import("svelte").Component<$$ComponentProps, {}, "">;
 type GallerySection = ReturnType<typeof GallerySection>;

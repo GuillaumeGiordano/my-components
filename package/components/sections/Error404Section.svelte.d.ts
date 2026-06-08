@@ -12,6 +12,7 @@ type $$ComponentProps = {
         href?: string;
         onclick?: () => void;
     };
+    withBackground?: "bg-base" | "";
 };
 declare const Error404Section: import("svelte").Component<$$ComponentProps, {}, "">;
 type Error404Section = ReturnType<typeof Error404Section>;

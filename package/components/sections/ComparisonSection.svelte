@@ -11,6 +11,7 @@
     description,
     plans,
     features,
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
@@ -27,10 +28,12 @@
       tooltip?: string;
       values: Array<string | boolean | null>;
     }>;
+    withBackground?: "bg-base" | "";
   } = $props();
+
 </script>
 
-<section class="comparison">
+<section class="comparison {withBackground}">
   <div class="comparison-inner">
     <!-- Section header -->
     <div class="section-header">
@@ -348,4 +351,6 @@
       border-radius: var(--radius-lg);
     }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

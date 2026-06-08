@@ -9,6 +9,7 @@ type $$ComponentProps = {
         prefix?: string;
         suffix?: string;
     }>;
+    withBackground?: "bg-base" | "";
 };
 declare const StatsSection: import("svelte").Component<$$ComponentProps, {}, "">;
 type StatsSection = ReturnType<typeof StatsSection>;

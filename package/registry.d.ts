@@ -6,6 +6,8 @@ export type ComponentEntry = {
 export type ComponentCategory = {
     slug: string;
     label: string;
+    /** Route prefix override — defaults to slug if omitted. */
+    baseSlug?: string;
     components: ComponentEntry[];
 };
 export declare const categories: ComponentCategory[];

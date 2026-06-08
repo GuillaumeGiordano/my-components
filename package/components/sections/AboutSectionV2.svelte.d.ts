@@ -15,6 +15,7 @@ type $$ComponentProps = {
         description: string;
     }>;
     columns?: 2 | 3 | 4;
+    withBackground?: "bg-base" | "";
 };
 declare const AboutSectionV2: Component<$$ComponentProps, {}, "">;
 type AboutSectionV2 = ReturnType<typeof AboutSectionV2>;

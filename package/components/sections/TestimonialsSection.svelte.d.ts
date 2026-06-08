@@ -11,6 +11,7 @@ type $$ComponentProps = {
         rating?: number;
     }>;
     addClass?: string;
+    withBackground?: "bg-base" | "";
 };
 declare const TestimonialsSection: import("svelte").Component<$$ComponentProps, {}, "">;
 type TestimonialsSection = ReturnType<typeof TestimonialsSection>;

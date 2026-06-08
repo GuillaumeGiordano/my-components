@@ -20,7 +20,8 @@
 		stores,
 		visual,
 		stats,
-		align = 'center'
+		align = 'center',
+		withBackground = "",
 	}: {
 		badge?: string;
 		title: string;
@@ -29,7 +30,9 @@
 		visual?: Snippet;
 		stats?: Array<{ value: string; label: string }>;
 		align?: 'center' | 'split';
+		withBackground?: "bg-base" | "";
 	} = $props();
+
 
 	// Fallback icon per platform
 	function platformIcon(store: Store): Component {
@@ -56,7 +59,7 @@
 	}
 </script>
 
-<section class="download-section" class:split={align === 'split'}>
+<section class="download-section {withBackground}" class:split={align === 'split'}>
 	<div class="container" class:split-layout={align === 'split'}>
 		<!-- Text + actions block -->
 		<div class="content" class:centered={align === 'center'}>
@@ -305,4 +308,6 @@
 			min-width: 150px;
 		}
 	}
+
+	.withBackground { background: var(--bg-base); }
 </style>

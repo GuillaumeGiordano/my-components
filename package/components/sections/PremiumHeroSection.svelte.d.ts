@@ -24,6 +24,7 @@ type $$ComponentProps = {
         label: string;
     }>;
     cards?: PremiumCard[];
+    withBackground?: "bg-base" | "";
 };
 declare const PremiumHeroSection: Component<$$ComponentProps, {}, "">;
 type PremiumHeroSection = ReturnType<typeof PremiumHeroSection>;

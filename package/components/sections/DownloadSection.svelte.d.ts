@@ -18,6 +18,7 @@ type $$ComponentProps = {
         label: string;
     }>;
     align?: 'center' | 'split';
+    withBackground?: "bg-base" | "";
 };
 declare const DownloadSection: Component<$$ComponentProps, {}, "">;
 type DownloadSection = ReturnType<typeof DownloadSection>;

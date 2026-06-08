@@ -12,6 +12,7 @@
     stats,
     align = 'center',
     visual,
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
@@ -22,7 +23,9 @@
     stats?: { value: string; label: string }[];
     align?: 'left' | 'center';
     visual?: Snippet;
+    withBackground?: "bg-base" | "";
   } = $props();
+
 
   function buildTitleParts(t: string, h?: string) {
     if (!h) return { before: t, hl: '', after: '' };
@@ -34,7 +37,7 @@
   const parts = $derived(buildTitleParts(title, highlight));
 </script>
 
-<section class="hero align-{align}">
+<section class="hero align-{align} {withBackground}">
   <!-- Decorative grid -->
   <div class="grid-overlay" aria-hidden="true"></div>
 
@@ -456,4 +459,6 @@
     .stats-divider { display: none; }
     .hero-stats { gap: 16px 28px; }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

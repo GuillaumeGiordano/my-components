@@ -19,6 +19,7 @@ type $$ComponentProps = {
         href: string;
     };
     columns?: 2 | 3 | 4;
+    withBackground?: "bg-base" | "";
 };
 declare const IntegrationsSection: Component<$$ComponentProps, {}, "">;
 type IntegrationsSection = ReturnType<typeof IntegrationsSection>;

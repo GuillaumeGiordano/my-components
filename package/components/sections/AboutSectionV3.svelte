@@ -8,16 +8,19 @@
     story,
     author,
     milestones,
+    withBackground = "",
   }: {
     badge?: string;
     title?: string;
     story: string;
     author?: { name: string; role: string; avatar?: string };
     milestones?: Array<{ year: string; title: string; description: string }>;
+    withBackground?: "bg-base" | "";
   } = $props();
+
 </script>
 
-<section class="about-v3">
+<section class="about-v3 {withBackground}">
   <div class="inner">
 
     <!-- Story side -->
@@ -232,4 +235,6 @@
     from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: none; }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

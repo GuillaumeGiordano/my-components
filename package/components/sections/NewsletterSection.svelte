@@ -13,6 +13,7 @@
     hint,
     onsubmit,
     variant = 'default',
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
@@ -22,7 +23,9 @@
     hint?: string;
     onsubmit?: (email: string) => void;
     variant?: 'default' | 'card';
+    withBackground?: "bg-base" | "";
   } = $props();
+
 
   let email = $state('');
   let submitted = $state(false);
@@ -51,7 +54,7 @@
   }
 </script>
 
-<section class="newsletter variant-{variant}">
+<section class="newsletter variant-{variant} {withBackground}">
   <div class="newsletter-inner">
     {#if variant === 'card'}
       <Card padding="lg">
@@ -289,4 +292,6 @@
       justify-content: center;
     }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

@@ -18,6 +18,7 @@ type $$ComponentProps = {
     }[];
     align?: 'left' | 'center';
     visual?: Snippet;
+    withBackground?: "bg-base" | "";
 };
 declare const HeroSectionV2: import("svelte").Component<$$ComponentProps, {}, "">;
 type HeroSectionV2 = ReturnType<typeof HeroSectionV2>;

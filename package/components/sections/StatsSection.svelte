@@ -7,6 +7,7 @@
     title,
     description,
     stats,
+    withBackground = "",
   }: {
     badge?: string;
     title?: string;
@@ -18,7 +19,9 @@
       prefix?: string;
       suffix?: string;
     }>;
+    withBackground?: "bg-base" | "";
   } = $props();
+
 
   // Track animated display values for each stat
   let displayValues: string[] = $state(stats.map(() => '0'));
@@ -93,7 +96,7 @@
   });
 </script>
 
-<section class="stats" bind:this={sectionEl}>
+<section class="stats {withBackground}" bind:this={sectionEl}>
   <div class="stats-inner">
     <!-- Optional header -->
     {#if badge || title || description}
@@ -262,4 +265,6 @@
       padding: 28px 16px;
     }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

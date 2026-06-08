@@ -9,6 +9,7 @@
     description,
     features,
     columns = 3,
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
@@ -20,10 +21,12 @@
       badge?: string;
     }>;
     columns?: 2 | 3 | 4;
+    withBackground?: "bg-base" | "";
   } = $props();
+
 </script>
 
-<section class="features">
+<section class="features {withBackground}">
   <div class="features-inner">
     <!-- Section header -->
     <div class="section-header">
@@ -180,4 +183,6 @@
       grid-template-columns: 1fr;
     }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

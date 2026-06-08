@@ -9,6 +9,7 @@
     description,
     testimonials,
     addClass,
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
@@ -22,7 +23,9 @@
       rating?: number;
     }>;
     addClass?: string;
+    withBackground?: "bg-base" | "";
   } = $props();
+
 
   // Build an array of 5 stars filled/empty
   function stars(rating: number): boolean[] {
@@ -30,7 +33,7 @@
   }
 </script>
 
-<section class="testimonials {addClass}">
+<section class="testimonials {addClass} {withBackground}">
   <div class="testimonials-inner">
     <!-- Header -->
     <div class="section-header">
@@ -216,4 +219,6 @@
       columns: 1;
     }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

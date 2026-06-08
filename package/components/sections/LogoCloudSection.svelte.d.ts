@@ -9,6 +9,7 @@ type $$ComponentProps = {
     }>;
     marquee?: boolean;
     variant?: 'default' | 'muted';
+    withBackground?: "bg-base" | "";
 };
 declare const LogoCloudSection: import("svelte").Component<$$ComponentProps, {}, "">;
 type LogoCloudSection = ReturnType<typeof LogoCloudSection>;
