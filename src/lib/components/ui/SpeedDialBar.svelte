@@ -12,8 +12,13 @@
     label: string;
     onclick?: () => void;
     active?: boolean;
-
     children?: SpeedDialBarSubItem[];
+  };
+
+  export type SpeedDialBarAction = {
+    icon: Component;
+    label: string;
+    onclick?: () => void;
   };
 </script>
 
@@ -24,15 +29,24 @@
 
   let {
     items = [],
+    actions = [],
     icon: TriggerIcon = Settings,
     nVisible = 5,
   }: {
     items?: SpeedDialBarItem[];
+    /** Buttons that appear vertically above the FAB when open. */
+    actions?: SpeedDialBarAction[];
     /** FAB trigger icon. */
     icon?: Component;
     /** Number of item slots visible simultaneously. */
     nVisible?: number;
   } = $props();
+
+  let open = $state(false);
+  let scrollPos = $state(0);
+  let openSubIdx = $state(-1);
+  let subAnchorX = $state(0);
+  let subAnchorBottom = $state(0);
 
   // ── Geometry ──────────────────────────────────────────────────────────
   const ITEM_SIZE = 48;
@@ -43,19 +57,14 @@
   const clipWidth = $derived(nVisible * ITEM_STEP + ITEM_GAP);
 
   // Scrollbar thumb geometry
+  const count = $derived(items.length);
+
   const trackWidth = $derived(count > 0 ? clipWidth - 2 * ITEM_GAP : 0);
   const thumbW = $derived(count > 0 ? trackWidth / count : 0);
   const thumbX = $derived(
     count > 0 ? (((scrollPos % count) + count) % count) * thumbW : 0,
   );
 
-  let open = $state(false);
-  let scrollPos = $state(0);
-  let openSubIdx = $state(-1);
-  let subAnchorX = $state(0);
-  let subAnchorBottom = $state(0);
-
-  const count = $derived(items.length);
   const itemsPerPx = 1 / ITEM_STEP;
 
   function slotItem(k: number): number {
@@ -313,6 +322,29 @@
     </div>
   </div>
 
+  <!-- Vertical action buttons — appear above the FAB -->
+  {#if actions.length > 0}
+    <div class="sdb-actions">
+      {#each actions as action, i}
+        {@const delay = open ? i * 50 : (actions.length - 1 - i) * 35}
+        <div class="sdb-action" style="--delay:{delay}ms">
+          <span class="sdb-action-label">{action.label}</span>
+          <button
+            type="button"
+            class="sdb-action-btn"
+            aria-label={action.label}
+            onclick={() => {
+              toggleOpen();
+              action.onclick?.();
+            }}
+          >
+            <action.icon size={20} />
+          </button>
+        </div>
+      {/each}
+    </div>
+  {/if}
+
   <!-- FAB — sits above the pill (z-index: 1) -->
   <button
     type="button"
@@ -558,6 +590,97 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     line-height: 1;
+  }
+
+  /* ── Vertical actions above FAB ── */
+  .sdb-actions {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    right: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 8px;
+    align-items: flex-end;
+    pointer-events: none;
+  }
+
+  .sdb-action {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    scale: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      scale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) var(--delay, 0ms),
+      opacity 0.22s ease var(--delay, 0ms);
+  }
+
+  .open .sdb-actions {
+    pointer-events: auto;
+  }
+
+  .open .sdb-action {
+    scale: 1;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .sdb-action-btn {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--bg-base);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast),
+      box-shadow var(--transition-fast),
+      scale var(--transition-fast);
+
+    &:hover {
+      background: var(--bg-hover);
+      color: var(--text-base);
+      scale: 1.1;
+      box-shadow: var(--shadow-lg);
+    }
+  }
+
+  .sdb-action-label {
+    position: relative;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--font-sans);
+    white-space: nowrap;
+    background: var(--text-heading);
+    color: var(--bg-base);
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    pointer-events: none;
+    user-select: none;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 5px solid transparent;
+      border-left-color: var(--text-heading);
+    }
+  }
+
+  .sdb-action:hover .sdb-action-label {
+    opacity: 1;
   }
 
   /* ── FAB ── */
