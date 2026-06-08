@@ -11,6 +11,7 @@
     description,
     images,
     columns = 3,
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
@@ -21,7 +22,9 @@
       caption?: string;
     }>;
     columns?: 2 | 3 | 4;
+    withBackground?: "bg-base" | "";
   } = $props();
+
 
   // Track which image is open in the lightbox
   let selectedIndex: number = $state(0);
@@ -57,7 +60,7 @@
   const current = $derived(images[selectedIndex]);
 </script>
 
-<section class="gallery">
+<section class="gallery {withBackground}">
   <div class="gallery-inner">
     <!-- Header -->
     <div class="section-header">
@@ -289,4 +292,6 @@
       grid-template-columns: 1fr;
     }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

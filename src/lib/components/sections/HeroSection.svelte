@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte';
-  import Button from '$lib/components/buttons/Button.svelte';
-  import Badge from '$lib/components/ui/Badge.svelte';
+  import type { Snippet } from "svelte";
+  import Button from "$lib/components/buttons/Button.svelte";
+  import Badge from "$lib/components/ui/Badge.svelte";
 
   let {
     badge,
@@ -10,7 +10,8 @@
     description,
     primaryCta,
     secondaryCta,
-    align = 'center',
+    align = "center",
+    withBackground = "",
     visual,
   }: {
     badge?: string;
@@ -19,22 +20,26 @@
     description: string;
     primaryCta?: { label: string; href: string };
     secondaryCta?: { label: string; href: string };
-    align?: 'left' | 'center';
+    align?: "left" | "center";
+    withBackground?: "bg-base" | "";
     visual?: Snippet;
   } = $props();
 
   // Split the title around the highlight word(s) to colorize it
-  function buildTitleParts(t: string, h?: string): { before: string; hl: string; after: string } {
-    if (!h) return { before: t, hl: '', after: '' };
+  function buildTitleParts(
+    t: string,
+    h?: string,
+  ): { before: string; hl: string; after: string } {
+    if (!h) return { before: t, hl: "", after: "" };
     const idx = t.indexOf(h);
-    if (idx === -1) return { before: t, hl: '', after: '' };
+    if (idx === -1) return { before: t, hl: "", after: "" };
     return { before: t.slice(0, idx), hl: h, after: t.slice(idx + h.length) };
   }
 
   const parts = $derived(buildTitleParts(title, highlight));
 </script>
 
-<section class="hero align-{align}">
+<section class="hero {withBackground} align-{align}">
   <div class="hero-inner">
     <div class="hero-content">
       {#if badge}
@@ -44,7 +49,8 @@
       {/if}
 
       <h1 class="hero-title">
-        {parts.before}{#if parts.hl}<span class="highlight">{parts.hl}</span>{/if}{parts.after}
+        {parts.before}{#if parts.hl}<span class="highlight">{parts.hl}</span
+          >{/if}{parts.after}
       </h1>
 
       <p class="hero-description">{description}</p>
@@ -65,14 +71,14 @@
       {/if}
     </div>
 
-    {#if visual && align === 'left'}
+    {#if visual && align === "left"}
       <div class="hero-visual">
         {@render visual()}
       </div>
     {/if}
   </div>
 
-  {#if visual && align === 'center'}
+  {#if visual && align === "center"}
     <div class="hero-visual-center">
       {@render visual()}
     </div>
@@ -84,15 +90,22 @@
     padding: 96px 24px 80px;
     position: relative;
     overflow: hidden;
+  }
+
+  .withBackground {
     background: var(--bg-base);
   }
 
   /* Subtle radial gradient in the background */
   .hero::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 80% 50% at 50% -10%, color-mix(in srgb, var(--primary) 12%, transparent), transparent);
+    background: radial-gradient(
+      ellipse 80% 50% at 50% -10%,
+      color-mix(in srgb, var(--primary) 12%, transparent),
+      transparent
+    );
     pointer-events: none;
     z-index: 0;
   }

@@ -22,7 +22,8 @@
 		description,
 		integrations,
 		cta,
-		columns = 4
+		columns = 4,
+		withBackground = "",
 	}: {
 		badge?: string;
 		title: string;
@@ -30,7 +31,9 @@
 		integrations: Integration[];
 		cta?: { label: string; href: string };
 		columns?: 2 | 3 | 4;
+		withBackground?: "bg-base" | "";
 	} = $props();
+
 
 	// Map status to Badge variant and label
 	function statusBadge(status: IntegrationStatus): { variant: 'success' | 'warning' | 'default'; label: string } {
@@ -40,7 +43,7 @@
 	}
 </script>
 
-<section class="integrations-section">
+<section class="integrations-section {withBackground}">
 	<div class="container">
 		<!-- Section header -->
 		<div class="section-header">
@@ -255,4 +258,6 @@
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
+
+	.withBackground { background: var(--bg-base); }
 </style>

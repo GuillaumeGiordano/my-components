@@ -11,6 +11,7 @@
     images,
     columns = 3,
     layout = 'grid',
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
@@ -23,7 +24,9 @@
     }>;
     columns?: 2 | 3 | 4;
     layout?: 'grid' | 'masonry' | 'featured';
+    withBackground?: "bg-base" | "";
   } = $props();
+
 
   const allCategories = $derived(
     [...new Set(images.map(img => img.category).filter((c): c is string => !!c))]
@@ -76,7 +79,7 @@
   const showDots = $derived(filteredImages.length <= 10);
 </script>
 
-<section class="gallery">
+<section class="gallery {withBackground}">
   <div class="gallery-inner">
 
     <!-- Header -->
@@ -630,4 +633,6 @@
     .lightbox-prev { left: 8px; }
     .lightbox-next { right: 8px; }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

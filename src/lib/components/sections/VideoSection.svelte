@@ -10,7 +10,8 @@
 		thumbnailSrc,
 		thumbnailAlt = 'Aperçu de la vidéo',
 		aspectRatio = '16/9',
-		autoplay = false
+		autoplay = false,
+		withBackground = "",
 	}: {
 		badge?: string;
 		title: string;
@@ -20,7 +21,9 @@
 		thumbnailAlt?: string;
 		aspectRatio?: '16/9' | '4/3' | '1/1';
 		autoplay?: boolean;
+		withBackground?: "bg-base" | "";
 	} = $props();
+
 
 	let playing = $state(false);
 
@@ -36,7 +39,7 @@
 	}
 </script>
 
-<section class="video-section">
+<section class="video-section {withBackground}">
 	<div class="container">
 		<!-- Section header -->
 		<div class="section-header">
@@ -214,4 +217,6 @@
 			padding: 64px 16px;
 		}
 	}
+
+	.withBackground { background: var(--bg-base); }
 </style>

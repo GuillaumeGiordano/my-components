@@ -14,6 +14,7 @@
     info,
     onsubmit,
     variant = 'split',
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
@@ -26,7 +27,9 @@
     }>;
     onsubmit?: (data: { name: string; email: string; subject?: string; message: string }) => Promise<void> | void;
     variant?: 'split' | 'centered';
+    withBackground?: "bg-base" | "";
   } = $props();
+
 
   // Form state
   let name = $state('');
@@ -77,7 +80,7 @@
   }
 </script>
 
-<section class="contact variant-{variant}">
+<section class="contact variant-{variant} {withBackground}">
   <div class="contact-inner">
     {#if variant === 'split'}
       <!-- Split layout: info on the left, form on the right -->
@@ -407,4 +410,6 @@
       width: 100%;
     }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

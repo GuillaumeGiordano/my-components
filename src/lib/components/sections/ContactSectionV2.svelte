@@ -15,6 +15,7 @@
     mapSrc,
     mapLabel = 'Notre localisation',
     onsubmit,
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
@@ -34,7 +35,9 @@
       subject?: string;
       message: string;
     }) => Promise<void> | void;
+    withBackground?: "bg-base" | "";
   } = $props();
+
 
   let name    = $state('');
   let email   = $state('');
@@ -77,7 +80,7 @@
   }
 </script>
 
-<section class="contact-v2">
+<section class="contact-v2 {withBackground}">
   <div class="contact-grid">
 
     <!-- ── Left column : header + infos + form ── -->
@@ -474,4 +477,6 @@
       width: 100%;
     }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

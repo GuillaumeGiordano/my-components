@@ -7,16 +7,19 @@
 		description = "Désolé, la page que vous recherchez n'existe pas ou a été déplacée.",
 		cta = { label: "Retour à l'accueil", href: '/' },
 		secondaryCta,
+		withBackground = "",
 	}: {
 		code?: string;
 		title?: string;
 		description?: string;
 		cta?: { label: string; href?: string; onclick?: () => void };
 		secondaryCta?: { label: string; href?: string; onclick?: () => void };
+		withBackground?: "bg-base" | "";
 	} = $props();
+
 </script>
 
-<section class="error-section">
+<section class="error-section {withBackground}">
 	<div class="error-inner">
 		<p class="error-code" aria-hidden="true">{code}</p>
 		<h1 class="error-title">{title}</h1>
@@ -85,4 +88,6 @@
 		justify-content: center;
 		margin-top: 4px;
 	}
+
+	.withBackground { background: var(--bg-base); }
 </style>

@@ -8,6 +8,7 @@
     title,
     description,
     plans,
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
@@ -23,10 +24,12 @@
       highlighted?: boolean;
       badge?: string;
     }>;
+    withBackground?: "bg-base" | "";
   } = $props();
+
 </script>
 
-<section class="pricing">
+<section class="pricing {withBackground}">
   <div class="pricing-inner">
     <!-- Section header -->
     <div class="section-header">
@@ -323,4 +326,6 @@
       }
     }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

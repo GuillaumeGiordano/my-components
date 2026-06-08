@@ -9,6 +9,7 @@
     primaryCta,
     secondaryCta,
     variant = 'default',
+    withBackground = "",
   }: {
     badge?: string;
     title: string;
@@ -16,10 +17,12 @@
     primaryCta?: { label: string; href: string };
     secondaryCta?: { label: string; href: string };
     variant?: 'default' | 'primary' | 'dark';
+    withBackground?: "bg-base" | "";
   } = $props();
+
 </script>
 
-<section class="cta-banner variant-{variant}">
+<section class="cta-banner variant-{variant} {withBackground}">
   <div class="cta-inner">
     {#if badge}
       <div class="cta-badge">
@@ -182,4 +185,6 @@
       padding: 64px 20px;
     }
   }
+
+  .withBackground { background: var(--bg-base); }
 </style>

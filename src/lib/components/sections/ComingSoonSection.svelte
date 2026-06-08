@@ -11,6 +11,7 @@
 		emailPlaceholder = 'Votre e-mail…',
 		ctaLabel = "M'inscrire",
 		onsubmit,
+		withBackground = "",
 	}: {
 		badge?: string;
 		title?: string;
@@ -19,7 +20,9 @@
 		emailPlaceholder?: string;
 		ctaLabel?: string;
 		onsubmit?: (email: string) => void;
+		withBackground?: "bg-base" | "";
 	} = $props();
+
 
 	let email   = $state('');
 	let sent    = $state(false);
@@ -58,7 +61,7 @@
 	}
 </script>
 
-<section class="cs-section">
+<section class="cs-section {withBackground}">
 	<div class="cs-inner">
 		{#if badge}
 			<Badge label={badge} variant="primary" dot />
@@ -210,4 +213,6 @@
 		.cs-form { flex-direction: column; }
 		.count-unit { min-width: 48px; }
 	}
+
+	.withBackground { background: var(--bg-base); }
 </style>

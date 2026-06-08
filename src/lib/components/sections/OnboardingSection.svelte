@@ -16,12 +16,15 @@
 		current = $bindable(0),
 		onComplete,
 		onSkip,
+		withBackground = "",
 	}: {
 		steps: OnboardingStep[];
 		current?: number;
 		onComplete?: () => void;
 		onSkip?: () => void;
+		withBackground?: "bg-base" | "";
 	} = $props();
+
 
 	const isLast  = $derived(current === steps.length - 1);
 	const isFirst  = $derived(current === 0);
@@ -38,7 +41,7 @@
 	}
 </script>
 
-<section class="onboard">
+<section class="onboard {withBackground}">
 	<div class="onboard-inner">
 		<!-- Stepper header -->
 		<div class="onboard-header">
@@ -165,4 +168,6 @@
 		color: var(--text-subtle);
 		font-weight: 500;
 	}
+
+	.withBackground { background: var(--bg-base); }
 </style>
