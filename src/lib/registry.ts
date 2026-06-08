@@ -7,6 +7,8 @@ export type ComponentEntry = {
 export type ComponentCategory = {
 	slug: string;
 	label: string;
+	/** Route prefix override — defaults to slug if omitted. */
+	baseSlug?: string;
 	components: ComponentEntry[];
 };
 
@@ -284,81 +286,6 @@ export const categories: ComponentCategory[] = [
 				description: 'Sentinel IntersectionObserver qui déclenche le chargement des données suivantes automatiquement'
 			},
 			{
-				slug: 'particle-background',
-				label: 'Particle Background',
-				description: 'Réseau de particules animées sur canvas — rebond sur les bords, connexions selon la distance'
-			},
-			{
-				slug: 'starfield-background',
-				label: 'Starfield Background',
-				description: 'Voyage dans les étoiles — projection 3D→2D avec traînées de motion blur sur canvas'
-			},
-			{
-				slug: 'matrix-background',
-				label: 'Matrix Background',
-				description: 'Pluie de caractères katakana style Matrix — fond semi-transparent pour les traînées, canvas'
-			},
-			{
-				slug: 'bubble-background',
-				label: 'Bubble Background',
-				description: 'Bulles transparentes qui montent avec reflet spéculaire — dérive aléatoire, canvas'
-			},
-			{
-				slug: 'noise-background',
-				label: 'Noise Background',
-				description: 'Blobs flous en mouvement lent — effet liquid noise / lava lamp coloré, canvas + blur'
-			},
-			{
-				slug: 'gradient-background',
-				label: 'Gradient Background',
-				description: 'Dégradé animé CSS pur — background-size 400%, couleurs et vitesse configurables, zéro JS runtime'
-			},
-			{
-				slug: 'aurora-background',
-				label: 'Aurora Background',
-				description: 'Aurore boréale CSS — 4 couches floues animées indépendamment, fond sombre recommandé'
-			},
-			{
-				slug: 'geometric-background',
-				label: 'Geometric Background',
-				description: 'Formes géométriques flottantes CSS — positions déterministes (stable SSR), animations indépendantes'
-			},
-			{
-				slug: 'ocean-background',
-				label: 'Ocean Background',
-				description: 'Fond marin animé — rayons lumineux, caustiques par interférence sinusoïdale, bulles flottantes. 3 profondeurs.'
-			},
-			{
-				slug: 'fire-background',
-				label: 'Fire Background',
-				description: 'Flammes canvas — particules HSL jaune→orange→rouge avec turbulence sinusoïdale'
-			},
-			{
-				slug: 'rain-background',
-				label: 'Rain Background',
-				description: 'Pluie canvas — gouttes diagonales (vent configurable), ripples elliptiques à l\'impact'
-			},
-			{
-				slug: 'snow-background',
-				label: 'Snow Background',
-				description: 'Flocons canvas — oscillation sinusoïdale par phase individuelle, vent configurable'
-			},
-			{
-				slug: 'thunder-background',
-				label: 'Thunder Background',
-				description: 'Orage canvas — éclairs par déplacement récursif, flash de scène, timing aléatoire'
-			},
-			{
-				slug: 'sand-background',
-				label: 'Sand Background',
-				description: 'Tempête de sable canvas — grains elliptiques avec parallaxe de profondeur, turbulence sinusoïdale'
-			},
-			{
-				slug: 'neon-grid-background',
-				label: 'Neon Grid Background',
-				description: 'Grille synthwave perspective animée — lignes convergentes, soleil rétro, glow canvas'
-			},
-			{
 				slug: 'glitch-text',
 				label: 'Glitch Text',
 				description: 'Effet glitch RGB — deux clones décalés avec clip-path aléatoire, fréquence et intensité configurables'
@@ -614,6 +541,28 @@ export const categories: ComponentCategory[] = [
 				label: '✦ Premium Hero',
 				description: 'Hero dark ultra-animé — orbes flottants, scroll reveal mot par mot, bento 3D tilt, bouton magnétique, bordure shimmer'
 			}
+		]
+	},
+	{
+		slug: 'backgrounds',
+		label: 'Backgrounds',
+		baseSlug: 'ui',
+		components: [
+			{ slug: 'gradient-background',  label: 'Gradient',  description: 'Dégradé animé CSS pur — background-size 400%, couleurs et vitesse configurables, zéro JS runtime' },
+			{ slug: 'aurora-background',    label: 'Aurora',    description: 'Aurore boréale CSS — 4 couches floues animées indépendamment, fond sombre recommandé' },
+			{ slug: 'geometric-background', label: 'Geometric', description: 'Formes géométriques flottantes CSS — positions déterministes (stable SSR), animations indépendantes' },
+			{ slug: 'noise-background',     label: 'Noise',     description: 'Blobs flous en mouvement lent — effet liquid noise / lava lamp coloré, canvas + blur' },
+			{ slug: 'particle-background',  label: 'Particles', description: 'Réseau de particules animées sur canvas — rebond sur les bords, connexions selon la distance' },
+			{ slug: 'starfield-background', label: 'Starfield', description: 'Voyage dans les étoiles — projection 3D→2D avec traînées de motion blur sur canvas' },
+			{ slug: 'matrix-background',    label: 'Matrix',    description: 'Pluie de caractères katakana style Matrix — fond semi-transparent pour les traînées, canvas' },
+			{ slug: 'bubble-background',    label: 'Bubbles',   description: 'Bulles transparentes qui montent avec reflet spéculaire — dérive aléatoire, canvas' },
+			{ slug: 'ocean-background',     label: 'Ocean',     description: 'Fond marin animé — rayons lumineux, caustiques par interférence sinusoïdale, bulles flottantes' },
+			{ slug: 'fire-background',      label: 'Fire',      description: 'Flammes canvas — particules HSL jaune→orange→rouge avec turbulence sinusoïdale' },
+			{ slug: 'rain-background',      label: 'Rain',      description: 'Pluie canvas — gouttes diagonales (vent configurable), ripples elliptiques à l\'impact' },
+			{ slug: 'snow-background',      label: 'Snow',      description: 'Flocons canvas — oscillation sinusoïdale par phase individuelle, vent configurable' },
+			{ slug: 'thunder-background',   label: 'Thunder',   description: 'Orage canvas — éclairs par déplacement récursif, flash de scène, timing aléatoire' },
+			{ slug: 'sand-background',      label: 'Sand',      description: 'Tempête de sable canvas — grains elliptiques avec parallaxe de profondeur, turbulence sinusoïdale' },
+			{ slug: 'neon-grid-background', label: 'Neon Grid', description: 'Grille synthwave perspective animée — lignes convergentes, soleil rétro, glow canvas' },
 		]
 	}
 ];

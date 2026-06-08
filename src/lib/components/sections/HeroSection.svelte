@@ -49,8 +49,11 @@
       {/if}
 
       <h1 class="hero-title">
-        {parts.before}{#if parts.hl}<span class="highlight">{parts.hl}</span
-          >{/if}{parts.after}
+        {parts.before}
+        {#if parts.hl}
+          <span class="highlight">{parts.hl}</span>
+        {/if}
+        {parts.after}
       </h1>
 
       <p class="hero-description">{description}</p>
@@ -167,6 +170,7 @@
     margin: 0 0 20px;
     animation: fade-up 0.5s ease both;
     animation-delay: 0.1s;
+    text-align: center;
   }
 
   .highlight {
@@ -181,11 +185,11 @@
     margin: 0 0 36px;
     animation: fade-up 0.5s ease both;
     animation-delay: 0.18s;
+    text-align: justify;
   }
 
   .hero-actions {
     display: flex;
-    flex-wrap: wrap;
     gap: 12px;
     animation: fade-up 0.5s ease both;
     animation-delay: 0.26s;

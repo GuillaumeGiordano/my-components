@@ -1,19 +1,34 @@
 <script lang="ts">
-  import '$lib/styles/demo-page.css';
-  import Carousel from '$lib/components/ui/Carousel.svelte';
+  import Carousel from "$lib/components/ui/Carousel.svelte";
 
   const colorSlides = [
-    { bg: 'linear-gradient(135deg, #2563eb, #7c3aed)', label: 'Slide 1 — Bleu → Violet' },
-    { bg: 'linear-gradient(135deg, #059669, #0891b2)', label: 'Slide 2 — Vert → Cyan' },
-    { bg: 'linear-gradient(135deg, #d97706, #dc2626)', label: 'Slide 3 — Ambre → Rouge' },
-    { bg: 'linear-gradient(135deg, #db2777, #9333ea)', label: 'Slide 4 — Rose → Violet' },
+    { bg: "linear-gradient(135deg, #2563eb, #7c3aed)", label: "Slide 1 — Bleu → Violet" },
+    { bg: "linear-gradient(135deg, #059669, #0891b2)", label: "Slide 2 — Vert → Cyan" },
+    { bg: "linear-gradient(135deg, #d97706, #dc2626)", label: "Slide 3 — Ambre → Rouge" },
+    { bg: "linear-gradient(135deg, #db2777, #9333ea)", label: "Slide 4 — Rose → Violet" },
   ];
 
   const cardSlides = [
-    { title: 'SvelteKit', desc: 'Framework full-stack basé sur Svelte — routing, SSR, endpoints.', icon: '⚡' },
-    { title: 'Tailwind CSS 4', desc: 'Utility-first CSS avec variables CSS natives et Vite plugin.', icon: '🎨' },
-    { title: 'TypeScript', desc: 'Typage statique pour un code plus robuste et maintenable.', icon: '🔷' },
-    { title: 'Lucide Icons', desc: 'Bibliothèque d\'icônes SVG cohérentes et légères.', icon: '✦' },
+    {
+      title: "SvelteKit",
+      desc: "Framework full-stack basé sur Svelte — routing, SSR, endpoints.",
+      icon: "⚡",
+    },
+    {
+      title: "Tailwind CSS 4",
+      desc: "Utility-first CSS avec variables CSS natives et Vite plugin.",
+      icon: "🎨",
+    },
+    {
+      title: "TypeScript",
+      desc: "Typage statique pour un code plus robuste et maintenable.",
+      icon: "🔷",
+    },
+    {
+      title: "Lucide Icons",
+      desc: "Bibliothèque d'icônes SVG cohérentes et légères.",
+      icon: "✦",
+    },
   ];
 </script>
 
@@ -25,8 +40,8 @@
   <div class="page-header">
     <h1>Carousel</h1>
     <p>
-      Carrousel de diapositives avec flèches, points de navigation, autoplay, swipe tactile
-      et navigation au clavier (← →).
+      Carrousel de diapositives avec flèches, points de navigation, autoplay, swipe
+      tactile et navigation au clavier (← →).
     </p>
   </div>
 
@@ -35,7 +50,7 @@
     <div class="carousel-wrap">
       <Carousel items={colorSlides}>
         {#snippet item(slide)}
-          {@const s = slide as typeof colorSlides[0]}
+          {@const s = slide as (typeof colorSlides)[0]}
           <div class="color-slide" style="background: {s.bg}">
             <span>{s.label}</span>
           </div>
@@ -49,7 +64,7 @@
     <div class="carousel-wrap">
       <Carousel items={colorSlides} autoplay interval={3000}>
         {#snippet item(slide)}
-          {@const s = slide as typeof colorSlides[0]}
+          {@const s = slide as (typeof colorSlides)[0]}
           <div class="color-slide" style="background: {s.bg}">
             <span>{s.label}</span>
           </div>
@@ -63,7 +78,7 @@
     <div class="carousel-wrap">
       <Carousel items={cardSlides} loop={false}>
         {#snippet item(slide)}
-          {@const s = slide as typeof cardSlides[0]}
+          {@const s = slide as (typeof cardSlides)[0]}
           <div class="card-slide">
             <div class="card-icon">{s.icon}</div>
             <h3>{s.title}</h3>
@@ -77,9 +92,15 @@
   <section class="variant">
     <h2>Sans flèches ni points</h2>
     <div class="carousel-wrap">
-      <Carousel items={colorSlides} showArrows={false} showDots={false} autoplay interval={2000}>
+      <Carousel
+        items={colorSlides}
+        showArrows={false}
+        showDots={false}
+        autoplay
+        interval={2000}
+      >
         {#snippet item(slide)}
-          {@const s = slide as typeof colorSlides[0]}
+          {@const s = slide as (typeof colorSlides)[0]}
           <div class="color-slide" style="background: {s.bg}">
             <span>{s.label}</span>
           </div>
@@ -106,7 +127,7 @@
     color: #fff;
     font-size: 18px;
     font-weight: 600;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   }
 
   .card-slide {

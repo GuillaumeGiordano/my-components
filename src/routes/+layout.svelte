@@ -6,51 +6,72 @@
   import ThemeToggle from "$lib/components/ui/ThemeToggle.svelte";
   import ThemePicker from "$lib/components/ui/ThemePicker.svelte";
   import Toaster from "$lib/components/ui/Toaster.svelte";
-  import "../app.css";
+  import SidebarItem from "$lib/components/ui/SidebarItem.svelte";
   import LogoGG from "$lib/components/logo/LogoGG.svelte";
+  import {
+    FileText,
+    MousePointerClick,
+    Layers,
+    LayoutTemplate,
+    BookOpen,
+    Sparkles,
+  } from "@lucide/svelte";
+  import "../app.css";
 
   let { children } = $props();
 
-  // Init theme on client only (localStorage + prefers-color-scheme)
   onMount(() => theme.init());
+
+  const categoryIcons: Record<string, any> = {
+    forms:       FileText,
+    buttons:     MousePointerClick,
+    ui:          Layers,
+    layout:      LayoutTemplate,
+    sections:    BookOpen,
+    backgrounds: Sparkles,
+  };
+
+  const navItems = $derived(
+    categories.map((cat) => {
+      const base = cat.baseSlug ?? cat.slug;
+      return {
+        slug:     cat.slug,
+        label:    cat.label,
+        icon:     categoryIcons[cat.slug] ?? Layers,
+        badge:    cat.components.length,
+        active:   $page.url.pathname.startsWith(`/${base}`),
+        children: cat.components.map((comp) => ({
+          label:  comp.label,
+          href:   `/${base}/${comp.slug}`,
+          active: $page.url.pathname === `/${base}/${comp.slug}`,
+        })),
+      };
+    })
+  );
 </script>
 
 <div class="app">
   <aside class="sidebar">
-    <ThemeToggle />
     <div class="sidebar-header">
       <LogoGG />
+      <ThemeToggle />
     </div>
 
     <nav class="sidebar-nav">
-      {#if categories.length === 0}
-        <p class="empty-hint">Aucun composant encore.<br />Créons-en ensemble !</p>
-      {:else}
-        {#each categories as category}
-          <div class="nav-group">
-            <a
-              href="/{category.slug}"
-              class="nav-category"
-              class:active={$page.url.pathname.startsWith(`/${category.slug}`)}
-            >
-              {category.label}
-            </a>
-            {#each category.components as component}
-              <a
-                href="/{category.slug}/{component.slug}"
-                class="nav-component"
-                class:active={$page.url.pathname ===
-                  `/${category.slug}/${component.slug}`}
-              >
-                {component.label}
-              </a>
-            {/each}
-          </div>
-        {/each}
-      {/if}
+      {#each navItems as cat}
+        <SidebarItem
+          icon={cat.icon}
+          label={cat.label}
+          badge={cat.badge}
+          active={cat.active}
+          children={cat.children}
+        />
+      {/each}
     </nav>
 
-    <ThemePicker />
+    <div class="sidebar-footer">
+      <ThemePicker />
+    </div>
   </aside>
 
   <main class="content">
@@ -87,78 +108,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 16px 16px;
+    padding: 16px;
     border-bottom: 1px solid var(--border);
-  }
-
-  .logo {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text-base);
-    text-decoration: none;
+    flex-shrink: 0;
   }
 
   .sidebar-nav {
-    padding: 12px 8px;
+    padding: 8px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
+    flex: 1;
   }
 
-  .empty-hint {
-    padding: 16px 8px;
-    font-size: 13px;
-    color: var(--text-subtle);
-    line-height: 1.6;
-  }
-
-  .nav-group {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    margin-bottom: 8px;
-  }
-
-  .nav-category {
-    padding: 6px 8px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-subtle);
-    text-decoration: none;
-    border-radius: var(--radius-md);
-    transition:
-      background var(--transition-fast),
-      color var(--transition-fast);
-  }
-
-  .nav-category:hover,
-  .nav-category.active {
-    background: var(--bg-hover);
-    color: var(--text-base);
-  }
-
-  .nav-component {
-    padding: 5px 8px 5px 16px;
-    font-size: 13px;
-    color: var(--text-muted);
-    text-decoration: none;
-    border-radius: var(--radius-md);
-    transition:
-      background var(--transition-fast),
-      color var(--transition-fast);
-  }
-
-  .nav-component:hover {
-    background: var(--bg-hover);
-    color: var(--text-base);
-  }
-
-  .nav-component.active {
-    background: var(--primary-subtle);
-    color: var(--primary-subtle-fg);
-    font-weight: 500;
+  .sidebar-footer {
+    padding: 8px;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
   }
 
   .content {
