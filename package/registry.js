@@ -222,6 +222,11 @@ export const categories = [
                 description: 'Bouton FAB fixe qui déploie un menu vertical vers le haut — items icône avec label au hover'
             },
             {
+                slug: 'speed-dial-bar',
+                label: 'Speed Dial Bar',
+                description: 'Barre fixe en bas avec scroll horizontal infini en boucle et sous-menus au-dessus'
+            },
+            {
                 slug: 'floating-group',
                 label: 'Floating Group',
                 description: 'Conteneur fixe bas gauche/droite pour regrouper plusieurs éléments flottants (SpeedDial, ScrollToTop…)'
@@ -453,7 +458,9 @@ export const categories = [
             { slug: 'standard-layout', label: 'Standard Layout', description: 'Combinaison Navbar + Sidebar + Main + Footer' },
             { slug: 'navbar-mobile', label: 'Navbar Mobile', description: 'Barre de navigation pour les appareils mobiles' },
             { slug: 'navbar-mobile-radial', label: 'Navbar Mobile Radial', description: 'Bouton flottant en bas à droite — menu radial en arc avec animation staggerée' },
-            { slug: 'navbar-mobile-wheel', label: 'Navbar Mobile Wheel', description: 'Roue rotative flottante — 3 items visibles, snap automatique, synchronisée avec le scroll de la page' }
+            { slug: 'navbar-mobile-radial-scroll', label: 'Radial Défilant', description: 'FAB radial avec 4 items visibles — glisser pour faire défiler les items en arc' },
+            { slug: 'navbar-mobile-wheel', label: 'Navbar Mobile Wheel', description: 'Roue rotative flottante — 3 items visibles, snap automatique, synchronisée avec le scroll de la page' },
+            { slug: 'navbar-mobile-sheet', label: 'Mobile Sheet', description: 'FAB flottant qui ouvre un menu plein écran — slide depuis le bas, items sidebar avec badge, collapse et swipe-to-close' }
         ]
     },
     {
