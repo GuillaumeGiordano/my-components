@@ -121,6 +121,8 @@ export type { NavItem, NavSubItem }       from './components/layout/Navbar.svelt
 export { default as NavbarMobile }              from './components/layout/NavbarMobile.svelte';
 export { default as NavbarMobileRadial }        from './components/layout/NavbarMobileRadial.svelte';
 export { default as NavbarMobileRadialScroll }  from './components/layout/NavbarMobileRadialScroll.svelte';
+export { default as NavbarMobileSheet }         from './components/layout/NavbarMobileSheet.svelte';
+export type { SheetNavItem }                    from './components/layout/NavbarMobileSheet.svelte';
 export { default as NavbarMobileWheel }         from './components/layout/NavbarMobileWheel.svelte';
 export type { WheelNavItem }                    from './components/layout/NavbarMobileWheel.svelte';
 export type { RadialNavItem }                   from './components/layout/NavbarMobileRadial.svelte';

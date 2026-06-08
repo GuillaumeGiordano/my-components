@@ -10,9 +10,14 @@
   }: {
     children: Snippet;
     position:
-      | "top-left"    | "top"    | "top-right"
-      | "left"                   | "right"
-      | "bottom-left" | "bottom" | "bottom-right";
+      | "top-left"
+      | "top"
+      | "top-right"
+      | "left"
+      | "right"
+      | "bottom-left"
+      | "bottom"
+      | "bottom-right";
     scrollAware?: boolean;
   } = $props();
 
@@ -46,7 +51,7 @@
 <style lang="scss">
   .wrapper {
     position: fixed;
-    z-index: 50;
+    z-index: 1000;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -54,14 +59,50 @@
   }
 
   /* ── Corners ── */
-  .top-left     { top: 28px;    left: 24px;  align-items: flex-start; }
-  .top-right    { top: 28px;    right: 24px; align-items: flex-end; }
-  .bottom-left  { bottom: 28px; left: 24px;  align-items: flex-start; }
-  .bottom-right { bottom: 28px; right: 24px; align-items: flex-end; }
+  .top-left {
+    top: 28px;
+    left: 24px;
+    align-items: flex-start;
+  }
+  .top-right {
+    top: 28px;
+    right: 24px;
+    align-items: flex-end;
+  }
+  .bottom-left {
+    bottom: 28px;
+    left: 24px;
+    align-items: flex-start;
+  }
+  .bottom-right {
+    bottom: 28px;
+    right: 24px;
+    align-items: flex-end;
+  }
 
   /* ── Mid-sides ── */
-  .top    { top: 28px;    left: 50%; transform: translateX(-50%); align-items: center; }
-  .bottom { bottom: 28px; left: 50%; transform: translateX(-50%); align-items: center; }
-  .left   { left: 24px;   top: 50%; transform: translateY(-50%);  align-items: flex-start; }
-  .right  { right: 24px;  top: 50%; transform: translateY(-50%);  align-items: flex-end; }
+  .top {
+    top: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+  }
+  .bottom {
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+  }
+  .left {
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    align-items: flex-start;
+  }
+  .right {
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    align-items: flex-end;
+  }
 </style>
