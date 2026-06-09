@@ -63,6 +63,7 @@
 
 	<div class="number-wrap">
 		<button
+			type="button"
 			class="stepper-btn"
 			onclick={decrement}
 			disabled={disabled || !canDecrement}
@@ -82,10 +83,12 @@
 			{step}
 			{disabled}
 			oninput={handleInput}
+			onkeydown={(e) => { if (e.key === 'Enter') e.preventDefault(); }}
 			aria-invalid={!!error}
 		/>
 
 		<button
+			type="button"
 			class="stepper-btn"
 			onclick={increment}
 			disabled={disabled || !canIncrement}
