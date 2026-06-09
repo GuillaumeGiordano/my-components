@@ -17,7 +17,7 @@
 	let {
 		id: _id,
 		name,
-		label,
+		label = '',
 		type = 'text',
 		value = $bindable(''),
 		placeholder = '',
@@ -37,7 +37,7 @@
 	}: {
 		id?: string;
 		name?: string;
-		label: string;
+		label?: string;
 		type?: InputType;
 		value?: string;
 		placeholder?: string;
@@ -68,12 +68,14 @@
 </script>
 
 <div class="field" class:has-error={!!error} class:is-disabled={disabled}>
-	<label class="label" for={id}>
-		{label}
-		{#if required}
-			<span class="required" aria-hidden="true" title="Champ obligatoire">*</span>
-		{/if}
-	</label>
+	{#if label}
+		<label class="label" for={id}>
+			{label}
+			{#if required}
+				<span class="required" aria-hidden="true" title="Champ obligatoire">*</span>
+			{/if}
+		</label>
+	{/if}
 
 	{#if hint}
 		<p id={hintId} class="hint">{hint}</p>
