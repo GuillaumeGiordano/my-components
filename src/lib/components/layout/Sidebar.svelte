@@ -1,6 +1,6 @@
 <script lang="ts">
   import { ChevronLeft } from '@lucide/svelte';
-  import type { Component } from 'svelte';
+  import type { Component, Snippet } from 'svelte';
   import { browser } from '$app/environment';
   import SidebarItem from '$lib/components/ui/SidebarItem.svelte';
   import type { SidebarSubItem } from '$lib/components/ui/SidebarItem.svelte';
@@ -25,11 +25,15 @@
     collapsed = $bindable(false),
     activeHref = '',
     shortkey = '[',
+    header,
+    footer,
   }: {
     groups?: SidebarGroup[];
     collapsed?: boolean;
     activeHref?: string;
     shortkey?: string | false;
+    header?: Snippet;
+    footer?: Snippet;
   } = $props();
 
   // Keyboard shortcut — ignored when focus is inside an input/textarea
@@ -63,6 +67,12 @@
     {/if}
   </button>
 
+  {#if header}
+    <div class="sidebar-header">
+      {@render header()}
+    </div>
+  {/if}
+
   <nav class="sidebar-nav" aria-label="Navigation principale">
     {#each groups as group}
       <div class="group">
@@ -85,6 +95,12 @@
       </div>
     {/each}
   </nav>
+
+  {#if footer}
+    <div class="sidebar-footer">
+      {@render footer()}
+    </div>
+  {/if}
 </aside>
 
 <style>
@@ -100,6 +116,7 @@
       border-color var(--transition-base);
     position: relative;
     min-height: 300px;
+    height: 100%;
   }
 
   .sidebar.collapsed { width: 56px; }
@@ -175,6 +192,20 @@
 
   .sidebar.collapsed .collapse-btn :global(svg) {
     transform: rotate(180deg);
+  }
+
+  /* ── Header / Footer snippets ── */
+  .sidebar-header {
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .sidebar-footer {
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+    overflow: hidden;
+    margin-top: auto;
   }
 
   /* ── Nav ── */
