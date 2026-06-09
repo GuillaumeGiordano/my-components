@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
-  import { browser } from '$app/environment';
+  import type { Component } from "svelte";
+  const browser = typeof window !== "undefined";
 
   export type ScrollSection = {
     label: string;
@@ -40,17 +40,19 @@
   // Dot centers — same denominator (maxScroll) so they align with the thumb center.
   // Dot CSS uses transform: translate(-50%,-50%) so `top` = center.
   // Thumb center = thumbTop + THUMB_H/2, so dots get the same +THUMB_H/2 offset.
-  const dotPx = $derived(tops.map(t => {
-    const r = Math.min(1, t / maxScroll);
-    return r * BAR + THUMB_H / 2;
-  }));
+  const dotPx = $derived(
+    tops.map((t) => {
+      const r = Math.min(1, t / maxScroll);
+      return r * BAR + THUMB_H / 2;
+    }),
+  );
 
   // ── Measurement ────────────────────────────────────────────────────────
   function measure() {
     pageH = document.documentElement.scrollHeight;
     winH = window.innerHeight;
-    tops = sections.map(s => {
-      const id = s.href.startsWith('#') ? s.href.slice(1) : s.href;
+    tops = sections.map((s) => {
+      const id = s.href.startsWith("#") ? s.href.slice(1) : s.href;
       return document.getElementById(id)?.offsetTop ?? 0;
     });
   }
@@ -59,16 +61,18 @@
     if (!browser) return;
     measure();
 
-    const onScroll = () => { scrollY = window.scrollY; };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', measure, { passive: true });
+    const onScroll = () => {
+      scrollY = window.scrollY;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", measure, { passive: true });
 
     const resizeObs = new ResizeObserver(measure);
     resizeObs.observe(document.documentElement);
 
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', measure);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", measure);
       resizeObs.disconnect();
     };
   });
@@ -84,17 +88,20 @@
     if (!browser) return;
     const obs: IntersectionObserver[] = [];
     sections.forEach((s, i) => {
-      const id = s.href.startsWith('#') ? s.href.slice(1) : s.href;
+      const id = s.href.startsWith("#") ? s.href.slice(1) : s.href;
       const el = document.getElementById(id);
       if (!el) return;
       // Fires when the top of the section crosses 30% from top of viewport
-      const o = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) activeIndex = i;
-      }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+      const o = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) activeIndex = i;
+        },
+        { rootMargin: "-20% 0px -70% 0px", threshold: 0 },
+      );
       o.observe(el);
       obs.push(o);
     });
-    return () => obs.forEach(o => o.disconnect());
+    return () => obs.forEach((o) => o.disconnect());
   });
 
   // ── Thumb drag ─────────────────────────────────────────────────────────
@@ -116,21 +123,23 @@
     window.scrollTo(0, ratio * maxScroll);
   }
 
-  function onThumbUp() { dragging = false; }
+  function onThumbUp() {
+    dragging = false;
+  }
 
   // ── Track click (not on dots/thumb) ────────────────────────────────────
   function onBarClick(e: MouseEvent) {
     if (!barEl || dragging) return;
     const rect = barEl.getBoundingClientRect();
     const ratio = Math.max(0, Math.min(1, (e.clientY - rect.top) / BAR));
-    window.scrollTo({ top: ratio * maxScroll, behavior: 'smooth' });
+    window.scrollTo({ top: ratio * maxScroll, behavior: "smooth" });
   }
 
   // ── Dot click ─────────────────────────────────────────────────────────
   function onDotClick(s: ScrollSection, e: MouseEvent) {
     e.stopPropagation();
-    const id = s.href.startsWith('#') ? s.href.slice(1) : s.href;
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    const id = s.href.startsWith("#") ? s.href.slice(1) : s.href;
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   }
 </script>
 
@@ -158,7 +167,9 @@
       style="top:{top}px"
       onclick={(e) => onDotClick(section, e)}
       onpointerenter={() => (hoveredIndex = i)}
-      onpointerleave={() => { if (hoveredIndex === i) hoveredIndex = -1; }}
+      onpointerleave={() => {
+        if (hoveredIndex === i) hoveredIndex = -1;
+      }}
       aria-label="Aller à : {section.label}"
       tabindex="0"
     >
@@ -183,8 +194,8 @@
     aria-valuemin={0}
     aria-valuemax={100}
     onkeydown={(e) => {
-      if (e.key === 'ArrowDown') window.scrollBy(0, 80);
-      if (e.key === 'ArrowUp') window.scrollBy(0, -80);
+      if (e.key === "ArrowDown") window.scrollBy(0, 80);
+      if (e.key === "ArrowUp") window.scrollBy(0, -80);
     }}
   ></div>
 </div>
@@ -265,7 +276,7 @@
       transform 0.15s ease;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       left: 100%;
       top: 50%;
@@ -295,7 +306,7 @@
 
     &::before {
       /* Extend the hit target vertically without affecting visual */
-      content: '';
+      content: "";
       position: absolute;
       inset: -8px 0;
     }

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
-  import { Settings, X } from '@lucide/svelte';
-  import { browser } from '$app/environment';
-  import { fade } from 'svelte/transition';
+  import type { Component } from "svelte";
+  import { Settings, X } from "@lucide/svelte";
+  const browser = typeof window !== "undefined";
+  import { fade } from "svelte/transition";
 
   export type SpeedDialItem = {
     icon: Component;
@@ -41,19 +41,32 @@
     item.onclick?.();
   }
 
-  function onItemPointerEnter(i: number) { hoveredIndex = i; }
-  function onItemPointerLeave(i: number) { if (hoveredIndex === i) hoveredIndex = -1; }
-  function onItemTouchStart(i: number) { hoveredIndex = i; }
-  function onItemTouchEnd() { hoveredIndex = -1; }
-  function onItemTouchCancel() { hoveredIndex = -1; }
+  function onItemPointerEnter(i: number) {
+    hoveredIndex = i;
+  }
+  function onItemPointerLeave(i: number) {
+    if (hoveredIndex === i) hoveredIndex = -1;
+  }
+  function onItemTouchStart(i: number) {
+    hoveredIndex = i;
+  }
+  function onItemTouchEnd() {
+    hoveredIndex = -1;
+  }
+  function onItemTouchCancel() {
+    hoveredIndex = -1;
+  }
 
   $effect(() => {
     if (!browser) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') { open = false; hoveredIndex = -1; }
+      if (e.key === "Escape") {
+        open = false;
+        hoveredIndex = -1;
+      }
     };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   });
 </script>
 
@@ -61,7 +74,10 @@
   <div
     class="backdrop"
     transition:fade={{ duration: 200 }}
-    onclick={() => { open = false; hoveredIndex = -1; }}
+    onclick={() => {
+      open = false;
+      hoveredIndex = -1;
+    }}
     role="presentation"
     aria-hidden="true"
   ></div>
@@ -92,7 +108,7 @@
     type="button"
     class="fab"
     onclick={toggle}
-    aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
+    aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
     aria-expanded={open}
     aria-haspopup="true"
   >
@@ -172,11 +188,23 @@
     pointer-events: none;
   }
 
-  .fab-open  { opacity: 1; transform: rotate(0deg) scale(1); }
-  .fab-close { opacity: 0; transform: rotate(-90deg) scale(0.4); }
+  .fab-open {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+  .fab-close {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.4);
+  }
 
-  .open .fab-open  { opacity: 0; transform: rotate(90deg) scale(0.4); }
-  .open .fab-close { opacity: 1; transform: rotate(0deg) scale(1); }
+  .open .fab-open {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.4);
+  }
+  .open .fab-close {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
 
   /* ── Items ── */
   .sd-item {
@@ -272,7 +300,7 @@
     transition: opacity 0.15s ease;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       left: 100%;
       top: 50%;

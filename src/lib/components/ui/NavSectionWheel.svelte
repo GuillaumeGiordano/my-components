@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
-  import { browser } from '$app/environment';
-  import { goto } from '$app/navigation';
+  import type { Component } from "svelte";
+  const browser = typeof window !== "undefined";
+  import { goto } from "$app/navigation";
 
   export type SectionNavItem = {
     icon: Component;
@@ -13,7 +13,7 @@
 
   let {
     items = [],
-    activeHref = '',
+    activeHref = "",
     // Height of the visible strip in px (≈ 25vh on an 800px screen)
     size = 200,
   }: {
@@ -33,7 +33,7 @@
   const ITEM_SIZE = 52;
   const CLIP_W = 280; // wide enough to hold items + labels
 
-  const radius = $derived((size / 2) / Math.sin((2 * VISUAL_STEP * Math.PI) / 180));
+  const radius = $derived(size / 2 / Math.sin((2 * VISUAL_STEP * Math.PI) / 180));
   const CX = CLIP_W; // circle center x = right edge of clip
   const CY = $derived(size / 2); // circle center y = vertical center
 
@@ -49,7 +49,7 @@
 
   function slotItem(k: number): number {
     const n = Math.round(scrollPos);
-    return ((n + k) % count + count) % count;
+    return (((n + k) % count) + count) % count;
   }
 
   function slotAngle(k: number): number {
@@ -65,7 +65,7 @@
     };
   }
 
-  const activeIndex = $derived(((Math.round(scrollPos)) % count + count) % count);
+  const activeIndex = $derived(((Math.round(scrollPos) % count) + count) % count);
 
   const visibleSlots = $derived.by(() => {
     if (count === 0) return [] as number[];
@@ -73,12 +73,15 @@
     const result: number[] = [];
     for (const k of [0, -1, 1, -2, 2]) {
       const i = slotItem(k);
-      if (!seen.has(i)) { seen.add(i); result.push(k); }
+      if (!seen.has(i)) {
+        seen.add(i);
+        result.push(k);
+      }
     }
     return result;
   });
 
-  const itemsPerPx = $derived(1 / (radius * (VISUAL_STEP * Math.PI) / 180));
+  const itemsPerPx = $derived(1 / ((radius * (VISUAL_STEP * Math.PI)) / 180));
 
   let animId = 0;
 
@@ -105,7 +108,9 @@
       } else {
         scrollPos = target;
         navigateTo(items[i]);
-        setTimeout(() => { snapping = false; }, 500);
+        setTimeout(() => {
+          snapping = false;
+        }, 500);
       }
     }
     animId = requestAnimationFrame(step);
@@ -114,8 +119,10 @@
   function navigateTo(item: SectionNavItem | undefined) {
     if (!item) return;
     if (item.href) {
-      if (item.href.startsWith('#')) {
-        document.getElementById(item.href.slice(1))?.scrollIntoView({ behavior: 'smooth' });
+      if (item.href.startsWith("#")) {
+        document
+          .getElementById(item.href.slice(1))
+          ?.scrollIntoView({ behavior: "smooth" });
       } else {
         goto(item.href);
       }
@@ -161,12 +168,12 @@
     dragActive = false;
 
     if (!hasMoved) {
-      const el = (e.target as HTMLElement)?.closest('[data-slot]') as HTMLElement | null;
+      const el = (e.target as HTMLElement)?.closest("[data-slot]") as HTMLElement | null;
       if (el !== null) snapToIndex(slotItem(parseInt(el.dataset.slot!)));
       return;
     }
 
-    const projected = scrollPos + (-velPx) * 100 * itemsPerPx;
+    const projected = scrollPos + -velPx * 100 * itemsPerPx;
     const target = Math.round(projected);
     snapToIndex(((target % count) + count) % count);
   }
@@ -186,8 +193,14 @@
 
   // Arrow keys when the strip is focused
   function onKeyDown(e: KeyboardEvent) {
-    if (e.key === 'ArrowDown') { e.preventDefault(); snapToIndex((activeIndex + 1) % count); }
-    if (e.key === 'ArrowUp')   { e.preventDefault(); snapToIndex((activeIndex - 1 + count) % count); }
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      snapToIndex((activeIndex + 1) % count);
+    }
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      snapToIndex((activeIndex - 1 + count) % count);
+    }
   }
 
   // ── Page scroll → wheel sync ─────────────────────────────────────────
@@ -195,21 +208,24 @@
     if (!browser) return;
     const obs: IntersectionObserver[] = [];
     items.forEach((item, i) => {
-      if (!item.href?.startsWith('#')) return;
+      if (!item.href?.startsWith("#")) return;
       const el = document.getElementById(item.href.slice(1));
       if (!el) return;
-      const o = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting && !snapping && i !== activeIndex) snapToIndex(i);
-      }, { threshold: 0.5 });
+      const o = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && !snapping && i !== activeIndex) snapToIndex(i);
+        },
+        { threshold: 0.5 },
+      );
       o.observe(el);
       obs.push(o);
     });
-    return () => obs.forEach(o => o.disconnect());
+    return () => obs.forEach((o) => o.disconnect());
   });
 
   // Init
   $effect(() => {
-    const i = items.findIndex(it => it.href === activeHref || it.active);
+    const i = items.findIndex((it) => it.href === activeHref || it.active);
     if (i >= 0) scrollPos = i;
   });
 </script>
@@ -296,10 +312,12 @@
           style="--x:{pos.x}px; --y:{pos.y}px"
           data-slot={k}
           aria-label={item.label}
-          aria-current={active ? 'page' : undefined}
+          aria-current={active ? "page" : undefined}
           onclick={(e) => e.preventDefault()}
           onpointerenter={() => (hoveredSlot = k)}
-          onpointerleave={() => { if (hoveredSlot === k) hoveredSlot = 99; }}
+          onpointerleave={() => {
+            if (hoveredSlot === k) hoveredSlot = 99;
+          }}
         >
           <span class="nsw-icon"><item.icon size={20} /></span>
           <span class="nsw-label">{item.label}</span>
@@ -315,7 +333,9 @@
           aria-label={item.label}
           onclick={(e) => e.preventDefault()}
           onpointerenter={() => (hoveredSlot = k)}
-          onpointerleave={() => { if (hoveredSlot === k) hoveredSlot = 99; }}
+          onpointerleave={() => {
+            if (hoveredSlot === k) hoveredSlot = 99;
+          }}
         >
           <span class="nsw-icon"><item.icon size={20} /></span>
           <span class="nsw-label">{item.label}</span>
@@ -349,8 +369,14 @@
     box-shadow: var(--shadow-lg);
     outline: none;
 
-    &:active { cursor: grabbing; }
-    &:focus-visible { box-shadow: var(--shadow-lg), 0 0 0 2px var(--primary); }
+    &:active {
+      cursor: grabbing;
+    }
+    &:focus-visible {
+      box-shadow:
+        var(--shadow-lg),
+        0 0 0 2px var(--primary);
+    }
   }
 
   /* ── Gradient fade at top & bottom edges ── */
@@ -365,7 +391,8 @@
 
   .nsw-fade--top {
     top: 0;
-    background: linear-gradient(to bottom,
+    background: linear-gradient(
+      to bottom,
       color-mix(in srgb, var(--bg-base) 80%, transparent),
       transparent
     );
@@ -373,7 +400,8 @@
 
   .nsw-fade--bottom {
     bottom: 0;
-    background: linear-gradient(to top,
+    background: linear-gradient(
+      to top,
       color-mix(in srgb, var(--bg-base) 80%, transparent),
       transparent
     );
@@ -508,7 +536,7 @@
 
     /* Arrow pointing right toward the item */
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       left: 100%;
       top: 50%;

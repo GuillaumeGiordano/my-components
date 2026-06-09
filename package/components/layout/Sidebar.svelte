@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { ChevronLeft } from '@lucide/svelte';
-  import type { Component } from 'svelte';
-  import { browser } from '$app/environment';
-  import SidebarItem from '../ui/SidebarItem.svelte';
-  import type { SidebarSubItem } from '../ui/SidebarItem.svelte';
+  import { ChevronLeft } from "@lucide/svelte";
+  import type { Component } from "svelte";
+  const browser = typeof window !== "undefined";
+  import SidebarItem from "../ui/SidebarItem.svelte";
+  import type { SidebarSubItem } from "../ui/SidebarItem.svelte";
 
   type SidebarLink = {
     label: string;
@@ -23,8 +23,8 @@
   let {
     groups = [] as SidebarGroup[],
     collapsed = $bindable(false),
-    activeHref = '',
-    shortkey = '[',
+    activeHref = "",
+    shortkey = "[",
   }: {
     groups?: SidebarGroup[];
     collapsed?: boolean;
@@ -38,22 +38,29 @@
 
     function onKeydown(e: KeyboardEvent) {
       const tag = (e.target as HTMLElement)?.tagName;
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || (e.target as HTMLElement)?.isContentEditable) return;
+      if (
+        tag === "INPUT" ||
+        tag === "TEXTAREA" ||
+        (e.target as HTMLElement)?.isContentEditable
+      )
+        return;
       if (e.key === shortkey && !e.ctrlKey && !e.metaKey && !e.altKey) {
         e.preventDefault();
         collapsed = !collapsed;
       }
     }
 
-    window.addEventListener('keydown', onKeydown);
-    return () => window.removeEventListener('keydown', onKeydown);
+    window.addEventListener("keydown", onKeydown);
+    return () => window.removeEventListener("keydown", onKeydown);
   });
 </script>
 
 <aside class="sidebar" class:collapsed>
   <button
     class="collapse-btn"
-    aria-label="{collapsed ? 'Ouvrir' : 'Réduire'} le menu{shortkey ? ` (${shortkey})` : ''}"
+    aria-label="{collapsed ? 'Ouvrir' : 'Réduire'} le menu{shortkey
+      ? ` (${shortkey})`
+      : ''}"
     title="{collapsed ? 'Ouvrir' : 'Réduire'} le menu{shortkey ? ` · ${shortkey}` : ''}"
     onclick={() => (collapsed = !collapsed)}
   >
@@ -102,7 +109,9 @@
     min-height: 300px;
   }
 
-  .sidebar.collapsed { width: 56px; }
+  .sidebar.collapsed {
+    width: 56px;
+  }
 
   /* ── Toggle button ── */
   .collapse-btn {
@@ -161,7 +170,7 @@
     transition: opacity var(--transition-fast);
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       top: 100%;
       left: 50%;
@@ -171,7 +180,9 @@
     }
   }
 
-  .collapse-btn:hover .shortkey-hint { opacity: 1; }
+  .collapse-btn:hover .shortkey-hint {
+    opacity: 1;
+  }
 
   .sidebar.collapsed .collapse-btn :global(svg) {
     transform: rotate(180deg);

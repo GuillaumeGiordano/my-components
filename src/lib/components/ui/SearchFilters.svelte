@@ -1,36 +1,36 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte';
-  import { SlidersHorizontal, Search, X, ChevronDown } from '@lucide/svelte';
-  import { browser } from '$app/environment';
-  import { goto } from '$app/navigation';
-  import { page } from '$app/stores';
+  import type { Snippet } from "svelte";
+  import { SlidersHorizontal, Search, X, ChevronDown } from "@lucide/svelte";
+  const browser = typeof window !== "undefined";
+  import { goto } from "$app/navigation";
+  import { page } from "$app/stores";
 
   // Params ignorés dans le comptage des filtres actifs
-  const PAGINATION_PARAMS = new Set(['page', 'perPage']);
+  const PAGINATION_PARAMS = new Set(["page", "perPage"]);
 
   let {
     children,
     onSearch,
     onReset,
-    loading     = false,
+    loading = false,
     collapsible = false,
-    columns     = 3,
-    title       = 'Filtres',
-    urlDriven   = false,
+    columns = 3,
+    title = "Filtres",
+    urlDriven = false,
   }: {
-    children:     Snippet;
-    onSearch?:    (values: Record<string, string | string[]>) => void;
-    onReset?:     () => void;
-    loading?:     boolean;
+    children: Snippet;
+    onSearch?: (values: Record<string, string | string[]>) => void;
+    onReset?: () => void;
+    loading?: boolean;
     collapsible?: boolean;
-    columns?:     number;
-    title?:       string;
+    columns?: number;
+    title?: string;
     /** Encode les filtres dans l'URL et remet page=1 à chaque recherche */
-    urlDriven?:   boolean;
+    urlDriven?: boolean;
   } = $props();
 
   let formEl: HTMLFormElement | null = null;
-  let expanded    = $state(true);
+  let expanded = $state(true);
   let activeCount = $state(0);
 
   // ── Mode URL : pré-remplir les champs + compter les filtres actifs ────
@@ -47,9 +47,9 @@
       if (val !== null) input.value = val;
     }
 
-    activeCount = [...params.entries()]
-      .filter(([k, v]) => !PAGINATION_PARAMS.has(k) && v !== '')
-      .length;
+    activeCount = [...params.entries()].filter(
+      ([k, v]) => !PAGINATION_PARAMS.has(k) && v !== "",
+    ).length;
   });
 
   function collect(): Record<string, string | string[]> {
@@ -64,8 +64,8 @@
   }
 
   function countActive(values: Record<string, string | string[]>): number {
-    return Object.values(values).filter(v =>
-      Array.isArray(v) ? v.length > 0 : v !== ''
+    return Object.values(values).filter((v) =>
+      Array.isArray(v) ? v.length > 0 : v !== "",
     ).length;
   }
 
@@ -80,13 +80,15 @@
       for (const [key, val] of Object.entries(values)) {
         if (Array.isArray(val)) {
           params.delete(key);
-          val.forEach(v => { if (v) params.append(key, v); });
+          val.forEach((v) => {
+            if (v) params.append(key, v);
+          });
         } else {
           if (val) params.set(key, val);
           else params.delete(key);
         }
       }
-      params.set('page', '1'); // reset pagination
+      params.set("page", "1"); // reset pagination
       await goto(`?${params.toString()}`);
       onSearch?.(values); // callback optionnel (analytics, etc.)
     } else {
@@ -101,9 +103,9 @@
     if (urlDriven) {
       // Garder uniquement perPage, effacer les filtres, revenir page 1
       const params = new URLSearchParams();
-      const perPage = $page.url.searchParams.get('perPage');
-      if (perPage) params.set('perPage', perPage);
-      params.set('page', '1');
+      const perPage = $page.url.searchParams.get("perPage");
+      if (perPage) params.set("perPage", perPage);
+      params.set("page", "1");
       await goto(`?${params.toString()}`);
       onReset?.();
     } else {
@@ -114,7 +116,6 @@
 
 <div class="sf">
   <form bind:this={formEl} onsubmit={handleSubmit} novalidate>
-
     <!-- ── Header ─────────────────────────────────────────────────────── -->
     <div class="sf-header">
       <span class="sf-title">
@@ -147,7 +148,7 @@
             class:sf-toggle--open={expanded}
             onclick={() => (expanded = !expanded)}
             aria-expanded={expanded}
-            aria-label={expanded ? 'Réduire les filtres' : 'Afficher les filtres'}
+            aria-label={expanded ? "Réduire les filtres" : "Afficher les filtres"}
           >
             <ChevronDown size={15} />
           </button>
@@ -193,7 +194,6 @@
         </div>
       </div>
     </div>
-
   </form>
 </div>
 
@@ -390,7 +390,9 @@
   }
 
   @keyframes sf-spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   /* ── Responsive — 1 colonne sur mobile ── */

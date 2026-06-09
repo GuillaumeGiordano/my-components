@@ -1,46 +1,46 @@
 <script lang="ts" module>
-  import type { Component } from 'svelte';
+  import type { Component } from "svelte";
 
   export type RadialScrollItem = {
-    icon:     Component;
-    label:    string;
-    href?:    string;
-    active?:  boolean;
+    icon: Component;
+    label: string;
+    href?: string;
+    active?: boolean;
     onclick?: () => void;
   };
 </script>
 
 <script lang="ts">
-  import { Menu, X } from '@lucide/svelte';
-  import { browser } from '$app/environment';
-  import { fade } from 'svelte/transition';
-  import { goto } from '$app/navigation';
+  import { Menu, X } from "@lucide/svelte";
+  const browser = typeof window !== "undefined";
+  import { fade } from "svelte/transition";
+  import { goto } from "$app/navigation";
 
   let {
-    items      = [],
-    activeHref = '',
-    radius     = 150,
+    items = [],
+    activeHref = "",
+    radius = 150,
   }: {
-    items?:      RadialScrollItem[];
+    items?: RadialScrollItem[];
     activeHref?: string;
     /** Arc radius in px. */
-    radius?:     number;
+    radius?: number;
   } = $props();
 
   // ── Geometry ──────────────────────────────────────────────────────────
   // 4 slots centered around 135° (the quarter-circle diagonal).
   // VISUAL_STEP = 27° → arc spans ≈ 94.5° – 175.5°, fully within the quadrant.
-  const N_VISIBLE    = 4;
-  const VISUAL_STEP  = 27;                       // degrees between adjacent slots
-  const CENTER_ANGLE = 135;                      // center of the visible arc
-  const SLOT_OFFSET  = (N_VISIBLE - 1) / 2;     // 1.5 — centers 4 slots
+  const N_VISIBLE = 4;
+  const VISUAL_STEP = 27; // degrees between adjacent slots
+  const CENTER_ANGLE = 135; // center of the visible arc
+  const SLOT_OFFSET = (N_VISIBLE - 1) / 2; // 1.5 — centers 4 slots
 
-  let open        = $state(false);
-  let scrollPos   = $state(0);   // continuous; integer n = item[n] at slot 0
+  let open = $state(false);
+  let scrollPos = $state(0); // continuous; integer n = item[n] at slot 0
   let hoveredSlot = $state(-1);
 
-  const count      = $derived(items.length);
-  const itemsPerPx = $derived(1 / (radius * (VISUAL_STEP * Math.PI) / 180));
+  const count = $derived(items.length);
+  const itemsPerPx = $derived(1 / ((radius * (VISUAL_STEP * Math.PI)) / 180));
 
   function slotItem(k: number): number {
     const n = Math.round(scrollPos);
@@ -55,7 +55,7 @@
   function slotDelta(k: number): { dx: number; dy: number } {
     const rad = (slotAngle(k) * Math.PI) / 180;
     return {
-      dx:  radius * Math.cos(rad),
+      dx: radius * Math.cos(rad),
       dy: -radius * Math.sin(rad), // CSS y-axis is inverted
     };
   }
@@ -63,26 +63,32 @@
   // Dedup: never show the same item twice (matters when count < 4)
   const visibleSlots = $derived.by(() => {
     if (count === 0) return [] as number[];
-    const seen   = new Set<number>();
+    const seen = new Set<number>();
     const result: number[] = [];
     for (const k of [0, 1, 2, 3]) {
       const i = slotItem(k);
-      if (!seen.has(i)) { seen.add(i); result.push(k); }
+      if (!seen.has(i)) {
+        seen.add(i);
+        result.push(k);
+      }
     }
     return result;
   });
 
   // ── Snap / animate ────────────────────────────────────────────────────
-  let animId   = 0;
+  let animId = 0;
   let snapping = false;
 
   function animateTo(target: number) {
     const start = scrollPos;
     const delta = target - start;
-    if (Math.abs(delta) < 0.001) { scrollPos = target; return; }
+    if (Math.abs(delta) < 0.001) {
+      scrollPos = target;
+      return;
+    }
     const dur = 320;
-    const t0  = performance.now();
-    snapping  = true;
+    const t0 = performance.now();
+    snapping = true;
     cancelAnimationFrame(animId);
 
     function step(t: number) {
@@ -92,7 +98,9 @@
         animId = requestAnimationFrame(step);
       } else {
         scrollPos = target;
-        setTimeout(() => { snapping = false; }, 200);
+        setTimeout(() => {
+          snapping = false;
+        }, 200);
       }
     }
     animId = requestAnimationFrame(step);
@@ -100,23 +108,23 @@
 
   // ── Drag ─────────────────────────────────────────────────────────────
   let dragActive = $state(false);
-  let dragY0   = 0;
-  let scroll0  = 0;
-  let lastDY   = 0;
-  let lastDT   = 0;
-  let velPx    = 0;
+  let dragY0 = 0;
+  let scroll0 = 0;
+  let lastDY = 0;
+  let lastDT = 0;
+  let velPx = 0;
   let hasMoved = false;
 
   function onDragStart(e: PointerEvent) {
     if (!open) return;
-    if ((e.target as HTMLElement).closest('.fab')) return;
+    if ((e.target as HTMLElement).closest(".fab")) return;
     dragActive = true;
-    hasMoved   = false;
-    dragY0     = e.clientY;
-    lastDY     = e.clientY;
-    lastDT     = Date.now();
-    scroll0    = scrollPos;
-    velPx      = 0;
+    hasMoved = false;
+    dragY0 = e.clientY;
+    lastDY = e.clientY;
+    lastDT = Date.now();
+    scroll0 = scrollPos;
+    velPx = 0;
     cancelAnimationFrame(animId);
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
   }
@@ -124,11 +132,11 @@
   function onDragMove(e: PointerEvent) {
     if (!dragActive) return;
     const now = Date.now();
-    const dt  = now - lastDT;
+    const dt = now - lastDT;
     if (dt > 0) velPx = (e.clientY - lastDY) / dt;
-    lastDY    = e.clientY;
-    lastDT    = now;
-    const dy  = e.clientY - dragY0;
+    lastDY = e.clientY;
+    lastDT = now;
+    const dy = e.clientY - dragY0;
     if (Math.abs(dy) > 5) hasMoved = true;
     scrollPos = scroll0 - dy * itemsPerPx;
   }
@@ -139,17 +147,18 @@
 
     if (!hasMoved) {
       // Tap — setPointerCapture redirects e.target, use coordinates instead
-      const el = document.elementFromPoint(e.clientX, e.clientY)
-        ?.closest('[data-slot]') as HTMLElement | null;
+      const el = document
+        .elementFromPoint(e.clientX, e.clientY)
+        ?.closest("[data-slot]") as HTMLElement | null;
       if (el) navigateTo(slotItem(parseInt(el.dataset.slot!)));
       return;
     }
 
     // Inertia snap
-    const projected = scrollPos + (-velPx) * 100 * itemsPerPx;
-    const raw    = Math.round(projected);
+    const projected = scrollPos + -velPx * 100 * itemsPerPx;
+    const raw = Math.round(projected);
     const target = ((raw % count) + count) % count;
-    const k      = Math.round((scrollPos - target) / count);
+    const k = Math.round((scrollPos - target) / count);
     animateTo(target + k * count);
   }
 
@@ -159,8 +168,10 @@
     open = false;
     hoveredSlot = -1;
     if (item.href) {
-      if (item.href.startsWith('#')) {
-        document.getElementById(item.href.slice(1))?.scrollIntoView({ behavior: 'smooth' });
+      if (item.href.startsWith("#")) {
+        document
+          .getElementById(item.href.slice(1))
+          ?.scrollIntoView({ behavior: "smooth" });
       } else {
         goto(item.href);
       }
@@ -179,17 +190,26 @@
     if (!browser) return;
     const h = (e: KeyboardEvent) => {
       if (!open) return;
-      if (e.key === 'Escape')    { open = false; hoveredSlot = -1; }
-      if (e.key === 'ArrowUp')   { e.preventDefault(); animateTo(Math.round(scrollPos) - 1); }
-      if (e.key === 'ArrowDown') { e.preventDefault(); animateTo(Math.round(scrollPos) + 1); }
+      if (e.key === "Escape") {
+        open = false;
+        hoveredSlot = -1;
+      }
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        animateTo(Math.round(scrollPos) - 1);
+      }
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        animateTo(Math.round(scrollPos) + 1);
+      }
     };
-    window.addEventListener('keydown', h);
-    return () => window.removeEventListener('keydown', h);
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
   });
 
   // Init from activeHref / active flag
   $effect(() => {
-    const i = items.findIndex(it => it.href === activeHref || it.active);
+    const i = items.findIndex((it) => it.href === activeHref || it.active);
     if (i >= 0) scrollPos = i;
   });
 </script>
@@ -200,7 +220,10 @@
     role="presentation"
     aria-hidden="true"
     transition:fade={{ duration: 220 }}
-    onclick={() => { open = false; hoveredSlot = -1; }}
+    onclick={() => {
+      open = false;
+      hoveredSlot = -1;
+    }}
   ></div>
 {/if}
 
@@ -229,20 +252,45 @@
       transition:fade={{ duration: 180 }}
       aria-hidden="true"
     >
-      <path class="qk-base"   d="M 88 13 A 75 75 0 0 0 13 88" fill="none" stroke-width="18" stroke-linecap="butt" />
-      <path class="qk-ridges" d="M 88 13 A 75 75 0 0 0 13 88" fill="none" stroke-width="16" stroke-linecap="butt"
-            stroke-dasharray="6 5" style="stroke-dashoffset:{-scrollPos * 12}px" />
-      <path class="qk-edge"   d="M 88 22 A 66 66 0 0 0 22 88" fill="none" stroke-width="1"  stroke-linecap="butt" />
-      <path class="qk-edge"   d="M 88  4 A 84 84 0 0 0  4 88" fill="none" stroke-width="1"  stroke-linecap="butt" />
+      <path
+        class="qk-base"
+        d="M 88 13 A 75 75 0 0 0 13 88"
+        fill="none"
+        stroke-width="18"
+        stroke-linecap="butt"
+      />
+      <path
+        class="qk-ridges"
+        d="M 88 13 A 75 75 0 0 0 13 88"
+        fill="none"
+        stroke-width="16"
+        stroke-linecap="butt"
+        stroke-dasharray="6 5"
+        style="stroke-dashoffset:{-scrollPos * 12}px"
+      />
+      <path
+        class="qk-edge"
+        d="M 88 22 A 66 66 0 0 0 22 88"
+        fill="none"
+        stroke-width="1"
+        stroke-linecap="butt"
+      />
+      <path
+        class="qk-edge"
+        d="M 88  4 A 84 84 0 0 0  4 88"
+        fill="none"
+        stroke-width="1"
+        stroke-linecap="butt"
+      />
     </svg>
   {/if}
 
   {#each visibleSlots as k}
-    {@const i      = slotItem(k)}
-    {@const item   = items[i]}
-    {@const delta  = slotDelta(k)}
+    {@const i = slotItem(k)}
+    {@const item = items[i]}
+    {@const delta = slotDelta(k)}
     {@const isActive = item.active ?? (!!activeHref && activeHref === item.href)}
-    {@const delay  = open ? k * 55 : (N_VISIBLE - 1 - k) * 35}
+    {@const delay = open ? k * 55 : (N_VISIBLE - 1 - k) * 35}
     {@const isPill = k === 3}
 
     {#if item}
@@ -257,8 +305,12 @@
           data-slot={k}
           aria-label={item.label}
           onclick={(e) => e.preventDefault()}
-          onpointerenter={() => { hoveredSlot = k; }}
-          onpointerleave={() => { if (hoveredSlot === k) hoveredSlot = -1; }}
+          onpointerenter={() => {
+            hoveredSlot = k;
+          }}
+          onpointerleave={() => {
+            if (hoveredSlot === k) hoveredSlot = -1;
+          }}
         >
           <span class="nav-icon"><item.icon size={20} /></span>
           <span class="nav-label">{item.label}</span>
@@ -274,8 +326,12 @@
           data-slot={k}
           aria-label={item.label}
           onclick={() => {}}
-          onpointerenter={() => { hoveredSlot = k; }}
-          onpointerleave={() => { if (hoveredSlot === k) hoveredSlot = -1; }}
+          onpointerenter={() => {
+            hoveredSlot = k;
+          }}
+          onpointerleave={() => {
+            if (hoveredSlot === k) hoveredSlot = -1;
+          }}
         >
           <span class="nav-icon"><item.icon size={20} /></span>
           <span class="nav-label">{item.label}</span>
@@ -289,7 +345,7 @@
     class="fab"
     class:open
     onclick={onFabClick}
-    aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
+    aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
     aria-expanded={open}
     aria-haspopup="true"
   >
@@ -375,11 +431,23 @@
     pointer-events: none;
   }
 
-  .fab-menu { opacity: 1; transform: rotate(0)   scale(1); }
-  .fab-close { opacity: 0; transform: rotate(-90deg) scale(0.4); }
+  .fab-menu {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+  .fab-close {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.4);
+  }
 
-  .open .fab-menu { opacity: 0; transform: rotate(90deg)  scale(0.4); }
-  .open .fab-close { opacity: 1; transform: rotate(0)     scale(1); }
+  .open .fab-menu {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.4);
+  }
+  .open .fab-close {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
 
   /* ── Nav items ──────────────────────────────────────────────────────────
      Uses individual CSS transform properties:
@@ -412,12 +480,12 @@
     opacity: 0;
 
     transition:
-      scale        0.38s cubic-bezier(0.34, 1.56, 0.64, 1) var(--delay),
-      opacity      0.25s ease                               var(--delay),
-      background   var(--transition-fast),
-      color        var(--transition-fast),
+      scale 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) var(--delay),
+      opacity 0.25s ease var(--delay),
+      background var(--transition-fast),
+      color var(--transition-fast),
       border-color var(--transition-fast),
-      box-shadow   var(--transition-fast);
+      box-shadow var(--transition-fast);
   }
 
   .open .nav-item {
@@ -476,7 +544,7 @@
     transition: opacity 0.15s ease;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       left: 100%;
       top: 50%;
@@ -503,13 +571,29 @@
     pointer-events: none;
   }
 
-  .qk-base   { stroke: color-mix(in srgb, var(--bg-hover) 85%, var(--border)); transition: stroke var(--transition-fast); }
-  .qk-ridges { stroke: color-mix(in srgb, var(--border) 80%, transparent);     transition: stroke var(--transition-fast); }
-  .qk-edge   { stroke: var(--border); opacity: 0.6; }
+  .qk-base {
+    stroke: color-mix(in srgb, var(--bg-hover) 85%, var(--border));
+    transition: stroke var(--transition-fast);
+  }
+  .qk-ridges {
+    stroke: color-mix(in srgb, var(--border) 80%, transparent);
+    transition: stroke var(--transition-fast);
+  }
+  .qk-edge {
+    stroke: var(--border);
+    opacity: 0.6;
+  }
 
-  .qknob--dragging .qk-base   { stroke: color-mix(in srgb, var(--primary) 15%, var(--bg-hover)); }
-  .qknob--dragging .qk-ridges { stroke: color-mix(in srgb, var(--primary) 55%, var(--border)); }
-  .qknob--dragging .qk-edge   { stroke: color-mix(in srgb, var(--primary) 40%, var(--border)); opacity: 1; }
+  .qknob--dragging .qk-base {
+    stroke: color-mix(in srgb, var(--primary) 15%, var(--bg-hover));
+  }
+  .qknob--dragging .qk-ridges {
+    stroke: color-mix(in srgb, var(--primary) 55%, var(--border));
+  }
+  .qknob--dragging .qk-edge {
+    stroke: color-mix(in srgb, var(--primary) 40%, var(--border));
+    opacity: 1;
+  }
 
   /* ── k=3 pill — icon (right) + label always visible (left) ─────────────
      flex-direction: row-reverse puts the icon on the right (anchor side)
@@ -535,7 +619,9 @@
     border-radius: 0;
     transition: color var(--transition-fast);
 
-    &::after { display: none; }
+    &::after {
+      display: none;
+    }
   }
 
   .open .nav-item.pill:hover .nav-label,
