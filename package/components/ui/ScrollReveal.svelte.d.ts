@@ -1,7 +1,7 @@
-import type { Snippet } from 'svelte';
+import type { Snippet } from "svelte";
 type $$ComponentProps = {
     children?: Snippet;
-    animation?: 'fade-up' | 'fade' | 'zoom' | 'slide-right' | 'flip';
+    animation?: "fade-up" | "fade" | "zoom" | "slide-right" | "flip";
     /** ms entre chaque enfant direct */
     stagger?: number;
     threshold?: number;

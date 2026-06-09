@@ -1,8 +1,8 @@
-import type { Snippet } from 'svelte';
+import type { Snippet } from "svelte";
 type $$ComponentProps = {
     children?: Snippet;
     /** Profondeur prédéfinie — ignorée si background est fourni */
-    depth?: 'shallow' | 'deep' | 'abyss';
+    depth?: "shallow" | "deep" | "abyss";
     /** Surcharge complète du fond */
     background?: string;
     particleCount?: number;

@@ -4,7 +4,7 @@ export type ProgressSection = {
 };
 type $$ComponentProps = {
     sections?: ProgressSection[];
-    side?: 'left' | 'right';
+    side?: "left" | "right";
     showLabels?: boolean;
 };
 declare const ScrollProgress: import("svelte").Component<$$ComponentProps, {}, "">;

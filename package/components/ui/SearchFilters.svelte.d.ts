@@ -1,4 +1,4 @@
-import type { Snippet } from 'svelte';
+import type { Snippet } from "svelte";
 type $$ComponentProps = {
     children: Snippet;
     onSearch?: (values: Record<string, string | string[]>) => void;

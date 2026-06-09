@@ -1,4 +1,4 @@
-import type { Snippet } from 'svelte';
+import type { Snippet } from "svelte";
 type $$ComponentProps = {
     children?: Snippet;
     /** Scale de départ (avant entrée dans le viewport) */
