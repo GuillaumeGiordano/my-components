@@ -1,28 +1,34 @@
 <script lang="ts">
-  import Sidebar from '$lib/components/layout/Sidebar.svelte';
-  import Avatar from '$lib/components/ui/Avatar.svelte';
-  import ThemeToggle from '$lib/components/ui/ThemeToggle.svelte';
+  import Sidebar from "$lib/components/layout/Sidebar.svelte";
+  import Avatar from "$lib/components/ui/Avatar.svelte";
+  import ThemeToggle from "$lib/components/ui/ThemeToggle.svelte";
   import {
-    LayoutDashboard, BarChart2, FileText, User, Lock, Bell,
-    Building2, LogOut, Settings,
-  } from '@lucide/svelte';
-  import '$lib/styles/demo-page.css';
+    LayoutDashboard,
+    BarChart2,
+    FileText,
+    User,
+    Lock,
+    Bell,
+    Building2,
+    LogOut,
+    Settings,
+  } from "@lucide/svelte";
 
   const groups = [
     {
-      label: 'Général',
+      label: "Général",
       items: [
-        { label: 'Tableau de bord', href: '#', icon: LayoutDashboard, active: true },
-        { label: 'Analytiques',     href: '#', icon: BarChart2 },
-        { label: 'Rapports',        href: '#', icon: FileText, badge: 3 },
+        { label: "Tableau de bord", href: "#", icon: LayoutDashboard, active: true },
+        { label: "Analytiques", href: "#", icon: BarChart2 },
+        { label: "Rapports", href: "#", icon: FileText, badge: 3 },
       ],
     },
     {
-      label: 'Paramètres',
+      label: "Paramètres",
       items: [
-        { label: 'Profil',         href: '#', icon: User },
-        { label: 'Sécurité',       href: '#', icon: Lock },
-        { label: 'Notifications',  href: '#', icon: Bell, badge: 12 },
+        { label: "Profil", href: "#", icon: User },
+        { label: "Sécurité", href: "#", icon: Lock },
+        { label: "Notifications", href: "#", icon: Bell, badge: 12 },
       ],
     },
   ];
@@ -38,20 +44,21 @@
   <div class="page-header">
     <h1>Sidebar</h1>
     <p>
-      Navigation latérale collapsible avec groupes, badges et état bindable.
-      Supporte des snippets <code>header</code> et <code>footer</code> pour
-      intégrer un en-tête de marque et un pied de page utilisateur.
+      Navigation latérale collapsible avec groupes, badges et état bindable. Supporte des
+      snippets <code>header</code> et <code>footer</code> pour intégrer un en-tête de marque
+      et un pied de page utilisateur.
     </p>
   </div>
 
   <!-- ── Démo complète avec header + footer ── -->
   <section class="variant">
     <h2>Avec header et footer</h2>
-    <p class="hint">Cas d'usage réel — en-tête de marque, navigation, pied de page utilisateur.</p>
+    <p class="hint">
+      Cas d'usage réel — en-tête de marque, navigation, pied de page utilisateur.
+    </p>
 
     <div class="demo-wrap">
       <Sidebar {groups} bind:collapsed>
-
         {#snippet header()}
           <div class="brand">
             <div class="brand-icon">
@@ -83,13 +90,12 @@
             {/if}
           </div>
         {/snippet}
-
       </Sidebar>
 
       <div class="demo-main">
         <p>Contenu principal</p>
         <p class="state-hint">
-          Sidebar : <strong>{collapsed ? 'réduite' : 'ouverte'}</strong>
+          Sidebar : <strong>{collapsed ? "réduite" : "ouverte"}</strong>
           — raccourci <kbd>[</kbd>
         </p>
       </div>
@@ -112,16 +118,10 @@
       <div class="props-row header">
         <span>Prop</span><span>Type</span><span>Défaut</span><span>Description</span>
       </div>
-      {#each [
-        ['groups',     'SidebarGroup[]',    '[]',    'Groupes de liens de navigation'],
-        ['collapsed',  'boolean',           'false', 'État réduit — bindable'],
-        ['activeHref', 'string',            "''",    'URL active (surlignée)'],
-        ['shortkey',   'string | false',    "'['",   'Raccourci clavier pour toggle — false pour désactiver'],
-        ['header',     'Snippet',           '—',     'Contenu rendu en haut de la sidebar (logo, marque…)'],
-        ['footer',     'Snippet',           '—',     'Contenu rendu en bas de la sidebar (user, logout…)'],
-      ] as [p, t, d, desc]}
+      {#each [["groups", "SidebarGroup[]", "[]", "Groupes de liens de navigation"], ["collapsed", "boolean", "false", "État réduit — bindable"], ["activeHref", "string", "''", "URL active (surlignée)"], ["shortkey", "string | false", "'['", "Raccourci clavier pour toggle — false pour désactiver"], ["header", "Snippet", "—", "Contenu rendu en haut de la sidebar (logo, marque…)"], ["footer", "Snippet", "—", "Contenu rendu en bas de la sidebar (user, logout…)"]] as [p, t, d, desc]}
         <div class="props-row">
-          <code>{p}</code><code class="type">{t}</code><code class="default">{d}</code><span>{desc}</span>
+          <code>{p}</code><code class="type">{t}</code><code class="default">{d}</code
+          ><span>{desc}</span>
         </div>
       {/each}
     </div>
@@ -131,7 +131,8 @@
   <section class="variant">
     <h2>Usage</h2>
     <div class="code-block">
-      <pre><code>{`<Sidebar {groups} bind:collapsed activeHref={page.url.pathname}>
+      <pre><code
+          >{`<Sidebar {groups} bind:collapsed activeHref={page.url.pathname}>
 
   {#snippet header()}
     <div class="brand-header">
@@ -148,7 +149,8 @@
     </div>
   {/snippet}
 
-</Sidebar>`}</code></pre>
+</Sidebar>`}</code
+        ></pre>
     </div>
   </section>
 </div>
@@ -185,7 +187,9 @@
     color: var(--text-subtle);
   }
 
-  .state-hint strong { color: var(--primary); }
+  .state-hint strong {
+    color: var(--primary);
+  }
 
   .state-hint kbd {
     font-family: var(--font-mono);
@@ -279,7 +283,9 @@
     border-radius: var(--radius-md);
     cursor: pointer;
     text-align: left;
-    transition: background var(--transition-fast), color var(--transition-fast);
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast);
 
     &:hover {
       background: var(--bg-hover);
@@ -306,7 +312,9 @@
     font-size: 13px;
     color: var(--text-muted);
 
-    &:last-child { border-bottom: none; }
+    &:last-child {
+      border-bottom: none;
+    }
     &.header {
       background: var(--bg-subtle);
       font-size: 11px;
@@ -317,9 +325,17 @@
     }
   }
 
-  .props-row code { font-family: var(--font-mono); font-size: 12px; color: var(--text-base); }
-  code.type    { color: var(--primary); }
-  code.default { color: var(--text-subtle); }
+  .props-row code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-base);
+  }
+  code.type {
+    color: var(--primary);
+  }
+  code.default {
+    color: var(--text-subtle);
+  }
 
   /* ── Code block ── */
   .code-block {
@@ -329,7 +345,10 @@
     overflow: auto;
   }
 
-  .code-block pre { margin: 0; padding: 20px; }
+  .code-block pre {
+    margin: 0;
+    padding: 20px;
+  }
 
   .code-block code {
     font-family: var(--font-mono);
