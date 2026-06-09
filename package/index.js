@@ -132,7 +132,6 @@ export { default as FeaturesSection } from './components/sections/FeaturesSectio
 export { default as GallerySection } from './components/sections/GallerySection.svelte';
 export { default as GallerySectionV2 } from './components/sections/GallerySectionV2.svelte';
 export { default as HeroSection } from './components/sections/HeroSection.svelte';
-export { default as HeroSectionV2 } from './components/sections/HeroSectionV2.svelte';
 export { default as ImageCardsSection } from './components/sections/ImageCardsSection.svelte';
 export { default as IntegrationsSection } from './components/sections/IntegrationsSection.svelte';
 export { default as LogoCloudSection } from './components/sections/LogoCloudSection.svelte';
