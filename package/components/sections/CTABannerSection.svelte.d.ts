@@ -10,7 +10,6 @@ type $$ComponentProps = {
         label: string;
         href: string;
     };
-    variant?: 'default' | 'primary' | 'dark';
     withBackground?: "bg-base" | "";
 };
 declare const CTABannerSection: import("svelte").Component<$$ComponentProps, {}, "">;

@@ -23,11 +23,11 @@
   onMount(() => theme.init());
 
   const categoryIcons: Record<string, any> = {
-    forms:       FileText,
-    buttons:     MousePointerClick,
-    ui:          Layers,
-    layout:      LayoutTemplate,
-    sections:    BookOpen,
+    forms: FileText,
+    buttons: MousePointerClick,
+    ui: Layers,
+    layout: LayoutTemplate,
+    sections: BookOpen,
     backgrounds: Sparkles,
   };
 
@@ -35,18 +35,18 @@
     categories.map((cat) => {
       const base = cat.baseSlug ?? cat.slug;
       return {
-        slug:     cat.slug,
-        label:    cat.label,
-        icon:     categoryIcons[cat.slug] ?? Layers,
-        badge:    cat.components.length,
-        active:   $page.url.pathname.startsWith(`/${base}`),
+        slug: cat.slug,
+        label: cat.label,
+        icon: categoryIcons[cat.slug] ?? Layers,
+        badge: cat.components.length,
+        active: $page.url.pathname.startsWith(`/${base}`),
         children: cat.components.map((comp) => ({
-          label:  comp.label,
-          href:   `/${base}/${comp.slug}`,
+          label: comp.label,
+          href: `/${base}/${comp.slug}`,
           active: $page.url.pathname === `/${base}/${comp.slug}`,
         })),
       };
-    })
+    }),
   );
 </script>
 
@@ -129,8 +129,8 @@
 
   .content {
     flex: 1;
-    padding: 32px;
-    max-width: 960px;
+    /* padding: 32px; */
+    /* max-width: 960px; */
     overflow-x: clip;
     margin: auto;
   }

@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Badge from '$lib/components/ui/Badge.svelte';
+  import Badge from "$lib/components/ui/Badge.svelte";
 
   let {
     badge,
     title,
     logos,
     marquee = false,
-    variant = 'default',
+    variant = "default",
     withBackground = "",
   }: {
     badge?: string;
@@ -18,10 +18,9 @@
       width?: number;
     }>;
     marquee?: boolean;
-    variant?: 'default' | 'muted';
+    variant?: "default" | "muted";
     withBackground?: "bg-base" | "";
   } = $props();
-
 
   // Duplicate logos for seamless marquee loop
   const marqueeLogos = $derived([...logos, ...logos]);
@@ -47,7 +46,12 @@
           {#each marqueeLogos as logo}
             <div class="logo-item">
               {#if logo.href}
-                <a href={logo.href} target="_blank" rel="noopener noreferrer" class="logo-link">
+                <a
+                  href={logo.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="logo-link"
+                >
                   {#if logo.src}
                     <img
                       src={logo.src}
@@ -83,7 +87,12 @@
         {#each logos as logo}
           <div class="logo-item">
             {#if logo.href}
-              <a href={logo.href} target="_blank" rel="noopener noreferrer" class="logo-link">
+              <a
+                href={logo.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="logo-link"
+              >
                 {#if logo.src}
                   <img
                     src={logo.src}
@@ -118,7 +127,7 @@
 
 <style>
   .logo-cloud {
-    padding: 80px 24px;
+    margin: 80px 24px;
     background: var(--bg-base);
   }
 
@@ -235,8 +244,12 @@
   }
 
   @keyframes marquee-scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
 
   @media (max-width: 600px) {
@@ -253,5 +266,7 @@
     }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .withBackground {
+    background: var(--bg-base);
+  }
 </style>

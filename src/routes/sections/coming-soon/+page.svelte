@@ -1,6 +1,5 @@
 <script lang="ts">
-  import '$lib/styles/demo-page.css';
-  import ComingSoonSection from '$lib/components/sections/ComingSoonSection.svelte';
+  import ComingSoonSection from "$lib/components/sections/ComingSoonSection.svelte";
 
   const launchDate = new Date(Date.now() + 15 * 24 * 60 * 60 * 1000); // +15 jours
 </script>
@@ -16,10 +15,7 @@
   <section class="variant">
     <h2>Avec compte à rebours</h2>
     <div class="frame">
-      <ComingSoonSection
-        {launchDate}
-        onsubmit={(email) => alert(`Inscrit : ${email}`)}
-      />
+      <ComingSoonSection {launchDate} onsubmit={(email) => alert(`Inscrit : ${email}`)} />
     </div>
   </section>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import Badge from '$lib/components/ui/Badge.svelte';
+  import { onMount } from "svelte";
+  import Badge from "$lib/components/ui/Badge.svelte";
 
   let {
     badge,
@@ -22,9 +22,8 @@
     withBackground?: "bg-base" | "";
   } = $props();
 
-
   // Track animated display values for each stat
-  let displayValues: string[] = $state(stats.map(() => '0'));
+  let displayValues: string[] = $state(stats.map(() => "0"));
   let hasAnimated = $state(false);
   let sectionEl: HTMLElement | null = $state(null);
 
@@ -33,7 +32,7 @@
    * Returns null if not purely numeric.
    */
   function parseNumeric(val: string): number | null {
-    const cleaned = val.replace(/[\s,]/g, '').replace(',', '.');
+    const cleaned = val.replace(/[\s,]/g, "").replace(",", ".");
     const n = parseFloat(cleaned);
     return isNaN(n) ? null : n;
   }
@@ -46,7 +45,7 @@
       return;
     }
 
-    const isDecimal = targetStr.includes('.') || targetStr.includes(',');
+    const isDecimal = targetStr.includes(".") || targetStr.includes(",");
     const decimals = isDecimal ? (targetStr.split(/[.,]/)[1]?.length ?? 0) : 0;
     const duration = 1600;
     const start = performance.now();
@@ -56,7 +55,7 @@
       const progress = Math.min(elapsed / duration, 1);
       // Ease-out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
-      const current = eased * target;
+      const current = eased * target!;
       displayValues[index] = current.toFixed(decimals);
 
       if (progress < 1) {
@@ -88,7 +87,7 @@
           observer.disconnect();
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.25 },
     );
 
     observer.observe(sectionEl);
@@ -138,7 +137,7 @@
 
 <style>
   .stats {
-    padding: 80px 24px;
+    margin: 80px 24px;
     background: var(--bg-base);
   }
 
@@ -242,8 +241,12 @@
   }
 
   @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   @media (max-width: 900px) {
@@ -266,5 +269,7 @@
     }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .withBackground {
+    background: var(--bg-base);
+  }
 </style>

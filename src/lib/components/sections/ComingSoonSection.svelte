@@ -7,7 +7,7 @@
 		badge = 'Bientôt disponible',
 		title = 'Quelque chose de grand arrive',
 		description = "Notre équipe travaille dur pour vous offrir une expérience exceptionnelle. Laissez-nous votre e-mail pour être parmi les premiers informés.",
-		launchDate,
+		launchDate = new Date('2026-07-01'),
 		emailPlaceholder = 'Votre e-mail…',
 		ctaLabel = "M'inscrire",
 		onsubmit,
@@ -16,7 +16,7 @@
 		badge?: string;
 		title?: string;
 		description?: string;
-		launchDate?: Date;
+		launchDate?: Date; // defaults to 2026-07-01
 		emailPlaceholder?: string;
 		ctaLabel?: string;
 		onsubmit?: (email: string) => void;

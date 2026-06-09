@@ -6,6 +6,7 @@ export { default as DatePicker } from './components/forms/DatePicker.svelte';
 export { default as DateRangePicker } from './components/forms/DateRangePicker.svelte';
 export { default as FileInput } from './components/forms/FileInput.svelte';
 export { default as FormInput } from './components/forms/Input.svelte';
+export { default as Input } from './components/forms/Input.svelte';
 export { default as NumberInput } from './components/forms/NumberInput.svelte';
 export { default as OtpInput } from './components/forms/OtpInput.svelte';
 export { default as RadioGroup } from './components/forms/RadioGroup.svelte';
@@ -17,6 +18,7 @@ export { default as Slider } from './components/forms/Slider.svelte';
 export { default as Switch } from './components/forms/Switch.svelte';
 export { default as TagInput } from './components/forms/TagInput.svelte';
 export { default as FormTextarea } from './components/forms/Textarea.svelte';
+export { default as Textarea } from './components/forms/Textarea.svelte';
 // ─── UI ──────────────────────────────────────────────────────────────────────
 export { default as Alert } from './components/ui/Alert.svelte';
 export { default as Carousel } from './components/ui/Carousel.svelte';

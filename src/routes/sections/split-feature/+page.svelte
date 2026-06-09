@@ -1,6 +1,5 @@
 <script lang="ts">
-  import '$lib/styles/demo-page.css';
-  import SplitFeatureSection from '$lib/components/sections/SplitFeatureSection.svelte';
+  import SplitFeatureSection from "$lib/components/sections/SplitFeatureSection.svelte";
 </script>
 
 <svelte:head>
@@ -67,48 +66,54 @@
 <div class="page">
   <div class="page-header">
     <h1>SplitFeature</h1>
-    <p>Sections alternant colonnes texte + visuel — idéale pour présenter les fonctionnalités clés.</p>
+    <p>
+      Sections alternant colonnes texte + visuel — idéale pour présenter les
+      fonctionnalités clés.
+    </p>
   </div>
 
   <SplitFeatureSection
     features={[
       {
-        badge: 'Collaboration',
-        title: 'Travaillez ensemble, où que vous soyez',
-        description: "Synchronisez votre équipe en temps réel grâce à notre espace de travail partagé. Commentez, assignez et validez sans jamais quitter la plateforme.",
+        badge: "Collaboration",
+        title: "Travaillez ensemble, où que vous soyez",
+        description:
+          "Synchronisez votre équipe en temps réel grâce à notre espace de travail partagé. Commentez, assignez et validez sans jamais quitter la plateforme.",
         bullets: [
-          'Modifications en temps réel avec présence des collaborateurs',
-          'Historique complet des versions et retour en arrière en un clic',
-          'Permissions granulaires par rôle et par projet',
+          "Modifications en temps réel avec présence des collaborateurs",
+          "Historique complet des versions et retour en arrière en un clic",
+          "Permissions granulaires par rôle et par projet",
           "Intégration native avec Slack, Notion et GitHub",
         ],
-        cta: { label: 'Découvrir la collaboration', href: '#' },
+        cta: { label: "Découvrir la collaboration", href: "#" },
         visual: visuel1,
       },
       {
-        badge: 'Automatisation',
-        title: 'Automatisez les tâches répétitives',
-        description: "Créez des flux de travail intelligents qui s'adaptent à votre processus. Déclenchez des actions automatiques et générez des rapports sans effort.",
+        badge: "Automatisation",
+        title: "Automatisez les tâches répétitives",
+        description:
+          "Créez des flux de travail intelligents qui s'adaptent à votre processus. Déclenchez des actions automatiques et générez des rapports sans effort.",
         bullets: [
           "Éditeur de flux visuel sans code requis",
-          'Plus de 200 déclencheurs et actions disponibles',
-          'Planification et conditions avancées',
+          "Plus de 200 déclencheurs et actions disponibles",
+          "Planification et conditions avancées",
           "Journaux d'exécution détaillés pour chaque automatisation",
         ],
-        cta: { label: "Explorer les automatisations", href: '#' },
+        cta: { label: "Explorer les automatisations", href: "#" },
         visual: visuel2,
       },
       {
-        badge: 'Analytique',
-        title: 'Des insights actionnables à portée de main',
-        description: "Suivez vos indicateurs clés en temps réel avec des tableaux de bord personnalisables. Prenez des décisions éclairées grâce à des données fiables.",
+        badge: "Analytique",
+        title: "Des insights actionnables à portée de main",
+        description:
+          "Suivez vos indicateurs clés en temps réel avec des tableaux de bord personnalisables. Prenez des décisions éclairées grâce à des données fiables.",
         bullets: [
-          'Dashboards personnalisables par glisser-déposer',
-          'Rapports automatiques envoyés par e-mail chaque semaine',
-          'Export en CSV, PDF ou connexion directe à votre BI',
-          'Alertes intelligentes sur les anomalies détectées',
+          "Dashboards personnalisables par glisser-déposer",
+          "Rapports automatiques envoyés par e-mail chaque semaine",
+          "Export en CSV, PDF ou connexion directe à votre BI",
+          "Alertes intelligentes sur les anomalies détectées",
         ],
-        cta: { label: 'Voir les tableaux de bord', href: '#' },
+        cta: { label: "Voir les tableaux de bord", href: "#" },
         visual: visuel3,
       },
     ]}
@@ -127,9 +132,15 @@
     overflow: hidden;
   }
 
-  .gradient-blue { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%); }
-  .gradient-violet { background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 50%, #c4b5fd 100%); }
-  .gradient-teal { background: linear-gradient(135deg, #ccfbf1 0%, #99f6e4 50%, #5eead4 100%); }
+  .gradient-blue {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%);
+  }
+  .gradient-violet {
+    background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 50%, #c4b5fd 100%);
+  }
+  .gradient-teal {
+    background: linear-gradient(135deg, #ccfbf1 0%, #99f6e4 50%, #5eead4 100%);
+  }
 
   .visual-inner {
     width: 80%;
@@ -155,10 +166,20 @@
     border-bottom: 1px solid #e5e7eb;
   }
 
-  .dot { width: 10px; height: 10px; border-radius: 50%; }
-  .dot.red { background: #f87171; }
-  .dot.yellow { background: #fbbf24; }
-  .dot.green { background: #34d399; }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .dot.red {
+    background: #f87171;
+  }
+  .dot.yellow {
+    background: #fbbf24;
+  }
+  .dot.green {
+    background: #34d399;
+  }
 
   .mock-content {
     padding: 16px;
@@ -167,18 +188,39 @@
     gap: 10px;
   }
 
-  .mock-line { height: 10px; border-radius: 4px; background: #e5e7eb; }
-  .mock-line.wide { width: 90%; }
-  .mock-line.medium { width: 65%; }
-  .mock-line.short { width: 40%; }
+  .mock-line {
+    height: 10px;
+    border-radius: 4px;
+    background: #e5e7eb;
+  }
+  .mock-line.wide {
+    width: 90%;
+  }
+  .mock-line.medium {
+    width: 65%;
+  }
+  .mock-line.short {
+    width: 40%;
+  }
 
-  .mock-avatar-row { display: flex; gap: 8px; margin-top: 4px; }
+  .mock-avatar-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+  }
   .mock-avatar {
-    width: 28px; height: 28px; border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
     background: linear-gradient(135deg, #818cf8, #6366f1);
   }
 
-  .mock-flow { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .mock-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
 
   .flow-node {
     padding: 10px 20px;
@@ -189,12 +231,27 @@
     min-width: 120px;
     text-align: center;
   }
-  .flow-node.source { background: #7c3aed; }
-  .flow-node.action { background: #6d28d9; }
-  .flow-node.result { background: #5b21b6; }
-  .flow-arrow { color: #7c3aed; font-size: 18px; }
+  .flow-node.source {
+    background: #7c3aed;
+  }
+  .flow-node.action {
+    background: #6d28d9;
+  }
+  .flow-node.result {
+    background: #5b21b6;
+  }
+  .flow-arrow {
+    color: #7c3aed;
+    font-size: 18px;
+  }
 
-  .mock-chart { width: 100%; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+  .mock-chart {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
 
   .chart-bars {
     display: flex;
@@ -213,5 +270,9 @@
     background: linear-gradient(180deg, #14b8a6, #0d9488);
   }
 
-  .chart-label { font-size: 12px; font-weight: 600; color: #0d9488; }
+  .chart-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #0d9488;
+  }
 </style>

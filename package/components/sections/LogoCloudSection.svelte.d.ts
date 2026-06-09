@@ -8,7 +8,7 @@ type $$ComponentProps = {
         width?: number;
     }>;
     marquee?: boolean;
-    variant?: 'default' | 'muted';
+    variant?: "default" | "muted";
     withBackground?: "bg-base" | "";
 };
 declare const LogoCloudSection: import("svelte").Component<$$ComponentProps, {}, "">;
