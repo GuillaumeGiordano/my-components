@@ -112,8 +112,9 @@
 
 <!-- ── Snippets ── -->
 {#snippet iconSlot()}
+  {@const Icon = icon}
   <span class="icon-wrap">
-    <icon size={16} />
+    <Icon size={16} />
     {#if collapsed && showBadge}
       <span class="badge-dot" aria-label="{badge} notifications"></span>
     {/if}
