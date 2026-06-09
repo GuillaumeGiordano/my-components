@@ -7,7 +7,7 @@
 	let {
 		id: _id,
 		name,
-		label,
+		label = '',
 		value = $bindable(''),
 		options = [] as Option[],
 		placeholder = 'Sélectionner…',
@@ -18,7 +18,7 @@
 	}: {
 		id?: string;
 		name?: string;
-		label: string;
+		label?: string;
 		value?: string;
 		options?: Option[];
 		placeholder?: string;
@@ -36,12 +36,14 @@
 </script>
 
 <div class="field" class:has-error={!!error} class:is-disabled={disabled}>
-	<label class="label" for={id}>
-		{label}
-		{#if required}
-			<span class="required" aria-hidden="true" title="Champ obligatoire">*</span>
-		{/if}
-	</label>
+	{#if label}
+		<label class="label" for={id}>
+			{label}
+			{#if required}
+				<span class="required" aria-hidden="true" title="Champ obligatoire">*</span>
+			{/if}
+		</label>
+	{/if}
 
 	{#if hint}
 		<p id={hintId} class="hint">{hint}</p>

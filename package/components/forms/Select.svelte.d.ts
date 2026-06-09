@@ -6,7 +6,7 @@ type Option = {
 type $$ComponentProps = {
     id?: string;
     name?: string;
-    label: string;
+    label?: string;
     value?: string;
     options?: Option[];
     placeholder?: string;

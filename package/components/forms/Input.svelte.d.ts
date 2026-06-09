@@ -3,7 +3,7 @@ type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'sea
 type $$ComponentProps = {
     id?: string;
     name?: string;
-    label: string;
+    label?: string;
     type?: InputType;
     value?: string;
     placeholder?: string;
