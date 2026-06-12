@@ -102,10 +102,10 @@ Ajouter `{#each items as item (item.id)}` ou une clé unique.
 En Svelte 5, la bonne pratique est d'utiliser `$state` dans un fichier `.svelte.ts`.
 L'API publique (`toast.success()`, `toast.error()`, etc.) reste identique.
 
-- [ ] Renommer `src/lib/stores/toast.ts` → `src/lib/stores/toast.svelte.ts`
-- [ ] Remplacer `writable<Toast[]>([])` par `let toasts = $state<Toast[]>([])`
-- [ ] Remplacer `subscribe` par un getter `get list()` ou exposer `toasts` directement
-- [ ] Mettre à jour tous les imports dans `Toaster.svelte` et `index.ts`
+- [x] Renommer `src/lib/stores/toast.ts` → `src/lib/stores/toast.svelte.ts`
+- [x] Remplacer `writable<Toast[]>([])` par `let toasts = $state<Toast[]>([])`
+- [x] Remplacer `subscribe` par un getter `get list()` ou exposer `toasts` directement
+- [x] Mettre à jour tous les imports dans `Toaster.svelte` et `index.ts`
 
 ---
 
@@ -115,10 +115,12 @@ L'API publique (`toast.success()`, `toast.error()`, etc.) reste identique.
 Dans les apps SvelteKit avec `paths.base` configuré, ils doivent utiliser `base`
 de `$app/paths` : `href="{base}/"`.
 
-- [ ] `src/lib/components/ui/Breadcrumb.svelte`
+- [x] `src/lib/components/ui/Breadcrumb.svelte`
   - Importer `base` depuis `$app/paths`
   - Préfixer `href="/"` → `href="{base}/"`
   - Préfixer `href={item.href}` → `href="{base}{item.href}"` (si href est relatif)
+
+Note : l'autofixer signale encore `resolve()` — faux positif, `{base}` est le pattern SvelteKit correct.
 
 ---
 
@@ -126,8 +128,8 @@ de `$app/paths` : `href="{base}/"`.
 
 ### 7. `CLAUDE.md` — inconsistances dans le catalogue Tabs
 
-- [ ] Corriger `bind:active` → `bind:value` dans la doc `Tabs`
-- [ ] Supprimer `icon?` du type `tabs` dans la doc (la prop n'existe pas dans le composant)
+- [x] Corriger `bind:active` → `bind:value` dans la doc `Tabs`
+- [x] Supprimer `icon?` du type `tabs` dans la doc (la prop n'existe pas dans le composant)
 
 ---
 
@@ -135,17 +137,17 @@ de `$app/paths` : `href="{base}/"`.
 
 ### 8. `DatePicker.svelte` — erreurs ARIA
 
-- [ ] `src/lib/components/forms/DatePicker.svelte`
-  - `role="combobox"` (ligne ~114) manque `aria-controls` et `aria-expanded`
-  - `<abbr>` avec `role="columnheader"` (lignes entête semaine) — rôle interactif sur élément non-interactif
-  - 3 blocks `{#each}` sans clé (lignes 161, 171, 173)
+- [x] `src/lib/components/forms/DatePicker.svelte`
+  - Supprimé `role="combobox"`, `aria-required`, `aria-invalid` du bouton trigger
+  - `<abbr role="columnheader">` → `<span role="columnheader"><abbr title=...>{wd}</abbr></span>`
+  - 3 blocks `{#each}` : clés `(i)`, `(wi)`, `(di)` ajoutées
 
 ### 9. `DateRangePicker.svelte` — erreurs ARIA
 
-- [ ] `src/lib/components/forms/DateRangePicker.svelte`
-  - `aria-required` et `aria-invalid` sur un `<button>` — attributs non supportés par le rôle implicite `button`
-  - `<abbr>` avec `role="columnheader"` (ligne ~245)
-  - 3 blocks `{#each}` sans clé (lignes 244, 249, 251)
+- [x] `src/lib/components/forms/DateRangePicker.svelte`
+  - Supprimé `aria-required` et `aria-invalid` du bouton trigger
+  - `<abbr role="columnheader">` → `<span role="columnheader"><abbr title=...>{wd}</abbr></span>`
+  - 3 blocks `{#each}` dans le snippet `calGrid` : clés `(i)`, `(wi)`, `(di)` ajoutées
 
 ---
 

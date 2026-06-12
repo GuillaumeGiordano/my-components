@@ -76,7 +76,7 @@ Dark mode: overridden via `.dark` class on `<html>`. Applied automatically by `t
 | `<Badge>` | Status labels. Props: `label`, `variant` (default/primary/success/warning/danger/info) |
 | `<Alert>` | Inline messages. Props: `variant`, `title`, `description` |
 | `<Modal>` | Dialog. Props: `id`, `title`, `size`. Snippets: `{#snippet footer(close)}` |
-| `<Tabs>` | Tab navigation. Props: `tabs: {id,label,icon?}[]`, `bind:active` |
+| `<Tabs>` | Tab navigation. Props: `tabs: {id,label}[]`, `bind:value` |
 | `<Table>` | Data table. Props: `columns`, `rows`, `loading`, `empty` |
 | `<Pagination>` | Page controls. Props: `bind:page`, `totalPages`, `total`, `perPage` — **always render, no condition needed** |
 | `<Breadcrumb>` | Navigation trail. Props: `items: {label,href?}[]` |

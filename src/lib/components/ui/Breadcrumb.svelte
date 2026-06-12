@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { ChevronRight, Home } from '@lucide/svelte';
+	import { base } from '$app/paths';
 
 	type BreadcrumbItem = {
 		label: string;
@@ -32,7 +33,7 @@
 	<ol class="breadcrumb">
 		{#if showHome}
 			<li class="crumb">
-				<a href="/" class="crumb-link crumb-home" aria-label="Accueil">
+				<a href="{base}/" class="crumb-link crumb-home" aria-label="Accueil">
 					<Home size={14} />
 				</a>
 				<ChevronRight size={14} class="separator" aria-hidden="true" />
@@ -45,7 +46,7 @@
 				{#if isLast || !item.href}
 					<span class="crumb-current">{item.label}</span>
 				{:else}
-					<a href={item.href} class="crumb-link">{item.label}</a>
+					<a href="{base}{item.href}" class="crumb-link">{item.label}</a>
 					<ChevronRight size={14} class="separator" aria-hidden="true" />
 				{/if}
 			</li>

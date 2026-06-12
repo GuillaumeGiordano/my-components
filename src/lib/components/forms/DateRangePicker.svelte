@@ -153,8 +153,6 @@
 		aria-haspopup="dialog"
 		aria-expanded={open}
 		aria-labelledby="{id}-label"
-		aria-required={required}
-		aria-invalid={!!error}
 		aria-describedby={describedby}
 		{disabled}
 		class="trigger"
@@ -241,14 +239,16 @@
 {#snippet calGrid(weeks: CalendarDay[][])}
 	<div class="cal-grid" role="grid">
 		<div class="weekdays" role="row">
-			{#each WEEKDAYS_SHORT as wd, i}
-				<abbr role="columnheader" title={WEEKDAYS_LONG[i]} class="weekday">{wd}</abbr>
+			{#each WEEKDAYS_SHORT as wd, i (i)}
+				<span role="columnheader" class="weekday">
+					<abbr title={WEEKDAYS_LONG[i]}>{wd}</abbr>
+				</span>
 			{/each}
 		</div>
 
-		{#each weeks as week}
+		{#each weeks as week, wi (wi)}
 			<div class="week" role="row">
-				{#each week as day}
+				{#each week as day, di (di)}
 					{@const { isStart, isEnd, inRange, isHover } = getDayState(day)}
 					<button
 						type="button"

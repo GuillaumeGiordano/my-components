@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { toast, type Toast } from '$lib/stores/toast';
+	import { toast, type Toast } from '$lib/stores/toast.svelte';
 	import { CheckCircle, AlertCircle, AlertTriangle, Info, X } from '@lucide/svelte';
 
 	const icons = {
@@ -25,7 +25,7 @@
 </script>
 
 <div class="toaster" aria-live="polite" aria-atomic="false">
-	{#each $toast as t (t.id)}
+	{#each toast.list as t (t.id)}
 		{@const ToastIcon = icons[t.variant]}
 		<div
 			class="toast toast--{t.variant}"

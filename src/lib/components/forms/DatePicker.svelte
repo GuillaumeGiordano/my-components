@@ -111,11 +111,8 @@
 	<button
 		{id}
 		type="button"
-		role="combobox"
-		aria-expanded={open}
 		aria-haspopup="dialog"
-		aria-required={required}
-		aria-invalid={!!error}
+		aria-expanded={open}
 		aria-describedby={describedby}
 		{disabled}
 		class="trigger"
@@ -158,19 +155,17 @@
 			<!-- Weekday headers -->
 			<div class="cal-grid" role="grid" aria-label="Calendrier">
 				<div class="weekdays" role="row">
-					{#each WEEKDAYS_SHORT as wd, i}
-						<abbr
-							role="columnheader"
-							title={WEEKDAYS_LONG[i]}
-							class="weekday"
-						>{wd}</abbr>
+					{#each WEEKDAYS_SHORT as wd, i (i)}
+						<span role="columnheader" class="weekday">
+							<abbr title={WEEKDAYS_LONG[i]}>{wd}</abbr>
+						</span>
 					{/each}
 				</div>
 
 				<!-- Day rows -->
-				{#each weeks as week, wi}
+				{#each weeks as week, wi (wi)}
 					<div class="week" role="row">
-						{#each week as day, di}
+						{#each week as day, di (di)}
 							{@const isSelected = !!selectedDate && isSameDay(day.date, selectedDate)}
 							<button
 								type="button"
