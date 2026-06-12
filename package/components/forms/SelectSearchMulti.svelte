@@ -31,13 +31,14 @@
 		disabled?: boolean;
 	} = $props();
 
-	const id = _id ?? name ?? uniqueId('selectsearchmulti');
+	const uid = uniqueId('selectsearchmulti');
+	const id = $derived(_id ?? name ?? uid);
 
-	const listboxId = `${id}-listbox`;
-	const searchId = `${id}-search`;
-	const hintId = hint ? `${id}-hint` : undefined;
-	const errorId = error ? `${id}-error` : undefined;
-	const describedby = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+	const listboxId = $derived(`${id}-listbox`);
+	const searchId = $derived(`${id}-search`);
+	const hintId = $derived(hint ? `${id}-hint` : undefined);
+	const errorId = $derived(error ? `${id}-error` : undefined);
+	const describedby = $derived([hintId, errorId].filter(Boolean).join(' ') || undefined);
 
 	let open = $state(false);
 	let query = $state('');
@@ -117,7 +118,7 @@
 	});
 </script>
 
-{#each value as v}
+{#each value as v (v)}
 	<input type="hidden" {name} value={v} />
 {/each}
 
@@ -156,7 +157,7 @@
 				<span class="placeholder">{placeholder}</span>
 			{:else if selectedOptions.length <= 3}
 				<span class="tags">
-					{#each selectedOptions as opt}
+					{#each selectedOptions as opt (opt.value)}
 						<span class="tag">
 							{opt.label}
 							<span
@@ -215,7 +216,7 @@
 				{#if filtered.length === 0}
 					<li class="no-results" aria-live="polite">Aucun résultat</li>
 				{:else}
-					{#each filtered as opt, i}
+					{#each filtered as opt, i (opt.value)}
 						{@const selected = value.includes(opt.value)}
 						<li
 							role="option"
@@ -264,7 +265,7 @@
 		gap: 3px;
 	}
 
-	.required { color: #dc2626; font-size: 16px; line-height: 1; }
+	.required { color: var(--danger); font-size: 16px; line-height: 1; }
 	.hint { font-size: 13px; color: var(--text-subtle); margin: 0; }
 
 	/* Trigger — hauteur fixe, identique aux autres selects */
@@ -292,8 +293,8 @@
 		outline: none;
 	}
 
-	.has-error .trigger { border-color: #dc2626; }
-	.has-error .trigger.open { box-shadow: 0 0 0 3px rgba(220,38,38,0.2); }
+	.has-error .trigger { border-color: var(--danger); }
+	.has-error .trigger.open { box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 20%, transparent); }
 
 	.trigger:disabled { opacity: 0.5; cursor: not-allowed; }
 
@@ -441,7 +442,7 @@
 		align-items: center;
 		gap: 5px;
 		font-size: 13px;
-		color: #dc2626;
+		color: var(--danger);
 		margin: 0;
 	}
 </style>

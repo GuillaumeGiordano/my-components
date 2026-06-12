@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { ChevronRight, Home } from '@lucide/svelte';
+	import { base } from '$app/paths';
 
 	type BreadcrumbItem = {
 		label: string;
@@ -16,7 +17,7 @@
 		maxItems?: number; // collapses middle items with "..." if exceeded
 	} = $props();
 
-	const visible = $derived(() => {
+	const visible = $derived.by(() => {
 		if (!maxItems || items.length <= maxItems) return items;
 		// Always show first + last (maxItems - 1), collapse the middle
 		const keep = Math.max(1, maxItems - 1);
@@ -32,20 +33,20 @@
 	<ol class="breadcrumb">
 		{#if showHome}
 			<li class="crumb">
-				<a href="/" class="crumb-link crumb-home" aria-label="Accueil">
+				<a href="{base}/" class="crumb-link crumb-home" aria-label="Accueil">
 					<Home size={14} />
 				</a>
 				<ChevronRight size={14} class="separator" aria-hidden="true" />
 			</li>
 		{/if}
 
-		{#each visible() as item, i}
-			{@const isLast = i === visible().length - 1}
+		{#each visible as item, i (i)}
+			{@const isLast = i === visible.length - 1}
 			<li class="crumb" aria-current={isLast ? 'page' : undefined}>
 				{#if isLast || !item.href}
 					<span class="crumb-current">{item.label}</span>
 				{:else}
-					<a href={item.href} class="crumb-link">{item.label}</a>
+					<a href="{base}{item.href}" class="crumb-link">{item.label}</a>
 					<ChevronRight size={14} class="separator" aria-hidden="true" />
 				{/if}
 			</li>

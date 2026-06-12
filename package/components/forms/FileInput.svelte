@@ -25,11 +25,12 @@
 		accept?: string;
 	} = $props();
 
-	const id = _id ?? name ?? uniqueId('file');
+	const uid = uniqueId('file');
+	const id = $derived(_id ?? name ?? uid);
 
-	const hintId = hint ? `${id}-hint` : undefined;
-	const errorId = error ? `${id}-error` : undefined;
-	const describedby = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+	const hintId = $derived(hint ? `${id}-hint` : undefined);
+	const errorId = $derived(error ? `${id}-error` : undefined);
+	const describedby = $derived([hintId, errorId].filter(Boolean).join(' ') || undefined);
 
 	let files = $state<File[]>([]);
 	let inputEl = $state<HTMLInputElement | null>(null);
@@ -117,7 +118,7 @@
 	<!-- File list -->
 	{#if files.length > 0}
 		<ul class="file-list" aria-label="Fichiers sélectionnés">
-			{#each files as file, i}
+			{#each files as file, i (i)}
 				<li class="file-item">
 					<FileText size={14} />
 					<span class="file-name">{file.name}</span>
@@ -160,7 +161,7 @@
 	}
 
 	.required {
-		color: #dc2626;
+		color: var(--danger);
 		font-size: 16px;
 		line-height: 1;
 	}
@@ -289,8 +290,8 @@
 	}
 
 	.remove-btn:hover {
-		color: #dc2626;
-		background: #fee2e2;
+		color: var(--danger);
+		background: var(--danger-subtle);
 	}
 
 	.remove-btn:focus-visible {
@@ -299,7 +300,7 @@
 	}
 
 	.has-error .dropzone {
-		border-color: #dc2626;
+		border-color: var(--danger);
 	}
 
 	.error-msg {
@@ -307,7 +308,7 @@
 		align-items: center;
 		gap: 5px;
 		font-size: 13px;
-		color: #dc2626;
+		color: var(--danger);
 		margin: 0;
 	}
 </style>

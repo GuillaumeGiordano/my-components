@@ -24,11 +24,12 @@
 		labelPosition?: 'left' | 'right';
 	} = $props();
 
-	const id = _id ?? name ?? uniqueId('switch');
+	const uid = uniqueId('switch');
+	const id = $derived(_id ?? name ?? uid);
 
-	const hintId = hint ? `${id}-hint` : undefined;
-	const errorId = error ? `${id}-error` : undefined;
-	const describedby = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+	const hintId = $derived(hint ? `${id}-hint` : undefined);
+	const errorId = $derived(error ? `${id}-error` : undefined);
+	const describedby = $derived([hintId, errorId].filter(Boolean).join(' ') || undefined);
 </script>
 
 <div class="field" class:has-error={!!error} class:is-disabled={disabled}>
@@ -168,7 +169,7 @@
 	}
 
 	.required {
-		color: #dc2626;
+		color: var(--danger);
 		font-size: 16px;
 		line-height: 1;
 	}
@@ -184,7 +185,7 @@
 		align-items: center;
 		gap: 5px;
 		font-size: 13px;
-		color: #dc2626;
+		color: var(--danger);
 		margin: 0 0 0 54px;
 	}
 </style>

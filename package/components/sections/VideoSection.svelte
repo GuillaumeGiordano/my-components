@@ -28,7 +28,7 @@
 	let playing = $state(false);
 
 	// Build the embed URL with autoplay=1 appended
-	const embedUrl = $derived(() => {
+	const embedUrl = $derived.by(() => {
 		if (!videoUrl) return '';
 		const separator = videoUrl.includes('?') ? '&' : '?';
 		return `${videoUrl}${separator}autoplay=1`;
@@ -58,7 +58,7 @@
 				{#if playing && videoUrl}
 					<!-- Embed iframe shown after user clicks play -->
 					<iframe
-						src={embedUrl()}
+						src={embedUrl}
 						title={thumbnailAlt}
 						frameborder="0"
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

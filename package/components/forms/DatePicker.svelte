@@ -34,11 +34,12 @@
 		max?:         string;
 	} = $props();
 
-	const id = _id ?? name ?? uniqueId('datepicker');
+	const uid = uniqueId('datepicker');
+	const id = $derived(_id ?? name ?? uid);
 
-	const hintId    = hint  ? `${id}-hint`  : undefined;
-	const errorId   = error ? `${id}-error` : undefined;
-	const describedby = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+	const hintId    = $derived(hint  ? `${id}-hint`  : undefined);
+	const errorId   = $derived(error ? `${id}-error` : undefined);
+	const describedby = $derived([hintId, errorId].filter(Boolean).join(' ') || undefined);
 
 	const today      = stripTime(new Date());
 	const selectedDate = $derived(parseISO(value));
@@ -110,11 +111,8 @@
 	<button
 		{id}
 		type="button"
-		role="combobox"
-		aria-expanded={open}
 		aria-haspopup="dialog"
-		aria-required={required}
-		aria-invalid={!!error}
+		aria-expanded={open}
 		aria-describedby={describedby}
 		{disabled}
 		class="trigger"
@@ -157,19 +155,17 @@
 			<!-- Weekday headers -->
 			<div class="cal-grid" role="grid" aria-label="Calendrier">
 				<div class="weekdays" role="row">
-					{#each WEEKDAYS_SHORT as wd, i}
-						<abbr
-							role="columnheader"
-							title={WEEKDAYS_LONG[i]}
-							class="weekday"
-						>{wd}</abbr>
+					{#each WEEKDAYS_SHORT as wd, i (i)}
+						<span role="columnheader" class="weekday">
+							<abbr title={WEEKDAYS_LONG[i]}>{wd}</abbr>
+						</span>
 					{/each}
 				</div>
 
 				<!-- Day rows -->
-				{#each weeks as week, wi}
+				{#each weeks as week, wi (wi)}
 					<div class="week" role="row">
-						{#each week as day, di}
+						{#each week as day, di (di)}
 							{@const isSelected = !!selectedDate && isSameDay(day.date, selectedDate)}
 							<button
 								type="button"
@@ -231,7 +227,7 @@
 		gap: 3px;
 	}
 
-	.required { color: #dc2626; font-size: 16px; line-height: 1; }
+	.required { color: var(--danger); font-size: 16px; line-height: 1; }
 	.hint { font-size: 13px; color: var(--text-subtle); margin: 0; }
 
 	/* ---- Trigger ---- */
@@ -259,8 +255,8 @@
 		outline: none;
 	}
 
-	.has-error .trigger { border-color: #dc2626; }
-	.has-error .trigger.open { box-shadow: 0 0 0 3px rgba(220,38,38,0.2); }
+	.has-error .trigger { border-color: var(--danger); }
+	.has-error .trigger.open { box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 20%, transparent); }
 	.trigger:disabled { opacity: 0.5; cursor: not-allowed; }
 
 	.trigger-label {
@@ -443,7 +439,7 @@
 		align-items: center;
 		gap: 5px;
 		font-size: 13px;
-		color: #dc2626;
+		color: var(--danger);
 		margin: 0;
 	}
 </style>

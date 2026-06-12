@@ -146,5 +146,5 @@ export { default as TeamSection } from './components/sections/TeamSection.svelte
 export { default as TestimonialsSection } from './components/sections/TestimonialsSection.svelte';
 export { default as VideoSection } from './components/sections/VideoSection.svelte';
 // ─── Stores & theme ──────────────────────────────────────────────────────────
-export { toast } from './stores/toast';
+export { toast } from './stores/toast.svelte';
 export { theme, THEMES, COLOR_THEMES, THEME_INIT_SCRIPT } from './theme.svelte';

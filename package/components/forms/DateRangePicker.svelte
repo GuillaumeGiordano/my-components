@@ -36,11 +36,12 @@
 		max?:         string;
 	} = $props();
 
-	const id = _id ?? name ?? uniqueId('daterange');
+	const uid = uniqueId('daterange');
+	const id = $derived(_id ?? name ?? uid);
 
-	const hintId  = hint  ? `${id}-hint`  : undefined;
-	const errorId = error ? `${id}-error` : undefined;
-	const describedby = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+	const hintId  = $derived(hint  ? `${id}-hint`  : undefined);
+	const errorId = $derived(error ? `${id}-error` : undefined);
+	const describedby = $derived([hintId, errorId].filter(Boolean).join(' ') || undefined);
 
 	const today   = stripTime(new Date());
 	const startDate = $derived(parseISO(startValue));
@@ -152,8 +153,6 @@
 		aria-haspopup="dialog"
 		aria-expanded={open}
 		aria-labelledby="{id}-label"
-		aria-required={required}
-		aria-invalid={!!error}
 		aria-describedby={describedby}
 		{disabled}
 		class="trigger"
@@ -240,14 +239,16 @@
 {#snippet calGrid(weeks: CalendarDay[][])}
 	<div class="cal-grid" role="grid">
 		<div class="weekdays" role="row">
-			{#each WEEKDAYS_SHORT as wd, i}
-				<abbr role="columnheader" title={WEEKDAYS_LONG[i]} class="weekday">{wd}</abbr>
+			{#each WEEKDAYS_SHORT as wd, i (i)}
+				<span role="columnheader" class="weekday">
+					<abbr title={WEEKDAYS_LONG[i]}>{wd}</abbr>
+				</span>
 			{/each}
 		</div>
 
-		{#each weeks as week}
+		{#each weeks as week, wi (wi)}
 			<div class="week" role="row">
-				{#each week as day}
+				{#each week as day, di (di)}
 					{@const { isStart, isEnd, inRange, isHover } = getDayState(day)}
 					<button
 						type="button"
@@ -295,7 +296,7 @@
 		gap: 3px;
 	}
 
-	.required { color: #dc2626; font-size: 16px; line-height: 1; }
+	.required { color: var(--danger); font-size: 16px; line-height: 1; }
 	.hint { font-size: 13px; color: var(--text-subtle); margin: 0; }
 
 	/* ---- Trigger ---- */
@@ -324,7 +325,7 @@
 		outline: none;
 	}
 
-	.has-error .trigger { border-color: #dc2626; }
+	.has-error .trigger { border-color: var(--danger); }
 	.trigger:disabled { opacity: 0.5; cursor: not-allowed; }
 
 	.trigger-segment {
@@ -563,7 +564,7 @@
 		align-items: center;
 		gap: 5px;
 		font-size: 13px;
-		color: #dc2626;
+		color: var(--danger);
 		margin: 0;
 	}
 </style>

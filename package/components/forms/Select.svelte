@@ -28,11 +28,12 @@
 		disabled?: boolean;
 	} = $props();
 
-	const id = _id ?? name ?? uniqueId('select');
+	const uid = uniqueId('select');
+	const id = $derived(_id ?? name ?? uid);
 
-	const hintId = hint ? `${id}-hint` : undefined;
-	const errorId = error ? `${id}-error` : undefined;
-	const describedby = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+	const hintId = $derived(hint ? `${id}-hint` : undefined);
+	const errorId = $derived(error ? `${id}-error` : undefined);
+	const describedby = $derived([hintId, errorId].filter(Boolean).join(' ') || undefined);
 </script>
 
 <div class="field" class:has-error={!!error} class:is-disabled={disabled}>
@@ -63,7 +64,7 @@
 			{#if placeholder}
 				<option value="" disabled selected={!value}>{placeholder}</option>
 			{/if}
-			{#each options as opt}
+			{#each options as opt (opt.value)}
 				<option value={opt.value} disabled={opt.disabled}>{opt.label}</option>
 			{/each}
 		</select>
@@ -98,7 +99,7 @@
 	}
 
 	.required {
-		color: #dc2626;
+		color: var(--danger);
 		font-size: 16px;
 		line-height: 1;
 	}
@@ -146,12 +147,12 @@
 	}
 
 	.has-error .select {
-		border-color: #dc2626;
+		border-color: var(--danger);
 	}
 
 	.has-error .select:focus {
-		border-color: #dc2626;
-		box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+		border-color: var(--danger);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 20%, transparent);
 	}
 
 	.chevron {
@@ -168,7 +169,7 @@
 		align-items: center;
 		gap: 5px;
 		font-size: 13px;
-		color: #dc2626;
+		color: var(--danger);
 		margin: 0;
 	}
 </style>

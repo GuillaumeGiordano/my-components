@@ -152,7 +152,7 @@ export { default as StatsSection } from './components/sections/StatsSection.svel
 export { default as TeamSection } from './components/sections/TeamSection.svelte';
 export { default as TestimonialsSection } from './components/sections/TestimonialsSection.svelte';
 export { default as VideoSection } from './components/sections/VideoSection.svelte';
-export { toast } from './stores/toast';
-export type { Toast, ToastVariant } from './stores/toast';
+export { toast } from './stores/toast.svelte';
+export type { Toast, ToastVariant } from './stores/toast.svelte';
 export { theme, THEMES, COLOR_THEMES, THEME_INIT_SCRIPT } from './theme.svelte';
 export type { Theme, ColorTheme, ShapeVariant, ShadowVariant, TypographyVariant, FontVariant, TransitionVariant, TextureVariant, TrackingVariant } from './theme.svelte';

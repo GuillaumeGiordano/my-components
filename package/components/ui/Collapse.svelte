@@ -16,10 +16,9 @@
     children: Snippet;
   } = $props();
 
-  let detailOpen = $derived(() => (isOpen ? "open" : ""));
 </script>
 
-<details {name} class="my-collapse {variant}">
+<details {name} open={isOpen} class="my-collapse {variant}">
   <summary class="summary">
     <span class="summary-title">{title}</span>
     <span class="chevron-wrap" aria-hidden="true">

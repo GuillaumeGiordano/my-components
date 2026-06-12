@@ -7,12 +7,13 @@ export type Toast = {
     duration?: number;
 };
 type ToastOptions = Partial<Pick<Toast, 'title' | 'duration'>>;
+declare function remove(id: string): void;
 export declare const toast: {
-    subscribe: (this: void, run: import("svelte/store").Subscriber<Toast[]>, invalidate?: () => void) => import("svelte/store").Unsubscriber;
+    readonly list: Toast[];
     success: (message: string, opts?: ToastOptions) => string;
     error: (message: string, opts?: ToastOptions) => string;
     warning: (message: string, opts?: ToastOptions) => string;
     info: (message: string, opts?: ToastOptions) => string;
-    remove: (id: string) => void;
+    remove: typeof remove;
 };
 export {};

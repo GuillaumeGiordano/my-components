@@ -56,11 +56,12 @@
 		pattern?: string;
 	} = $props();
 
-	const id = _id ?? name ?? uniqueId('input');
+	const uid = uniqueId('input');
+	const id = $derived(_id ?? name ?? uid);
 
-	const hintId = hint ? `${id}-hint` : undefined;
-	const errorId = error ? `${id}-error` : undefined;
-	const describedby = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+	const hintId = $derived(hint ? `${id}-hint` : undefined);
+	const errorId = $derived(error ? `${id}-error` : undefined);
+	const describedby = $derived([hintId, errorId].filter(Boolean).join(' ') || undefined);
 
 	// Password visibility toggle
 	let showPassword = $state(false);
@@ -150,7 +151,7 @@
 	}
 
 	.required {
-		color: #dc2626;
+		color: var(--danger);
 		font-size: 16px;
 		line-height: 1;
 	}
@@ -206,12 +207,12 @@
 
 	/* Error state */
 	.has-error .input {
-		border-color: #dc2626;
+		border-color: var(--danger);
 	}
 
 	.has-error .input:focus {
-		border-color: #dc2626;
-		box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+		border-color: var(--danger);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 20%, transparent);
 	}
 
 	/* Icons */
@@ -256,7 +257,7 @@
 		align-items: center;
 		gap: 5px;
 		font-size: 13px;
-		color: #dc2626;
+		color: var(--danger);
 		margin: 0;
 	}
 </style>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { toast, type Toast } from '../../stores/toast';
+	import { toast, type Toast } from '../../stores/toast.svelte';
 	import { CheckCircle, AlertCircle, AlertTriangle, Info, X } from '@lucide/svelte';
 
 	const icons = {
@@ -25,7 +25,7 @@
 </script>
 
 <div class="toaster" aria-live="polite" aria-atomic="false">
-	{#each $toast as t (t.id)}
+	{#each toast.list as t (t.id)}
 		{@const ToastIcon = icons[t.variant]}
 		<div
 			class="toast toast--{t.variant}"
@@ -81,10 +81,10 @@
 	}
 
 	/* Variant colors — left accent strip via border-left */
-	.toast--info    { border-left: 4px solid var(--info, #3b82f6);    color: var(--info-fg, #1d4ed8); }
-	.toast--success { border-left: 4px solid var(--success, #22c55e); color: var(--success-fg, #15803d); }
-	.toast--warning { border-left: 4px solid var(--warning, #f59e0b); color: var(--warning-fg, #92400e); }
-	.toast--error   { border-left: 4px solid var(--danger, #ef4444);  color: var(--danger-fg, #b91c1c); }
+	.toast--info    { border-left: 4px solid var(--info);    color: var(--info-fg); }
+	.toast--success { border-left: 4px solid var(--success); color: var(--success-fg); }
+	.toast--warning { border-left: 4px solid var(--warning); color: var(--warning-fg); }
+	.toast--error   { border-left: 4px solid var(--danger);  color: var(--danger-subtle-fg); }
 
 	.toast__icon {
 		flex-shrink: 0;

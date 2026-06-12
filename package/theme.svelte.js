@@ -209,7 +209,7 @@ export const THEMES = [
         shape: 'sharp', shadow: 'flat', typography: 'tight',
         font: 'condensed', transition: 'instant', texture: 'lines', tracking: 'tight-body',
         light: { primary: '#b5894a', primaryHover: '#292524', primaryFg: '#ffffff', primarySubtle: '#fef3c7', primarySubtleFg: '#78350f' },
-        dark: { primary: '#d4a96a', primaryHover: '#a3a3a3', primaryFg: '#0c0a09', primarySubtle: '#1c1410', hover: '#2d2018' },
+        dark: { primary: '#d4a96a', primaryHover: '#a3a3a3', primaryFg: '#0c0a09', primarySubtle: '#1c1410', primarySubtleFg: '#d4a96a' },
         bgDark: { base: '#0c0a09', subtle: '#1c1917', muted: '#1c1917', hover: '#292524' },
         borderDark: { border: 'rgba(212,169,106,0.20)', borderStrong: 'rgba(212,169,106,0.38)' },
         textureColor: { light: 'rgba(100,83,60,0.05)', dark: 'rgba(212,169,106,0.04)' },
