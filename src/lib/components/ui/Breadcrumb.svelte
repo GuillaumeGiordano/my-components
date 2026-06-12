@@ -16,7 +16,7 @@
 		maxItems?: number; // collapses middle items with "..." if exceeded
 	} = $props();
 
-	const visible = $derived(() => {
+	const visible = $derived.by(() => {
 		if (!maxItems || items.length <= maxItems) return items;
 		// Always show first + last (maxItems - 1), collapse the middle
 		const keep = Math.max(1, maxItems - 1);
@@ -39,8 +39,8 @@
 			</li>
 		{/if}
 
-		{#each visible() as item, i}
-			{@const isLast = i === visible().length - 1}
+		{#each visible as item, i (i)}
+			{@const isLast = i === visible.length - 1}
 			<li class="crumb" aria-current={isLast ? 'page' : undefined}>
 				{#if isLast || !item.href}
 					<span class="crumb-current">{item.label}</span>

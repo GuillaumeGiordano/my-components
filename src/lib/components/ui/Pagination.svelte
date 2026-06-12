@@ -37,7 +37,7 @@
 	}
 
 	// Generate the list of page numbers + "..." placeholders
-	const pages = $derived((): (number | '...')[] => {
+	const pages = $derived.by((): (number | '...')[] => {
 		if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
 
 		const left  = Math.max(2, page - siblings);
@@ -65,7 +65,7 @@
 			<ChevronLeft size={16} />
 		</button>
 
-		{#each pages() as p}
+		{#each pages as p, i (i)}
 			{#if p === '...'}
 				<span class="page-dots">…</span>
 			{:else}
@@ -101,7 +101,7 @@
 				onchange={changePerPage}
 				aria-label="Nombre d'éléments par page"
 			>
-				{#each perPageOptions as opt}
+				{#each perPageOptions as opt (opt)}
 					<option value={opt}>{opt}</option>
 				{/each}
 			</select>

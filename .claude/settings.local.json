@@ -17,7 +17,8 @@
       "PowerShell(Get-NetTCPConnection *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/ui/chatbot)",
       "Bash(curl *)",
-      "Bash(gh pr *)"
+      "Bash(gh pr *)",
+      "mcp__svelte__svelte-autofixer"
     ]
   }
 }

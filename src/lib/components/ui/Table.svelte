@@ -43,7 +43,7 @@
 		}
 	}
 
-	const sorted = $derived((): T[] => {
+	const sorted = $derived.by((): T[] => {
 		if (!sortKey) return rows;
 		return [...rows].sort((a, b) => {
 			const av = a[sortKey!];
@@ -85,7 +85,7 @@
 						/>
 					</th>
 				{/if}
-				{#each columns as col}
+				{#each columns as col (col.key)}
 					<th
 						class="th"
 						class:th--sortable={col.sortable}
@@ -119,7 +119,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#if sorted().length === 0}
+			{#if sorted.length === 0}
 				<tr>
 					<td
 						class="td td--empty"
@@ -129,7 +129,7 @@
 					</td>
 				</tr>
 			{:else}
-				{#each sorted() as row}
+				{#each sorted as row, i (i)}
 					<tr
 						class="tr"
 						class:tr--selected={selected.includes(row)}
@@ -146,7 +146,7 @@
 								/>
 							</td>
 						{/if}
-						{#each columns as col}
+						{#each columns as col (col.key)}
 							<td class="td" style:text-align={col.align ?? 'left'}>
 								{#if col.cell}
 									{@render col.cell(row)}
