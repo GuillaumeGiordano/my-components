@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
   import { onMount } from "svelte";
   import { categories } from "$lib/registry";
   import { theme } from "$lib/theme.svelte";
@@ -39,11 +39,11 @@
         label: cat.label,
         icon: categoryIcons[cat.slug] ?? Layers,
         badge: cat.components.length,
-        active: $page.url.pathname.startsWith(`/${base}`),
+        active: page.url.pathname.startsWith(`/${base}`),
         children: cat.components.map((comp) => ({
           label: comp.label,
           href: `/${base}/${comp.slug}`,
-          active: $page.url.pathname === `/${base}/${comp.slug}`,
+          active: page.url.pathname === `/${base}/${comp.slug}`,
         })),
       };
     }),
