@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet, Component } from "svelte";
   import { MoreHorizontal } from "@lucide/svelte";
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
 
   type NavItem = {
     icon: Component;
@@ -57,7 +57,7 @@
 
 <nav class="mobile-nav" class:fixed aria-label="Navigation mobile">
   {#each items as item}
-    {@const active = $page.url.pathname === item.href}
+    {@const active = page.url.pathname === item.href}
     <a
       href={item.href}
       class="nav-item"
