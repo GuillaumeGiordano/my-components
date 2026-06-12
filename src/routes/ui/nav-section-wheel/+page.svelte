@@ -103,7 +103,7 @@
       <pre><code>{`<!-- +layout.svelte -->
 <script>
   import { NavSectionWheel } from '@guillaumeg/ui';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
 <\/script>
 
 <!-- Ajouter un padding-right sur le contenu pour ne pas être masqué -->
@@ -112,7 +112,7 @@
 </main>
 
 <NavSectionWheel
-  activeHref={$page.url.hash}
+  activeHref={page.url.hash}
   items={sections}
 />`}</code></pre>
     </div>

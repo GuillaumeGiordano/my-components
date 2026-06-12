@@ -3,7 +3,7 @@
   import { SlidersHorizontal, Search, X, ChevronDown } from "@lucide/svelte";
   const browser = typeof window !== "undefined";
   import { goto } from "$app/navigation";
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
 
   // Params ignorés dans le comptage des filtres actifs
   const PAGINATION_PARAMS = new Set(["page", "perPage"]);
@@ -38,8 +38,8 @@
   $effect(() => {
     if (!urlDriven || !browser || !formEl) return;
 
-    // $page crée la dépendance réactive — se re-déclenche à chaque changement d'URL
-    const params = $page.url.searchParams;
+    // page crée la dépendance réactive — se re-déclenche à chaque changement d'URL
+    const params = page.url.searchParams;
 
     for (const el of Array.from(formEl.elements)) {
       const input = el as HTMLInputElement | HTMLSelectElement;
@@ -77,7 +77,7 @@
 
     if (urlDriven) {
       // Construire les nouveaux params en partant des params actuels (préserve perPage)
-      const params = new URLSearchParams($page.url.searchParams);
+      const params = new URLSearchParams(page.url.searchParams);
       for (const [key, val] of Object.entries(values)) {
         if (Array.isArray(val)) {
           params.delete(key);
@@ -104,7 +104,7 @@
     if (urlDriven) {
       // Garder uniquement perPage, effacer les filtres, revenir page 1
       const params = new URLSearchParams();
-      const perPage = $page.url.searchParams.get("perPage");
+      const perPage = page.url.searchParams.get("perPage");
       if (perPage) params.set("perPage", perPage);
       params.set("page", "1");
       await goto(`?${params.toString()}`);

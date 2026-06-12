@@ -5,7 +5,7 @@
   import FormInput     from "$lib/components/forms/Input.svelte";
   import Select        from "$lib/components/forms/Select.svelte";
   import { goto }      from '$app/navigation';
-  import { page }      from '$app/stores';
+  import { page }      from '$app/state';
 
   let { data } = $props();
 
@@ -24,13 +24,13 @@
 
   // ── Navigation de page via URL (préserve les filtres) ───────────────
   function setPage(p: number) {
-    const params = new URLSearchParams($page.url.searchParams);
+    const params = new URLSearchParams(page.url.searchParams);
     params.set('page', String(p));
     goto(`?${params.toString()}`);
   }
 
   function setPerPage(val: number) {
-    const params = new URLSearchParams($page.url.searchParams);
+    const params = new URLSearchParams(page.url.searchParams);
     params.set('perPage', String(val));
     params.set('page', '1');
     goto(`?${params.toString()}`);
@@ -87,7 +87,7 @@
     <p class="hint">
       Les filtres et la page sont encodés dans l'URL. Essaie de filtrer, changer de page,
       puis utilise le bouton <strong>Retour</strong> du navigateur.
-      L'URL courante : <code class="url-display">{$page.url.search || '(aucun filtre)'}</code>
+      L'URL courante : <code class="url-display">{page.url.search || '(aucun filtre)'}</code>
     </p>
 
     <SearchFilters
@@ -201,13 +201,13 @@ export const load: PageLoad = ({ url }) => {
   let { data } = $props();
 
   function setPage(p) {
-    const params = new URLSearchParams($page.url.searchParams);
+    const params = new URLSearchParams(page.url.searchParams);
     params.set('page', String(p));
     goto('?' + params.toString());
   }
 
   function setPerPage(val) {
-    const params = new URLSearchParams($page.url.searchParams);
+    const params = new URLSearchParams(page.url.searchParams);
     params.set('perPage', String(val));
     params.set('page', '1');
     goto('?' + params.toString());
