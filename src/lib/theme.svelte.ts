@@ -273,7 +273,7 @@ export const THEMES: Theme[] = [
     shape: 'sharp', shadow: 'flat', typography: 'tight',
     font: 'condensed', transition: 'instant', texture: 'lines', tracking: 'tight-body',
     light: { primary: '#b5894a', primaryHover: '#292524', primaryFg: '#ffffff', primarySubtle: '#fef3c7', primarySubtleFg: '#78350f' },
-    dark:  { primary: '#d4a96a', primaryHover: '#a3a3a3', primaryFg: '#0c0a09', primarySubtle: '#1c1410', hover: '#2d2018' } as any,
+    dark:  { primary: '#d4a96a', primaryHover: '#a3a3a3', primaryFg: '#0c0a09', primarySubtle: '#1c1410', primarySubtleFg: '#d4a96a' },
     bgDark:      { base: '#0c0a09', subtle: '#1c1917', muted: '#1c1917', hover: '#292524' },
     borderDark:  { border: 'rgba(212,169,106,0.20)', borderStrong: 'rgba(212,169,106,0.38)' },
     textureColor: { light: 'rgba(100,83,60,0.05)', dark: 'rgba(212,169,106,0.04)' },
@@ -556,6 +556,6 @@ export const theme = createTheme();
 export const THEME_INIT_SCRIPT = `(function(){var d=document.documentElement;var m=localStorage.getItem('theme');var dark=m?m==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(dark)d.classList.add('dark');var cls=localStorage.getItem('theme-classes');if(cls)cls.split(' ').forEach(function(c){if(c)d.classList.add(c);});try{var vars=JSON.parse(localStorage.getItem('theme-vars')||'null');if(vars)vars.forEach(function(v){d.style.setProperty(v[0],v[1]);});}catch(e){}})();`;
 
 /** @deprecated Use THEMES instead */
-export const COLOR_THEMES = THEMES.map((t) => ({ id: t.id as any, label: t.label, color: t.light.primary }));
+export const COLOR_THEMES = THEMES.map((t) => ({ id: t.id, label: t.label, color: t.light.primary }));
 /** @deprecated Use Theme['id'] instead */
 export type ColorTheme = string;

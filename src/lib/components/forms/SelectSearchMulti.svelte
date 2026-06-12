@@ -265,7 +265,7 @@
 		gap: 3px;
 	}
 
-	.required { color: #dc2626; font-size: 16px; line-height: 1; }
+	.required { color: var(--danger); font-size: 16px; line-height: 1; }
 	.hint { font-size: 13px; color: var(--text-subtle); margin: 0; }
 
 	/* Trigger — hauteur fixe, identique aux autres selects */
@@ -293,8 +293,8 @@
 		outline: none;
 	}
 
-	.has-error .trigger { border-color: #dc2626; }
-	.has-error .trigger.open { box-shadow: 0 0 0 3px rgba(220,38,38,0.2); }
+	.has-error .trigger { border-color: var(--danger); }
+	.has-error .trigger.open { box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 20%, transparent); }
 
 	.trigger:disabled { opacity: 0.5; cursor: not-allowed; }
 
@@ -442,7 +442,7 @@
 		align-items: center;
 		gap: 5px;
 		font-size: 13px;
-		color: #dc2626;
+		color: var(--danger);
 		margin: 0;
 	}
 </style>

@@ -26,6 +26,30 @@
   --text-heading: #0f172a;  /* titres                               */
 
   /* -------------------------------------------------------------------
+     COULEURS — SÉMANTIQUES (état, feedback)
+     ------------------------------------------------------------------- */
+  --danger:            #dc2626;
+  --danger-hover:      #b91c1c;
+  --danger-fg:         #ffffff;
+  --danger-subtle:     #fee2e2;
+  --danger-subtle-fg:  #991b1b;
+
+  --success:           #22c55e;
+  --success-fg:        #15803d;
+  --success-subtle:    #dcfce7;
+  --success-subtle-fg: #14532d;
+
+  --warning:           #f59e0b;
+  --warning-fg:        #92400e;
+  --warning-subtle:    #fef3c7;
+  --warning-subtle-fg: #78350f;
+
+  --info:              #3b82f6;
+  --info-fg:           #1d4ed8;
+  --info-subtle:       #dbeafe;
+  --info-subtle-fg:    #1e40af;
+
+  /* -------------------------------------------------------------------
      COULEURS — PRIMAIRE (changer ici pour adapter à un client)
      ------------------------------------------------------------------- */
   --primary:          #2563eb;  /* couleur d'accentuation principale  */

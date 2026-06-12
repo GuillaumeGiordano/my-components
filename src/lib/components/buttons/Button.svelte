@@ -8,6 +8,7 @@
   let {
     variant = "primary",
     size = "md",
+    type = "button",
     disabled = false,
     loading = false,
     href,
@@ -19,6 +20,7 @@
   }: {
     variant?: Variant;
     size?: Size;
+    type?: "button" | "submit" | "reset";
     disabled?: boolean;
     loading?: boolean;
     href?: string;
@@ -60,6 +62,7 @@
   </a>
 {:else}
   <button
+    {type}
     class="btn btn-{variant} btn-{size}"
     class:icon-only={iconOnly}
     disabled={isDisabled}
@@ -187,13 +190,13 @@
   }
 
   .btn-danger {
-    background: #dc2626;
-    color: #fff;
-    border-color: #dc2626;
+    background: var(--danger);
+    color: var(--danger-fg);
+    border-color: var(--danger);
   }
   .btn-danger:hover:not(:disabled) {
-    background: #b91c1c;
-    border-color: #b91c1c;
+    background: var(--danger-hover);
+    border-color: var(--danger-hover);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   }
 

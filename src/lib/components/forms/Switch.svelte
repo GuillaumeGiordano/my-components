@@ -169,7 +169,7 @@
 	}
 
 	.required {
-		color: #dc2626;
+		color: var(--danger);
 		font-size: 16px;
 		line-height: 1;
 	}
@@ -185,7 +185,7 @@
 		align-items: center;
 		gap: 5px;
 		font-size: 13px;
-		color: #dc2626;
+		color: var(--danger);
 		margin: 0 0 0 54px;
 	}
 </style>

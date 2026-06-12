@@ -1,161 +1,63 @@
-# TODO — Audit Svelte 5 Best Practices
+# TODO — Audit Svelte 5 Best Practices + V0
 
-Résultats de l'audit complet du 2026-06-12 (autofixer MCP Svelte + revue manuelle).
-Cocher chaque tâche une fois terminée et validée par l'autofixer.
-
----
-
-## HAUTE PRIORITÉ — Bugs de réactivité
-
-### 1. `$derived(() => ...)` → `$derived.by(() => ...)` (5 fichiers)
-
-**Problème :** `$derived(() => {...})` stocke la fonction elle-même comme valeur dérivée,
-au lieu de son résultat. Svelte ne mémoïse pas le calcul. La bonne syntaxe pour
-une computation complexe est `$derived.by(() => {...})`.
-
-- [x] `src/lib/components/ui/Breadcrumb.svelte` — ligne 19 (`visible`)
-- [x] `src/lib/components/ui/Collapse.svelte` — ligne 19 (`detailOpen`) — voir aussi item #3
-- [x] `src/lib/components/ui/Pagination.svelte` — ligne 40 (`pages`)
-- [x] `src/lib/components/sections/VideoSection.svelte` — ligne 31 (`embedUrl`)
-- [x] `src/lib/components/ui/Table.svelte` — ligne 46 (`sorted`)
-
-**Correction type :**
-```ts
-// Avant (❌)
-const pages = $derived((): (number | '...')[] => { ... });
-// Après (✓)
-const pages = $derived.by((): (number | '...')[] => { ... });
-```
-Et dans le template : utiliser `pages` (sans parenthèses) à la place de `pages()`.
+Audit complet du 2026-06-12. Tous les items sont terminés.
 
 ---
 
-### 2. `state_referenced_locally` — props capturées en `const` sans `$derived` (13 fichiers)
+## ✅ PASSE 1 — Bugs de réactivité Svelte 5
 
-**Problème :** Les props `_id`, `name`, `hint`, `error` sont référencées dans des `const`
-simples. Cela ne capture que la valeur initiale — si la prop change, les dérivés
-(`id`, `hintId`, `errorId`, `describedby`) ne se mettent pas à jour.
+- [x] `$derived(() => ...)` → `$derived.by(() => ...)` (5 fichiers)
+- [x] `state_referenced_locally` — props capturées sans `$derived` (12 fichiers de formulaires)
+- [x] `Collapse.svelte` — prop `isOpen` sans effet sur `<details>`
 
-Fichiers concernés :
-- [x] `src/lib/components/forms/Input.svelte`
-- [x] `src/lib/components/forms/Select.svelte`
-- [x] `src/lib/components/forms/Textarea.svelte`
-- [x] `src/lib/components/forms/Checkbox.svelte`
-- [x] `src/lib/components/forms/Switch.svelte`
-- [x] `src/lib/components/forms/RadioGroup.svelte`
-- [x] `src/lib/components/forms/FileInput.svelte`
-- [x] `src/lib/components/forms/SelectMulti.svelte`
-- [x] `src/lib/components/forms/SelectSearch.svelte`
-- [x] `src/lib/components/forms/SelectSearchMulti.svelte`
-- [x] `src/lib/components/forms/DatePicker.svelte`
-- [x] `src/lib/components/forms/DateRangePicker.svelte`
-- [ ] `src/lib/components/ui/Tooltip.svelte` — pas concerné (uniqueId sans props réactives)
+## ✅ PASSE 1 — Performance / Qualité
 
-**Correction type :**
-```ts
-// Avant (❌)
-const id = _id ?? name ?? uniqueId('input');
-const hintId = hint ? `${id}-hint` : undefined;
-const errorId = error ? `${id}-error` : undefined;
-const describedby = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+- [x] `{#each}` sans clé — Pagination, Table, Breadcrumb, SelectSearch, SelectSearchMulti, DatePicker, DateRangePicker
+- [x] `stores/toast.ts` → `stores/toast.svelte.ts` (migration Svelte 4 `writable` → `$state`)
+- [x] `Breadcrumb.svelte` — hrefs préfixés avec `base` de `$app/paths`
 
-// Après (✓)
-const uid = uniqueId('input'); // appelé une seule fois, valeur stable
-const id = $derived(_id ?? name ?? uid);
-const hintId = $derived(hint ? `${id}-hint` : undefined);
-const errorId = $derived(error ? `${id}-error` : undefined);
-const describedby = $derived([hintId, errorId].filter(Boolean).join(' ') || undefined);
-```
+## ✅ PASSE 1 — Documentation
+
+- [x] `CLAUDE.md` — Tabs : `bind:active` → `bind:value`, retrait de `icon?`
+
+## ✅ PASSE 1 — Accessibilité
+
+- [x] `DatePicker.svelte` — `role="combobox"` + `aria-required`/`aria-invalid` retirés du bouton, `<abbr role="columnheader">` corrigé, clés `{#each}` ajoutées
+- [x] `DateRangePicker.svelte` — `aria-required`/`aria-invalid` retirés du bouton, même fix `<abbr>`, clés `{#each}`
 
 ---
 
-### 3. `Collapse.svelte` — prop `isOpen` sans effet + `detailOpen` inutilisé
+## ✅ PASSE 2 — Qualité package V0
 
-**Problème :** La prop `isOpen` est déclarée mais ne contrôle pas l'attribut `open` du
-`<details>`. L'élément est toujours fermé au rendu initial, quel que soit `isOpen`.
-De plus, `detailOpen` est calculé via `$derived` mais jamais utilisé dans le template.
-
-- [x] `src/lib/components/ui/Collapse.svelte`
-  - Supprimer `let detailOpen = $derived(...)`
-  - Ajouter `open={isOpen}` sur `<details>`
-
----
-
-## PRIORITÉ MOYENNE — Performance / Qualité
-
-### 4. `{#each}` sans clé (5 fichiers)
-
-**Problème :** Sans clé, Svelte ne peut pas optimiser le DOM lors des réordonnements.
-Ajouter `{#each items as item (item.id)}` ou une clé unique.
-
-- [x] `src/lib/components/ui/Pagination.svelte` — 2 blocks `{#each}` (lignes 68, 104)
-- [x] `src/lib/components/ui/Table.svelte` — 3 blocks `{#each}` (lignes 88, 132, 149)
-- [x] `src/lib/components/ui/Breadcrumb.svelte` — 1 block `{#each}` (ligne 42)
-- [x] `src/lib/components/forms/SelectSearch.svelte` — 1 block `{#each}` (ligne 198)
-- [x] `src/lib/components/forms/SelectSearchMulti.svelte` — 3 blocks `{#each}` (lignes 121, 160, 219)
+- [x] `package.json` — suppression `@anthropic-ai/sdk` + `groq-sdk`, ajout `keywords`
+- [x] `theme.svelte.ts` — retrait des 2 casts `as any`
+- [x] `Button.svelte` — prop `type` avec défaut `"button"` + variante `danger` utilise `var(--danger)`
+- [x] `tokens.css` — ajout des tokens sémantiques : `--danger`, `--success`, `--warning`, `--info` (et variantes `*-hover`, `*-fg`, `*-subtle`, `*-subtle-fg`)
+- [x] Couleurs d'erreur hardcodées `#dc2626` → `var(--danger)` dans 12 composants de formulaires
+- [x] `rgba(220,38,38,0.2)` → `color-mix(in srgb, var(--danger) 20%, transparent)` (shadows d'erreur)
+- [x] `#fee2e2` → `var(--danger-subtle)` (FileInput hover)
+- [x] `Toaster.svelte` — retrait des fallbacks hardcodés, `--danger-fg` → `--danger-subtle-fg` pour la couleur texte des toasts
+- [x] `src/routes/ui/toast/+page.svelte` — import mis à jour vers `toast.svelte`
 
 ---
 
-### 5. `stores/toast.ts` — migrer de `writable` vers `$state`
+## État V0
 
-**Problème :** Utilise l'API store Svelte 4 (`writable` de `svelte/store`).
-En Svelte 5, la bonne pratique est d'utiliser `$state` dans un fichier `.svelte.ts`.
-L'API publique (`toast.success()`, `toast.error()`, etc.) reste identique.
+| Catégorie              | Status    |
+|------------------------|-----------|
+| Syntaxe Svelte 4       | ✅ Clean   |
+| Réactivité `$derived`  | ✅ Clean   |
+| Clés `{#each}`         | ✅ Clean   |
+| TypeScript `src/lib`   | ✅ 0 erreurs |
+| Package.json           | ✅ Propre  |
+| Tokens CSS             | ✅ Complets |
+| Couleurs hardcodées    | ✅ Migrées  |
+| Accessibilité (formes) | ✅ OK      |
+| `type="button"`        | ✅ Button.svelte (défaut) |
 
-- [x] Renommer `src/lib/stores/toast.ts` → `src/lib/stores/toast.svelte.ts`
-- [x] Remplacer `writable<Toast[]>([])` par `let toasts = $state<Toast[]>([])`
-- [x] Remplacer `subscribe` par un getter `get list()` ou exposer `toasts` directement
-- [x] Mettre à jour tous les imports dans `Toaster.svelte` et `index.ts`
+### Éléments non bloquants laissés pour après V0
 
----
-
-### 6. `Breadcrumb.svelte` — `href` sans `base` path
-
-**Problème :** Les liens `href="/"` et `href={item.href}` sont hardcodés.
-Dans les apps SvelteKit avec `paths.base` configuré, ils doivent utiliser `base`
-de `$app/paths` : `href="{base}/"`.
-
-- [x] `src/lib/components/ui/Breadcrumb.svelte`
-  - Importer `base` depuis `$app/paths`
-  - Préfixer `href="/"` → `href="{base}/"`
-  - Préfixer `href={item.href}` → `href="{base}{item.href}"` (si href est relatif)
-
-Note : l'autofixer signale encore `resolve()` — faux positif, `{base}` est le pattern SvelteKit correct.
-
----
-
-## BASSE PRIORITÉ — Documentation
-
-### 7. `CLAUDE.md` — inconsistances dans le catalogue Tabs
-
-- [x] Corriger `bind:active` → `bind:value` dans la doc `Tabs`
-- [x] Supprimer `icon?` du type `tabs` dans la doc (la prop n'existe pas dans le composant)
-
----
-
-## PRIORITÉ MOYENNE — Accessibilité (détectée lors de l'audit #2)
-
-### 8. `DatePicker.svelte` — erreurs ARIA
-
-- [x] `src/lib/components/forms/DatePicker.svelte`
-  - Supprimé `role="combobox"`, `aria-required`, `aria-invalid` du bouton trigger
-  - `<abbr role="columnheader">` → `<span role="columnheader"><abbr title=...>{wd}</abbr></span>`
-  - 3 blocks `{#each}` : clés `(i)`, `(wi)`, `(di)` ajoutées
-
-### 9. `DateRangePicker.svelte` — erreurs ARIA
-
-- [x] `src/lib/components/forms/DateRangePicker.svelte`
-  - Supprimé `aria-required` et `aria-invalid` du bouton trigger
-  - `<abbr role="columnheader">` → `<span role="columnheader"><abbr title=...>{wd}</abbr></span>`
-  - 3 blocks `{#each}` dans le snippet `calGrid` : clés `(i)`, `(wi)`, `(di)` ajoutées
-
----
-
-## Checklist de validation
-
-Après chaque correction, relancer l'autofixer MCP Svelte sur le fichier modifié
-pour confirmer l'absence de nouveaux problèmes.
-
-```
-mcp__svelte__svelte-autofixer({ code: "chemin/vers/Fichier.svelte", desired_svelte_version: 5 })
-```
+- Couleurs hardcodées dans les composants **sections** (PremiumHeroSection, GallerySection…) — cosmétiques décoratifs, non liés au système de thème
+- Faux positifs autofixer `resolve()` sur les `<a href>` (Breadcrumb, Button) — pattern `{base}` correct
+- Suggestions `$effect` pour click-outside — pattern inévitable pour event listeners DOM
+- Erreurs dans les pages de démo `src/routes` (exemples de showcase, pas dans le package publié)

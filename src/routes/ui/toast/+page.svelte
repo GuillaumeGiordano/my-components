@@ -1,6 +1,6 @@
 <script lang="ts">
   import '$lib/styles/demo-page.css';
-  import { toast } from '$lib/stores/toast';
+  import { toast } from '$lib/stores/toast.svelte';
   import Button from '$lib/components/buttons/Button.svelte';
 </script>
 

@@ -2,6 +2,7 @@
 	"name": "@guillaumeg/ui",
 	"version": "1.0.0",
 	"description": "Bibliothèque de composants Svelte 5 — UI, formulaires, layout, sections.",
+	"keywords": ["svelte", "svelte5", "components", "ui", "forms", "layout", "design-system"],
 	"author": "guillaumeG",
 	"license": "MIT",
 	"private": false,
@@ -35,13 +36,11 @@
 		"svelte": "^5.0.0"
 	},
 	"devDependencies": {
-		"@anthropic-ai/sdk": "^0.98.0",
 		"@sveltejs/adapter-auto": "^7.0.1",
 		"@sveltejs/kit": "^2.57.0",
 		"@sveltejs/package": "^2.5.7",
 		"@sveltejs/vite-plugin-svelte": "^7.0.0",
 		"@tailwindcss/vite": "^4.2.2",
-		"groq-sdk": "^1.2.0",
 		"svelte": "^5.55.2",
 		"svelte-check": "^4.4.6",
 		"tailwindcss": "^4.2.2",

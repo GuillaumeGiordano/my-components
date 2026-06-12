@@ -296,7 +296,7 @@
 		gap: 3px;
 	}
 
-	.required { color: #dc2626; font-size: 16px; line-height: 1; }
+	.required { color: var(--danger); font-size: 16px; line-height: 1; }
 	.hint { font-size: 13px; color: var(--text-subtle); margin: 0; }
 
 	/* ---- Trigger ---- */
@@ -325,7 +325,7 @@
 		outline: none;
 	}
 
-	.has-error .trigger { border-color: #dc2626; }
+	.has-error .trigger { border-color: var(--danger); }
 	.trigger:disabled { opacity: 0.5; cursor: not-allowed; }
 
 	.trigger-segment {
@@ -564,7 +564,7 @@
 		align-items: center;
 		gap: 5px;
 		font-size: 13px;
-		color: #dc2626;
+		color: var(--danger);
 		margin: 0;
 	}
 </style>

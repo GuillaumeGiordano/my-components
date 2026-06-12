@@ -99,7 +99,7 @@
 	}
 
 	.required {
-		color: #dc2626;
+		color: var(--danger);
 		font-size: 16px;
 		line-height: 1;
 	}
@@ -147,12 +147,12 @@
 	}
 
 	.has-error .select {
-		border-color: #dc2626;
+		border-color: var(--danger);
 	}
 
 	.has-error .select:focus {
-		border-color: #dc2626;
-		box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+		border-color: var(--danger);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 20%, transparent);
 	}
 
 	.chevron {
@@ -169,7 +169,7 @@
 		align-items: center;
 		gap: 5px;
 		font-size: 13px;
-		color: #dc2626;
+		color: var(--danger);
 		margin: 0;
 	}
 </style>
