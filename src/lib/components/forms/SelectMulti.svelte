@@ -29,12 +29,13 @@
 		disabled?: boolean;
 	} = $props();
 
-	const id = _id ?? name ?? uniqueId('selectmulti');
+	const uid = uniqueId('selectmulti');
+	const id = $derived(_id ?? name ?? uid);
 
-	const listboxId = `${id}-listbox`;
-	const hintId = hint ? `${id}-hint` : undefined;
-	const errorId = error ? `${id}-error` : undefined;
-	const describedby = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+	const listboxId = $derived(`${id}-listbox`);
+	const hintId = $derived(hint ? `${id}-hint` : undefined);
+	const errorId = $derived(error ? `${id}-error` : undefined);
+	const describedby = $derived([hintId, errorId].filter(Boolean).join(' ') || undefined);
 
 	let open = $state(false);
 	let containerEl = $state<HTMLDivElement | null>(null);
@@ -71,7 +72,7 @@
 </script>
 
 <!-- Hidden inputs for form submission -->
-{#each value as v}
+{#each value as v (v)}
 	<input type="hidden" {name} value={v} />
 {/each}
 
@@ -109,7 +110,7 @@
 				<span class="placeholder">{placeholder}</span>
 			{:else if value.length <= 3}
 				<div class="tags">
-					{#each options.filter(o => value.includes(o.value)) as opt}
+					{#each options.filter(o => value.includes(o.value)) as opt (opt.value)}
 						<span class="tag">
 							{opt.label}
 							<button
@@ -136,7 +137,7 @@
 			aria-label={label}
 			class="listbox"
 		>
-			{#each options as opt}
+			{#each options as opt (opt.value)}
 				{@const selected = value.includes(opt.value)}
 				<li
 					role="option"

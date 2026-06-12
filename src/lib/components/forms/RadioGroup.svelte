@@ -26,10 +26,11 @@
 		orientation?: 'vertical' | 'horizontal';
 	} = $props();
 
-	const groupId = name ?? uniqueId('radiogroup');
-	const hintId = hint ? `${groupId}-hint` : undefined;
-	const errorId = error ? `${groupId}-error` : undefined;
-	const describedby = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+	const uid = uniqueId('radiogroup');
+	const groupId = $derived(name ?? uid);
+	const hintId = $derived(hint ? `${groupId}-hint` : undefined);
+	const errorId = $derived(error ? `${groupId}-error` : undefined);
+	const describedby = $derived([hintId, errorId].filter(Boolean).join(' ') || undefined);
 </script>
 
 <!--
@@ -54,7 +55,7 @@
 	{/if}
 
 	<div class="options" class:horizontal={orientation === 'horizontal'}>
-		{#each options as opt}
+		{#each options as opt (opt.value)}
 			{@const optId = `${name}-${opt.value}`}
 			<div class="option" class:is-disabled={disabled || opt.disabled}>
 				<input

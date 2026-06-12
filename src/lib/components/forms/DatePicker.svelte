@@ -34,11 +34,12 @@
 		max?:         string;
 	} = $props();
 
-	const id = _id ?? name ?? uniqueId('datepicker');
+	const uid = uniqueId('datepicker');
+	const id = $derived(_id ?? name ?? uid);
 
-	const hintId    = hint  ? `${id}-hint`  : undefined;
-	const errorId   = error ? `${id}-error` : undefined;
-	const describedby = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+	const hintId    = $derived(hint  ? `${id}-hint`  : undefined);
+	const errorId   = $derived(error ? `${id}-error` : undefined);
+	const describedby = $derived([hintId, errorId].filter(Boolean).join(' ') || undefined);
 
 	const today      = stripTime(new Date());
 	const selectedDate = $derived(parseISO(value));

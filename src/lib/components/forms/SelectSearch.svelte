@@ -31,13 +31,14 @@
 		disabled?: boolean;
 	} = $props();
 
-	const id = _id ?? name ?? uniqueId('selectsearch');
+	const uid = uniqueId('selectsearch');
+	const id = $derived(_id ?? name ?? uid);
 
-	const listboxId = `${id}-listbox`;
-	const searchId = `${id}-search`;
-	const hintId = hint ? `${id}-hint` : undefined;
-	const errorId = error ? `${id}-error` : undefined;
-	const describedby = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+	const listboxId = $derived(`${id}-listbox`);
+	const searchId = $derived(`${id}-search`);
+	const hintId = $derived(hint ? `${id}-hint` : undefined);
+	const errorId = $derived(error ? `${id}-error` : undefined);
+	const describedby = $derived([hintId, errorId].filter(Boolean).join(' ') || undefined);
 
 	let open = $state(false);
 	let query = $state('');
@@ -194,7 +195,7 @@
 				{#if filtered.length === 0}
 					<li class="no-results" aria-live="polite">Aucun résultat</li>
 				{:else}
-					{#each filtered as opt, i}
+					{#each filtered as opt, i (opt.value)}
 						<li
 							role="option"
 							aria-selected={opt.value === value}

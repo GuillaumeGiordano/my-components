@@ -37,19 +37,19 @@ simples. Cela ne capture que la valeur initiale — si la prop change, les déri
 (`id`, `hintId`, `errorId`, `describedby`) ne se mettent pas à jour.
 
 Fichiers concernés :
-- [ ] `src/lib/components/forms/Input.svelte`
-- [ ] `src/lib/components/forms/Select.svelte`
-- [ ] `src/lib/components/forms/Textarea.svelte`
-- [ ] `src/lib/components/forms/Checkbox.svelte`
-- [ ] `src/lib/components/forms/Switch.svelte`
-- [ ] `src/lib/components/forms/RadioGroup.svelte`
-- [ ] `src/lib/components/forms/FileInput.svelte`
-- [ ] `src/lib/components/forms/SelectMulti.svelte`
-- [ ] `src/lib/components/forms/SelectSearch.svelte`
-- [ ] `src/lib/components/forms/SelectSearchMulti.svelte`
-- [ ] `src/lib/components/forms/DatePicker.svelte`
-- [ ] `src/lib/components/forms/DateRangePicker.svelte`
-- [ ] `src/lib/components/ui/Tooltip.svelte`
+- [x] `src/lib/components/forms/Input.svelte`
+- [x] `src/lib/components/forms/Select.svelte`
+- [x] `src/lib/components/forms/Textarea.svelte`
+- [x] `src/lib/components/forms/Checkbox.svelte`
+- [x] `src/lib/components/forms/Switch.svelte`
+- [x] `src/lib/components/forms/RadioGroup.svelte`
+- [x] `src/lib/components/forms/FileInput.svelte`
+- [x] `src/lib/components/forms/SelectMulti.svelte`
+- [x] `src/lib/components/forms/SelectSearch.svelte`
+- [x] `src/lib/components/forms/SelectSearchMulti.svelte`
+- [x] `src/lib/components/forms/DatePicker.svelte`
+- [x] `src/lib/components/forms/DateRangePicker.svelte`
+- [ ] `src/lib/components/ui/Tooltip.svelte` — pas concerné (uniqueId sans props réactives)
 
 **Correction type :**
 ```ts
@@ -91,8 +91,8 @@ Ajouter `{#each items as item (item.id)}` ou une clé unique.
 - [x] `src/lib/components/ui/Pagination.svelte` — 2 blocks `{#each}` (lignes 68, 104)
 - [x] `src/lib/components/ui/Table.svelte` — 3 blocks `{#each}` (lignes 88, 132, 149)
 - [x] `src/lib/components/ui/Breadcrumb.svelte` — 1 block `{#each}` (ligne 42)
-- [ ] `src/lib/components/forms/SelectSearch.svelte` — 1 block `{#each}` (ligne 197)
-- [ ] `src/lib/components/forms/SelectSearchMulti.svelte` — 3 blocks `{#each}` (lignes 120, 159, 218)
+- [x] `src/lib/components/forms/SelectSearch.svelte` — 1 block `{#each}` (ligne 198)
+- [x] `src/lib/components/forms/SelectSearchMulti.svelte` — 3 blocks `{#each}` (lignes 121, 160, 219)
 
 ---
 
@@ -128,6 +128,24 @@ de `$app/paths` : `href="{base}/"`.
 
 - [ ] Corriger `bind:active` → `bind:value` dans la doc `Tabs`
 - [ ] Supprimer `icon?` du type `tabs` dans la doc (la prop n'existe pas dans le composant)
+
+---
+
+## PRIORITÉ MOYENNE — Accessibilité (détectée lors de l'audit #2)
+
+### 8. `DatePicker.svelte` — erreurs ARIA
+
+- [ ] `src/lib/components/forms/DatePicker.svelte`
+  - `role="combobox"` (ligne ~114) manque `aria-controls` et `aria-expanded`
+  - `<abbr>` avec `role="columnheader"` (lignes entête semaine) — rôle interactif sur élément non-interactif
+  - 3 blocks `{#each}` sans clé (lignes 161, 171, 173)
+
+### 9. `DateRangePicker.svelte` — erreurs ARIA
+
+- [ ] `src/lib/components/forms/DateRangePicker.svelte`
+  - `aria-required` et `aria-invalid` sur un `<button>` — attributs non supportés par le rôle implicite `button`
+  - `<abbr>` avec `role="columnheader"` (ligne ~245)
+  - 3 blocks `{#each}` sans clé (lignes 244, 249, 251)
 
 ---
 

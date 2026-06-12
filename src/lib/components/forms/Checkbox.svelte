@@ -24,11 +24,12 @@
 		indeterminate?: boolean;
 	} = $props();
 
-	const id = _id ?? name ?? uniqueId('checkbox');
+	const uid = uniqueId('checkbox');
+	const id = $derived(_id ?? name ?? uid);
 
-	const hintId = hint ? `${id}-hint` : undefined;
-	const errorId = error ? `${id}-error` : undefined;
-	const describedby = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+	const hintId = $derived(hint ? `${id}-hint` : undefined);
+	const errorId = $derived(error ? `${id}-error` : undefined);
+	const describedby = $derived([hintId, errorId].filter(Boolean).join(' ') || undefined);
 
 	// indeterminate must be set via DOM property, not HTML attribute
 	let inputEl = $state<HTMLInputElement | null>(null);
