@@ -17,6 +17,7 @@
     columns = 3,
     title = "Filtres",
     urlDriven = false,
+    expanded = $bindable(false),
   }: {
     children: Snippet;
     onSearch?: (values: Record<string, string | string[]>) => void;
@@ -27,10 +28,10 @@
     title?: string;
     /** Encode les filtres dans l'URL et remet page=1 à chaque recherche */
     urlDriven?: boolean;
+    expanded?: boolean;
   } = $props();
 
   let formEl: HTMLFormElement | null = null;
-  let expanded = $state(true);
   let activeCount = $state(0);
 
   // ── Mode URL : pré-remplir les champs + compter les filtres actifs ────
