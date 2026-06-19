@@ -1,11 +1,9 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import Button from "$lib/components/buttons/Button.svelte";
-  import Badge from "$lib/components/ui/Badge.svelte";
   import HighlightedTitle from "$lib/components/ui/HighlightedTitle.svelte";
 
   let {
-    badge,
     title,
     highlight,
     description,
@@ -15,7 +13,6 @@
     withBackground = "",
     visual,
   }: {
-    badge?: string;
     title: string;
     highlight?: string;
     description: string;
@@ -30,12 +27,6 @@
 <section class="hero {withBackground} align-{align}">
   <div class="hero-inner">
     <div class="hero-content">
-      {#if badge}
-        <div class="hero-badge">
-          <Badge label={badge} variant="primary" dot />
-        </div>
-      {/if}
-
       <h1 class="hero-title">
         <HighlightedTitle text={title} {highlight} />
       </h1>
@@ -45,12 +36,12 @@
       {#if primaryCta || secondaryCta}
         <div class="hero-actions">
           {#if primaryCta}
-            <Button variant="primary" size="lg" href={primaryCta.href}>
+            <Button variant="primary" size="lg" addClass="test" href={primaryCta.href}>
               {primaryCta.label}
             </Button>
           {/if}
           {#if secondaryCta}
-            <Button variant="outline" size="lg" href={secondaryCta.href}>
+            <Button variant="outline" size="lg" addClass="test" href={secondaryCta.href}>
               {secondaryCta.label}
             </Button>
           {/if}
@@ -74,9 +65,12 @@
 
 <style>
   .hero {
-    padding: 96px 24px 80px;
     position: relative;
     overflow: hidden;
+    min-height: calc(100vh - var(--header-height) - 1px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .withBackground {
@@ -101,9 +95,9 @@
     position: relative;
     z-index: 1;
     max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 64px;
   }
 
@@ -129,7 +123,6 @@
 
   .align-left .hero-content {
     flex: 1;
-    max-width: 580px;
   }
 
   .align-left .hero-visual {
@@ -172,6 +165,12 @@
     gap: 12px;
     animation: fade-up 0.5s ease both;
     animation-delay: 0.26s;
+  }
+  :global(.test) {
+    flex: 1;
+  }
+  .test {
+    flex: 1;
   }
 
   .hero-visual-center {

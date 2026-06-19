@@ -1,12 +1,20 @@
 <script lang="ts">
-  import '$lib/styles/demo-page.css';
-  import Tilt3D from '$lib/components/ui/Tilt3D.svelte';
-  import { Star, Zap, Shield } from '@lucide/svelte';
+  import "$lib/styles/demo-page.css";
+  import Tilt3D from "$lib/components/ui/Tilt3D.svelte";
+  import { Star, Zap, Shield } from "@lucide/svelte";
 </script>
+
 <svelte:head><title>Tilt 3D</title></svelte:head>
 <div class="page">
-  <div class="page-header"><h1>Tilt 3D</h1><p>Carte qui pivote en 3D selon la position du curseur — <code>rotateX/Y</code> + reflet glare optionnel.</p></div>
-  <section class="variant"><h2>Cartes avec glare</h2>
+  <div class="page-header">
+    <h1>Tilt 3D</h1>
+    <p>
+      Carte qui pivote en 3D selon la position du curseur — <code>rotateX/Y</code> + reflet
+      glare optionnel.
+    </p>
+  </div>
+  <section class="variant">
+    <h2>Cartes avec glare</h2>
     <div class="demo">
       <Tilt3D>
         <div class="card">
@@ -31,7 +39,8 @@
       </Tilt3D>
     </div>
   </section>
-  <section class="variant"><h2>Sans glare — <code>glare={false}</code> — <code>maxTilt={25}</code></h2>
+  <section class="variant">
+    <h2>Sans glare — <code>glare={false}</code> — <code>maxTilt={25}</code></h2>
     <div class="demo">
       <Tilt3D glare={false} maxTilt={25}>
         <div class="card card--dark">
@@ -42,13 +51,58 @@
     </div>
   </section>
 </div>
+
 <style>
-  .demo { display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:24px;padding:48px 32px;background:var(--bg-subtle);border-radius:var(--radius-lg); }
-  .card { padding:24px;border-radius:12px;background:var(--bg-base);border:1px solid var(--border);width:180px;display:flex;flex-direction:column;gap:8px; }
-  .card--b { border-color:color-mix(in srgb,#f59e0b 40%,var(--border)); }
-  .card--c { border-color:color-mix(in srgb,#22c55e 40%,var(--border)); }
-  .card--dark { background:#0f172a;border-color:#334155; }
-  .card-icon { width:36px;height:36px;border-radius:8px;background:color-mix(in srgb,var(--primary) 12%,transparent);color:var(--primary);display:flex;align-items:center;justify-content:center; }
-  .card h3 { margin:0;font-size:14px;font-weight:700;color:var(--text-heading); }
-  .card p  { margin:0;font-size:12px;color:var(--text-muted);line-height:1.4; }
+  .demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 48px 32px;
+    background: var(--bg-subtle);
+    border-radius: var(--radius-lg);
+  }
+  .card {
+    padding: 24px;
+    border-radius: 12px;
+    background: var(--bg-base);
+    border: 1px solid var(--border);
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .card--b {
+    border-color: color-mix(in srgb, #f59e0b 40%, var(--border));
+  }
+  .card--c {
+    border-color: color-mix(in srgb, #22c55e 40%, var(--border));
+  }
+  .card--dark {
+    background: #0f172a;
+    border-color: #334155;
+  }
+  .card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--primary) 12%, transparent);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-heading);
+  }
+  .card p {
+    margin: 0;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
 </style>

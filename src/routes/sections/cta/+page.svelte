@@ -18,7 +18,6 @@
   </div>
 
   <CTABannerSection
-    variant="default"
     title="Prêt à transformer votre workflow ?"
     description="Rejoignez plus de 10 000 équipes qui utilisent notre plateforme chaque jour pour livrer plus vite et mieux."
     primaryCta={{ label: "Commencer gratuitement", href: "#" }}
@@ -27,7 +26,6 @@
 
   <GradientBackground>
     <CTABannerSection
-      variant="primary"
       badge="Offre limitée"
       title="2 mois offerts sur le plan Pro"
       description="Passez au plan annuel avant le 31 mai et économisez l'équivalent de deux mois d'abonnement. L'offre prend fin bientôt."
@@ -37,7 +35,6 @@
   </GradientBackground>
 
   <CTABannerSection
-    variant="dark"
     title="Une question ? Parlons-en."
     description="Notre équipe est disponible du lundi au vendredi pour vous aider à choisir la solution adaptée à vos besoins."
     primaryCta={{ label: "Contacter les ventes", href: "#" }}

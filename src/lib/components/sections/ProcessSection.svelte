@@ -1,17 +1,16 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
-  import Badge from '$lib/components/ui/Badge.svelte';
-  import Card from '$lib/components/ui/Card.svelte';
+  import type { Component } from "svelte";
+  import Badge from "$lib/components/ui/Badge.svelte";
+  import Button from "$lib/components/buttons/Button.svelte";
+  import Card from "$lib/components/ui/Card.svelte";
 
   let {
-    badge,
     title,
     description,
     steps,
-    layout = 'horizontal',
+    layout = "horizontal",
     withBackground = "",
   }: {
-    badge?: string;
     title: string;
     description?: string;
     steps: Array<{
@@ -19,20 +18,17 @@
       title: string;
       description: string;
       badge?: string;
+      cta?: { label: string; href: string };
     }>;
-    layout?: 'horizontal' | 'vertical';
+    layout?: "horizontal" | "vertical";
     withBackground?: "bg-base" | "";
   } = $props();
-
 </script>
 
 <section class="process {withBackground}">
   <div class="process-inner">
     <!-- Section header -->
     <div class="section-header">
-      {#if badge}
-        <Badge label={badge} variant="primary" dot />
-      {/if}
       <h2 class="section-title">{title}</h2>
       {#if description}
         <p class="section-description">{description}</p>
@@ -40,7 +36,7 @@
     </div>
 
     <!-- Steps: horizontal layout -->
-    {#if layout === 'horizontal'}
+    {#if layout === "horizontal"}
       <div class="steps-horizontal">
         {#each steps as step, i}
           <!-- Step card -->
@@ -58,6 +54,13 @@
                   </div>
                 {/if}
                 <p class="step-description">{step.description}</p>
+                {#if step.cta}
+                  <div class="step-cta">
+                    <Button variant="primary" size="sm" href={step.cta.href}>
+                      {step.cta.label}
+                    </Button>
+                  </div>
+                {/if}
               {/snippet}
             </Card>
           </div>
@@ -71,7 +74,7 @@
         {/each}
       </div>
 
-    <!-- Steps: vertical layout -->
+      <!-- Steps: vertical layout -->
     {:else}
       <div class="steps-vertical">
         {#each steps as step, i}
@@ -97,6 +100,13 @@
                   {/if}
                 </div>
                 <p class="step-description">{step.description}</p>
+                {#if step.cta}
+                  <div class="step-cta">
+                    <Button variant="primary" size="sm" href={step.cta.href}>
+                      {step.cta.label}
+                    </Button>
+                  </div>
+                {/if}
               </div>
             </div>
           </div>
@@ -107,14 +117,13 @@
 </section>
 
 <style>
-  .process {
-    padding: 100px 24px;
+  .withBackground {
     background: var(--bg-base);
   }
 
   .process-inner {
     max-width: 1100px;
-    margin: 0 auto;
+    margin: 60px auto;
     display: flex;
     flex-direction: column;
     gap: 64px;
@@ -230,6 +239,10 @@
     margin: 0;
   }
 
+  .step-cta {
+    margin-top: 16px;
+  }
+
   /* ---- Vertical layout ---- */
   .steps-vertical {
     display: flex;
@@ -316,8 +329,14 @@
 
   /* ---- Animation ---- */
   @keyframes fade-up {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* ---- Mobile: horizontal becomes vertical ---- */
@@ -342,6 +361,4 @@
       transform: none;
     }
   }
-
-  .withBackground { background: var(--bg-base); }
 </style>

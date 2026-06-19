@@ -6,75 +6,75 @@
   /* -------------------------------------------------------------------
      COULEURS — FOND
      ------------------------------------------------------------------- */
-  --bg-base:    #ffffff;   /* fond principal de la page            */
-  --bg-subtle:  #f8fafc;   /* sidebar, header                      */
-  --bg-muted:   #f1f5f9;   /* preview stage, zones grisées         */
-  --bg-hover:   #e2e8f0;   /* survol d'éléments interactifs        */
+  --bg-base: #ffffff; /* fond principal de la page            */
+  --bg-subtle: #f8fafc; /* sidebar, header                      */
+  --bg-muted: #f1f5f9; /* preview stage, zones grisées         */
+  --bg-hover: #e2e8f0; /* survol d'éléments interactifs        */
 
   /* -------------------------------------------------------------------
      COULEURS — BORDURES
      ------------------------------------------------------------------- */
-  --border:       #e2e8f0;
+  --border: #e2e8f0;
   --border-strong: #cbd5e1;
 
   /* -------------------------------------------------------------------
      COULEURS — TEXTE
      ------------------------------------------------------------------- */
-  --text-base:    #1e293b;  /* texte principal                      */
-  --text-muted:   #475569;  /* texte secondaire                     */
-  --text-subtle:  #94a3b8;  /* texte tertiaire, placeholders        */
-  --text-heading: #0f172a;  /* titres                               */
+  --text-base: #1e293b; /* texte principal                      */
+  --text-muted: #475569; /* texte secondaire                     */
+  --text-subtle: #94a3b8; /* texte tertiaire, placeholders        */
+  --text-heading: #0f172a; /* titres                               */
 
   /* -------------------------------------------------------------------
      COULEURS — SÉMANTIQUES (état, feedback)
      ------------------------------------------------------------------- */
-  --danger:            #dc2626;
-  --danger-hover:      #b91c1c;
-  --danger-fg:         #ffffff;
-  --danger-subtle:     #fee2e2;
-  --danger-subtle-fg:  #991b1b;
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+  --danger-fg: #ffffff;
+  --danger-subtle: #fee2e2;
+  --danger-subtle-fg: #991b1b;
 
-  --success:           #22c55e;
-  --success-fg:        #15803d;
-  --success-subtle:    #dcfce7;
+  --success: #22c55e;
+  --success-fg: #15803d;
+  --success-subtle: #dcfce7;
   --success-subtle-fg: #14532d;
 
-  --warning:           #f59e0b;
-  --warning-fg:        #92400e;
-  --warning-subtle:    #fef3c7;
+  --warning: #f59e0b;
+  --warning-fg: #92400e;
+  --warning-subtle: #fef3c7;
   --warning-subtle-fg: #78350f;
 
-  --info:              #3b82f6;
-  --info-fg:           #1d4ed8;
-  --info-subtle:       #dbeafe;
-  --info-subtle-fg:    #1e40af;
+  --info: #3b82f6;
+  --info-fg: #1d4ed8;
+  --info-subtle: #dbeafe;
+  --info-subtle-fg: #1e40af;
 
   /* -------------------------------------------------------------------
      COULEURS — PRIMAIRE (changer ici pour adapter à un client)
      ------------------------------------------------------------------- */
-  --primary:          #2563eb;  /* couleur d'accentuation principale  */
-  --primary-hover:    #1d4ed8;  /* hover sur éléments primaires       */
-  --primary-fg:       #ffffff;  /* texte sur fond primaire            */
-  --primary-subtle:   #dbeafe;  /* fond primaire léger                */
-  --primary-subtle-fg:#1d4ed8;  /* texte sur fond primaire léger      */
+  --primary: #2563eb; /* couleur d'accentuation principale  */
+  --primary-hover: #1d4ed8; /* hover sur éléments primaires       */
+  --primary-fg: #ffffff; /* texte sur fond primaire            */
+  --primary-subtle: #dbeafe; /* fond primaire léger                */
+  --primary-subtle-fg: #1d4ed8; /* texte sur fond primaire léger      */
 
   /* -------------------------------------------------------------------
      COULEURS — FOOTER (sombre par défaut, indépendant du thème)
      ------------------------------------------------------------------- */
-  --footer-bg:          #0f172a;
-  --footer-text:        #cbd5e1;
-  --footer-text-muted:  #94a3b8;
+  --footer-bg: #0f172a;
+  --footer-text: #cbd5e1;
+  --footer-text-muted: #94a3b8;
   --footer-text-subtle: #475569;
-  --footer-border:      #1e293b;
-  --footer-brand:       #ffffff;
+  --footer-border: #1e293b;
+  --footer-brand: #ffffff;
 
   /* -------------------------------------------------------------------
      FORME
      ------------------------------------------------------------------- */
-  --radius-sm:   4px;
-  --radius-md:   6px;
-  --radius-lg:   8px;
-  --radius-xl:   10px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
   --radius-full: 9999px;
 
   /* -------------------------------------------------------------------
@@ -87,14 +87,20 @@
   /* -------------------------------------------------------------------
      TYPOGRAPHIE
      ------------------------------------------------------------------- */
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Fira Code", "Cascadia Code", Consolas, monospace;
 
   /* -------------------------------------------------------------------
      TRANSITIONS
      ------------------------------------------------------------------- */
   --transition-fast: 0.15s ease;
   --transition-base: 0.25s ease;
+
+  /* -------------------------------------------------------------------
+     NAVIGATION
+     ------------------------------------------------------------------- */
+  --nav-height: 64px;
+  --header-height: 64px;
 }
 
 /* ==========================================================================
@@ -102,28 +108,28 @@
    ========================================================================== */
 
 .dark {
-  --bg-base:    #0f172a;
-  --bg-subtle:  #1e293b;
-  --bg-muted:   #1e293b;
-  --bg-hover:   #334155;
+  --bg-base: #0f172a;
+  --bg-subtle: #1e293b;
+  --bg-muted: #1e293b;
+  --bg-hover: #334155;
 
-  --border:       #334155;
+  --border: #334155;
   --border-strong: #475569;
 
-  --text-base:    #f1f5f9;
-  --text-muted:   #94a3b8;
-  --text-subtle:  #64748b;
+  --text-base: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
   --text-heading: #f8fafc;
 
-  --primary:          #3b82f6;
-  --primary-hover:    #2563eb;
-  --primary-fg:       #ffffff;
-  --primary-subtle:   #1e3a8a;
-  --primary-subtle-fg:#93c5fd;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-fg: #ffffff;
+  --primary-subtle: #1e3a8a;
+  --primary-subtle-fg: #93c5fd;
 
   /* Le footer devient encore plus sombre en dark mode */
-  --footer-bg:          #020617;
-  --footer-border:      #0f172a;
+  --footer-bg: #020617;
+  --footer-border: #0f172a;
 }
 
 /* ==========================================================================
@@ -131,10 +137,10 @@
    ========================================================================== */
 
 :root {
-  --heading-weight:   700;
+  --heading-weight: 700;
   --heading-tracking: -0.025em;
-  --leading-base:     1.6;
-  --font-size-base:   16px;
+  --leading-base: 1.6;
+  --font-size-base: 16px;
 }
 
 /* ==========================================================================
@@ -145,24 +151,24 @@
 /* ── Forme / border-radius ──────────────────────────────────────────────── */
 
 .shape-sharp {
-  --radius-sm:  2px;
-  --radius-md:  3px;
-  --radius-lg:  4px;
-  --radius-xl:  6px;
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
 }
 
 .shape-rounded {
-  --radius-sm:  6px;
-  --radius-md:  10px;
-  --radius-lg:  14px;
-  --radius-xl:  20px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
 }
 
 .shape-pill {
-  --radius-sm:  10px;
-  --radius-md:  20px;
-  --radius-lg:  32px;
-  --radius-xl:  48px;
+  --radius-sm: 10px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-xl: 48px;
 }
 
 /* ── Ombres ─────────────────────────────────────────────────────────────── */
@@ -183,28 +189,40 @@
 
 /* Tight : titres lourds et serrés */
 .type-tight {
-  --heading-weight:   800;
+  --heading-weight: 800;
   --heading-tracking: -0.04em;
-  --leading-base:     1.45;
+  --leading-base: 1.45;
 }
 
 /* Relaxed : titres légers et aérés */
 .type-relaxed {
-  --heading-weight:   600;
+  --heading-weight: 600;
   --heading-tracking: -0.01em;
-  --leading-base:     1.75;
+  --leading-base: 1.75;
 }
 
 /* Global heading override — s'applique à tous les h1-h4 dans l'app */
-.type-tight h1, .type-tight h2, .type-tight h3, .type-tight h4,
-.type-relaxed h1, .type-relaxed h2, .type-relaxed h3, .type-relaxed h4 {
+.type-tight h1,
+.type-tight h2,
+.type-tight h3,
+.type-tight h4,
+.type-relaxed h1,
+.type-relaxed h2,
+.type-relaxed h3,
+.type-relaxed h4 {
   font-weight: var(--heading-weight) !important;
   letter-spacing: var(--heading-tracking) !important;
 }
 
 /* Line-height sur le body */
-.type-tight   body, .type-tight   p { line-height: var(--leading-base); }
-.type-relaxed body, .type-relaxed p { line-height: var(--leading-base); }
+.type-tight body,
+.type-tight p {
+  line-height: var(--leading-base);
+}
+.type-relaxed body,
+.type-relaxed p {
+  line-height: var(--leading-base);
+}
 
 /* ==========================================================================
    POLICES — tokens et classes de thème
@@ -212,12 +230,17 @@
 
 :root {
   --font-display: var(--font-sans);
-  --font-body:    var(--font-sans);
+  --font-body: var(--font-sans);
   --tracking-body: 0em;
 }
 
 /* Apply display font to all headings globally */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display, inherit);
 }
 
@@ -228,20 +251,20 @@ html {
 
 /* Monospace — Tron, Matrix, Corporate */
 .font-mono {
-  --font-display: ui-monospace, 'Cascadia Code', Consolas, 'Courier New', monospace;
-  --font-body:    ui-monospace, 'Cascadia Code', Consolas, 'Courier New', monospace;
+  --font-display: ui-monospace, "Cascadia Code", Consolas, "Courier New", monospace;
+  --font-body: ui-monospace, "Cascadia Code", Consolas, "Courier New", monospace;
   font-family: var(--font-body);
 }
 
 /* Condensed bold — Dark Side, Deadpool, Man of Steel, Gotham */
 .font-condensed {
-  --font-display: Impact, 'Arial Narrow', 'Franklin Gothic Medium', sans-serif;
+  --font-display: Impact, "Arial Narrow", "Franklin Gothic Medium", sans-serif;
 }
 
 /* Geometric soft — Nature, DeLorean, Playful, Warm */
 .font-geometric {
-  --font-display: 'Trebuchet MS', 'Century Gothic', Futura, sans-serif;
-  --font-body:    'Trebuchet MS', 'Century Gothic', Futura, sans-serif;
+  --font-display: "Trebuchet MS", "Century Gothic", Futura, sans-serif;
+  --font-body: "Trebuchet MS", "Century Gothic", Futura, sans-serif;
   font-family: var(--font-body);
 }
 
@@ -274,8 +297,12 @@ html {
    ESPACEMENT DES LETTRES — corps de texte
    ========================================================================== */
 
-.tracking-wide       { --tracking-body:  0.04em; }
-.tracking-tight-body { --tracking-body: -0.01em; }
+.tracking-wide {
+  --tracking-body: 0.04em;
+}
+.tracking-tight-body {
+  --tracking-body: -0.01em;
+}
 
 /* ==========================================================================
    TEXTURE DE FOND
@@ -286,7 +313,7 @@ html {
 html.texture-dots::before,
 html.texture-lines::before,
 html.texture-grid::before {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;

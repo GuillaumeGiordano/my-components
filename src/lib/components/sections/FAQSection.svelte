@@ -1,23 +1,20 @@
 <script lang="ts">
-  import Badge from '$lib/components/ui/Badge.svelte';
-  import Collapse from '$lib/components/ui/Collapse.svelte';
+  import Badge from "$lib/components/ui/Badge.svelte";
+  import Collapse from "$lib/components/ui/Collapse.svelte";
 
   let {
-    badge,
     title,
     description,
     faqs,
     columns = 1,
     withBackground = "",
   }: {
-    badge?: string;
     title: string;
     description?: string;
     faqs: Array<{ question: string; answer: string }>;
     columns?: 1 | 2;
     withBackground?: "bg-base" | "";
   } = $props();
-
 
   // Split faqs into columns for 2-col layout
   const leftFaqs = $derived(columns === 2 ? faqs.filter((_, i) => i % 2 === 0) : faqs);
@@ -28,9 +25,6 @@
   <div class="faq-inner">
     <!-- Header -->
     <div class="section-header">
-      {#if badge}
-        <Badge label={badge} variant="primary" dot />
-      {/if}
       <h2 class="section-title">{title}</h2>
       {#if description}
         <p class="section-description">{description}</p>
@@ -53,7 +47,10 @@
         </div>
         <div class="faq-col">
           {#each rightFaqs as faq, i}
-            <div class="faq-item" style="animation-delay: {(i + leftFaqs.length) * 0.07}s">
+            <div
+              class="faq-item"
+              style="animation-delay: {(i + leftFaqs.length) * 0.07}s"
+            >
               <Collapse title={faq.question} variant="bordered">
                 {#snippet children()}
                   <p class="faq-answer">{faq.answer}</p>
@@ -80,14 +77,13 @@
 </section>
 
 <style>
-  .faq {
-    padding: 88px 24px;
+  .withBackground {
     background: var(--bg-base);
   }
 
   .faq-inner {
     max-width: 860px;
-    margin: 0 auto;
+    margin: 60px auto;
   }
 
   .faq-inner:has(.faq-two-col) {
@@ -173,6 +169,4 @@
       grid-template-columns: 1fr;
     }
   }
-
-  .withBackground { background: var(--bg-base); }
 </style>

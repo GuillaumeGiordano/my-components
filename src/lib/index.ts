@@ -65,6 +65,7 @@ export { default as Timeline }            from './components/ui/Timeline.svelte'
 export { default as TypeWriter }          from './components/ui/TypeWriter.svelte';
 export { default as DragSort }            from './components/ui/DragSort.svelte';
 export { default as GlowCard }            from './components/ui/GlowCard.svelte';
+export { default as HighlightedTitle }    from './components/ui/HighlightedTitle.svelte';
 export { default as InfiniteScroll }      from './components/ui/InfiniteScroll.svelte';
 export { default as KonamiCode }          from './components/ui/KonamiCode.svelte';
 export { default as ParticleBackground }  from './components/ui/ParticleBackground.svelte';

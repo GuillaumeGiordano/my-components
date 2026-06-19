@@ -293,7 +293,7 @@
     align-items: center;
     gap: 8px;
     padding: 0 24px;
-    height: 60px;
+    height: var(--header-height);
   }
 
   /* ── Desktop nav ── */

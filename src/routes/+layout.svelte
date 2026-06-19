@@ -129,9 +129,7 @@
 
   .content {
     flex: 1;
-    /* padding: 32px; */
-    /* max-width: 960px; */
     overflow-x: clip;
-    margin: auto;
+    margin: 0 auto;
   }
 </style>

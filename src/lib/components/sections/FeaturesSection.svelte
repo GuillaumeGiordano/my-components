@@ -1,17 +1,15 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
-  import Badge from '$lib/components/ui/Badge.svelte';
-  import Card from '$lib/components/ui/Card.svelte';
+  import type { Component } from "svelte";
+  import Badge from "$lib/components/ui/Badge.svelte";
+  import Card from "$lib/components/ui/Card.svelte";
 
   let {
-    badge,
     title,
     description,
     features,
     columns = 3,
     withBackground = "",
   }: {
-    badge?: string;
     title: string;
     description?: string;
     features: Array<{
@@ -23,16 +21,12 @@
     columns?: 2 | 3 | 4;
     withBackground?: "bg-base" | "";
   } = $props();
-
 </script>
 
 <section class="features {withBackground}">
   <div class="features-inner">
     <!-- Section header -->
     <div class="section-header">
-      {#if badge}
-        <Badge label={badge} variant="primary" dot />
-      {/if}
       <h2 class="section-title">{title}</h2>
       {#if description}
         <p class="section-description">{description}</p>
@@ -66,14 +60,13 @@
 </section>
 
 <style>
-  .features {
-    padding: 88px 24px;
+  .withBackground {
     background: var(--bg-base);
   }
 
   .features-inner {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 60px auto;
   }
 
   /* ---- Header ---- */
@@ -108,9 +101,15 @@
     gap: 20px;
   }
 
-  .cols-2 { grid-template-columns: repeat(2, 1fr); }
-  .cols-3 { grid-template-columns: repeat(3, 1fr); }
-  .cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
 
   /* ---- Card content ---- */
   .feature-card-wrap {
@@ -169,7 +168,9 @@
   }
 
   @media (max-width: 1024px) {
-    .cols-4 { grid-template-columns: repeat(2, 1fr); }
+    .cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   @media (max-width: 768px) {
@@ -183,6 +184,4 @@
       grid-template-columns: 1fr;
     }
   }
-
-  .withBackground { background: var(--bg-base); }
 </style>

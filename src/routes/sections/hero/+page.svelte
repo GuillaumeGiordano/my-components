@@ -1,5 +1,7 @@
 <script lang="ts">
+  import HeroSectionG2 from "$lib/components/g2-webdev/HeroSectionG2.svelte";
   import HeroSection from "$lib/components/sections/HeroSection.svelte";
+
   import Carousel from "$lib/components/ui/Carousel.svelte";
   import ParticleBackground from "$lib/components/ui/ParticleBackground.svelte";
 
@@ -77,13 +79,24 @@
   </ParticleBackground>
 
   <div class="page-header" style="margin-top: 64px;">
-    <h2>HeroSection V2</h2>
+    <h2>HeroSection G2 Webdev</h2>
     <p>
-      Variante premium avec grille décorative, orbes animés, texte highlight en gradient,
-      badge interactif et ligne de stats.
+      Ancienne version de la section Hero, utilisée sur le site G2 Webdev. Elle ne
+      contient pas de badge et n'est pas stylisée avec des tokens CSS.
     </p>
   </div>
 </div>
+
+<ParticleBackground>
+  <HeroSectionG2
+    title="Créez des interfaces modernes en un rien de temps"
+    highlight="interfaces modernes"
+    description="Une bibliothèque de composants Svelte 5 soignés, accessibles et prêts à l'emploi. Concentrez-vous sur votre produit, pas sur les détails d'implémentation."
+    primaryCta={{ label: "Commencer gratuitement", href: "#" }}
+    secondaryCta={{ label: "Voir la démo", href: "#" }}
+    align="center"
+  />
+</ParticleBackground>
 
 <style>
   .card-slide {

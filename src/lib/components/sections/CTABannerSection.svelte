@@ -3,14 +3,12 @@
   import Button from "$lib/components/buttons/Button.svelte";
 
   let {
-    badge,
     title,
     description,
     primaryCta,
     secondaryCta,
     withBackground = "",
   }: {
-    badge?: string;
     title: string;
     description?: string;
     primaryCta?: { label: string; href: string };
@@ -21,12 +19,6 @@
 
 <section class="cta-banner {withBackground}">
   <div class="cta-inner">
-    {#if badge}
-      <div class="cta-badge">
-        <Badge label={badge} dot />
-      </div>
-    {/if}
-
     <h2 class="cta-title">{title}</h2>
 
     {#if description}
@@ -52,13 +44,11 @@
 
 <style>
   .cta-banner {
-    margin: 88px 24px;
     position: relative;
     overflow: hidden;
     width: 100%;
   }
 
-  /* ---- Variants ---- */
   .withBackground {
     background: var(--bg-subtle);
   }
@@ -68,7 +58,7 @@
     position: relative;
     z-index: 1;
     max-width: 680px;
-    margin: 0 auto;
+    margin: 60px auto;
     text-align: center;
     display: flex;
     flex-direction: column;
