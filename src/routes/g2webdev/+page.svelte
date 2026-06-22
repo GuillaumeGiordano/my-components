@@ -14,7 +14,7 @@
   import FloatingGroup from "$lib/FloatingGroup.svelte";
   import HeroSection from "$lib/components/sections/HeroSection.svelte";
   import {
-    LayoutDashboard,
+    Home,
     FileText,
     Settings,
     Users,
@@ -26,6 +26,8 @@
     ShoppingCart,
     AppWindow,
     CalendarCheck,
+    HelpCircle,
+    Mail,
   } from "@lucide/svelte";
 
   import knowledge from "./knowledge.json";
@@ -109,17 +111,15 @@
   <title>G2 Webdev</title>
 </svelte:head>
 
-<!-- Fixed particle layer: stays put while sections scroll over it -->
-<div class="particle-layer" aria-hidden="true">
-  <ParticleBackground />
-</div>
-
 <Navbar
   items={[
-    { icon: LayoutDashboard, label: "Dashboard", href: "/", active: true },
-    { icon: FileText, label: "Articles", href: "/articles" },
-    { icon: Users, label: "Équipe", href: "/team" },
-    { icon: Settings, label: "Paramètres", href: "/settings" },
+    { icon: Home, label: "Accueil", href: "#hero", active: true },
+    { icon: BarChart2, label: "Chiffres", href: "#stats" },
+    { icon: CalendarCheck, label: "Méthode", href: "#process" },
+    { icon: FileText, label: "Devis", href: "#cta-banner" },
+    { icon: Sparkles, label: "Services", href: "#features" },
+    { icon: HelpCircle, label: "FAQ", href: "#faq" },
+    { icon: Mail, label: "Contact", href: "#contact" },
   ]}
 >
   {#snippet brand()}
@@ -136,6 +136,7 @@
     <ParticleBackground />
   {/snippet}
   <HeroSection
+    id="hero"
     title="Agence web dans le Var, création de sites sur mesure"
     highlight="création de sites"
     description="G2 Webdev conçoit des sites internet modernes, rapides et optimisés pour le référencement (SEO), et accompagne les entreprises, artisans et indépendants du Var dans leur croissance digitale. Une question ? Notre agent IA vous répond à tout moment, directement sur le site."
@@ -209,6 +210,7 @@
   </HeroSection>
 
   <StatsSection
+    id="stats"
     withBackground="bg-base"
     stats={[
       {
@@ -239,6 +241,7 @@
   />
 
   <ProcessSection
+    id="process"
     title="Votre projet, étape par étape"
     description="De l'écoute de votre besoin à la mise en ligne, nous vous accompagnons à chaque étape de votre projet web."
     steps={[
@@ -284,13 +287,15 @@
   />
 
   <CTABannerSection
-    title="Votre projet web à partir de 390€"
+    id="cta-banner"
+    title="Votre projet web à partir de 490€"
     description="Recevez un devis gratuit et sans engagement sous 48h. Parlons de votre projet et obtenez une estimation claire et adaptée à vos besoins."
     withBackground="bg-base"
     primaryCta={{ label: "Demander un devis gratuit", href: "#contact" }}
   />
 
   <FeaturesSection
+    id="features"
     title="Tout ce dont votre équipe a besoin"
     description="Une plateforme pensée pour les équipes modernes : rapide, sécurisée et facile à intégrer dans vos workflows existants."
     columns={3}
@@ -336,6 +341,7 @@
   />
 
   <FAQSection
+    id="faq"
     title="Questions fréquentes"
     description="Vous ne trouvez pas la réponse ? Contactez-moi, je réponds en moins de 24 heures."
     columns={2}
@@ -343,6 +349,7 @@
   />
 
   <ContactSection
+    id="contact"
     title="Contactez notre équipe"
     description="Vous avez une question, un retour ou une demande spécifique ? Remplissez ce formulaire et nous vous répondrons rapidement."
     onsubmit={handleSubmit}
@@ -430,19 +437,5 @@
     font-size: 12px;
     color: var(--text-muted);
     line-height: 1.4;
-  }
-
-  /* Fixed full-viewport layer that the page sections scroll over */
-  .particle-layer {
-    position: fixed;
-    inset: 0;
-    z-index: -1; /* sits behind the normal flow content */
-    pointer-events: none;
-  }
-
-  /* The component sizes its canvas to its own height, so force it to fill the layer */
-  .particle-layer :global(.pb) {
-    width: 100%;
-    height: 100%;
   }
 </style>

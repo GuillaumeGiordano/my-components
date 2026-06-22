@@ -8,6 +8,7 @@
   import { Send, CheckCircle } from "@lucide/svelte";
 
   let {
+    id,
     title,
     description,
     info,
@@ -15,6 +16,7 @@
     variant = "split",
     withBackground = "",
   }: {
+    id?: string;
     title: string;
     description?: string;
     info?: Array<{
@@ -82,7 +84,7 @@
   }
 </script>
 
-<section class="contact variant-{variant} {withBackground}">
+<section {id} class="contact variant-{variant} {withBackground}">
   <div class="contact-inner">
     {#if variant === "split"}
       <!-- Split layout: info on the left, form on the right -->

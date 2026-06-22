@@ -3,12 +3,14 @@
   import Button from "$lib/components/buttons/Button.svelte";
 
   let {
+    id,
     title,
     description,
     primaryCta,
     secondaryCta,
     withBackground = "",
   }: {
+    id?: string;
     title: string;
     description?: string;
     primaryCta?: { label: string; href: string };
@@ -17,7 +19,7 @@
   } = $props();
 </script>
 
-<section class="cta-banner {withBackground}">
+<section {id} class="cta-banner {withBackground}">
   <div class="cta-inner">
     <h2 class="cta-title">{title}</h2>
 

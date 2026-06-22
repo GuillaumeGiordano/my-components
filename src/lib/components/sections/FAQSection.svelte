@@ -3,12 +3,14 @@
   import Collapse from "$lib/components/ui/Collapse.svelte";
 
   let {
+    id,
     title,
     description,
     faqs,
     columns = 1,
     withBackground = "",
   }: {
+    id?: string;
     title: string;
     description?: string;
     faqs: Array<{ question: string; answer: string }>;
@@ -21,7 +23,7 @@
   const rightFaqs = $derived(columns === 2 ? faqs.filter((_, i) => i % 2 !== 0) : []);
 </script>
 
-<section class="faq {withBackground}">
+<section {id} class="faq {withBackground}">
   <div class="faq-inner">
     <!-- Header -->
     <div class="section-header">

@@ -4,6 +4,7 @@
   import HighlightedTitle from "$lib/components/ui/HighlightedTitle.svelte";
 
   let {
+    id,
     title,
     highlight,
     description,
@@ -13,6 +14,7 @@
     withBackground = "",
     visual,
   }: {
+    id?: string;
     title: string;
     highlight?: string;
     description: string;
@@ -24,7 +26,7 @@
   } = $props();
 </script>
 
-<section class="hero {withBackground} align-{align}">
+<section {id} class="hero {withBackground} align-{align}">
   <div class="hero-inner">
     <div class="hero-content">
       <h1 class="hero-title">

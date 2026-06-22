@@ -5,12 +5,14 @@
   import Card from "$lib/components/ui/Card.svelte";
 
   let {
+    id,
     title,
     description,
     steps,
     layout = "horizontal",
     withBackground = "",
   }: {
+    id?: string;
     title: string;
     description?: string;
     steps: Array<{
@@ -25,7 +27,7 @@
   } = $props();
 </script>
 
-<section class="process {withBackground}">
+<section {id} class="process {withBackground}">
   <div class="process-inner">
     <!-- Section header -->
     <div class="section-header">

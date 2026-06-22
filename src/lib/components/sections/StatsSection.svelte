@@ -3,11 +3,13 @@
   import Badge from "$lib/components/ui/Badge.svelte";
 
   let {
+    id,
     title,
     description,
     stats,
     withBackground = "",
   }: {
+    id?: string;
     title?: string;
     description?: string;
     stats: Array<{
@@ -93,7 +95,7 @@
   });
 </script>
 
-<section class="stats {withBackground}" bind:this={sectionEl}>
+<section {id} class="stats {withBackground}" bind:this={sectionEl}>
   <div class="stats-inner">
     <!-- Optional header -->
     {#if title || description}

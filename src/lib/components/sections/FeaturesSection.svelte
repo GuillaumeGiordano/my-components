@@ -4,12 +4,14 @@
   import Card from "$lib/components/ui/Card.svelte";
 
   let {
+    id,
     title,
     description,
     features,
     columns = 3,
     withBackground = "",
   }: {
+    id?: string;
     title: string;
     description?: string;
     features: Array<{
@@ -23,7 +25,7 @@
   } = $props();
 </script>
 
-<section class="features {withBackground}">
+<section {id} class="features {withBackground}">
   <div class="features-inner">
     <!-- Section header -->
     <div class="section-header">
