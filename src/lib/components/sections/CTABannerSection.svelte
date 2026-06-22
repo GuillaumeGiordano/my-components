@@ -49,8 +49,9 @@
     width: 100%;
   }
 
-  .withBackground {
-    background: var(--bg-subtle);
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
   }
 
   /* ---- Inner ---- */
@@ -119,9 +120,5 @@
     .cta-banner {
       padding: 64px 20px;
     }
-  }
-
-  .withBackground {
-    background: var(--bg-base);
   }
 </style>

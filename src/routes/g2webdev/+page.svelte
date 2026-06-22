@@ -286,6 +286,7 @@
   <CTABannerSection
     title="Votre projet web à partir de 390€"
     description="Recevez un devis gratuit et sans engagement sous 48h. Parlons de votre projet et obtenez une estimation claire et adaptée à vos besoins."
+    withBackground="bg-base"
     primaryCta={{ label: "Demander un devis gratuit", href: "#contact" }}
   />
 
