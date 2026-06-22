@@ -26,15 +26,54 @@
     brand,
     actionBtn,
     mobileMenu = "drawer",
+    spy = false,
   }: {
     items?: NavItem[];
     brand?: Snippet;
     actionBtn?: Snippet;
     mobileMenu?: "drawer" | "popover" | "fullscreen";
+    /** Enable scroll spy: highlight the item whose `#anchor` section crosses the viewport center. */
+    spy?: boolean;
   } = $props();
 
   let menuOpen = $state(false);
   let mobileOpenIndex = $state<number | null>(null);
+
+  // ── Scroll spy ──────────────────────────────────────────────────────────────
+  // Id of the section currently crossing the viewport center (spy mode only)
+  let activeId = $state<string | null>(null);
+
+  // True when an item's `#anchor` href points to the active section
+  function isItemActive(item: NavItem | NavSubItem): boolean {
+    if (spy && item.href?.startsWith("#")) return item.href.slice(1) === activeId;
+    return !!item.active;
+  }
+
+  $effect(() => {
+    if (!browser || !spy) return;
+
+    // Collect section ids from every hash href (top-level items + children)
+    const ids = items
+      .flatMap((item) => [item.href, ...(item.children?.map((c) => c.href) ?? [])])
+      .filter((href): href is string => !!href && href.startsWith("#"))
+      .map((href) => href.slice(1));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) activeId = entry.target.id;
+        }
+      },
+      { rootMargin: "-50% 0px -50% 0px" },
+    );
+
+    for (const id of ids) {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    }
+
+    return () => observer.disconnect();
+  });
 
   function close() {
     menuOpen = false;
@@ -68,7 +107,7 @@
         <a
           href={item.href}
           class="mobile-link"
-          class:active={item.active}
+          class:active={isItemActive(item)}
           onclick={close}
         >
           {#if item.icon}<span class="mobile-icon"><item.icon size={16} /></span>{/if}
@@ -79,7 +118,7 @@
         <button
           type="button"
           class="mobile-link"
-          class:active={item.active}
+          class:active={isItemActive(item)}
           onclick={() => (hasChildren ? toggleMobileItem(i) : close())}
           aria-expanded={hasChildren ? subOpen : undefined}
         >
@@ -100,7 +139,7 @@
             <a
               href={child.href}
               class="mobile-sub-link"
-              class:active={child.active}
+              class:active={isItemActive(child)}
               onclick={close}
             >
               {#if child.icon}
@@ -135,8 +174,8 @@
             <a
               href={item.href}
               class="nav-link"
-              class:active={item.active}
-              aria-current={item.active ? "page" : undefined}
+              class:active={isItemActive(item)}
+              aria-current={isItemActive(item) ? "page" : undefined}
             >
               {#if item.icon}<span class="nav-icon"><item.icon size={16} /></span>{/if}
               <span class="nav-label">{item.label}</span>
@@ -146,7 +185,7 @@
             <button
               type="button"
               class="nav-link"
-              class:active={item.active}
+              class:active={isItemActive(item)}
               aria-haspopup={hasChildren ? "true" : undefined}
             >
               {#if item.icon}<span class="nav-icon"><item.icon size={16} /></span>{/if}
@@ -164,9 +203,9 @@
                 <a
                   href={child.href}
                   class="dropdown-item"
-                  class:active={child.active}
+                  class:active={isItemActive(child)}
                   role="menuitem"
-                  aria-current={child.active ? "page" : undefined}
+                  aria-current={isItemActive(child) ? "page" : undefined}
                 >
                   {#if child.icon}
                     <span class="drop-icon"><child.icon size={15} /></span>

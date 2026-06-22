@@ -33,6 +33,17 @@
   import knowledge from "./knowledge.json";
   import ScrollOverSection from "$lib/components/sections/ScrollOverSection.svelte";
 
+  // Navbar items — anchors match each section's `id`; scroll spy is handled by <Navbar spy>
+  const navItems = [
+    { icon: Home, label: "Accueil", href: "#hero" },
+    { icon: BarChart2, label: "Chiffres", href: "#stats" },
+    { icon: CalendarCheck, label: "Méthode", href: "#process" },
+    { icon: FileText, label: "Devis", href: "#cta-banner" },
+    { icon: Sparkles, label: "Services", href: "#features" },
+    { icon: HelpCircle, label: "FAQ", href: "#faq" },
+    { icon: Mail, label: "Contact", href: "#contact" },
+  ];
+
   function handleSubmit(data: {
     name: string;
     email: string;
@@ -111,17 +122,7 @@
   <title>G2 Webdev</title>
 </svelte:head>
 
-<Navbar
-  items={[
-    { icon: Home, label: "Accueil", href: "#hero", active: true },
-    { icon: BarChart2, label: "Chiffres", href: "#stats" },
-    { icon: CalendarCheck, label: "Méthode", href: "#process" },
-    { icon: FileText, label: "Devis", href: "#cta-banner" },
-    { icon: Sparkles, label: "Services", href: "#features" },
-    { icon: HelpCircle, label: "FAQ", href: "#faq" },
-    { icon: Mail, label: "Contact", href: "#contact" },
-  ]}
->
+<Navbar items={navItems} spy>
   {#snippet brand()}
     <LogoGG width={28} height={28} open={false} />
   {/snippet}
@@ -135,6 +136,7 @@
   {#snippet background()}
     <ParticleBackground />
   {/snippet}
+
   <HeroSection
     id="hero"
     title="Agence web dans le Var, création de sites sur mesure"
@@ -366,6 +368,17 @@
 </FloatingGroup>
 
 <style lang="scss">
+  /* Offset anchor targets so they land below the sticky navbar */
+  :global(#hero),
+  :global(#stats),
+  :global(#process),
+  :global(#cta-banner),
+  :global(#features),
+  :global(#faq),
+  :global(#contact) {
+    scroll-margin-top: calc(var(--header-height) + 3rem);
+  }
+
   .demo {
     display: flex;
     align-items: center;

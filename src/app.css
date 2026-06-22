@@ -14,9 +14,17 @@ html {
   font-family: var(--font-sans);
   background-color: var(--bg-base);
   color: var(--text-base);
+  scroll-behavior: smooth;
   transition:
     background-color var(--transition-base),
     color var(--transition-base);
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
