@@ -26,7 +26,6 @@
 
   <GradientBackground>
     <CTABannerSection
-      badge="Offre limitée"
       title="2 mois offerts sur le plan Pro"
       description="Passez au plan annuel avant le 31 mai et économisez l'équivalent de deux mois d'abonnement. L'offre prend fin bientôt."
       primaryCta={{ label: "Profiter de l'offre", href: "#" }}

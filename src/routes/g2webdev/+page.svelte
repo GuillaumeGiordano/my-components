@@ -211,16 +211,16 @@
 <StatsSection
   stats={[
     {
-      value: "5",
+      value: "4",
       suffix: "+",
       label: "Années d'expérience",
       description: "en développement web professionnel",
     },
     {
-      value: "30",
-      suffix: "+",
-      label: "Projets livrés",
-      description: "sites, apps et e-commerces",
+      value: "1",
+      suffix: ".",
+      label: "Interlocuteur unique",
+      description: "du devis à la mise en ligne",
     },
     {
       value: "48",
@@ -229,10 +229,10 @@
       description: "garanti en jours ouvrés",
     },
     {
-      value: "24",
-      suffix: "h",
-      label: "Délai de réponse",
-      description: "à chacune de vos demandes",
+      value: "100",
+      suffix: "%",
+      label: "Sur-mesure et flexible",
+      description: "aucun site sous template revendu",
     },
   ]}
 />
