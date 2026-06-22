@@ -48,7 +48,7 @@
     {
       question: "Dois-je préparer quelque chose à l'avance ?",
       answer:
-        "Aucune préparation n'est nécessaire. Quelques idées sur vos objectifs, votre cible et des exemples de sites que vous aimez suffisent. Je me charge de structurer l'échange.",
+        "Aucune préparation n'est nécessaire. Quelques idées sur vos objectifs, votre cible et des exemples de sites que vous aimez suffisent. Nous nous chargeons de structurer l'échange.",
     },
     {
       question: "Que se passe-t-il après l'atelier ?",
@@ -149,7 +149,7 @@
         icon: Video,
         title: "Prise de contact, 5 min",
         description:
-          "Présentation de votre activité et de votre projet. Je vous écoute pour bien comprendre votre contexte.",
+          "Présentation de votre activité et de votre projet. Nous vous écoutons pour bien comprendre votre contexte.",
       },
       {
         icon: Map,
@@ -192,7 +192,7 @@
 <ParticleBackground>
   <ContactSection
     title="Réservez votre atelier offert"
-    description="Remplissez ce formulaire pour planifier votre atelier d'expression du besoin. Je vous réponds en moins de 24 heures."
+    description="Remplissez ce formulaire pour planifier votre atelier d'expression du besoin. Nous vous répondons en moins de 24 heures."
     onsubmit={handleSubmit}
     variant="centered"
   />

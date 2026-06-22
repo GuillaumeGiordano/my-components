@@ -9,8 +9,10 @@
   import FeaturesSection from "$lib/components/sections/FeaturesSection.svelte";
   import ProcessSection from "$lib/components/sections/ProcessSection.svelte";
   import StatsSection from "$lib/components/sections/StatsSection.svelte";
+  import Chatbot from "$lib/components/ui/Chatbot.svelte";
   import ParticleBackground from "$lib/components/ui/ParticleBackground.svelte";
   import Tilt3D from "$lib/components/ui/Tilt3D.svelte";
+  import FloatingGroup from "$lib/FloatingGroup.svelte";
   import {
     LayoutDashboard,
     FileText,
@@ -26,6 +28,8 @@
     CalendarCheck,
   } from "@lucide/svelte";
 
+  import knowledge from "./knowledge.json";
+
   function handleSubmit(data: {
     name: string;
     email: string;
@@ -40,7 +44,7 @@
     {
       question: "Combien coûte un site web sur mesure ?",
       answer:
-        "Une landing page démarre à partir de 790 €, un site vitrine à partir de 1 490 €. Les applications web sont devisées selon le périmètre fonctionnel. Je fournis systématiquement un devis détaillé avant tout engagement.",
+        "Nos tarifs sont établis sur devis selon la complexité du projet. Chaque projet étant unique, nous privilégions une tarification transparente adaptée à votre budget. Nous fournissons systématiquement un devis détaillé et gratuit avant tout engagement.",
     },
     {
       question: "Quels sont les délais de réalisation ?",
@@ -50,17 +54,17 @@
     {
       question: "Utilisez-vous des templates ou tout est sur mesure ?",
       answer:
-        "Tout est développé sur mesure avec SvelteKit 5 et TypeScript. Je dispose d'une bibliothèque de composants maison (@guillaumeg/ui) qui permet de livrer vite sans sacrifier la qualité ni la flexibilité.",
+        "Tout est développé sur mesure avec SvelteKit et TypeScript. Nous nous appuyons sur notre bibliothèque de composants maison (@guillaumeg/ui) qui permet de livrer vite sans sacrifier la qualité ni la flexibilité.",
     },
     {
       question: "Proposez-vous la maintenance après livraison ?",
       answer:
-        "Oui. Des contrats de maintenance mensuelle sont disponibles à partir de 320 €/mois, incluant les mises à jour de sécurité, la surveillance des dépendances et la correction des bugs signalés.",
+        "Oui. Nous proposons des contrats de maintenance incluant les mises à jour de sécurité, la surveillance des dépendances et la correction des bugs signalés.",
     },
     {
       question: "Quelles technologies utilisez-vous ?",
       answer:
-        "SvelteKit 5 (runes mode) avec TypeScript strict côté front-end. PostgreSQL + Drizzle ORM ou Prisma côté back-end. Vercel ou VPS (PM2 + Nginx) pour le déploiement. Resend pour les emails transactionnels.",
+        "Nous travaillons principalement avec SvelteKit, TypeScript, Tailwind CSS et Node.js. Nous utilisons également notre propre bibliothèque de composants UI (@guillaumeg/ui) pour accélérer le développement.",
     },
     {
       question: "Comment se déroule une collaboration à distance ?",
@@ -85,17 +89,17 @@
     {
       question: "Gérez-vous le nom de domaine et l'hébergement ?",
       answer:
-        "Oui, je peux prendre en charge l'achat du nom de domaine, la configuration de l'hébergement et la mise en ligne. Vous restez propriétaire de tous les comptes et accès.",
+        "Oui, nous pouvons prendre en charge l'achat du nom de domaine, la configuration de l'hébergement et la mise en ligne. Vous restez propriétaire de tous les comptes et accès.",
     },
     {
       question: "Pouvez-vous reprendre un site existant ?",
       answer:
-        "Oui. Je réalise des refontes de sites existants : modernisation du design, amélioration des performances et du référencement, ou migration vers une technologie plus récente.",
+        "Oui. Nous réalisons des refontes de sites existants : modernisation du design, amélioration des performances et du référencement, ou migration vers une technologie plus récente.",
     },
     {
       question: "Proposez-vous une formation pour gérer mon site ?",
       answer:
-        "Oui. À la livraison, je vous forme à l'utilisation de votre site (mise à jour des contenus, ajout de pages, gestion des images). Un guide écrit ou une session visio peut être inclus selon vos besoins.",
+        "Oui. À la livraison, nous vous formons à l'utilisation de votre site (mise à jour des contenus, ajout de pages, gestion des images). Un guide écrit ou une session visio peut être inclus selon vos besoins.",
     },
   ];
 </script>
@@ -103,6 +107,14 @@
 <svelte:head>
   <title>G2 Webdev</title>
 </svelte:head>
+
+<FloatingGroup position="bottom-right">
+  <Chatbot
+    {knowledge}
+    title="G2webdev — Assistant"
+    initialMessage="Bonjour ! Je peux vous renseigner sur G2webdev et les composants de la bibliothèque. Comment puis-je vous aider ?"
+  />
+</FloatingGroup>
 
 <Navbar
   items={[
@@ -134,49 +146,61 @@
       <div class="demo">
         <Tilt3D>
           <div class="card card--vitrine">
-            <div class="card-icon"><Monitor size={22} /></div>
-            <span class="card-tag">Le plus demandé</span>
+            <div class="card-header">
+              <div class="card-icon"><Monitor size={22} /></div>
+              <span class="card-tag">Le plus demandé</span>
+            </div>
             <h3>Site vitrine</h3>
             <p>
               Présentez votre activité avec un site élégant, rapide et pensé pour
               convertir vos visiteurs.
             </p>
+            <Button variant="primary" size="sm" href="#">En savoir plus</Button>
           </div>
         </Tilt3D>
 
         <Tilt3D>
           <div class="card card--portfolio">
-            <div class="card-icon"><Image size={22} /></div>
-            <span class="card-tag">Créatifs</span>
+            <div class="card-header">
+              <div class="card-icon"><Image size={22} /></div>
+              <span class="card-tag">Créatifs</span>
+            </div>
             <h3>Portfolio</h3>
             <p>
               Mettez vos réalisations en valeur dans une galerie soignée et entièrement
               responsive.
             </p>
+            <Button variant="primary" size="sm" href="#">En savoir plus</Button>
           </div>
         </Tilt3D>
 
         <Tilt3D>
           <div class="card card--ecom">
-            <div class="card-icon"><ShoppingCart size={22} /></div>
-            <span class="card-tag">Vente en ligne</span>
+            <div class="card-header">
+              <div class="card-icon"><ShoppingCart size={22} /></div>
+              <span class="card-tag">Vente en ligne</span>
+            </div>
             <h3>E-commerce</h3>
             <p>
               Une boutique sécurisée et performante pour vendre vos produits partout,
               24h/24.
             </p>
+            <Button variant="primary" size="sm" href="#">En savoir plus</Button>
           </div>
         </Tilt3D>
 
         <Tilt3D>
           <div class="card card--app">
-            <div class="card-icon"><AppWindow size={22} /></div>
-            <span class="card-tag">Sur mesure</span>
+            <div class="card-header">
+              <div class="card-icon"><AppWindow size={22} /></div>
+              <span class="card-tag">Sur mesure</span>
+            </div>
             <h3>Application web</h3>
             <p>
               Des outils métier sur mesure, accessibles partout et taillés pour votre
               organisation.
             </p>
+            <Button variant="primary" size="sm" href="#">En savoir plus</Button>
           </div>
         </Tilt3D>
       </div>
@@ -352,7 +376,14 @@
     height: 250px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 8px;
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
   .card--vitrine {
     --accent: var(--primary);
