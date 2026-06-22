@@ -119,6 +119,11 @@
 </section>
 
 <style>
+  .process {
+    display: flex;
+    min-height: calc(100vh - var(--header-height));
+  }
+
   .bg-base {
     background: var(--bg-base);
   }

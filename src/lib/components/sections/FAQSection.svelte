@@ -79,12 +79,17 @@
 </section>
 
 <style>
+  .faq {
+    display: flex;
+    min-height: calc(100vh - var(--header-height));
+  }
+
   .bg-base {
     background: var(--bg-base);
   }
 
   .faq-inner {
-    max-width: 860px;
+    max-width: 900px;
     margin: auto;
     padding: 60px 0;
   }
@@ -115,7 +120,7 @@
     font-size: 1.05rem;
     color: var(--text-muted);
     line-height: 1.7;
-    max-width: 520px;
+    max-width: 900px;
     margin: 0;
   }
 

@@ -34,11 +34,11 @@
   import ScrollOverSection from "$lib/components/sections/ScrollOverSection.svelte";
   import ScrollToTop from "$lib/components/ui/ScrollToTop.svelte";
   import GradientBackground from "$lib/components/ui/GradientBackground.svelte";
+  import Footer from "$lib/components/layout/Footer.svelte";
 
   // Navbar items — anchors match each section's `id`; scroll spy is handled by <Navbar spy>
   const navItems = [
     { icon: Home, label: "Accueil", href: "#hero" },
-    { icon: BarChart2, label: "Chiffres", href: "#stats" },
     { icon: CalendarCheck, label: "Méthode", href: "#process" },
     { icon: FileText, label: "Devis", href: "#cta-banner" },
     { icon: Sparkles, label: "Services", href: "#features" },
@@ -56,6 +56,8 @@
     return new Promise<void>((resolve) => setTimeout(resolve, 1000));
   }
 
+  // FAQ visible — questions les plus décisives. Les autres restent couvertes par
+  // l'assistant IA (voir knowledge.json), qui répond déjà à toutes ces questions.
   const faqs = [
     {
       question: "Combien coûte un site web sur mesure ?",
@@ -68,24 +70,9 @@
         "Comptez 1 semaine pour une landing page, 2 à 4 semaines pour un site vitrine et 4 à 12 semaines pour une application web, selon la complexité. Les délais sont définis conjointement au démarrage du projet.",
     },
     {
-      question: "Utilisez-vous des templates ou tout est sur mesure ?",
-      answer:
-        "Tout est développé sur mesure avec SvelteKit et TypeScript. Nous nous appuyons sur notre bibliothèque de composants maison (@guillaumeg/ui) qui permet de livrer vite sans sacrifier la qualité ni la flexibilité.",
-    },
-    {
       question: "Proposez-vous la maintenance après livraison ?",
       answer:
         "Oui. Nous proposons des contrats de maintenance incluant les mises à jour de sécurité, la surveillance des dépendances et la correction des bugs signalés.",
-    },
-    {
-      question: "Quelles technologies utilisez-vous ?",
-      answer:
-        "Nous travaillons principalement avec SvelteKit, TypeScript, Tailwind CSS et Node.js. Nous utilisons également notre propre bibliothèque de composants UI (@guillaumeg/ui) pour accélérer le développement.",
-    },
-    {
-      question: "Comment se déroule une collaboration à distance ?",
-      answer:
-        "Échanges par email et visio (Google Meet). Suivi de projet via Linear ou Notion. Chaque livraison intermédiaire dispose d'une URL de preview Vercel pour validation avant mise en production.",
     },
     {
       question: "Le référencement (SEO) est-il inclus ?",
@@ -101,21 +88,6 @@
       question: "À qui appartient le site une fois livré ?",
       answer:
         "Le site vous appartient à 100 %. Vous recevez l'intégralité du code source et les accès (hébergement, nom de domaine, dépôt Git). Aucune dépendance à un abonnement propriétaire.",
-    },
-    {
-      question: "Gérez-vous le nom de domaine et l'hébergement ?",
-      answer:
-        "Oui, nous pouvons prendre en charge l'achat du nom de domaine, la configuration de l'hébergement et la mise en ligne. Vous restez propriétaire de tous les comptes et accès.",
-    },
-    {
-      question: "Pouvez-vous reprendre un site existant ?",
-      answer:
-        "Oui. Nous réalisons des refontes de sites existants : modernisation du design, amélioration des performances et du référencement, ou migration vers une technologie plus récente.",
-    },
-    {
-      question: "Proposez-vous une formation pour gérer mon site ?",
-      answer:
-        "Oui. À la livraison, nous vous formons à l'utilisation de votre site (mise à jour des contenus, ajout de pages, gestion des images). Un guide écrit ou une session visio peut être inclus selon vos besoins.",
     },
   ];
 </script>
@@ -321,6 +293,7 @@
         title: "Déploiement sur VM",
         description:
           "Mise en production sur serveur dédié ou VM, configurée, sécurisée et prête à monter en charge selon votre activité.",
+        badge: "Europe",
       },
       {
         icon: Settings,
@@ -339,7 +312,6 @@
         title: "Atelier d'expression du besoin",
         description:
           "Une séance de cadrage pour clarifier vos objectifs, vos cibles et vos fonctionnalités avant de lancer le projet.",
-        badge: "Offert",
       },
       {
         icon: Sparkles,
@@ -353,10 +325,10 @@
   <!-- FAQ Section -->
   <FAQSection
     id="faq"
-    title="Questions fréquentes"
-    description="Vous ne trouvez pas la réponse ? Contactez-moi, je réponds en moins de 24 heures."
+    title="Vos questions, nos réponses"
+    description="Pas envie de chercher ? Posez votre question à notre assistant IA, en bas à droite : il répond instantanément, 24h/24. Et si vous préférez un échange humain, je vous réponds en moins de 24 heures."
     withBackground="bg-base"
-    columns={2}
+    columns={1}
     {faqs}
   />
 
@@ -369,6 +341,34 @@
     variant="centered"
   />
 </ScrollOverSection>
+
+<Footer
+  tagline="Agence web dans le Var, création de sites sur mesure."
+  columns={[
+    {
+      heading: "Navigation",
+      links: [
+        { label: "Accueil", href: "#hero" },
+        { label: "Chiffres", href: "#stats" },
+        { label: "Méthode", href: "#process" },
+        { label: "Services", href: "#features" },
+      ],
+    },
+    {
+      heading: "Aller plus loin",
+      links: [
+        { label: "Devis", href: "#cta-banner" },
+        { label: "FAQ", href: "#faq" },
+        { label: "Contact", href: "#contact" },
+      ],
+    },
+  ]}
+  copyright={`© ${new Date().getFullYear()} G2 Webdev. Tous droits réservés.`}
+>
+  {#snippet brand()}
+    <LogoGG width={46} height={46} open={true} />
+  {/snippet}
+</Footer>
 
 <FloatingGroup position="bottom-right">
   <ScrollToTop />
