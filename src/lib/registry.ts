@@ -477,6 +477,11 @@ export const categories: ComponentCategory[] = [
 				description: 'Étapes numérotées avec connecteurs — layout horizontal ou vertical, responsive'
 			},
 			{
+				slug: 'scroll-over',
+				label: 'Scroll Over',
+				description: 'Fond épinglé (sticky) au-dessus duquel le contenu défile — réutilisable, hauteur configurable'
+			},
+			{
 				slug: 'comparison',
 				label: 'Comparison Table',
 				description: 'Tableau comparatif sticky avec check/cross/texte, catégories et tooltips'
