@@ -35,6 +35,8 @@
   import ScrollToTop from "$lib/components/ui/ScrollToTop.svelte";
   import GradientBackground from "$lib/components/ui/GradientBackground.svelte";
   import Footer from "$lib/components/layout/Footer.svelte";
+  import ProcessTimelineSection from "$lib/components/sections/ProcessTimelineSection.svelte";
+  import StarfieldBackground from "$lib/components/ui/StarfieldBackground.svelte";
 
   // Navbar items — anchors match each section's `id`; scroll spy is handled by <Navbar spy>
   const navItems = [
@@ -88,6 +90,43 @@
       question: "À qui appartient le site une fois livré ?",
       answer:
         "Le site vous appartient à 100 %. Vous recevez l'intégralité du code source et les accès (hébergement, nom de domaine, dépôt Git). Aucune dépendance à un abonnement propriétaire.",
+    },
+  ];
+
+  // Steps for the ProcessSection and ProcessTimelineSection, describing the workflow from initial contact to maintenance.
+  const steps = [
+    {
+      icon: CalendarCheck,
+      title: "Prendre rendez-vous",
+      description:
+        "Réservez un premier échange, en visio ou sur place, pour nous présenter votre projet.",
+      badge: "Gratuit",
+      cta: { label: "Prendre rendez-vous", href: "#" },
+    },
+    {
+      icon: FileText,
+      title: "Atelier d'expression du besoin",
+      description:
+        "Un échange pour comprendre vos objectifs, vos cibles et vos contraintes, et définir ensemble le périmètre du projet.",
+      badge: "Offert",
+    },
+    {
+      icon: Sparkles,
+      title: "Conception, design & développement",
+      description:
+        "Maquettes, identité visuelle puis développement de votre site, validés avec vous à chaque étape.",
+    },
+    {
+      icon: Rocket,
+      title: "Mise en ligne",
+      description:
+        "Tests sur tous les écrans, mise en ligne et optimisation pour le référencement (SEO).",
+    },
+    {
+      icon: Settings,
+      title: "Maintenance & suivi",
+      description:
+        "Mises à jour, sauvegardes et conseils pour faire évoluer votre site au rythme de votre activité.",
     },
   ];
 </script>
@@ -219,50 +258,13 @@
   />
 
   <!-- Process Section -->
-  <ProcessSection
+  <ProcessTimelineSection
     id="process"
     title="Votre projet, étape par étape"
     description="De l'écoute de votre besoin à la mise en ligne, nous vous accompagnons à chaque étape de votre projet web."
-    steps={[
-      {
-        icon: CalendarCheck,
-        title: "Prendre rendez-vous",
-        description:
-          "Réservez un premier échange, en visio ou sur place, pour nous présenter votre projet.",
-        badge: "Gratuit",
-        cta: { label: "Prendre rendez-vous", href: "#contact" },
-      },
-      {
-        icon: FileText,
-        title: "Atelier d'expression du besoin, 20 min",
-        description:
-          "Un échange pour comprendre vos objectifs, vos cibles et vos contraintes, et définir ensemble le périmètre du projet.",
-        badge: "Offert",
-        cta: {
-          label: "En savoir plus",
-          href: "/g2webdev/atelier-expression-du-besoin",
-        },
-      },
-      {
-        icon: Sparkles,
-        title: "Conception, design & développement",
-        description:
-          "Maquettes, identité visuelle puis développement de votre site, validés avec vous à chaque étape.",
-      },
-      {
-        icon: Rocket,
-        title: "Mise en ligne",
-        description:
-          "Tests sur tous les écrans, mise en ligne et optimisation pour le référencement (SEO).",
-      },
-      {
-        icon: Settings,
-        title: "Maintenance & suivi",
-        description:
-          "Mises à jour, sauvegardes et conseils pour faire évoluer votre site au rythme de votre activité.",
-      },
-    ]}
-    layout="vertical"
+    gap="-48px"
+    minHeight="calc(100vh - var(--header-height))"
+    {steps}
   />
 
   <!-- Gradient background for the CTA section -->

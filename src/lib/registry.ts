@@ -477,6 +477,11 @@ export const categories: ComponentCategory[] = [
 				description: 'Étapes numérotées avec connecteurs — layout horizontal ou vertical, responsive'
 			},
 			{
+				slug: 'process-timeline',
+				label: 'Process Timeline',
+				description: 'Timeline verticale centrée : les étapes numérotées apparaissent en alternance gauche/droite au scroll'
+			},
+			{
 				slug: 'scroll-over',
 				label: 'Scroll Over',
 				description: 'Fond épinglé (sticky) au-dessus duquel le contenu défile — réutilisable, hauteur configurable'

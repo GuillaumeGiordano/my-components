@@ -161,6 +161,7 @@ export { default as PremiumHeroSection }  from './components/sections/PremiumHer
 export type { PremiumCard }               from './components/sections/PremiumHeroSection.svelte';
 export { default as PricingSection }      from './components/sections/PricingSection.svelte';
 export { default as ProcessSection }      from './components/sections/ProcessSection.svelte';
+export { default as ProcessTimelineSection } from './components/sections/ProcessTimelineSection.svelte';
 export { default as ScrollOverSection }   from './components/sections/ScrollOverSection.svelte';
 export { default as SplitFeatureSection } from './components/sections/SplitFeatureSection.svelte';
 export { default as StatsSection }        from './components/sections/StatsSection.svelte';
