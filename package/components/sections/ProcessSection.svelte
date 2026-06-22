@@ -1,14 +1,14 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
-  import Badge from '../ui/Badge.svelte';
-  import Card from '../ui/Card.svelte';
+  import type { Component } from "svelte";
+  import Badge from "../ui/Badge.svelte";
+  import Card from "../ui/Card.svelte";
 
   let {
     badge,
     title,
     description,
     steps,
-    layout = 'horizontal',
+    layout = "horizontal",
     withBackground = "",
   }: {
     badge?: string;
@@ -20,10 +20,9 @@
       description: string;
       badge?: string;
     }>;
-    layout?: 'horizontal' | 'vertical';
+    layout?: "horizontal" | "vertical";
     withBackground?: "bg-base" | "";
   } = $props();
-
 </script>
 
 <section class="process {withBackground}">
@@ -40,7 +39,7 @@
     </div>
 
     <!-- Steps: horizontal layout -->
-    {#if layout === 'horizontal'}
+    {#if layout === "horizontal"}
       <div class="steps-horizontal">
         {#each steps as step, i}
           <!-- Step card -->
@@ -71,7 +70,7 @@
         {/each}
       </div>
 
-    <!-- Steps: vertical layout -->
+      <!-- Steps: vertical layout -->
     {:else}
       <div class="steps-vertical">
         {#each steps as step, i}
@@ -316,8 +315,14 @@
 
   /* ---- Animation ---- */
   @keyframes fade-up {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* ---- Mobile: horizontal becomes vertical ---- */
@@ -343,5 +348,8 @@
     }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>

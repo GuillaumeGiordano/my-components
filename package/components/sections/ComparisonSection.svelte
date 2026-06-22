@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
-  import { Check, X } from '@lucide/svelte';
-  import Badge from '../ui/Badge.svelte';
-  import Button from '../buttons/Button.svelte';
-  import Tooltip from '../ui/Tooltip.svelte';
+  import type { Component } from "svelte";
+  import { Check, X } from "@lucide/svelte";
+  import Badge from "../ui/Badge.svelte";
+  import Button from "../buttons/Button.svelte";
+  import Tooltip from "../ui/Tooltip.svelte";
 
   let {
     badge,
@@ -30,7 +30,6 @@
     }>;
     withBackground?: "bg-base" | "";
   } = $props();
-
 </script>
 
 <section class="comparison {withBackground}">
@@ -56,11 +55,7 @@
             <th class="feature-col" scope="col"></th>
 
             {#each plans as plan}
-              <th
-                class="plan-col"
-                class:highlighted={plan.highlighted}
-                scope="col"
-              >
+              <th class="plan-col" class:highlighted={plan.highlighted} scope="col">
                 <div class="plan-header">
                   <span class="plan-name">{plan.name}</span>
                   {#if plan.badge}
@@ -69,7 +64,7 @@
                   {#if plan.cta}
                     <div class="plan-cta">
                       <Button
-                        variant={plan.highlighted ? 'primary' : 'outline'}
+                        variant={plan.highlighted ? "primary" : "outline"}
                         size="sm"
                         href={plan.cta.href}
                       >
@@ -108,10 +103,7 @@
                 </td>
 
                 {#each feature.values as value, colIndex}
-                  <td
-                    class="value-cell"
-                    class:highlighted={plans[colIndex]?.highlighted}
-                  >
+                  <td class="value-cell" class:highlighted={plans[colIndex]?.highlighted}>
                     {#if value === true}
                       <span class="icon-check" aria-label="Inclus">
                         <Check size={18} />
@@ -352,5 +344,8 @@
     }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>

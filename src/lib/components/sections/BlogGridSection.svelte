@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Badge from '$lib/components/ui/Badge.svelte';
-  import Card from '$lib/components/ui/Card.svelte';
-  import Avatar from '$lib/components/ui/Avatar.svelte';
-  import Button from '$lib/components/buttons/Button.svelte';
-  import { Clock } from '@lucide/svelte';
+  import Badge from "$lib/components/ui/Badge.svelte";
+  import Card from "$lib/components/ui/Card.svelte";
+  import Avatar from "$lib/components/ui/Avatar.svelte";
+  import Button from "$lib/components/buttons/Button.svelte";
+  import { Clock } from "@lucide/svelte";
 
   let {
     badge,
@@ -12,7 +12,7 @@
     posts,
     columns = 3,
     showCta = false,
-    ctaLabel = 'Voir tous les articles',
+    ctaLabel = "Voir tous les articles",
     ctaHref,
     withBackground = "",
   }: {
@@ -35,7 +35,6 @@
     ctaHref?: string;
     withBackground?: "bg-base" | "";
   } = $props();
-
 </script>
 
 <section class="blog-grid {withBackground}">
@@ -64,10 +63,7 @@
     <!-- Posts grid -->
     <div class="posts-grid cols-{columns}">
       {#each posts as post, i}
-        <article
-          class="post-wrap"
-          style="animation-delay: {i * 0.07}s"
-        >
+        <article class="post-wrap" style="animation-delay: {i * 0.07}s">
           {#if post.href}
             <a href={post.href} class="post-link" tabindex="-1" aria-hidden="true"></a>
           {/if}
@@ -77,7 +73,12 @@
               <!-- Cover image -->
               <div class="post-image-wrap">
                 {#if post.image}
-                  <img src={post.image} alt={post.title} class="post-image" loading="lazy" />
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    class="post-image"
+                    loading="lazy"
+                  />
                 {:else}
                   <div class="post-image-placeholder"></div>
                 {/if}
@@ -189,8 +190,12 @@
     gap: 24px;
   }
 
-  .cols-3 { grid-template-columns: repeat(3, 1fr); }
-  .cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   /* Post article */
   .post-wrap {
@@ -253,7 +258,7 @@
   .post-image-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.18) 0%, transparent 60%);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.18) 0%, transparent 60%);
     opacity: 0;
     transition: opacity var(--transition-base);
   }
@@ -348,13 +353,21 @@
 
   /* Animation */
   @keyframes fade-up {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Responsive */
   @media (max-width: 900px) {
-    .cols-3 { grid-template-columns: repeat(2, 1fr); }
+    .cols-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   @media (max-width: 640px) {
@@ -363,7 +376,9 @@
     }
 
     .cols-3,
-    .cols-2 { grid-template-columns: 1fr; }
+    .cols-2 {
+      grid-template-columns: 1fr;
+    }
 
     .section-header {
       flex-direction: column;
@@ -379,5 +394,8 @@
     }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>

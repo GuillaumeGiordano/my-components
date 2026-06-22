@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
-  import { onMount } from 'svelte';
-  import Badge from '../ui/Badge.svelte';
-  import Card from '../ui/Card.svelte';
+  import type { Component } from "svelte";
+  import { onMount } from "svelte";
+  import Badge from "../ui/Badge.svelte";
+  import Card from "../ui/Card.svelte";
 
   let {
     badge,
@@ -22,21 +22,25 @@
     withBackground?: "bg-base" | "";
   } = $props();
 
-
   let sectionEl: HTMLElement | null = $state(null);
-  let displayValues: string[] = $state((stats ?? []).map(() => '0'));
+  let displayValues: string[] = $state((stats ?? []).map(() => "0"));
   let hasAnimated = $state(false);
 
   function parseNumeric(val: string): number | null {
-    const n = parseFloat(val.replace(/[\s,]/g, '').replace(',', '.'));
+    const n = parseFloat(val.replace(/[\s,]/g, "").replace(",", "."));
     return isNaN(n) ? null : n;
   }
 
   function animateStat(index: number, targetStr: string) {
     const target = parseNumeric(targetStr);
-    if (target === null) { displayValues[index] = targetStr; return; }
-    const decimals = targetStr.includes('.') || targetStr.includes(',')
-      ? (targetStr.split(/[.,]/)[1]?.length ?? 0) : 0;
+    if (target === null) {
+      displayValues[index] = targetStr;
+      return;
+    }
+    const decimals =
+      targetStr.includes(".") || targetStr.includes(",")
+        ? (targetStr.split(/[.,]/)[1]?.length ?? 0)
+        : 0;
     const duration = 1600;
     const start = performance.now();
     function tick(now: number) {
@@ -58,7 +62,7 @@
           stats!.forEach((s, i) => animateStat(i, s.value));
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
     observer.observe(sectionEl);
     return () => observer.disconnect();
@@ -67,7 +71,6 @@
 
 <section class="about-v2 {withBackground}" bind:this={sectionEl}>
   <div class="inner">
-
     <!-- Header -->
     <div class="header">
       {#if badge}
@@ -112,7 +115,6 @@
         {/each}
       </div>
     {/if}
-
   </div>
 </section>
 
@@ -212,9 +214,15 @@
     display: grid;
     gap: 20px;
 
-    &.cols-2 { grid-template-columns: repeat(2, 1fr); }
-    &.cols-3 { grid-template-columns: repeat(3, 1fr); }
-    &.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    &.cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    &.cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    &.cols-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 
   .value-inner {
@@ -251,18 +259,36 @@
 
   /* ── Responsive ── */
   @media (max-width: 768px) {
-    .about-v2 { padding: 64px 24px; }
-    .stats-row { padding: 24px 16px; gap: 8px; }
-    .stat-divider { display: none; }
+    .about-v2 {
+      padding: 64px 24px;
+    }
+    .stats-row {
+      padding: 24px 16px;
+      gap: 8px;
+    }
+    .stat-divider {
+      display: none;
+    }
     .values-grid {
-      &.cols-2, &.cols-3, &.cols-4 { grid-template-columns: 1fr; }
+      &.cols-2,
+      &.cols-3,
+      &.cols-4 {
+        grid-template-columns: 1fr;
+      }
     }
   }
 
   @media (min-width: 769px) and (max-width: 1024px) {
-    .values-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
-    .values-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    .values-grid.cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .values-grid.cols-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>

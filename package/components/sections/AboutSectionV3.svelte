@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Badge from '../ui/Badge.svelte';
-  import Avatar from '../ui/Avatar.svelte';
+  import Badge from "../ui/Badge.svelte";
+  import Avatar from "../ui/Avatar.svelte";
 
   let {
     badge,
@@ -17,12 +17,10 @@
     milestones?: Array<{ year: string; title: string; description: string }>;
     withBackground?: "bg-base" | "";
   } = $props();
-
 </script>
 
 <section class="about-v3 {withBackground}">
   <div class="inner">
-
     <!-- Story side -->
     <div class="story-side">
       {#if badge}
@@ -34,11 +32,7 @@
       <blockquote class="story">{story}</blockquote>
       {#if author}
         <div class="author">
-          <Avatar
-            name={author.name}
-            src={author.avatar}
-            size="md"
-          />
+          <Avatar name={author.name} src={author.avatar} size="md" />
           <div class="author-info">
             <span class="author-name">{author.name}</span>
             <span class="author-role">{author.role}</span>
@@ -67,7 +61,6 @@
         </ol>
       </div>
     {/if}
-
   </div>
 </section>
 
@@ -187,7 +180,7 @@
 
   /* Vertical line between dots */
   .milestone:not(:last-child) .milestone-body::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 7px;
     top: 22px;
@@ -227,14 +220,28 @@
 
   /* ── Responsive ── */
   @media (max-width: 768px) {
-    .about-v3 { padding: 64px 24px; }
-    .inner { grid-template-columns: 1fr; gap: 48px; }
+    .about-v3 {
+      padding: 64px 24px;
+    }
+    .inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
   }
 
   @keyframes fade-in {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: none; }
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>

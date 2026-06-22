@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Badge from '../ui/Badge.svelte';
-  import Collapse from '../ui/Collapse.svelte';
+  import Badge from "../ui/Badge.svelte";
+  import Collapse from "../ui/Collapse.svelte";
 
   let {
     badge,
@@ -17,7 +17,6 @@
     columns?: 1 | 2;
     withBackground?: "bg-base" | "";
   } = $props();
-
 
   // Split faqs into columns for 2-col layout
   const leftFaqs = $derived(columns === 2 ? faqs.filter((_, i) => i % 2 === 0) : faqs);
@@ -53,7 +52,10 @@
         </div>
         <div class="faq-col">
           {#each rightFaqs as faq, i}
-            <div class="faq-item" style="animation-delay: {(i + leftFaqs.length) * 0.07}s">
+            <div
+              class="faq-item"
+              style="animation-delay: {(i + leftFaqs.length) * 0.07}s"
+            >
               <Collapse title={faq.question} variant="bordered">
                 {#snippet children()}
                   <p class="faq-answer">{faq.answer}</p>
@@ -174,5 +176,8 @@
     }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>

@@ -131,7 +131,8 @@
 </section>
 
 <style>
-  .withBackground {
+  .bg-base {
+    padding: 1rem 0;
     background: var(--bg-base);
   }
 

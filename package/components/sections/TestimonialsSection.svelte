@@ -26,7 +26,6 @@
     withBackground?: "bg-base" | "";
   } = $props();
 
-
   // Build an array of 5 stars filled/empty
   function stars(rating: number): boolean[] {
     return Array.from({ length: 5 }, (_, i) => i < rating);
@@ -220,5 +219,8 @@
     }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { fade } from 'svelte/transition';
-  import Badge from '../ui/Badge.svelte';
-  import { ChevronLeft, ChevronRight, X, ZoomIn } from '@lucide/svelte';
+  import { onMount } from "svelte";
+  import { fade } from "svelte/transition";
+  import Badge from "../ui/Badge.svelte";
+  import { ChevronLeft, ChevronRight, X, ZoomIn } from "@lucide/svelte";
 
   let {
     badge,
@@ -10,7 +10,7 @@
     description,
     images,
     columns = 3,
-    layout = 'grid',
+    layout = "grid",
     withBackground = "",
   }: {
     badge?: string;
@@ -23,19 +23,18 @@
       category?: string;
     }>;
     columns?: 2 | 3 | 4;
-    layout?: 'grid' | 'masonry' | 'featured';
+    layout?: "grid" | "masonry" | "featured";
     withBackground?: "bg-base" | "";
   } = $props();
 
-
-  const allCategories = $derived(
-    [...new Set(images.map(img => img.category).filter((c): c is string => !!c))]
-  );
+  const allCategories = $derived([
+    ...new Set(images.map((img) => img.category).filter((c): c is string => !!c)),
+  ]);
 
   let activeCategory = $state<string | null>(null);
 
   const filteredImages = $derived(
-    activeCategory ? images.filter(img => img.category === activeCategory) : images
+    activeCategory ? images.filter((img) => img.category === activeCategory) : images,
   );
 
   let lightboxOpen = $state(false);
@@ -44,12 +43,12 @@
   function openLightbox(index: number) {
     selectedIndex = index;
     lightboxOpen = true;
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
   }
 
   function closeLightbox() {
     lightboxOpen = false;
-    document.body.style.overflow = '';
+    document.body.style.overflow = "";
   }
 
   function prev() {
@@ -62,16 +61,16 @@
 
   function handleKeydown(e: KeyboardEvent) {
     if (!lightboxOpen) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') prev();
-    if (e.key === 'ArrowRight') next();
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft") prev();
+    if (e.key === "ArrowRight") next();
   }
 
   onMount(() => {
-    window.addEventListener('keydown', handleKeydown);
+    window.addEventListener("keydown", handleKeydown);
     return () => {
-      window.removeEventListener('keydown', handleKeydown);
-      document.body.style.overflow = '';
+      window.removeEventListener("keydown", handleKeydown);
+      document.body.style.overflow = "";
     };
   });
 
@@ -81,7 +80,6 @@
 
 <section class="gallery {withBackground}">
   <div class="gallery-inner">
-
     <!-- Header -->
     <div class="section-header">
       {#if badge}
@@ -99,7 +97,9 @@
         <button
           class="filter-btn"
           class:active={activeCategory === null}
-          onclick={() => { activeCategory = null; }}
+          onclick={() => {
+            activeCategory = null;
+          }}
           type="button"
         >
           Tous
@@ -108,7 +108,9 @@
           <button
             class="filter-btn"
             class:active={activeCategory === cat}
-            onclick={() => { activeCategory = cat; }}
+            onclick={() => {
+              activeCategory = cat;
+            }}
             type="button"
           >
             {cat}
@@ -141,7 +143,6 @@
         {/each}
       </div>
     {/key}
-
   </div>
 </section>
 
@@ -151,7 +152,7 @@
     class="lightbox"
     role="dialog"
     aria-modal="true"
-    aria-label={current?.alt ?? 'Galerie'}
+    aria-label={current?.alt ?? "Galerie"}
     transition:fade={{ duration: 200 }}
   >
     <!-- Backdrop -->
@@ -184,14 +185,20 @@
     <!-- Prev / Next -->
     <button
       class="lightbox-nav lightbox-prev"
-      onclick={(e) => { e.stopPropagation(); prev(); }}
+      onclick={(e) => {
+        e.stopPropagation();
+        prev();
+      }}
       aria-label="Image précédente"
     >
       <ChevronLeft size={22} strokeWidth={2} />
     </button>
     <button
       class="lightbox-nav lightbox-next"
-      onclick={(e) => { e.stopPropagation(); next(); }}
+      onclick={(e) => {
+        e.stopPropagation();
+        next();
+      }}
       aria-label="Image suivante"
     >
       <ChevronRight size={22} strokeWidth={2} />
@@ -205,7 +212,9 @@
             <button
               class="dot"
               class:active={i === selectedIndex}
-              onclick={() => { selectedIndex = i; }}
+              onclick={() => {
+                selectedIndex = i;
+              }}
               aria-label="Image {i + 1}"
             ></button>
           {/each}
@@ -302,14 +311,26 @@
   }
 
   /* Grid layout — standard */
-  .layout-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-  .layout-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
-  .layout-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .layout-grid.cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .layout-grid.cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .layout-grid.cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
 
   /* Featured layout — first item takes 2×2 */
-  .layout-featured.cols-2 { grid-template-columns: repeat(2, 1fr); }
-  .layout-featured.cols-3 { grid-template-columns: repeat(3, 1fr); }
-  .layout-featured.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .layout-featured.cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .layout-featured.cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .layout-featured.cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
 
   .layout-featured .gallery-item:first-child {
     grid-column: span 2;
@@ -322,9 +343,15 @@
     column-gap: 12px;
   }
 
-  .layout-masonry.cols-2 { columns: 2; }
-  .layout-masonry.cols-3 { columns: 3; }
-  .layout-masonry.cols-4 { columns: 4; }
+  .layout-masonry.cols-2 {
+    columns: 2;
+  }
+  .layout-masonry.cols-3 {
+    columns: 3;
+  }
+  .layout-masonry.cols-4 {
+    columns: 4;
+  }
 
   .layout-masonry .gallery-item {
     break-inside: avoid;
@@ -349,7 +376,9 @@
     aspect-ratio: 4 / 3;
     background: var(--bg-muted);
     animation: reveal 0.5s ease both;
-    transition: box-shadow var(--transition-base), transform var(--transition-base);
+    transition:
+      box-shadow var(--transition-base),
+      transform var(--transition-base);
     display: block;
   }
 
@@ -384,7 +413,12 @@
     align-items: flex-start;
     justify-content: flex-end;
     padding: 14px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%);
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.1) 50%,
+      transparent 100%
+    );
     opacity: 0;
     transition: opacity var(--transition-base);
   }
@@ -460,7 +494,9 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background var(--transition-fast), border-color var(--transition-fast);
+    transition:
+      background var(--transition-fast),
+      border-color var(--transition-fast);
   }
 
   .lightbox-close:hover {
@@ -540,11 +576,19 @@
     border-color: rgba(255, 255, 255, 0.4);
   }
 
-  .lightbox-prev { left: 20px; }
-  .lightbox-prev:hover { transform: translateY(-50%) translateX(-2px); }
+  .lightbox-prev {
+    left: 20px;
+  }
+  .lightbox-prev:hover {
+    transform: translateY(-50%) translateX(-2px);
+  }
 
-  .lightbox-next { right: 20px; }
-  .lightbox-next:hover { transform: translateY(-50%) translateX(2px); }
+  .lightbox-next {
+    right: 20px;
+  }
+  .lightbox-next:hover {
+    transform: translateY(-50%) translateX(2px);
+  }
 
   /* ---- Footer (dots / progress) ---- */
   .lightbox-footer {
@@ -569,7 +613,10 @@
     background: rgba(255, 255, 255, 0.3);
     cursor: pointer;
     padding: 0;
-    transition: background var(--transition-fast), transform var(--transition-fast), width var(--transition-fast);
+    transition:
+      background var(--transition-fast),
+      transform var(--transition-fast),
+      width var(--transition-fast);
   }
 
   .dot.active {
@@ -594,23 +641,37 @@
 
   /* ---- Entry animation ---- */
   @keyframes reveal {
-    from { opacity: 0; transform: scale(0.97) translateY(8px); }
-    to   { opacity: 1; transform: none; }
+    from {
+      opacity: 0;
+      transform: scale(0.97) translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 
   /* ---- Responsive ---- */
   @media (max-width: 900px) {
     .layout-grid.cols-4,
     .layout-featured.cols-4,
-    .layout-masonry.cols-4 { grid-template-columns: repeat(2, 1fr); columns: 2; }
+    .layout-masonry.cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+      columns: 2;
+    }
 
     .layout-grid.cols-3,
     .layout-featured.cols-3,
-    .layout-masonry.cols-3 { grid-template-columns: repeat(2, 1fr); columns: 2; }
+    .layout-masonry.cols-3 {
+      grid-template-columns: repeat(2, 1fr);
+      columns: 2;
+    }
   }
 
   @media (max-width: 540px) {
-    .gallery { padding: 64px 20px; }
+    .gallery {
+      padding: 64px 20px;
+    }
 
     .layout-grid.cols-2,
     .layout-grid.cols-3,
@@ -623,16 +684,25 @@
 
     .layout-masonry.cols-2,
     .layout-masonry.cols-3,
-    .layout-masonry.cols-4 { columns: 1; }
+    .layout-masonry.cols-4 {
+      columns: 1;
+    }
 
     .layout-featured .gallery-item:first-child {
       grid-column: span 1;
       grid-row: span 1;
     }
 
-    .lightbox-prev { left: 8px; }
-    .lightbox-next { right: 8px; }
+    .lightbox-prev {
+      left: 8px;
+    }
+    .lightbox-next {
+      right: 8px;
+    }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>

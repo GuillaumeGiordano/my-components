@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
-  import { onMount } from 'svelte';
-  import { ArrowRight, Sparkles } from '@lucide/svelte';
+  import type { Component } from "svelte";
+  import { onMount } from "svelte";
+  import { ArrowRight, Sparkles } from "@lucide/svelte";
 
   export type PremiumCard = {
     icon: Component;
@@ -32,30 +32,34 @@
     withBackground?: "bg-base" | "";
   } = $props();
 
-
   // Split title words for staggered reveal
   const words = $derived(
-    title.split(' ').map((word, i) => ({
+    title.split(" ").map((word, i) => ({
       text: word,
-      highlighted: highlight?.toLowerCase().split(' ').some(h =>
-        word.toLowerCase().includes(h)
-      ) ?? false,
+      highlighted:
+        highlight
+          ?.toLowerCase()
+          .split(" ")
+          .some((h) => word.toLowerCase().includes(h)) ?? false,
       delay: i * 0.09,
-    }))
+    })),
   );
 
-  let titleEl:   HTMLElement | null = $state(null);
+  let titleEl: HTMLElement | null = $state(null);
   let sectionEl: HTMLElement | null = $state(null);
   let revealed = $state(false);
 
   // Stat animation
-  let displayStats = $state((stats ?? []).map(s => s.value));
+  let displayStats = $state((stats ?? []).map((s) => s.value));
   let statsAnimated = $state(false);
 
   function animateCounter(index: number, target: string) {
-    const n = parseFloat(target.replace(/[^\d.]/g, ''));
-    if (isNaN(n)) { displayStats[index] = target; return; }
-    const decimals = target.includes('.') ? (target.split('.')[1]?.length ?? 0) : 0;
+    const n = parseFloat(target.replace(/[^\d.]/g, ""));
+    if (isNaN(n)) {
+      displayStats[index] = target;
+      return;
+    }
+    const decimals = target.includes(".") ? (target.split(".")[1]?.length ?? 0) : 0;
     const start = performance.now();
     const duration = 1800;
     function tick(now: number) {
@@ -74,21 +78,21 @@
       const r = node.getBoundingClientRect();
       const x = ((e.clientX - r.left) / r.width - 0.5) * 2;
       const y = ((e.clientY - r.top) / r.height - 0.5) * 2;
-      node.style.setProperty('--tx', `${-y * 9}deg`);
-      node.style.setProperty('--ty', `${x * 9}deg`);
-      node.style.setProperty('--gx', `${(x + 1) * 50}%`);
-      node.style.setProperty('--gy', `${(y + 1) * 50}%`);
+      node.style.setProperty("--tx", `${-y * 9}deg`);
+      node.style.setProperty("--ty", `${x * 9}deg`);
+      node.style.setProperty("--gx", `${(x + 1) * 50}%`);
+      node.style.setProperty("--gy", `${(y + 1) * 50}%`);
     };
     const onLeave = () => {
-      node.style.setProperty('--tx', '0deg');
-      node.style.setProperty('--ty', '0deg');
+      node.style.setProperty("--tx", "0deg");
+      node.style.setProperty("--ty", "0deg");
     };
-    node.addEventListener('mousemove', onMove);
-    node.addEventListener('mouseleave', onLeave);
+    node.addEventListener("mousemove", onMove);
+    node.addEventListener("mouseleave", onLeave);
     return {
       destroy() {
-        node.removeEventListener('mousemove', onMove);
-        node.removeEventListener('mouseleave', onLeave);
+        node.removeEventListener("mousemove", onMove);
+        node.removeEventListener("mouseleave", onLeave);
       },
     };
   }
@@ -101,13 +105,15 @@
       const dy = (e.clientY - (r.top + r.height / 2)) * 0.28;
       node.style.transform = `translate(${dx}px, ${dy}px)`;
     };
-    const onLeave = () => { node.style.transform = 'translate(0,0)'; };
-    node.addEventListener('mousemove', onMove);
-    node.addEventListener('mouseleave', onLeave);
+    const onLeave = () => {
+      node.style.transform = "translate(0,0)";
+    };
+    node.addEventListener("mousemove", onMove);
+    node.addEventListener("mouseleave", onLeave);
     return {
       destroy() {
-        node.removeEventListener('mousemove', onMove);
-        node.removeEventListener('mouseleave', onLeave);
+        node.removeEventListener("mousemove", onMove);
+        node.removeEventListener("mouseleave", onLeave);
       },
     };
   }
@@ -115,28 +121,36 @@
   onMount(() => {
     // Title word reveal
     if (titleEl) {
-      const obs = new IntersectionObserver(([e]) => {
-        if (e.isIntersecting) { revealed = true; obs.disconnect(); }
-      }, { threshold: 0.2 });
+      const obs = new IntersectionObserver(
+        ([e]) => {
+          if (e.isIntersecting) {
+            revealed = true;
+            obs.disconnect();
+          }
+        },
+        { threshold: 0.2 },
+      );
       obs.observe(titleEl);
     }
 
     // Stats counter
     if (sectionEl && stats?.length) {
-      const obs = new IntersectionObserver(([e]) => {
-        if (e.isIntersecting && !statsAnimated) {
-          statsAnimated = true;
-          stats!.forEach((s, i) => animateCounter(i, s.value));
-          obs.disconnect();
-        }
-      }, { threshold: 0.4 });
+      const obs = new IntersectionObserver(
+        ([e]) => {
+          if (e.isIntersecting && !statsAnimated) {
+            statsAnimated = true;
+            stats!.forEach((s, i) => animateCounter(i, s.value));
+            obs.disconnect();
+          }
+        },
+        { threshold: 0.4 },
+      );
       obs.observe(sectionEl);
     }
   });
 </script>
 
 <section class="premium {withBackground}" bind:this={sectionEl}>
-
   <!-- ── Animated background ── -->
   <div class="bg" aria-hidden="true">
     <div class="orb orb-1"></div>
@@ -146,10 +160,8 @@
   </div>
 
   <div class="inner">
-
     <!-- ── Text column ── -->
     <div class="text-col">
-
       {#if badge}
         <div class="badge-pill">
           <Sparkles size={13} />
@@ -162,8 +174,8 @@
           <span
             class="word"
             class:highlight={word.highlighted}
-            style="--delay: {word.delay}s"
-          >{word.text}{' '}</span>
+            style="--delay: {word.delay}s">{word.text}{" "}</span
+          >
         {/each}
       </h1>
 
@@ -174,7 +186,7 @@
           {#each stats as stat, i}
             <div class="stat">
               <span class="stat-val">
-                {displayStats[i]}{stat.suffix ?? ''}
+                {displayStats[i]}{stat.suffix ?? ""}
               </span>
               <span class="stat-label">{stat.label}</span>
             </div>
@@ -199,7 +211,6 @@
           {/if}
         </div>
       {/if}
-
     </div>
 
     <!-- ── Bento grid ── -->
@@ -228,7 +239,6 @@
         {/each}
       </div>
     {/if}
-
   </div>
 </section>
 
@@ -277,23 +287,29 @@
   }
 
   .orb-1 {
-    width: 520px; height: 520px;
+    width: 520px;
+    height: 520px;
     background: radial-gradient(circle, #4f35ea, transparent 70%);
-    top: -120px; left: -80px;
+    top: -120px;
+    left: -80px;
     animation: drift-1 14s ease-in-out infinite;
   }
 
   .orb-2 {
-    width: 400px; height: 400px;
+    width: 400px;
+    height: 400px;
     background: radial-gradient(circle, #0d7ff5, transparent 70%);
-    bottom: -60px; right: 10%;
+    bottom: -60px;
+    right: 10%;
     animation: drift-2 18s ease-in-out infinite;
   }
 
   .orb-3 {
-    width: 300px; height: 300px;
+    width: 300px;
+    height: 300px;
     background: radial-gradient(circle, #a855f7, transparent 70%);
-    top: 50%; right: 30%;
+    top: 50%;
+    right: 30%;
     transform: translateY(-50%);
     animation: drift-3 22s ease-in-out infinite;
   }
@@ -301,28 +317,46 @@
   .grid-overlay {
     position: absolute;
     inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
     background-size: 60px 60px;
     mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
   }
 
   @keyframes drift-1 {
-    0%,100% { transform: translate(0,0) scale(1); }
-    33%      { transform: translate(60px,-40px) scale(1.07); }
-    66%      { transform: translate(-30px,50px) scale(0.93); }
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(60px, -40px) scale(1.07);
+    }
+    66% {
+      transform: translate(-30px, 50px) scale(0.93);
+    }
   }
 
   @keyframes drift-2 {
-    0%,100% { transform: translate(0,0) scale(1); }
-    40%      { transform: translate(-50px,30px) scale(1.1); }
-    70%      { transform: translate(40px,-20px) scale(0.9); }
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    40% {
+      transform: translate(-50px, 30px) scale(1.1);
+    }
+    70% {
+      transform: translate(40px, -20px) scale(0.9);
+    }
   }
 
   @keyframes drift-3 {
-    0%,100% { transform: translateY(-50%) translate(0,0) scale(1); }
-    50%      { transform: translateY(-50%) translate(-60px,40px) scale(1.15); }
+    0%,
+    100% {
+      transform: translateY(-50%) translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translateY(-50%) translate(-60px, 40px) scale(1.15);
+    }
   }
 
   /* ══════════════════════════════════════════════════════════
@@ -383,13 +417,15 @@
   ══════════════════════════════════════════════════════════ */
   .desc {
     font-size: 17px;
-    color: rgba(255,255,255,0.55);
+    color: rgba(255, 255, 255, 0.55);
     line-height: 1.75;
     margin: 0 0 36px;
     max-width: 480px;
     opacity: 0;
     transform: translateY(12px);
-    transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
+    transition:
+      opacity 0.6s ease 0.5s,
+      transform 0.6s ease 0.5s;
   }
 
   .desc.revealed {
@@ -423,7 +459,7 @@
 
   .stat-label {
     font-size: 13px;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255, 255, 255, 0.4);
     font-weight: 500;
   }
 
@@ -453,11 +489,17 @@
     font-size: 15px;
     font-weight: 600;
     text-decoration: none;
-    box-shadow: 0 0 24px rgba(99, 102, 241, 0.5), 0 4px 12px rgba(0,0,0,0.3);
-    transition: box-shadow 0.25s ease, transform 0.25s ease;
+    box-shadow:
+      0 0 24px rgba(99, 102, 241, 0.5),
+      0 4px 12px rgba(0, 0, 0, 0.3);
+    transition:
+      box-shadow 0.25s ease,
+      transform 0.25s ease;
 
     &:hover {
-      box-shadow: 0 0 40px rgba(99, 102, 241, 0.7), 0 4px 20px rgba(0,0,0,0.3);
+      box-shadow:
+        0 0 40px rgba(99, 102, 241, 0.7),
+        0 4px 20px rgba(0, 0, 0, 0.3);
       transform: translateY(-1px);
     }
   }
@@ -468,17 +510,20 @@
     gap: 6px;
     padding: 13px 24px;
     border-radius: 999px;
-    border: 1px solid rgba(255,255,255,0.12);
-    color: rgba(255,255,255,0.65);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.65);
     font-size: 15px;
     font-weight: 500;
     text-decoration: none;
-    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    transition:
+      border-color 0.2s,
+      color 0.2s,
+      background 0.2s;
 
     &:hover {
-      border-color: rgba(255,255,255,0.3);
+      border-color: rgba(255, 255, 255, 0.3);
       color: #fff;
-      background: rgba(255,255,255,0.06);
+      background: rgba(255, 255, 255, 0.06);
     }
   }
 
@@ -496,20 +541,22 @@
   .bento-card {
     position: relative;
     border-radius: 18px;
-    border: 1px solid rgba(255,255,255,0.08);
-    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(16px);
     padding: 28px;
     cursor: default;
     overflow: hidden;
-    transform: perspective(700px) rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg));
-    transition: transform 0.15s ease, box-shadow 0.3s ease;
-    animation: card-in 0.6s cubic-bezier(0.16,1,0.3,1) both;
+    transform: perspective(700px) rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg));
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.3s ease;
+    animation: card-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
     animation-delay: var(--delay, 0s);
 
     &:hover {
-      box-shadow: 0 0 30px rgba(99,102,241,0.15);
-      border-color: rgba(255,255,255,0.14);
+      box-shadow: 0 0 30px rgba(99, 102, 241, 0.15);
+      border-color: rgba(255, 255, 255, 0.14);
     }
   }
 
@@ -520,7 +567,7 @@
 
   /* ── Shimmer rotating border ── */
   @property --shimmer-angle {
-    syntax: '<angle>';
+    syntax: "<angle>";
     initial-value: 0deg;
     inherits: false;
   }
@@ -553,10 +600,14 @@
     padding: 1px;
   }
 
-  .bento-card:hover .shimmer-border { opacity: 1; }
+  .bento-card:hover .shimmer-border {
+    opacity: 1;
+  }
 
   @keyframes shimmer-spin {
-    to { --shimmer-angle: 360deg; }
+    to {
+      --shimmer-angle: 360deg;
+    }
   }
 
   /* ── Inner glow (follows tilt via CSS vars) ── */
@@ -571,12 +622,17 @@
     top: var(--gy, 50%);
     left: var(--gx, 50%);
     transform: translate(-50%, -50%);
-    transition: opacity 0.3s, top 0.1s, left 0.1s;
+    transition:
+      opacity 0.3s,
+      top 0.1s,
+      left 0.1s;
     filter: blur(20px);
     z-index: 0;
   }
 
-  .bento-card:hover .inner-glow { opacity: 0.2; }
+  .bento-card:hover .inner-glow {
+    opacity: 0.2;
+  }
 
   /* ── Card content ── */
   .card-inner {
@@ -595,7 +651,7 @@
     width: 44px;
     height: 44px;
     border-radius: 12px;
-    background: rgba(99,102,241,0.15);
+    background: rgba(99, 102, 241, 0.15);
     color: #818cf8;
     flex-shrink: 0;
   }
@@ -609,16 +665,18 @@
   .card-title {
     font-size: 16px;
     font-weight: 700;
-    color: rgba(255,255,255,0.9);
+    color: rgba(255, 255, 255, 0.9);
     margin: 0;
     line-height: 1.3;
   }
 
-  .large .card-title { font-size: 20px; }
+  .large .card-title {
+    font-size: 20px;
+  }
 
   .card-desc {
     font-size: 13.5px;
-    color: rgba(255,255,255,0.42);
+    color: rgba(255, 255, 255, 0.42);
     line-height: 1.65;
     margin: 0;
   }
@@ -627,28 +685,55 @@
      Entrance animations
   ══════════════════════════════════════════════════════════ */
   @keyframes fade-up {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: none; }
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 
   @keyframes card-in {
-    from { opacity: 0; transform: perspective(700px) translateY(20px) scale(0.97); }
-    to   { opacity: 1; transform: perspective(700px) translateY(0) scale(1); }
+    from {
+      opacity: 0;
+      transform: perspective(700px) translateY(20px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: perspective(700px) translateY(0) scale(1);
+    }
   }
 
   /* ══════════════════════════════════════════════════════════
      Responsive
   ══════════════════════════════════════════════════════════ */
   @media (max-width: 900px) {
-    .premium { padding: 80px 24px 90px; min-height: auto; }
-    .inner   { grid-template-columns: 1fr; gap: 56px; }
-    .desc    { max-width: 100%; }
+    .premium {
+      padding: 80px 24px 90px;
+      min-height: auto;
+    }
+    .inner {
+      grid-template-columns: 1fr;
+      gap: 56px;
+    }
+    .desc {
+      max-width: 100%;
+    }
   }
 
   @media (max-width: 500px) {
-    .bento { grid-template-columns: 1fr; }
-    .bento-card.large { grid-row: auto; }
+    .bento {
+      grid-template-columns: 1fr;
+    }
+    .bento-card.large {
+      grid-row: auto;
+    }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>

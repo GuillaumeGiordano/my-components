@@ -1,6 +1,5 @@
 <script lang="ts">
   import Button from "$lib/components/buttons/Button.svelte";
-  import HeroSectionG2 from "$lib/components/g2-webdev/HeroSectionG2.svelte";
   import Navbar from "$lib/components/layout/Navbar.svelte";
   import LogoGG from "$lib/components/logo/LogoGG.svelte";
   import ContactSection from "$lib/components/sections/ContactSection.svelte";
@@ -13,6 +12,7 @@
   import ParticleBackground from "$lib/components/ui/ParticleBackground.svelte";
   import Tilt3D from "$lib/components/ui/Tilt3D.svelte";
   import FloatingGroup from "$lib/FloatingGroup.svelte";
+  import HeroSection from "$lib/components/sections/HeroSection.svelte";
   import {
     LayoutDashboard,
     FileText,
@@ -29,6 +29,7 @@
   } from "@lucide/svelte";
 
   import knowledge from "./knowledge.json";
+  import ScrollOverSection from "$lib/components/sections/ScrollOverSection.svelte";
 
   function handleSubmit(data: {
     name: string;
@@ -108,13 +109,10 @@
   <title>G2 Webdev</title>
 </svelte:head>
 
-<FloatingGroup position="bottom-right">
-  <Chatbot
-    {knowledge}
-    title="G2webdev — Assistant"
-    initialMessage="Bonjour ! Je peux vous renseigner sur G2webdev et les composants de la bibliothèque. Comment puis-je vous aider ?"
-  />
-</FloatingGroup>
+<!-- Fixed particle layer: stays put while sections scroll over it -->
+<div class="particle-layer" aria-hidden="true">
+  <ParticleBackground />
+</div>
 
 <Navbar
   items={[
@@ -133,8 +131,11 @@
   {/snippet}
 </Navbar>
 
-<ParticleBackground>
-  <HeroSectionG2
+<ScrollOverSection>
+  {#snippet background()}
+    <ParticleBackground />
+  {/snippet}
+  <HeroSection
     title="Agence web dans le Var, création de sites sur mesure"
     highlight="création de sites"
     description="G2 Webdev conçoit des sites internet modernes, rapides et optimisés pour le référencement (SEO), et accompagne les entreprises, artisans et indépendants du Var dans leur croissance digitale. Une question ? Notre agent IA vous répond à tout moment, directement sur le site."
@@ -205,39 +206,38 @@
         </Tilt3D>
       </div>
     {/snippet}
-  </HeroSectionG2>
-</ParticleBackground>
+  </HeroSection>
 
-<StatsSection
-  stats={[
-    {
-      value: "4",
-      suffix: "+",
-      label: "Années d'expérience",
-      description: "en développement web professionnel",
-    },
-    {
-      value: "1",
-      suffix: ".",
-      label: "Interlocuteur unique",
-      description: "du devis à la mise en ligne",
-    },
-    {
-      value: "48",
-      suffix: "h",
-      label: "Délai de réponse",
-      description: "garanti en jours ouvrés",
-    },
-    {
-      value: "100",
-      suffix: "%",
-      label: "Sur-mesure et flexible",
-      description: "aucun site sous template revendu",
-    },
-  ]}
-/>
+  <StatsSection
+    withBackground="bg-base"
+    stats={[
+      {
+        value: "4",
+        suffix: "+",
+        label: "Années d'expérience",
+        description: "en développement web professionnel",
+      },
+      {
+        value: "1",
+        suffix: ".",
+        label: "Interlocuteur unique",
+        description: "du devis à la mise en ligne",
+      },
+      {
+        value: "48",
+        suffix: "h",
+        label: "Délai de réponse",
+        description: "garanti en jours ouvrés",
+      },
+      {
+        value: "100",
+        suffix: "%",
+        label: "Sur-mesure et flexible",
+        description: "aucun site sous template revendu",
+      },
+    ]}
+  />
 
-<ParticleBackground>
   <ProcessSection
     title="Votre projet, étape par étape"
     description="De l'écoute de votre besoin à la mise en ligne, nous vous accompagnons à chaque étape de votre projet web."
@@ -282,15 +282,13 @@
     ]}
     layout="vertical"
   />
-</ParticleBackground>
 
-<CTABannerSection
-  title="Votre projet web à partir de 390€"
-  description="Recevez un devis gratuit et sans engagement sous 48h. Parlons de votre projet et obtenez une estimation claire et adaptée à vos besoins."
-  primaryCta={{ label: "Demander un devis gratuit", href: "#contact" }}
-/>
+  <CTABannerSection
+    title="Votre projet web à partir de 390€"
+    description="Recevez un devis gratuit et sans engagement sous 48h. Parlons de votre projet et obtenez une estimation claire et adaptée à vos besoins."
+    primaryCta={{ label: "Demander un devis gratuit", href: "#contact" }}
+  />
 
-<ParticleBackground>
   <FeaturesSection
     title="Tout ce dont votre équipe a besoin"
     description="Une plateforme pensée pour les équipes modernes : rapide, sécurisée et facile à intégrer dans vos workflows existants."
@@ -335,25 +333,29 @@
       },
     ]}
   />
-</ParticleBackground>
 
-<ParticleBackground>
   <FAQSection
     title="Questions fréquentes"
     description="Vous ne trouvez pas la réponse ? Contactez-moi, je réponds en moins de 24 heures."
     columns={2}
     {faqs}
   />
-</ParticleBackground>
 
-<ParticleBackground>
   <ContactSection
     title="Contactez notre équipe"
     description="Vous avez une question, un retour ou une demande spécifique ? Remplissez ce formulaire et nous vous répondrons rapidement."
     onsubmit={handleSubmit}
     variant="centered"
   />
-</ParticleBackground>
+</ScrollOverSection>
+
+<FloatingGroup position="bottom-right">
+  <Chatbot
+    {knowledge}
+    title="G2webdev — Assistant"
+    initialMessage="Bonjour ! Je peux vous renseigner sur G2webdev et les composants de la bibliothèque. Comment puis-je vous aider ?"
+  />
+</FloatingGroup>
 
 <style lang="scss">
   .demo {
@@ -427,5 +429,19 @@
     font-size: 12px;
     color: var(--text-muted);
     line-height: 1.4;
+  }
+
+  /* Fixed full-viewport layer that the page sections scroll over */
+  .particle-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -1; /* sits behind the normal flow content */
+    pointer-events: none;
+  }
+
+  /* The component sizes its canvas to its own height, so force it to fill the layer */
+  .particle-layer :global(.pb) {
+    width: 100%;
+    height: 100%;
   }
 </style>

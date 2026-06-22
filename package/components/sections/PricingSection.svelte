@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Badge from '../ui/Badge.svelte';
-  import Button from '../buttons/Button.svelte';
-  import { Check } from '@lucide/svelte';
+  import Badge from "../ui/Badge.svelte";
+  import Button from "../buttons/Button.svelte";
+  import { Check } from "@lucide/svelte";
 
   let {
     badge,
@@ -26,7 +26,6 @@
     }>;
     withBackground?: "bg-base" | "";
   } = $props();
-
 </script>
 
 <section class="pricing {withBackground}">
@@ -84,7 +83,7 @@
 
           <div class="plan-cta">
             <Button
-              variant={plan.highlighted ? 'primary' : 'outline'}
+              variant={plan.highlighted ? "primary" : "outline"}
               size="lg"
               href={plan.href}
             >
@@ -327,5 +326,8 @@
     }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>

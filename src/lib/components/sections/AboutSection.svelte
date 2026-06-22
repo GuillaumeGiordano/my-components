@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Component, Snippet } from 'svelte';
-  import Badge from '$lib/components/ui/Badge.svelte';
-  import Button from '$lib/components/buttons/Button.svelte';
+  import type { Component, Snippet } from "svelte";
+  import Badge from "$lib/components/ui/Badge.svelte";
+  import Button from "$lib/components/buttons/Button.svelte";
 
   let {
     badge,
@@ -11,7 +11,7 @@
     values,
     primaryCta,
     secondaryCta,
-    imagePosition = 'right',
+    imagePosition = "right",
     visual,
     withBackground = "",
   }: {
@@ -22,16 +22,14 @@
     values?: Array<{ icon: Component; label: string; description?: string }>;
     primaryCta?: { label: string; href: string };
     secondaryCta?: { label: string; href: string };
-    imagePosition?: 'right' | 'left';
+    imagePosition?: "right" | "left";
     visual?: Snippet;
     withBackground?: "bg-base" | "";
   } = $props();
-
 </script>
 
-<section class="about {withBackground}" class:image-left={imagePosition === 'left'}>
+<section class="about {withBackground}" class:image-left={imagePosition === "left"}>
   <div class="about-inner">
-
     <div class="text-side">
       {#if badge}
         <div class="badge-wrap">
@@ -68,7 +66,9 @@
             <Button href={primaryCta.href} variant="primary">{primaryCta.label}</Button>
           {/if}
           {#if secondaryCta}
-            <Button href={secondaryCta.href} variant="outline">{secondaryCta.label}</Button>
+            <Button href={secondaryCta.href} variant="outline"
+              >{secondaryCta.label}</Button
+            >
           {/if}
         </div>
       {/if}
@@ -79,7 +79,6 @@
         {@render visual()}
       </div>
     {/if}
-
   </div>
 </section>
 
@@ -99,11 +98,17 @@
     align-items: center;
   }
 
-  .about.image-left .text-side  { order: 2; }
-  .about.image-left .visual-side { order: 1; }
+  .about.image-left .text-side {
+    order: 2;
+  }
+  .about.image-left .visual-side {
+    order: 1;
+  }
 
   /* ── Text ── */
-  .badge-wrap { margin-bottom: 16px; }
+  .badge-wrap {
+    margin-bottom: 16px;
+  }
 
   .eyebrow {
     font-size: 13px;
@@ -193,11 +198,23 @@
 
   /* ── Responsive ── */
   @media (max-width: 768px) {
-    .about { padding: 64px 24px; }
-    .about-inner { grid-template-columns: 1fr; gap: 40px; }
-    .about.image-left .text-side  { order: 1; }
-    .about.image-left .visual-side { order: 2; }
+    .about {
+      padding: 64px 24px;
+    }
+    .about-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .about.image-left .text-side {
+      order: 1;
+    }
+    .about.image-left .visual-side {
+      order: 2;
+    }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>

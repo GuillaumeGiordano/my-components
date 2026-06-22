@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
-  import Badge from '../ui/Badge.svelte';
-  import Card from '../ui/Card.svelte';
-  import Input from '../forms/Input.svelte';
-  import Textarea from '../forms/Textarea.svelte';
-  import Button from '../buttons/Button.svelte';
-  import { Send, CheckCircle, MapPin } from '@lucide/svelte';
+  import type { Component } from "svelte";
+  import Badge from "../ui/Badge.svelte";
+  import Card from "../ui/Card.svelte";
+  import Input from "../forms/Input.svelte";
+  import Textarea from "../forms/Textarea.svelte";
+  import Button from "../buttons/Button.svelte";
+  import { Send, CheckCircle, MapPin } from "@lucide/svelte";
 
   let {
     badge,
@@ -13,7 +13,7 @@
     description,
     info,
     mapSrc,
-    mapLabel = 'Notre localisation',
+    mapLabel = "Notre localisation",
     onsubmit,
     withBackground = "",
   }: {
@@ -38,24 +38,23 @@
     withBackground?: "bg-base" | "";
   } = $props();
 
-
-  let name    = $state('');
-  let email   = $state('');
-  let subject = $state('');
-  let message = $state('');
+  let name = $state("");
+  let email = $state("");
+  let subject = $state("");
+  let message = $state("");
   let loading = $state(false);
   let success = $state(false);
-  let errors  = $state<{ name?: string; email?: string; message?: string }>({});
+  let errors = $state<{ name?: string; email?: string; message?: string }>({});
 
   function validate(): boolean {
     const next: typeof errors = {};
-    if (!name.trim()) next.name = 'Le nom est requis.';
+    if (!name.trim()) next.name = "Le nom est requis.";
     if (!email.trim()) {
       next.email = "L'adresse email est requise.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       next.email = "L'adresse email n'est pas valide.";
     }
-    if (!message.trim()) next.message = 'Le message est requis.';
+    if (!message.trim()) next.message = "Le message est requis.";
     errors = next;
     return Object.keys(next).length === 0;
   }
@@ -74,7 +73,7 @@
   }
 
   function reset() {
-    name = email = subject = message = '';
+    name = email = subject = message = "";
     errors = {};
     success = false;
   }
@@ -82,10 +81,8 @@
 
 <section class="contact-v2 {withBackground}">
   <div class="contact-grid">
-
     <!-- ── Left column : header + infos + form ── -->
     <div class="content-col">
-
       <div class="content-header">
         {#if badge}
           <Badge label={badge} variant="primary" dot />
@@ -124,7 +121,8 @@
                 <div class="success-icon"><CheckCircle size={38} /></div>
                 <h3 class="success-title">Message envoyé !</h3>
                 <p class="success-text">
-                  Merci de nous avoir contactés. Nous vous répondrons dans les 24 heures ouvrées.
+                  Merci de nous avoir contactés. Nous vous répondrons dans les 24 heures
+                  ouvrées.
                 </p>
                 <Button variant="outline" size="sm" onclick={reset}>
                   {#snippet children()}Envoyer un autre message{/snippet}
@@ -169,7 +167,7 @@
                 <div class="form-footer">
                   <Button variant="primary" size="md" icon={Send}>
                     {#snippet children()}
-                      {loading ? 'Envoi en cours…' : 'Envoyer le message'}
+                      {loading ? "Envoi en cours…" : "Envoyer le message"}
                     {/snippet}
                   </Button>
                 </div>
@@ -202,7 +200,6 @@
         </div>
       {/if}
     </div>
-
   </div>
 </section>
 
@@ -478,5 +475,8 @@
     }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>

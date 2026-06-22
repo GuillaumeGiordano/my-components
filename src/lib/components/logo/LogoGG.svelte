@@ -18,7 +18,7 @@
 
 <div class="logo-root {addClass}" {...others}>
   <!-- svelte-ignore a11y_consider_explicit_label -->
-  <a class="logo-link" href="https://guillaumegiordano.fr" target="_blank">
+  <a class="logo-link" href="https://g2webdev.fr" target="_blank">
     <svg
       version="1.0"
       xmlns="http://www.w3.org/2000/svg"

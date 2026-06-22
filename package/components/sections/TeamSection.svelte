@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
-  import Badge from '../ui/Badge.svelte';
-  import Avatar from '../ui/Avatar.svelte';
-  import Card from '../ui/Card.svelte';
+  import type { Component } from "svelte";
+  import Badge from "../ui/Badge.svelte";
+  import Avatar from "../ui/Avatar.svelte";
+  import Card from "../ui/Card.svelte";
 
   let {
     badge,
@@ -23,7 +23,6 @@
     }>;
     withBackground?: "bg-base" | "";
   } = $props();
-
 </script>
 
 <section class="team {withBackground}">
@@ -46,12 +45,7 @@
           <Card hoverable padding="lg">
             {#snippet children()}
               <div class="member-layout">
-                <Avatar
-                  src={member.avatar}
-                  name={member.name}
-                  size="xl"
-                  shape="circle"
-                />
+                <Avatar src={member.avatar} name={member.name} size="xl" shape="circle" />
                 <div class="member-info">
                   <span class="member-name">{member.name}</span>
                   <span class="member-role">{member.role}</span>
@@ -221,5 +215,8 @@
     }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>

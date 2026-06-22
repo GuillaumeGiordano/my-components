@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Badge from '$lib/components/ui/Badge.svelte';
-  import { ArrowRight } from '@lucide/svelte';
+  import Badge from "$lib/components/ui/Badge.svelte";
+  import { ArrowRight } from "@lucide/svelte";
 
   let {
     badge,
@@ -23,7 +23,6 @@
     columns?: 2 | 3 | 4;
     withBackground?: "bg-base" | "";
   } = $props();
-
 </script>
 
 <section class="image-cards-section {withBackground}">
@@ -135,7 +134,7 @@
       to top,
       rgba(0, 0, 0, 0.88) 0%,
       rgba(0, 0, 0, 0.55) 45%,
-      rgba(0, 0, 0, 0.30) 100%
+      rgba(0, 0, 0, 0.3) 100%
     );
   }
 
@@ -193,7 +192,9 @@
     text-decoration: none;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    transition: gap var(--transition-fast, 0.15s ease), color var(--transition-fast, 0.15s ease);
+    transition:
+      gap var(--transition-fast, 0.15s ease),
+      color var(--transition-fast, 0.15s ease);
   }
 
   .card-link:hover {
@@ -226,5 +227,8 @@
     }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>

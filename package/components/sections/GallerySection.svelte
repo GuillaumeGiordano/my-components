@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import Badge from '../ui/Badge.svelte';
-  import Modal from '../ui/Modal.svelte';
-  import Button from '../buttons/Button.svelte';
-  import { ChevronLeft, ChevronRight } from '@lucide/svelte';
+  import { onMount } from "svelte";
+  import Badge from "../ui/Badge.svelte";
+  import Modal from "../ui/Modal.svelte";
+  import Button from "../buttons/Button.svelte";
+  import { ChevronLeft, ChevronRight } from "@lucide/svelte";
 
   let {
     badge,
@@ -25,11 +25,10 @@
     withBackground?: "bg-base" | "";
   } = $props();
 
-
   // Track which image is open in the lightbox
   let selectedIndex: number = $state(0);
 
-  const MODAL_ID = 'gallery-lightbox';
+  const MODAL_ID = "gallery-lightbox";
 
   function openLightbox(index: number) {
     selectedIndex = index;
@@ -48,13 +47,13 @@
   function handleKeydown(e: KeyboardEvent) {
     const dialog = document.getElementById(MODAL_ID) as HTMLDialogElement | null;
     if (!dialog?.open) return;
-    if (e.key === 'ArrowLeft') prev();
-    if (e.key === 'ArrowRight') next();
+    if (e.key === "ArrowLeft") prev();
+    if (e.key === "ArrowRight") next();
   }
 
   onMount(() => {
-    window.addEventListener('keydown', handleKeydown);
-    return () => window.removeEventListener('keydown', handleKeydown);
+    window.addEventListener("keydown", handleKeydown);
+    return () => window.removeEventListener("keydown", handleKeydown);
   });
 
   const current = $derived(images[selectedIndex]);
@@ -100,11 +99,7 @@
   {#snippet children()}
     <div class="lightbox-body">
       {#if current}
-        <img
-          src={current.src}
-          alt={current.alt}
-          class="lightbox-img"
-        />
+        <img src={current.src} alt={current.alt} class="lightbox-img" />
         {#if current.caption}
           <p class="lightbox-caption">{current.caption}</p>
         {/if}
@@ -120,9 +115,7 @@
       <Button variant="secondary" size="sm" icon={ChevronLeft} onclick={prev}>
         Précédent
       </Button>
-      <Button variant="ghost" size="sm" onclick={close}>
-        Fermer
-      </Button>
+      <Button variant="ghost" size="sm" onclick={close}>Fermer</Button>
       <Button variant="secondary" size="sm" iconRight={ChevronRight} onclick={next}>
         Suivant
       </Button>
@@ -173,9 +166,15 @@
     gap: 12px;
   }
 
-  .cols-2 { grid-template-columns: repeat(2, 1fr); }
-  .cols-3 { grid-template-columns: repeat(3, 1fr); }
-  .cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
 
   /* ---- Gallery item (button) ---- */
   .gallery-item {
@@ -272,13 +271,21 @@
   }
 
   @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   @media (max-width: 900px) {
-    .cols-4 { grid-template-columns: repeat(2, 1fr); }
-    .cols-3 { grid-template-columns: repeat(2, 1fr); }
+    .cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .cols-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   @media (max-width: 540px) {
@@ -293,5 +300,8 @@
     }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>

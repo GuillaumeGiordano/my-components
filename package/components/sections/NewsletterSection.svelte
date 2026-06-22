@@ -1,18 +1,18 @@
 <script lang="ts">
-  import Badge from '../ui/Badge.svelte';
-  import Button from '../buttons/Button.svelte';
-  import Card from '../ui/Card.svelte';
-  import { CheckCircle2 } from '@lucide/svelte';
+  import Badge from "../ui/Badge.svelte";
+  import Button from "../buttons/Button.svelte";
+  import Card from "../ui/Card.svelte";
+  import { CheckCircle2 } from "@lucide/svelte";
 
   let {
     badge,
     title,
     description,
-    placeholder = 'votre@email.com',
+    placeholder = "votre@email.com",
     ctaLabel = "S'abonner",
     hint,
     onsubmit,
-    variant = 'default',
+    variant = "default",
     withBackground = "",
   }: {
     badge?: string;
@@ -22,15 +22,14 @@
     ctaLabel?: string;
     hint?: string;
     onsubmit?: (email: string) => void;
-    variant?: 'default' | 'card';
+    variant?: "default" | "card";
     withBackground?: "bg-base" | "";
   } = $props();
 
-
-  let email = $state('');
+  let email = $state("");
   let submitted = $state(false);
   let loading = $state(false);
-  let error = $state('');
+  let error = $state("");
 
   function validate(val: string): boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
@@ -38,10 +37,10 @@
 
   async function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
-    error = '';
+    error = "";
 
     if (!validate(email)) {
-      error = 'Veuillez entrer une adresse e-mail valide.';
+      error = "Veuillez entrer une adresse e-mail valide.";
       return;
     }
 
@@ -56,7 +55,7 @@
 
 <section class="newsletter variant-{variant} {withBackground}">
   <div class="newsletter-inner">
-    {#if variant === 'card'}
+    {#if variant === "card"}
       <Card padding="lg">
         {#snippet children()}
           {@render inner()}
@@ -293,5 +292,8 @@
     }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>

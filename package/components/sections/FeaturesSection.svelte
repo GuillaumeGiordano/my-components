@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
-  import Badge from '../ui/Badge.svelte';
-  import Card from '../ui/Card.svelte';
+  import type { Component } from "svelte";
+  import Badge from "../ui/Badge.svelte";
+  import Card from "../ui/Card.svelte";
 
   let {
     badge,
@@ -23,7 +23,6 @@
     columns?: 2 | 3 | 4;
     withBackground?: "bg-base" | "";
   } = $props();
-
 </script>
 
 <section class="features {withBackground}">
@@ -108,9 +107,15 @@
     gap: 20px;
   }
 
-  .cols-2 { grid-template-columns: repeat(2, 1fr); }
-  .cols-3 { grid-template-columns: repeat(3, 1fr); }
-  .cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
 
   /* ---- Card content ---- */
   .feature-card-wrap {
@@ -169,7 +174,9 @@
   }
 
   @media (max-width: 1024px) {
-    .cols-4 { grid-template-columns: repeat(2, 1fr); }
+    .cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   @media (max-width: 768px) {
@@ -184,5 +191,8 @@
     }
   }
 
-  .withBackground { background: var(--bg-base); }
+  .bg-base {
+    padding: 1rem 0;
+    background: var(--bg-base);
+  }
 </style>
