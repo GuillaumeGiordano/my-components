@@ -97,7 +97,7 @@ Dark mode: overridden via `.dark` class on `<html>`. Applied automatically by `t
 | Component | Usage |
 |---|---|
 | `<Sidebar>` | Navigation sidebar. Props: `groups: SidebarGroup[]`, `bind:collapsed`, `activeHref`, `shortkey`. Snippets: `{#snippet header()}`, `{#snippet footer()}` — optionnels, rendus en haut/bas avec bordure séparatrice. |
-| `<Navbar>` | Top navigation bar. Props: `items: NavItem[]`, `logo?`, snippets: `{#snippet actions()}` |
+| `<Navbar>` | Top navigation bar. Props: `items: NavItem[]`, `logo?`, `spy` (scroll spy: auto-highlights the item whose `#anchor` section crosses the viewport center), snippets: `{#snippet actions()}` |
 | `<Footer>` | Page footer |
 | `<StandardLayout>` | Full page layout wrapper |
 

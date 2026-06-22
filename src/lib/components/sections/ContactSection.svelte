@@ -209,13 +209,14 @@
 {/snippet}
 
 <style>
-  .withBackground {
+  .bg-base {
     background: var(--bg-base);
   }
 
   .contact-inner {
     max-width: 1100px;
-    margin: 60px auto;
+    margin: auto;
+    padding: 60px 0;
   }
 
   /* ---- Split layout ---- */

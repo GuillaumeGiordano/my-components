@@ -1,10 +1,12 @@
-@import 'tailwindcss';
-@import '$lib/styles/tokens.css';
+@import "tailwindcss";
+@import "$lib/styles/tokens.css";
 
 /* Dark mode via classe sur <html> */
 @custom-variant dark (&:where(.dark, .dark *));
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -29,4 +31,20 @@ html {
 
 body {
   min-height: 100vh;
+}
+
+.bg-base {
+  background: var(--bg-base);
+}
+
+.bg-subtle {
+  background: var(--bg-subtle);
+}
+
+.bg-accent {
+  background: var(--bg-accent);
+}
+
+.bg-primary {
+  background: var(--primary);
 }

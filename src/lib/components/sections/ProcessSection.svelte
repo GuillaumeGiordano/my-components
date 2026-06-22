@@ -119,13 +119,14 @@
 </section>
 
 <style>
-  .withBackground {
+  .bg-base {
     background: var(--bg-base);
   }
 
   .process-inner {
     max-width: 1100px;
-    margin: 60px auto;
+    margin: auto;
+    padding: 60px 0;
     display: flex;
     flex-direction: column;
     gap: 64px;

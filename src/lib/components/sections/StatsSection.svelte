@@ -19,7 +19,7 @@
       prefix?: string;
       suffix?: string;
     }>;
-    withBackground?: "bg-base" | "";
+    withBackground?: "bg-base" | "bg-subtle" | "bg-accent" | "bg-primary" | "";
   } = $props();
 
   // Track animated display values for each stat
@@ -134,13 +134,25 @@
 
 <style>
   .bg-base {
-    padding: 1rem 0;
     background: var(--bg-base);
+  }
+
+  .bg-subtle {
+    background: var(--bg-subtle);
+  }
+
+  .bg-accent {
+    background: var(--bg-accent);
+  }
+
+  .bg-primary {
+    background: var(--primary);
   }
 
   .stats-inner {
     max-width: 1100px;
-    margin: 60px auto;
+    margin: auto;
+    padding: 60px 0;
   }
 
   /* ---- Header ---- */

@@ -15,7 +15,7 @@
     description?: string;
     primaryCta?: { label: string; href: string };
     secondaryCta?: { label: string; href: string };
-    withBackground?: "bg-base" | "";
+    withBackground?: "bg-base" | "bg-subtle" | "bg-accent" | "bg-primary" | "";
   } = $props();
 </script>
 
@@ -51,17 +51,13 @@
     width: 100%;
   }
 
-  .bg-base {
-    padding: 1rem 0;
-    background: var(--bg-base);
-  }
-
   /* ---- Inner ---- */
   .cta-inner {
     position: relative;
     z-index: 1;
     max-width: 680px;
-    margin: 60px auto;
+    margin: auto;
+    padding: 60px 0;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -84,7 +80,6 @@
     line-height: 1.7;
     max-width: 520px;
     margin: 0;
-    color: var(--text-muted);
   }
 
   .cta-actions {

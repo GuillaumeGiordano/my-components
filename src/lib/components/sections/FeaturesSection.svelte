@@ -62,13 +62,14 @@
 </section>
 
 <style>
-  .withBackground {
+  .bg-base {
     background: var(--bg-base);
   }
 
   .features-inner {
-    max-width: 1200px;
-    margin: 60px auto;
+    max-width: 1100px;
+    margin: auto;
+    padding: 60px 0;
   }
 
   /* ---- Header ---- */

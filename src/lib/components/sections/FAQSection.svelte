@@ -79,13 +79,14 @@
 </section>
 
 <style>
-  .withBackground {
+  .bg-base {
     background: var(--bg-base);
   }
 
   .faq-inner {
     max-width: 860px;
-    margin: 60px auto;
+    margin: auto;
+    padding: 60px 0;
   }
 
   .faq-inner:has(.faq-two-col) {

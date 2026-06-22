@@ -32,6 +32,8 @@
 
   import knowledge from "./knowledge.json";
   import ScrollOverSection from "$lib/components/sections/ScrollOverSection.svelte";
+  import ScrollToTop from "$lib/components/ui/ScrollToTop.svelte";
+  import GradientBackground from "$lib/components/ui/GradientBackground.svelte";
 
   // Navbar items — anchors match each section's `id`; scroll spy is handled by <Navbar spy>
   const navItems = [
@@ -124,7 +126,7 @@
 
 <Navbar items={navItems} spy>
   {#snippet brand()}
-    <LogoGG width={28} height={28} open={false} />
+    <LogoGG width={46} height={46} open={false} />
   {/snippet}
 
   {#snippet actionBtn()}
@@ -137,6 +139,7 @@
     <ParticleBackground />
   {/snippet}
 
+  <!-- Hero Section -->
   <HeroSection
     id="hero"
     title="Agence web dans le Var, création de sites sur mesure"
@@ -211,6 +214,7 @@
     {/snippet}
   </HeroSection>
 
+  <!-- Stats Section -->
   <StatsSection
     id="stats"
     withBackground="bg-base"
@@ -242,6 +246,7 @@
     ]}
   />
 
+  <!-- Process Section -->
   <ProcessSection
     id="process"
     title="Votre projet, étape par étape"
@@ -288,18 +293,21 @@
     layout="vertical"
   />
 
-  <CTABannerSection
-    id="cta-banner"
-    title="Votre projet web à partir de 490€"
-    description="Recevez un devis gratuit et sans engagement sous 48h. Parlons de votre projet et obtenez une estimation claire et adaptée à vos besoins."
-    withBackground="bg-base"
-    primaryCta={{ label: "Demander un devis gratuit", href: "#contact" }}
-  />
+  <!-- Gradient background for the CTA section -->
+  <GradientBackground>
+    <CTABannerSection
+      id="cta-banner"
+      title="Votre projet web à partir de 490€"
+      description="Recevez un devis gratuit et sans engagement sous 48h. Parlons de votre projet et obtenez une estimation claire et adaptée à vos besoins."
+      primaryCta={{ label: "Demander un devis gratuit", href: "#contact" }}
+    />
+  </GradientBackground>
 
+  <!-- Features Section -->
   <FeaturesSection
     id="features"
-    title="Tout ce dont votre équipe a besoin"
-    description="Une plateforme pensée pour les équipes modernes : rapide, sécurisée et facile à intégrer dans vos workflows existants."
+    title="Tout ce dont vous avez besoin pour votre site web"
+    description="Nous proposons un accompagnement complet pour la création et la maintenance de votre site internet, afin de vous permettre de vous concentrer sur votre activité."
     columns={3}
     features={[
       {
@@ -342,14 +350,17 @@
     ]}
   />
 
+  <!-- FAQ Section -->
   <FAQSection
     id="faq"
     title="Questions fréquentes"
     description="Vous ne trouvez pas la réponse ? Contactez-moi, je réponds en moins de 24 heures."
+    withBackground="bg-base"
     columns={2}
     {faqs}
   />
 
+  <!-- Contact Section -->
   <ContactSection
     id="contact"
     title="Contactez notre équipe"
@@ -360,6 +371,8 @@
 </ScrollOverSection>
 
 <FloatingGroup position="bottom-right">
+  <ScrollToTop />
+
   <Chatbot
     {knowledge}
     title="G2webdev — Assistant"
@@ -376,7 +389,7 @@
   :global(#features),
   :global(#faq),
   :global(#contact) {
-    scroll-margin-top: calc(var(--header-height) + 3rem);
+    scroll-margin-top: var(--header-height);
   }
 
   .demo {
