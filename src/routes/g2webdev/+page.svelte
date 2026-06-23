@@ -402,14 +402,13 @@
 </FloatingGroup>
 
 <FloatingGroup position="bottom-right">
-  <ScrollToTop />
-
   <Chatbot
     {open}
     {knowledge}
     title="G2webdev — Assistant"
     initialMessage="Bonjour ! Je peux vous renseigner sur G2webdev et les composants de la bibliothèque. Comment puis-je vous aider ?"
   />
+  <ScrollToTop />
 </FloatingGroup>
 
 <style lang="scss">
