@@ -97,6 +97,7 @@
     bind:side={railSide}
     pages={dockPages}
     home={{ icon: Home, label: "Accueil", href: "/g2webdev" }}
+    mode="auto"
   />
 </FloatingGroup>
 
