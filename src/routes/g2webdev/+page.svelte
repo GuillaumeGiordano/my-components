@@ -185,7 +185,7 @@
               Présentez votre activité avec un site élégant, rapide et pensé pour
               convertir vos visiteurs.
             </p>
-            <Button variant="primary" size="sm" href="/g2webdev/site-vitrine">
+            <Button variant="primary" size="sm" href="/g2webdev/offres/site-vitrine">
               En savoir plus
             </Button>
           </div>
@@ -202,7 +202,7 @@
               Mettez vos réalisations en valeur dans une galerie soignée et entièrement
               responsive.
             </p>
-            <Button variant="primary" size="sm" href="/g2webdev/portfolio">
+            <Button variant="primary" size="sm" href="/g2webdev/offres/portfolio">
               En savoir plus
             </Button>
           </div>
@@ -219,7 +219,7 @@
               Une boutique sécurisée et performante pour vendre vos produits partout,
               24h/24.
             </p>
-            <Button variant="primary" size="sm" href="/g2webdev/e-commerce">
+            <Button variant="primary" size="sm" href="/g2webdev/offres/e-commerce">
               En savoir plus
             </Button>
           </div>
@@ -236,7 +236,7 @@
               Des outils métier sur mesure, accessibles partout et taillés pour votre
               organisation.
             </p>
-            <Button variant="primary" size="sm" href="/g2webdev/application-web">
+            <Button variant="primary" size="sm" href="/g2webdev/offres/application-web">
               En savoir plus
             </Button>
           </div>

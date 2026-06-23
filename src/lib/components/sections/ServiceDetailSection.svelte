@@ -84,12 +84,13 @@
 <style>
   .sd {
     display: flex;
-    padding: 80px 24px;
+    min-height: calc(100vh - var(--header-height) - 1px);
   }
 
   .sd-inner {
     max-width: 1100px;
     width: 100%;
+    padding: 80px 24px;
     margin: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
