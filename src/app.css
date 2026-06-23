@@ -51,11 +51,18 @@ body {
 
 .section {
   display: flex;
-  background: radial-gradient(
-    ellipse 80% 50% at 50% -10%,
-    color-mix(in srgb, var(--primary) 12%, transparent),
-    transparent
-  );
+  /* Two mirrored glows: one bleeding in from the top, one from the bottom */
+  background:
+    radial-gradient(
+      ellipse 80% 50% at 50% -10%,
+      color-mix(in srgb, var(--primary) 12%, transparent),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 80% 50% at 50% 110%,
+      color-mix(in srgb, var(--primary) 12%, transparent),
+      transparent
+    );
 
   &--full {
     min-height: calc(100vh - var(--header-height));

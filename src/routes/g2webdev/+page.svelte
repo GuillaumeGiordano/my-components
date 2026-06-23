@@ -83,7 +83,6 @@
   const navItems = [
     { icon: Home, label: "Accueil", href: "#hero" },
     { icon: CalendarCheck, label: "Méthode", href: "#process" },
-    { icon: FileText, label: "Devis", href: "#cta-banner" },
     { icon: Sparkles, label: "Services", href: "#features" },
     { icon: HelpCircle, label: "FAQ", href: "#faq" },
     { icon: Mail, label: "Contact", href: "#contact" },
@@ -254,16 +253,6 @@
     minHeight="calc(100vh - var(--header-height))"
     {steps}
   />
-
-  <!-- Gradient background for the CTA section -->
-  <GradientBackground>
-    <CTABannerSection
-      id="cta-banner"
-      title="Votre projet web à partir de 1 200€"
-      description="Recevez un devis gratuit et sans engagement sous 48h. Parlons de votre projet et obtenez une estimation claire et adaptée à vos besoins."
-      primaryCta={{ label: "Demander un devis gratuit", href: "#contact" }}
-    />
-  </GradientBackground>
 
   <!-- Features Section -->
   <FeaturesSection
