@@ -1,3 +1,4 @@
+import type { Component } from "svelte";
 import type { ScrollSection } from "./SectionScrollbar.svelte";
 type $$ComponentProps = {
     sections?: ScrollSection[];
@@ -7,9 +8,17 @@ type $$ComponentProps = {
     /** Permanent button pinned in first position (a real link, e.g. back to home).
      *  Sits outside the scroll-spy/puck mechanics. */
     home?: ScrollSection;
+    /** "desktop": always-visible pill. "mobile": collapsed FAB opening an overlay.
+     *  "auto": switches to mobile below `mobileBreakpoint`. */
+    mode?: "desktop" | "mobile" | "auto";
+    /** Viewport width (px) under which "auto" mode collapses to the mobile FAB. */
+    mobileBreakpoint?: number;
+    /** Icon shown on the collapsed mobile FAB. */
+    mobileIcon?: Component;
     /** Edge the dock sits on — controls which side the tooltips appear. */
     side?: "left" | "right";
+    open?: boolean;
 };
-declare const SectionNavDock: import("svelte").Component<$$ComponentProps, {}, "side">;
+declare const SectionNavDock: Component<$$ComponentProps, {}, "open" | "side">;
 type SectionNavDock = ReturnType<typeof SectionNavDock>;
 export default SectionNavDock;

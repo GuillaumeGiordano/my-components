@@ -1,5 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import type { Component } from "svelte";
+  import { List } from "@lucide/svelte";
   import type { ScrollSection } from "./SectionScrollbar.svelte";
   const browser = typeof window !== "undefined";
 
@@ -7,7 +9,11 @@
     sections = [],
     pages = {},
     home,
+    mode = "desktop",
+    mobileBreakpoint = 768,
+    mobileIcon: MobileIcon = List,
     side = $bindable("left"),
+    open = $bindable(false),
   }: {
     sections?: ScrollSection[];
     /** Route → sections map. When `sections` is omitted, the dock auto-selects the
@@ -16,15 +22,58 @@
     /** Permanent button pinned in first position (a real link, e.g. back to home).
      *  Sits outside the scroll-spy/puck mechanics. */
     home?: ScrollSection;
+    /** "desktop": always-visible pill. "mobile": collapsed FAB opening an overlay.
+     *  "auto": switches to mobile below `mobileBreakpoint`. */
+    mode?: "desktop" | "mobile" | "auto";
+    /** Viewport width (px) under which "auto" mode collapses to the mobile FAB. */
+    mobileBreakpoint?: number;
+    /** Icon shown on the collapsed mobile FAB. */
+    mobileIcon?: Component;
     /** Edge the dock sits on — controls which side the tooltips appear. */
     side?: "left" | "right";
+    open?: boolean;
   } = $props();
 
   // Explicit `sections` wins; otherwise resolve the list from the current route.
   const normalize = (p: string) => (p.length > 1 && p.endsWith("/") ? p.slice(0, -1) : p);
   const items = $derived(
-    sections.length ? sections : (pages[normalize(page.url.pathname)] ?? pages["*"] ?? []),
+    sections.length
+      ? sections
+      : (pages[normalize(page.url.pathname)] ?? pages["*"] ?? []),
   );
+
+  // ── Display mode (desktop pill vs collapsible mobile FAB) ────────────────
+  // let open = $state(false);
+  let isNarrow = $state(false);
+  let popoverEl = $state<HTMLElement>();
+
+  // Track the breakpoint only in "auto" mode.
+  $effect(() => {
+    if (!browser || mode !== "auto") return;
+    const mq = window.matchMedia(`(max-width: ${mobileBreakpoint}px)`);
+    const apply = () => (isNarrow = mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  });
+
+  const effectiveMode = $derived(
+    mode === "auto" ? (isNarrow ? "mobile" : "desktop") : mode,
+  );
+  const hasContent = $derived(!!home || items.length > 0);
+
+  const close = () => (open = false);
+
+  // Move the open overlay to <body> so it escapes any transformed ancestor
+  // (e.g. FloatingGroup) and reliably covers the whole viewport.
+  function portal(node: HTMLElement) {
+    document.body.appendChild(node);
+    return {
+      destroy() {
+        if (node.isConnected) node.remove();
+      },
+    };
+  }
 
   // Geometry (kept in sync with CSS via custom properties below)
   const ITEM = 44; // circle diameter (px)
@@ -56,6 +105,7 @@
 
   function go(s: ScrollSection | undefined) {
     if (s) document.getElementById(idOf(s))?.scrollIntoView({ behavior: "smooth" });
+    close(); // close the mobile overlay after navigating (no-op in desktop)
   }
 
   // ── Puck drag ──────────────────────────────────────────────────────────
@@ -125,9 +175,33 @@
       window.removeEventListener("resize", onScroll);
     };
   });
+
+  // Live scroll preview while dragging the puck: the page follows the section
+  // currently under it, so you see it scroll. The exact landing happens on drop (go()).
+  $effect(() => {
+    if (!browser || !dragging) return;
+    const s = items[targetIndex];
+    if (s) document.getElementById(idOf(s))?.scrollIntoView({ behavior: "smooth" });
+  });
+
+  // While the mobile overlay is open: lock page scroll, close on Escape, focus the panel.
+  $effect(() => {
+    if (!browser || !open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+    };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    popoverEl?.focus();
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  });
 </script>
 
-{#if home || items.length}
+{#snippet dockNav()}
   <nav
     class="dock dock--{side}"
     class:is-dragging={dragging}
@@ -137,7 +211,12 @@
     <ul class="dock-list" bind:this={listEl}>
       {#if home}
         <li>
-          <a class="dock-item dock-home" href={home.href} aria-label={home.label}>
+          <a
+            class="dock-item dock-home"
+            href={home.href}
+            aria-label={home.label}
+            onclick={close}
+          >
             {#if home.icon}
               <span class="dock-icon"><home.icon size={20} /></span>
             {/if}
@@ -188,6 +267,45 @@
       {/if}
     </ul>
   </nav>
+{/snippet}
+
+{#if hasContent}
+  {#if effectiveMode === "mobile"}
+    {#if open}
+      <!-- Portaled to <body> so the overlay covers the whole viewport -->
+      <div class="dock-modal" use:portal>
+        <button
+          class="dock-overlay"
+          type="button"
+          aria-label="Fermer la navigation"
+          onclick={close}
+        ></button>
+        <div
+          class="dock-popover dock-popover--{side}"
+          bind:this={popoverEl}
+          tabindex="-1"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation par sections"
+        >
+          {@render dockNav()}
+        </div>
+      </div>
+    {:else}
+      <button
+        class="dock-fab"
+        type="button"
+        onclick={() => (open = true)}
+        aria-label="Ouvrir la navigation"
+        aria-haspopup="dialog"
+        aria-expanded={open}
+      >
+        <MobileIcon size={22} />
+      </button>
+    {/if}
+  {:else}
+    {@render dockNav()}
+  {/if}
 {/if}
 
 <style>
@@ -368,12 +486,85 @@
     box-shadow: 0 6px 20px color-mix(in srgb, var(--primary) 40%, transparent);
   }
 
+  /* ── Mobile: collapsed FAB ── */
+  .dock-fab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border: none;
+    border-radius: 50%;
+    background: var(--primary);
+    color: var(--primary-fg);
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    transition:
+      background var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  .dock-fab:hover {
+    background: var(--primary-hover);
+    transform: scale(1.05);
+  }
+
+  .dock-fab:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+  }
+
+  /* ── Mobile: open overlay + side popover ── */
+  .dock-overlay {
+    position: fixed;
+    inset: 0;
+    border: none;
+    padding: 0;
+    background: color-mix(in srgb, #000 55%, transparent);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    cursor: pointer;
+    z-index: 1100;
+    animation: dock-fade 0.2s ease;
+  }
+
+  .dock-popover {
+    position: fixed;
+    top: 50%;
+    z-index: 1101;
+    transform: translateY(-50%);
+    animation: dock-pop 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .dock-popover--left {
+    left: 16px;
+  }
+  .dock-popover--right {
+    right: 16px;
+  }
+
+  @keyframes dock-fade {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes dock-pop {
+    from {
+      opacity: 0;
+      transform: translateY(-50%) scale(0.92);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .dock-puck {
       transition: none;
     }
     .dock-item {
       transition: none;
+    }
+    .dock-overlay,
+    .dock-popover {
+      animation: none;
     }
   }
 </style>
