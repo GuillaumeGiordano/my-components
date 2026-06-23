@@ -1,27 +1,17 @@
 <script lang="ts">
-  import Button from "$lib/components/buttons/Button.svelte";
-  import Navbar from "$lib/components/layout/Navbar.svelte";
-  import LogoGG from "$lib/components/logo/LogoGG.svelte";
   import ContactSection from "$lib/components/sections/ContactSection.svelte";
   import FAQSection from "$lib/components/sections/FAQSection.svelte";
   import FeaturesSection from "$lib/components/sections/FeaturesSection.svelte";
   import HeroSection from "$lib/components/sections/HeroSection.svelte";
   import StatsSection from "$lib/components/sections/StatsSection.svelte";
-  import Chatbot from "$lib/components/ui/Chatbot.svelte";
   import DeviceShowcase from "$lib/components/ui/DeviceShowcase.svelte";
   import ParticleBackground from "$lib/components/ui/ParticleBackground.svelte";
-  import ScrollProgressBar from "$lib/components/ui/ScrollProgressBar.svelte";
-  import SectionNavDock from "$lib/components/ui/SectionNavDock.svelte";
-  import FloatingGroup from "$lib/FloatingGroup.svelte";
   import {
     AppWindow,
     BarChart2,
     CalendarCheck,
     FileText,
-    HelpCircle,
-    Home,
     Image,
-    Mail,
     MessageCircle,
     Monitor,
     Rocket,
@@ -32,11 +22,8 @@
     X,
   } from "@lucide/svelte";
 
-  import Footer from "$lib/components/layout/Footer.svelte";
   import ProcessTimelineSection from "$lib/components/sections/ProcessTimelineSection.svelte";
   import ScrollOverSection from "$lib/components/sections/ScrollOverSection.svelte";
-  import ScrollToTop from "$lib/components/ui/ScrollToTop.svelte";
-  import knowledge from "./knowledge.json";
 
   // Animated offer showcase shown in the hero (replaces the static cards)
   const offers = [
@@ -72,15 +59,6 @@
       accent: "#f59e0b",
       icon: AppWindow,
     },
-  ];
-
-  // Navbar items — anchors match each section's `id`; scroll spy is handled by <Navbar spy>
-  const navItems = [
-    { icon: Home, label: "Accueil", href: "#hero" },
-    { icon: CalendarCheck, label: "Méthode", href: "#process" },
-    { icon: Sparkles, label: "Services", href: "#features" },
-    { icon: HelpCircle, label: "FAQ", href: "#faq" },
-    { icon: Mail, label: "Contact", href: "#contact" },
   ];
 
   function handleSubmit(data: {
@@ -174,18 +152,6 @@
 <svelte:head>
   <title>G2 Webdev</title>
 </svelte:head>
-
-<ScrollProgressBar />
-
-<Navbar items={navItems} spy>
-  {#snippet brand()}
-    <LogoGG width={46} height={46} open={false} />
-  {/snippet}
-
-  {#snippet actionBtn()}
-    <Button size="sm" variant="primary" href="#">Prendre rendez-vous</Button>
-  {/snippet}
-</Navbar>
 
 <ScrollOverSection>
   {#snippet background()}
@@ -328,48 +294,6 @@
     variant="centered"
   />
 </ScrollOverSection>
-
-<Footer
-  tagline="Agence web dans le Var, création de sites sur mesure."
-  columns={[
-    {
-      heading: "Navigation",
-      links: [
-        { label: "Accueil", href: "#hero" },
-        { label: "Chiffres", href: "#stats" },
-        { label: "Méthode", href: "#process" },
-        { label: "Services", href: "#features" },
-      ],
-    },
-    {
-      heading: "Aller plus loin",
-      links: [
-        { label: "Devis", href: "#cta-banner" },
-        { label: "FAQ", href: "#faq" },
-        { label: "Contact", href: "#contact" },
-      ],
-    },
-  ]}
-  copyright={`© ${new Date().getFullYear()} G2 Webdev. Tous droits réservés.`}
->
-  {#snippet brand()}
-    <LogoGG width={46} height={46} open={true} />
-  {/snippet}
-</Footer>
-
-<FloatingGroup position={railSide === "left" ? "left" : "right"}>
-  <SectionNavDock bind:side={railSide} sections={navItems} />
-</FloatingGroup>
-
-<FloatingGroup position="bottom-right">
-  <Chatbot
-    {open}
-    {knowledge}
-    title="G2webdev — Assistant"
-    initialMessage="Bonjour ! Je peux vous renseigner sur G2webdev et les composants de la bibliothèque. Comment puis-je vous aider ?"
-  />
-  <ScrollToTop />
-</FloatingGroup>
 
 <style lang="scss">
   /* Offset anchor targets so they land below the sticky navbar */

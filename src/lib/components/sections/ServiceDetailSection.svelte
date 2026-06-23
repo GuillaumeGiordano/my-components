@@ -12,28 +12,24 @@
     icon: Icon,
     accent = "var(--primary)",
     reverse = false,
+    withBackground = "",
     visual,
   }: {
     id?: string;
-    /** Small label above the title (e.g. "Le plus demandé"). */
     eyebrow?: string;
     title: string;
     description: string;
-    /** Key selling points, shown as a checklist. */
     points?: string[];
     cta?: { label: string; href: string };
-    /** Optional icon shown in the eyebrow badge. */
     icon?: Component;
-    /** Accent color — any CSS color or token. */
     accent?: string;
-    /** Put the visual on the left instead of the right. */
     reverse?: boolean;
-    /** Custom illustration replacing the default browser mockup. */
+    withBackground?: "bg-base" | "";
     visual?: Snippet;
   } = $props();
 </script>
 
-<section {id} class="sd" class:reverse style="--accent:{accent}">
+<section {id} class="sd {withBackground}" class:reverse style="--accent:{accent}">
   <div class="sd-inner">
     <!-- Text -->
     <div class="sd-text">
@@ -92,6 +88,10 @@
   .sd {
     display: flex;
     min-height: calc(100vh - var(--header-height) - 1px);
+  }
+
+  .bg-base {
+    background: var(--bg-base);
   }
 
   .sd-inner {
