@@ -47,7 +47,7 @@
   const offers = [
     {
       label: "Site vitrine",
-      price: 490,
+      price: 1200,
       tagline: "Présentez votre activité et convertissez vos visiteurs.",
       href: "/g2webdev/offres/site-vitrine",
       accent: "var(--primary)",
@@ -55,7 +55,7 @@
     },
     {
       label: "Portfolio",
-      price: 690,
+      price: 1500,
       tagline: "Mettez vos réalisations en valeur dans une galerie soignée.",
       href: "/g2webdev/offres/portfolio",
       accent: "#8b5cf6",
@@ -63,7 +63,7 @@
     },
     {
       label: "E-commerce",
-      price: 1490,
+      price: 2900,
       tagline: "Vendez vos produits en ligne, partout et 24h/24.",
       href: "/g2webdev/offres/e-commerce",
       accent: "#22c55e",
@@ -71,7 +71,7 @@
     },
     {
       label: "Application web",
-      price: 2900,
+      price: "Sur devis",
       tagline: "Des outils métier sur mesure, taillés pour votre organisation.",
       href: "/g2webdev/offres/application-web",
       accent: "#f59e0b",
@@ -259,7 +259,7 @@
   <GradientBackground>
     <CTABannerSection
       id="cta-banner"
-      title="Votre projet web à partir de 490€"
+      title="Votre projet web à partir de 1 200€"
       description="Recevez un devis gratuit et sans engagement sous 48h. Parlons de votre projet et obtenez une estimation claire et adaptée à vos besoins."
       primaryCta={{ label: "Demander un devis gratuit", href: "#contact" }}
     />

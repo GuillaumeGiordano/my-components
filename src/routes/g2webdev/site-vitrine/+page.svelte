@@ -182,7 +182,7 @@
 />
 
 <CTABannerSection
-  title="Votre site vitrine à partir de 490€"
+  title="Votre site vitrine à partir de 1 200€"
   description="Recevez un devis gratuit et sans engagement sous 48h. Parlons de votre projet."
   primaryCta={{ label: "Demander un devis gratuit", href: "/g2webdev#contact" }}
 />

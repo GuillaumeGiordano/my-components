@@ -5,7 +5,8 @@
   import ScrambleText from "./ScrambleText.svelte";
   import Tilt3D from "./Tilt3D.svelte";
 
-  type Offer = { label: string; price: number; accent?: string };
+  // `price` may be a string (e.g. "Sur devis") for offers without a fixed price.
+  type Offer = { label: string; price: number | string; accent?: string };
 
   let {
     offers = [],
@@ -32,6 +33,9 @@
   const current = $derived(offers[index] ?? { label: "", price: 0 });
   const accent = $derived(current.accent ?? "var(--primary)");
   const labels = $derived(offers.map((o) => o.label));
+  // Show "à partir de … €" only for numeric prices; a string price (e.g. "Sur devis")
+  // is displayed on its own, without prefix or suffix.
+  const numericPrice = $derived(typeof current.price === "number");
 
   // Automatically loop through the offers. Pauses on hover/focus and respects
   // the user's reduced-motion preference.
@@ -98,7 +102,7 @@
       <div class="ds-title-card">
         <span class="ds-name"><MorphText words={labels} {index} duration={500} /></span>
         <span class="ds-price">
-          {prefix}
+          {#if numericPrice}{prefix} {/if}
           <strong
             ><ScrambleText
               bind:this={scrambler}
@@ -106,7 +110,7 @@
               autoplay={false}
               speed={35}
               stagger={45}
-            />{suffix}</strong
+            />{#if numericPrice}{suffix}{/if}</strong
           >
         </span>
       </div>

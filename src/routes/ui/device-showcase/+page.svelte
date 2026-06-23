@@ -3,10 +3,10 @@
   import DeviceShowcase from "$lib/components/ui/DeviceShowcase.svelte";
 
   const offers = [
-    { label: "Site vitrine", price: 490, accent: "var(--primary)" },
-    { label: "Portfolio", price: 690, accent: "#8b5cf6" },
-    { label: "E-commerce", price: 1490, accent: "#22c55e" },
-    { label: "Application web", price: 2900, accent: "#f59e0b" },
+    { label: "Site vitrine", price: 1200, accent: "var(--primary)" },
+    { label: "Portfolio", price: 1500, accent: "#8b5cf6" },
+    { label: "E-commerce", price: 2900, accent: "#22c55e" },
+    { label: "Application web", price: "Sur devis", accent: "#f59e0b" },
   ];
 </script>
 
