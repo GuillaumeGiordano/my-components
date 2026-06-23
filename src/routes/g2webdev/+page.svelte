@@ -137,7 +137,7 @@
   let open = $state(false);
 
   // User preference: which edge the section nav rail sits on (right/left-handed)
-  let railSide = $state<"left" | "right">("left");
+  let railSide = $state<"left" | "right">("right");
 </script>
 
 <svelte:head>
