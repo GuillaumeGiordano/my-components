@@ -236,6 +236,16 @@ export const categories: ComponentCategory[] = [
 				description: 'Cercles d\'icônes avec tooltip au survol + palet draggable couleur primary à déposer sur la section cible'
 			},
 			{
+				slug: 'offer-showcase',
+				label: 'Offer Showcase',
+				description: 'Carte d\'offre animée : prix qui se compte, rotation automatique des offres, halo pulsant et points de navigation'
+			},
+			{
+				slug: 'device-showcase',
+				label: 'Device Showcase',
+				description: 'Mockup CSS desktop + téléphone, titre/prix de l\'offre et bouton pour faire défiler les offres'
+			},
+			{
 				slug: 'nav-section-wheel',
 				label: 'Nav Section Wheel',
 				description: 'Roue de navigation verticale fixée sur le bord droit — 3 sections visibles, coupée en haut/bas, synchronisée avec le scroll'

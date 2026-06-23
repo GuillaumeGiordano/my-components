@@ -102,6 +102,8 @@ export { default as ConfettiButton }      from './components/ui/ConfettiButton.s
 export { default as CommandPalette }      from './components/ui/CommandPalette.svelte';
 export type { CommandItem }               from './components/ui/CommandPalette.svelte';
 export { default as Marquee }             from './components/ui/Marquee.svelte';
+export { default as OfferShowcase }       from './components/ui/OfferShowcase.svelte';
+export { default as DeviceShowcase }      from './components/ui/DeviceShowcase.svelte';
 // ─── Scroll interactions ──────────────────────────────────────────────────────
 export { default as StickyStory }         from './components/ui/StickyStory.svelte';
 export type { StorySlide }                from './components/ui/StickyStory.svelte';
