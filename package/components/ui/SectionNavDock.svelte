@@ -30,6 +30,7 @@
   const ITEM = 44; // circle diameter (px)
   const GAP = 12; // space between circles (px)
   const PAD = 6; // list padding (px)
+  const SEP = 9; // separator block height between home and sections (px)
 
   let activeIndex = $state(0);
   let dragging = $state(false);
@@ -37,13 +38,14 @@
   let listEl = $state<HTMLElement>();
 
   const idOf = (s: ScrollSection) => (s.href.startsWith("#") ? s.href.slice(1) : s.href);
-  // The permanent home button (when set) takes the first slot, shifting section rows down.
-  const headOffset = $derived(home ? 1 : 0);
-  const slotTop = (i: number) => PAD + (i + headOffset) * (ITEM + GAP);
+  // The permanent home button + its separator sit above the sections, shifting the
+  // section rows down by `headSpace` pixels (home + gap + separator + gap).
+  const headSpace = $derived(home ? ITEM + 2 * GAP + SEP : 0);
+  const slotTop = (i: number) => PAD + headSpace + i * (ITEM + GAP);
   const clampIndex = (i: number) => Math.max(0, Math.min(items.length - 1, i));
   // Section index sitting under a given puck pixel position.
   const indexAt = (top: number) =>
-    clampIndex(Math.round((top - PAD) / (ITEM + GAP)) - headOffset);
+    clampIndex(Math.round((top - PAD - headSpace) / (ITEM + GAP)));
 
   // Where the puck rests (active section) and where it is while dragging.
   // Clamp in case the active index is stale right after a page change.
@@ -130,7 +132,7 @@
     class="dock dock--{side}"
     class:is-dragging={dragging}
     aria-label="Navigation par sections"
-    style="--item:{ITEM}px; --gap:{GAP}px; --pad:{PAD}px"
+    style="--item:{ITEM}px; --gap:{GAP}px; --pad:{PAD}px; --sep:{SEP}px"
   >
     <ul class="dock-list" bind:this={listEl}>
       {#if home}
@@ -142,6 +144,9 @@
             <span class="dock-label">{home.label}</span>
           </a>
         </li>
+        {#if items.length}
+          <li class="dock-sep" aria-hidden="true"></li>
+        {/if}
       {/if}
 
       {#each items as section, i (section.href)}
@@ -247,6 +252,22 @@
   .dock-home:hover {
     background: var(--primary-hover);
     color: var(--primary-fg);
+  }
+
+  /* Thin separator between the home button and the section list */
+  .dock-sep {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--sep);
+  }
+
+  .dock-sep::before {
+    content: "";
+    width: 60%;
+    height: 1px;
+    border-radius: 1px;
+    background: color-mix(in srgb, var(--border-strong) 85%, transparent);
   }
 
   .dock-item:focus-visible {
