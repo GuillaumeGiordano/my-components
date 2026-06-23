@@ -5,7 +5,7 @@ type $$ComponentProps = {
     videoUrl?: string;
     thumbnailSrc?: string;
     thumbnailAlt?: string;
-    aspectRatio?: '16/9' | '4/3' | '1/1';
+    aspectRatio?: "16/9" | "4/3" | "1/1";
     autoplay?: boolean;
     withBackground?: "bg-base" | "";
 };

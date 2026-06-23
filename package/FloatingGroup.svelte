@@ -14,7 +14,9 @@
       | "top"
       | "top-right"
       | "left"
+      | "left-edge"
       | "right"
+      | "right-edge"
       | "bottom-left"
       | "bottom"
       | "bottom-right";
@@ -99,8 +101,22 @@
     transform: translateY(-50%);
     align-items: flex-start;
   }
+  /* Flush against the left edge of the screen */
+  .left-edge {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    align-items: flex-start;
+  }
   .right {
     right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    align-items: flex-end;
+  }
+  /* Flush against the right edge of the screen */
+  .right-edge {
+    right: 0;
     top: 50%;
     transform: translateY(-50%);
     align-items: flex-end;

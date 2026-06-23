@@ -212,6 +212,26 @@ export const categories = [
                 description: 'Barre de scroll verticale avec points de section cliquables et thumb draggable — synchronisée avec la page'
             },
             {
+                slug: 'section-nav-rail',
+                label: 'Section Nav Rail',
+                description: 'Rail vertical d\'icônes fixé à gauche — se déploie au survol pour révéler les libellés, clic = scroll vers la section'
+            },
+            {
+                slug: 'section-nav-dock',
+                label: 'Section Nav Dock',
+                description: 'Cercles d\'icônes avec tooltip au survol + palet draggable couleur primary à déposer sur la section cible'
+            },
+            {
+                slug: 'offer-showcase',
+                label: 'Offer Showcase',
+                description: 'Carte d\'offre animée : prix qui se compte, rotation automatique des offres, halo pulsant et points de navigation'
+            },
+            {
+                slug: 'device-showcase',
+                label: 'Device Showcase',
+                description: 'Mockup CSS desktop + téléphone, titre/prix de l\'offre et bouton pour faire défiler les offres'
+            },
+            {
                 slug: 'nav-section-wheel',
                 label: 'Nav Section Wheel',
                 description: 'Roue de navigation verticale fixée sur le bord droit — 3 sections visibles, coupée en haut/bas, synchronisée avec le scroll'
@@ -370,6 +390,11 @@ export const categories = [
                 slug: 'scroll-progress',
                 label: 'Scroll Progress',
                 description: 'Sidebar fixe : ligne de progression + dots de section cliquables avec smooth scroll'
+            },
+            {
+                slug: 'scroll-progress-bar',
+                label: 'Scroll Progress Bar',
+                description: 'Barre de progression fine pleine largeur, fixée en haut de la page, qui se remplit au scroll'
             }
         ]
     },
@@ -433,6 +458,11 @@ export const categories = [
                 description: 'Grille de chiffres clés avec animation au scroll et préfixe/suffixe'
             },
             {
+                slug: 'checklist',
+                label: 'Checklist',
+                description: 'Liste « ce qui est inclus » avec coches — 1 à 3 colonnes, libellé + description optionnelle'
+            },
+            {
                 slug: 'team',
                 label: 'Team',
                 description: 'Grille de membres avec avatar, bio et liens sociaux'
@@ -461,6 +491,21 @@ export const categories = [
                 slug: 'process',
                 label: 'Process',
                 description: 'Étapes numérotées avec connecteurs — layout horizontal ou vertical, responsive'
+            },
+            {
+                slug: 'process-timeline',
+                label: 'Process Timeline',
+                description: 'Timeline verticale centrée : les étapes numérotées apparaissent en alternance gauche/droite au scroll'
+            },
+            {
+                slug: 'service-detail',
+                label: 'Service Detail',
+                description: 'Section explicative autonome : accroche, titre, description, points clés, CTA + mockup CSS teinté par accent'
+            },
+            {
+                slug: 'scroll-over',
+                label: 'Scroll Over',
+                description: 'Fond épinglé (sticky) au-dessus duquel le contenu défile — réutilisable, hauteur configurable'
             },
             {
                 slug: 'comparison',

@@ -1,5 +1,5 @@
-import type { Component } from 'svelte';
-type IntegrationStatus = 'available' | 'coming-soon' | 'beta';
+import type { Component } from "svelte";
+type IntegrationStatus = "available" | "coming-soon" | "beta";
 type Integration = {
     name: string;
     description?: string;

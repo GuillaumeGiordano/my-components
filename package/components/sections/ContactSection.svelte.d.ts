@@ -1,6 +1,6 @@
-import type { Component } from 'svelte';
+import type { Component } from "svelte";
 type $$ComponentProps = {
-    badge?: string;
+    id?: string;
     title: string;
     description?: string;
     info?: Array<{
@@ -15,7 +15,7 @@ type $$ComponentProps = {
         subject?: string;
         message: string;
     }) => Promise<void> | void;
-    variant?: 'split' | 'centered';
+    variant?: "split" | "centered";
     withBackground?: "bg-base" | "";
 };
 declare const ContactSection: Component<$$ComponentProps, {}, "">;

@@ -1,5 +1,5 @@
 type $$ComponentProps = {
-    badge?: string;
+    id?: string;
     title?: string;
     description?: string;
     stats: Array<{
@@ -9,7 +9,7 @@ type $$ComponentProps = {
         prefix?: string;
         suffix?: string;
     }>;
-    withBackground?: "bg-base" | "";
+    withBackground?: "bg-base" | "bg-subtle" | "bg-accent" | "bg-primary" | "";
 };
 declare const StatsSection: import("svelte").Component<$$ComponentProps, {}, "">;
 type StatsSection = ReturnType<typeof StatsSection>;

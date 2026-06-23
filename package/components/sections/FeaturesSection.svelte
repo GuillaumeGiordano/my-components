@@ -4,14 +4,14 @@
   import Card from "../ui/Card.svelte";
 
   let {
-    badge,
+    id,
     title,
     description,
     features,
     columns = 3,
     withBackground = "",
   }: {
-    badge?: string;
+    id?: string;
     title: string;
     description?: string;
     features: Array<{
@@ -25,13 +25,10 @@
   } = $props();
 </script>
 
-<section class="features {withBackground}">
+<section {id} class="features {withBackground}">
   <div class="features-inner">
     <!-- Section header -->
     <div class="section-header">
-      {#if badge}
-        <Badge label={badge} variant="primary" dot />
-      {/if}
       <h2 class="section-title">{title}</h2>
       {#if description}
         <p class="section-description">{description}</p>
@@ -66,13 +63,23 @@
 
 <style>
   .features {
-    padding: 88px 24px;
+    display: flex;
+    min-height: calc(100vh - var(--header-height));
+    background: radial-gradient(
+      ellipse 80% 50% at 50% -10%,
+      color-mix(in srgb, var(--primary) 12%, transparent),
+      transparent
+    );
+  }
+
+  .bg-base {
     background: var(--bg-base);
   }
 
   .features-inner {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 1100px;
+    margin: auto;
+    padding: 60px 0;
   }
 
   /* ---- Header ---- */
@@ -189,10 +196,5 @@
     .cols-4 {
       grid-template-columns: 1fr;
     }
-  }
-
-  .bg-base {
-    padding: 1rem 0;
-    background: var(--bg-base);
   }
 </style>

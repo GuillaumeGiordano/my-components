@@ -1,5 +1,5 @@
 type $$ComponentProps = {
-    badge?: string;
+    id?: string;
     title: string;
     description?: string;
     faqs: Array<{

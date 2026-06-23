@@ -1,6 +1,6 @@
 import type { Snippet } from "svelte";
 type $$ComponentProps = {
-    badge?: string;
+    id?: string;
     title: string;
     highlight?: string;
     description: string;

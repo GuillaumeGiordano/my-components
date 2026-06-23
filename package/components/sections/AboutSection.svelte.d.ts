@@ -1,4 +1,4 @@
-import type { Component, Snippet } from 'svelte';
+import type { Component, Snippet } from "svelte";
 type $$ComponentProps = {
     badge?: string;
     eyebrow?: string;
@@ -17,7 +17,7 @@ type $$ComponentProps = {
         label: string;
         href: string;
     };
-    imagePosition?: 'right' | 'left';
+    imagePosition?: "right" | "left";
     visual?: Snippet;
     withBackground?: "bg-base" | "";
 };

@@ -3,14 +3,14 @@
   import Collapse from "../ui/Collapse.svelte";
 
   let {
-    badge,
+    id,
     title,
     description,
     faqs,
     columns = 1,
     withBackground = "",
   }: {
-    badge?: string;
+    id?: string;
     title: string;
     description?: string;
     faqs: Array<{ question: string; answer: string }>;
@@ -23,13 +23,10 @@
   const rightFaqs = $derived(columns === 2 ? faqs.filter((_, i) => i % 2 !== 0) : []);
 </script>
 
-<section class="faq {withBackground}">
+<section {id} class="faq {withBackground}">
   <div class="faq-inner">
     <!-- Header -->
     <div class="section-header">
-      {#if badge}
-        <Badge label={badge} variant="primary" dot />
-      {/if}
       <h2 class="section-title">{title}</h2>
       {#if description}
         <p class="section-description">{description}</p>
@@ -83,13 +80,18 @@
 
 <style>
   .faq {
-    padding: 88px 24px;
+    display: flex;
+    min-height: calc(100vh - var(--header-height));
+  }
+
+  .bg-base {
     background: var(--bg-base);
   }
 
   .faq-inner {
-    max-width: 860px;
-    margin: 0 auto;
+    max-width: 900px;
+    margin: auto;
+    padding: 60px 0;
   }
 
   .faq-inner:has(.faq-two-col) {
@@ -118,7 +120,7 @@
     font-size: 1.05rem;
     color: var(--text-muted);
     line-height: 1.7;
-    max-width: 520px;
+    max-width: 900px;
     margin: 0;
   }
 
@@ -174,10 +176,5 @@
     .faq-two-col {
       grid-template-columns: 1fr;
     }
-  }
-
-  .bg-base {
-    padding: 1rem 0;
-    background: var(--bg-base);
   }
 </style>

@@ -1,4 +1,4 @@
-import type { Component, Snippet } from 'svelte';
+import type { Component, Snippet } from "svelte";
 type OnboardingStep = {
     label: string;
     title: string;

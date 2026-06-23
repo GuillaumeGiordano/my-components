@@ -1,3 +1,4 @@
+import type { Snippet } from "svelte";
 type FooterLink = {
     label: string;
     href: string;
@@ -7,7 +8,7 @@ type FooterColumn = {
     links: FooterLink[];
 };
 type $$ComponentProps = {
-    brand?: string;
+    brand?: Snippet;
     tagline?: string;
     columns?: FooterColumn[];
     copyright?: string;

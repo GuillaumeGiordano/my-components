@@ -4,6 +4,7 @@ type Size = "sm" | "md" | "lg";
 type $$ComponentProps = {
     variant?: Variant;
     size?: Size;
+    addClass?: string;
     type?: "button" | "submit" | "reset";
     disabled?: boolean;
     loading?: boolean;

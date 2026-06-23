@@ -1,17 +1,18 @@
 <script lang="ts">
   import type { Component } from "svelte";
   import Badge from "../ui/Badge.svelte";
+  import Button from "../buttons/Button.svelte";
   import Card from "../ui/Card.svelte";
 
   let {
-    badge,
+    id,
     title,
     description,
     steps,
     layout = "horizontal",
     withBackground = "",
   }: {
-    badge?: string;
+    id?: string;
     title: string;
     description?: string;
     steps: Array<{
@@ -19,19 +20,17 @@
       title: string;
       description: string;
       badge?: string;
+      cta?: { label: string; href: string };
     }>;
     layout?: "horizontal" | "vertical";
     withBackground?: "bg-base" | "";
   } = $props();
 </script>
 
-<section class="process {withBackground}">
+<section {id} class="process {withBackground}">
   <div class="process-inner">
     <!-- Section header -->
     <div class="section-header">
-      {#if badge}
-        <Badge label={badge} variant="primary" dot />
-      {/if}
       <h2 class="section-title">{title}</h2>
       {#if description}
         <p class="section-description">{description}</p>
@@ -57,6 +56,13 @@
                   </div>
                 {/if}
                 <p class="step-description">{step.description}</p>
+                {#if step.cta}
+                  <div class="step-cta">
+                    <Button variant="primary" size="sm" href={step.cta.href}>
+                      {step.cta.label}
+                    </Button>
+                  </div>
+                {/if}
               {/snippet}
             </Card>
           </div>
@@ -96,6 +102,13 @@
                   {/if}
                 </div>
                 <p class="step-description">{step.description}</p>
+                {#if step.cta}
+                  <div class="step-cta">
+                    <Button variant="primary" size="sm" href={step.cta.href}>
+                      {step.cta.label}
+                    </Button>
+                  </div>
+                {/if}
               </div>
             </div>
           </div>
@@ -107,13 +120,18 @@
 
 <style>
   .process {
-    padding: 100px 24px;
+    display: flex;
+    min-height: calc(100vh - var(--header-height));
+  }
+
+  .bg-base {
     background: var(--bg-base);
   }
 
   .process-inner {
     max-width: 1100px;
-    margin: 0 auto;
+    margin: auto;
+    padding: 60px 0;
     display: flex;
     flex-direction: column;
     gap: 64px;
@@ -227,6 +245,10 @@
     color: var(--text-muted);
     line-height: 1.6;
     margin: 0;
+  }
+
+  .step-cta {
+    margin-top: 16px;
   }
 
   /* ---- Vertical layout ---- */
@@ -346,10 +368,5 @@
       left: 20px;
       transform: none;
     }
-  }
-
-  .bg-base {
-    padding: 1rem 0;
-    background: var(--bg-base);
   }
 </style>

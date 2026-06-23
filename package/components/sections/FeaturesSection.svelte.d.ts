@@ -1,6 +1,6 @@
-import type { Component } from 'svelte';
+import type { Component } from "svelte";
 type $$ComponentProps = {
-    badge?: string;
+    id?: string;
     title: string;
     description?: string;
     features: Array<{

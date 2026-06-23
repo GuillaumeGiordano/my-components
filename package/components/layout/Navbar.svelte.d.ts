@@ -18,6 +18,8 @@ type $$ComponentProps = {
     brand?: Snippet;
     actionBtn?: Snippet;
     mobileMenu?: "drawer" | "popover" | "fullscreen";
+    /** Enable scroll spy: highlight the item whose `#anchor` section crosses the viewport center. */
+    spy?: boolean;
 };
 declare const Navbar: Component<$$ComponentProps, {}, "">;
 type Navbar = ReturnType<typeof Navbar>;

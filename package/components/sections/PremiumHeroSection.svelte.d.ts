@@ -1,4 +1,4 @@
-import type { Component } from 'svelte';
+import type { Component } from "svelte";
 export type PremiumCard = {
     icon: Component;
     title: string;

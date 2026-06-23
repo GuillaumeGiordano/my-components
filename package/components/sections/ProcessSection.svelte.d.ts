@@ -1,6 +1,6 @@
-import type { Component } from 'svelte';
+import type { Component } from "svelte";
 type $$ComponentProps = {
-    badge?: string;
+    id?: string;
     title: string;
     description?: string;
     steps: Array<{
@@ -8,8 +8,12 @@ type $$ComponentProps = {
         title: string;
         description: string;
         badge?: string;
+        cta?: {
+            label: string;
+            href: string;
+        };
     }>;
-    layout?: 'horizontal' | 'vertical';
+    layout?: "horizontal" | "vertical";
     withBackground?: "bg-base" | "";
 };
 declare const ProcessSection: Component<$$ComponentProps, {}, "">;

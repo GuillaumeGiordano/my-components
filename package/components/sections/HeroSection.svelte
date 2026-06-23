@@ -1,10 +1,10 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import Button from "../buttons/Button.svelte";
-  import Badge from "../ui/Badge.svelte";
+  import HighlightedTitle from "../ui/HighlightedTitle.svelte";
 
   let {
-    badge,
+    id,
     title,
     highlight,
     description,
@@ -14,7 +14,7 @@
     withBackground = "",
     visual,
   }: {
-    badge?: string;
+    id?: string;
     title: string;
     highlight?: string;
     description: string;
@@ -24,36 +24,13 @@
     withBackground?: "bg-base" | "";
     visual?: Snippet;
   } = $props();
-
-  // Split the title around the highlight word(s) to colorize it
-  function buildTitleParts(
-    t: string,
-    h?: string,
-  ): { before: string; hl: string; after: string } {
-    if (!h) return { before: t, hl: "", after: "" };
-    const idx = t.indexOf(h);
-    if (idx === -1) return { before: t, hl: "", after: "" };
-    return { before: t.slice(0, idx), hl: h, after: t.slice(idx + h.length) };
-  }
-
-  const parts = $derived(buildTitleParts(title, highlight));
 </script>
 
-<section class="hero {withBackground} align-{align}">
+<section {id} class="hero radial {withBackground} align-{align}">
   <div class="hero-inner">
     <div class="hero-content">
-      {#if badge}
-        <div class="hero-badge">
-          <Badge label={badge} variant="primary" dot />
-        </div>
-      {/if}
-
       <h1 class="hero-title">
-        {parts.before}
-        {#if parts.hl}
-          <span class="highlight">{parts.hl}</span>
-        {/if}
-        {parts.after}
+        <HighlightedTitle text={title} {highlight} />
       </h1>
 
       <p class="hero-description">{description}</p>
@@ -61,12 +38,12 @@
       {#if primaryCta || secondaryCta}
         <div class="hero-actions">
           {#if primaryCta}
-            <Button variant="primary" size="lg" href={primaryCta.href}>
+            <Button variant="primary" size="lg" addClass="test" href={primaryCta.href}>
               {primaryCta.label}
             </Button>
           {/if}
           {#if secondaryCta}
-            <Button variant="outline" size="lg" href={secondaryCta.href}>
+            <Button variant="outline" size="lg" addClass="test" href={secondaryCta.href}>
               {secondaryCta.label}
             </Button>
           {/if}
@@ -90,17 +67,16 @@
 
 <style>
   .hero {
-    padding: 96px 24px 80px;
     position: relative;
     overflow: hidden;
-  }
-
-  .withBackground {
-    background: var(--bg-base);
+    min-height: calc(100vh - var(--header-height) - 1px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   /* Subtle radial gradient in the background */
-  .hero::before {
+  .radial::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -113,13 +89,17 @@
     z-index: 0;
   }
 
+  .bg-base {
+    background: var(--bg-base);
+  }
+
   .hero-inner {
     position: relative;
     z-index: 1;
     max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 64px;
   }
 
@@ -145,7 +125,6 @@
 
   .align-left .hero-content {
     flex: 1;
-    max-width: 580px;
   }
 
   .align-left .hero-visual {
@@ -173,11 +152,6 @@
     text-align: center;
   }
 
-  .highlight {
-    color: var(--primary);
-    position: relative;
-  }
-
   .hero-description {
     font-size: clamp(1rem, 2vw, 1.2rem);
     line-height: 1.7;
@@ -193,6 +167,12 @@
     gap: 12px;
     animation: fade-up 0.5s ease both;
     animation-delay: 0.26s;
+  }
+  :global(.test) {
+    flex: 1;
+  }
+  .test {
+    flex: 1;
   }
 
   .hero-visual-center {

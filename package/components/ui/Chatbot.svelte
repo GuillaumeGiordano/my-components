@@ -5,6 +5,7 @@
   export type KnowledgeEntry = { question: string; answer: string };
 
   let {
+    open = $bindable(false),
     onMessage,
     knowledge,
     apiEndpoint = "/api/chat",
@@ -12,6 +13,7 @@
     placeholder = "Posez une question…",
     initialMessage = "",
   }: {
+    open?: boolean;
     onMessage?: (history: ChatMessage[]) => Promise<string>;
     knowledge?: KnowledgeEntry[];
     apiEndpoint?: string;
@@ -20,12 +22,12 @@
     initialMessage?: string;
   } = $props();
 
-  let open = $state(false);
+  // let open = $state(false);
   let loading = $state(false);
   let input = $state("");
   let messagesEl: HTMLDivElement | null = $state(null);
 
-  const messages = $state<ChatMessage[]>(
+  const messages = $derived<ChatMessage[]>(
     initialMessage ? [{ role: "assistant", content: initialMessage }] : [],
   );
 

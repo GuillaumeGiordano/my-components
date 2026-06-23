@@ -8,7 +8,7 @@
   import { Send, CheckCircle } from "@lucide/svelte";
 
   let {
-    badge,
+    id,
     title,
     description,
     info,
@@ -16,7 +16,7 @@
     variant = "split",
     withBackground = "",
   }: {
-    badge?: string;
+    id?: string;
     title: string;
     description?: string;
     info?: Array<{
@@ -84,16 +84,13 @@
   }
 </script>
 
-<section class="contact variant-{variant} {withBackground}">
+<section {id} class="section contact variant-{variant} {withBackground}">
   <div class="contact-inner">
     {#if variant === "split"}
       <!-- Split layout: info on the left, form on the right -->
       <div class="split-layout">
         <!-- Left column: title + info -->
         <div class="info-col">
-          {#if badge}
-            <Badge label={badge} variant="primary" dot />
-          {/if}
           <h2 class="section-title">{title}</h2>
           {#if description}
             <p class="section-description">{description}</p>
@@ -129,9 +126,6 @@
       <!-- Centered layout -->
       <div class="centered-layout">
         <div class="centered-header">
-          {#if badge}
-            <Badge label={badge} variant="primary" dot />
-          {/if}
           <h2 class="section-title">{title}</h2>
           {#if description}
             <p class="section-description">{description}</p>
@@ -216,13 +210,18 @@
 
 <style>
   .contact {
-    padding: 100px 24px;
+    display: flex;
+    min-height: calc(100vh - var(--header-height));
+  }
+
+  .bg-base {
     background: var(--bg-base);
   }
 
   .contact-inner {
     max-width: 1100px;
-    margin: 0 auto;
+    margin: auto;
+    padding: 60px 0;
   }
 
   /* ---- Split layout ---- */
@@ -409,10 +408,5 @@
     .form-footer :global(button) {
       width: 100%;
     }
-  }
-
-  .bg-base {
-    padding: 1rem 0;
-    background: var(--bg-base);
   }
 </style>

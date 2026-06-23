@@ -8,6 +8,7 @@
   let {
     variant = "primary",
     size = "md",
+    addClass = "",
     type = "button",
     disabled = false,
     loading = false,
@@ -20,6 +21,7 @@
   }: {
     variant?: Variant;
     size?: Size;
+    addClass?: string;
     type?: "button" | "submit" | "reset";
     disabled?: boolean;
     loading?: boolean;
@@ -41,7 +43,7 @@
 {#if href && !isDisabled}
   <a
     {href}
-    class="btn btn-{variant} btn-{size}"
+    class="btn btn-{variant} btn-{size} {addClass}"
     class:icon-only={iconOnly}
     role="button"
     {...restProps}
@@ -63,7 +65,7 @@
 {:else}
   <button
     {type}
-    class="btn btn-{variant} btn-{size}"
+    class="btn btn-{variant} btn-{size} {addClass}"
     class:icon-only={iconOnly}
     disabled={isDisabled}
     {onclick}

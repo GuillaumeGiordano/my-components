@@ -1,5 +1,5 @@
 type $$ComponentProps = {
-    badge?: string;
+    id?: string;
     title: string;
     description?: string;
     primaryCta?: {
@@ -10,7 +10,7 @@ type $$ComponentProps = {
         label: string;
         href: string;
     };
-    withBackground?: "bg-base" | "";
+    withBackground?: "bg-base" | "bg-subtle" | "bg-accent" | "bg-primary" | "";
 };
 declare const CTABannerSection: import("svelte").Component<$$ComponentProps, {}, "">;
 type CTABannerSection = ReturnType<typeof CTABannerSection>;

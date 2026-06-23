@@ -3,13 +3,13 @@
   import Badge from "../ui/Badge.svelte";
 
   let {
-    badge,
+    id,
     title,
     description,
     stats,
     withBackground = "",
   }: {
-    badge?: string;
+    id?: string;
     title?: string;
     description?: string;
     stats: Array<{
@@ -19,7 +19,7 @@
       prefix?: string;
       suffix?: string;
     }>;
-    withBackground?: "bg-base" | "";
+    withBackground?: "bg-base" | "bg-subtle" | "bg-accent" | "bg-primary" | "";
   } = $props();
 
   // Track animated display values for each stat
@@ -95,14 +95,11 @@
   });
 </script>
 
-<section class="stats {withBackground}" bind:this={sectionEl}>
+<section {id} class="stats {withBackground}" bind:this={sectionEl}>
   <div class="stats-inner">
     <!-- Optional header -->
-    {#if badge || title || description}
+    {#if title || description}
       <div class="section-header">
-        {#if badge}
-          <Badge label={badge} variant="primary" dot />
-        {/if}
         {#if title}
           <h2 class="section-title">{title}</h2>
         {/if}
@@ -136,20 +133,31 @@
 </section>
 
 <style>
-  .stats {
-    margin: 80px 24px;
+  .bg-base {
     background: var(--bg-base);
+  }
+
+  .bg-subtle {
+    background: var(--bg-subtle);
+  }
+
+  .bg-accent {
+    background: var(--bg-accent);
+  }
+
+  .bg-primary {
+    background: var(--primary);
   }
 
   .stats-inner {
     max-width: 1100px;
-    margin: 0 auto;
+    margin: auto;
+    padding: 60px 0;
   }
 
   /* ---- Header ---- */
   .section-header {
     text-align: center;
-    margin-bottom: 56px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -267,9 +275,5 @@
     .stat-item {
       padding: 28px 16px;
     }
-  }
-
-  .withBackground {
-    background: var(--bg-base);
   }
 </style>

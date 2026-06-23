@@ -9,7 +9,7 @@ type $$ComponentProps = {
         category?: string;
     }>;
     columns?: 2 | 3 | 4;
-    layout?: 'grid' | 'masonry' | 'featured';
+    layout?: "grid" | "masonry" | "featured";
     withBackground?: "bg-base" | "";
 };
 declare const GallerySectionV2: import("svelte").Component<$$ComponentProps, {}, "">;

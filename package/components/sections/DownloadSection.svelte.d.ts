@@ -1,5 +1,5 @@
-import type { Component, Snippet } from 'svelte';
-type Platform = 'ios' | 'android' | 'windows' | 'mac' | 'linux' | 'web';
+import type { Component, Snippet } from "svelte";
+type Platform = "ios" | "android" | "windows" | "mac" | "linux" | "web";
 type Store = {
     platform: Platform;
     label: string;
@@ -17,7 +17,7 @@ type $$ComponentProps = {
         value: string;
         label: string;
     }>;
-    align?: 'center' | 'split';
+    align?: "center" | "split";
     withBackground?: "bg-base" | "";
 };
 declare const DownloadSection: Component<$$ComponentProps, {}, "">;
