@@ -187,6 +187,14 @@
 
 <style>
   .dock {
+    /* Shrink to the column width so the frosted pill hugs the round buttons */
+    width: fit-content;
+    background: color-mix(in srgb, var(--bg-base) 55%, transparent);
+    backdrop-filter: blur(12px) saturate(1.4);
+    -webkit-backdrop-filter: blur(12px) saturate(1.4);
+    border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-lg);
     user-select: none;
     -webkit-user-select: none;
   }
@@ -222,21 +230,23 @@
       transform var(--transition-fast);
   }
 
-  /* Permanent home button — tinted to stand apart from the section items */
-  .dock-home {
-    color: var(--primary);
-    border-color: color-mix(in srgb, var(--primary) 35%, var(--border));
-  }
-
-  .dock-home:hover {
-    background: var(--primary);
-    color: var(--primary-fg);
-  }
-
   .dock-item:hover {
     background: var(--bg-hover);
     color: var(--text-base);
     transform: scale(1.05);
+  }
+
+  /* Permanent home button — filled like a FAB to stand apart from the section items.
+     Placed after .dock-item:hover so its colors win on hover (equal specificity). */
+  .dock-home {
+    background: var(--primary);
+    color: var(--primary-fg);
+    border-color: transparent;
+  }
+
+  .dock-home:hover {
+    background: var(--primary-hover);
+    color: var(--primary-fg);
   }
 
   .dock-item:focus-visible {
