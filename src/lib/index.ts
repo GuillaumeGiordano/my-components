@@ -112,6 +112,7 @@ export { default as ScrollReveal }        from './components/ui/ScrollReveal.sve
 export { default as ScrollCounter }       from './components/ui/ScrollCounter.svelte';
 export { default as ScrollProgress }      from './components/ui/ScrollProgress.svelte';
 export type { ProgressSection }           from './components/ui/ScrollProgress.svelte';
+export { default as ScrollProgressBar }   from './components/ui/ScrollProgressBar.svelte';
 export { default as Toaster }             from './components/ui/Toaster.svelte';
 export { default as Tooltip }             from './components/ui/Tooltip.svelte';
 

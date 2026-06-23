@@ -13,6 +13,7 @@
   import Tilt3D from "$lib/components/ui/Tilt3D.svelte";
   import FloatingGroup from "$lib/FloatingGroup.svelte";
   import SectionNavRail from "$lib/components/ui/SectionNavRail.svelte";
+  import ScrollProgressBar from "$lib/components/ui/ScrollProgressBar.svelte";
   import HeroSection from "$lib/components/sections/HeroSection.svelte";
   import {
     Home,
@@ -143,6 +144,8 @@
 <svelte:head>
   <title>G2 Webdev</title>
 </svelte:head>
+
+<ScrollProgressBar />
 
 <Navbar items={navItems} spy>
   {#snippet brand()}
@@ -394,7 +397,7 @@
   {/snippet}
 </Footer>
 
-<FloatingGroup position={railSide === "left" ? "left-edge" : "right-edge"}>
+<FloatingGroup position={railSide === "left" ? "left" : "right"}>
   <SectionNavRail bind:side={railSide} sections={navItems} />
 </FloatingGroup>
 

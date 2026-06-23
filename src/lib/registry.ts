@@ -389,6 +389,11 @@ export const categories: ComponentCategory[] = [
 				slug: 'scroll-progress',
 				label: 'Scroll Progress',
 				description: 'Sidebar fixe : ligne de progression + dots de section cliquables avec smooth scroll'
+			},
+			{
+				slug: 'scroll-progress-bar',
+				label: 'Scroll Progress Bar',
+				description: 'Barre de progression fine pleine largeur, fixée en haut de la page, qui se remplit au scroll'
 			}
 		]
 	},
