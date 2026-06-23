@@ -1,5 +1,9 @@
 <script lang="ts">
   import ServiceDetailSection from "$lib/components/sections/ServiceDetailSection.svelte";
+  import WebsiteShowcase from "$lib/components/ui/WebsiteShowcase.svelte";
+  import PortfolioShowcase from "$lib/components/ui/PortfolioShowcase.svelte";
+  import EcommerceShowcase from "$lib/components/ui/EcommerceShowcase.svelte";
+  import AppShowcase from "$lib/components/ui/AppShowcase.svelte";
   import { Monitor, Image, ShoppingCart, AppWindow } from "@lucide/svelte";
 </script>
 
@@ -24,7 +28,11 @@
     "Nom de domaine et hébergement inclus la 1ʳᵉ année",
   ]}
   cta={{ label: "Demander un devis gratuit", href: "/g2webdev#contact" }}
-/>
+>
+  {#snippet visual()}
+    <WebsiteShowcase />
+  {/snippet}
+</ServiceDetailSection>
 
 <ServiceDetailSection
   id="portfolio"
@@ -41,7 +49,11 @@
     "Liens et partage vers vos réseaux",
   ]}
   cta={{ label: "Demander un devis gratuit", href: "/g2webdev#contact" }}
-/>
+>
+  {#snippet visual()}
+    <PortfolioShowcase />
+  {/snippet}
+</ServiceDetailSection>
 
 <ServiceDetailSection
   id="e-commerce"
@@ -57,7 +69,11 @@
     "Tableau de bord des ventes en temps réel",
   ]}
   cta={{ label: "Demander un devis gratuit", href: "/g2webdev#contact" }}
-/>
+>
+  {#snippet visual()}
+    <EcommerceShowcase />
+  {/snippet}
+</ServiceDetailSection>
 
 <ServiceDetailSection
   id="application-web"
@@ -74,4 +90,8 @@
     "Architecture évolutive et sécurisée (RGPD)",
   ]}
   cta={{ label: "Demander un devis gratuit", href: "/g2webdev#contact" }}
-/>
+>
+  {#snippet visual()}
+    <AppShowcase />
+  {/snippet}
+</ServiceDetailSection>

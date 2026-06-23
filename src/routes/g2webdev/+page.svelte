@@ -3,45 +3,40 @@
   import Navbar from "$lib/components/layout/Navbar.svelte";
   import LogoGG from "$lib/components/logo/LogoGG.svelte";
   import ContactSection from "$lib/components/sections/ContactSection.svelte";
-  import CTABannerSection from "$lib/components/sections/CTABannerSection.svelte";
   import FAQSection from "$lib/components/sections/FAQSection.svelte";
   import FeaturesSection from "$lib/components/sections/FeaturesSection.svelte";
-  import ProcessSection from "$lib/components/sections/ProcessSection.svelte";
+  import HeroSection from "$lib/components/sections/HeroSection.svelte";
   import StatsSection from "$lib/components/sections/StatsSection.svelte";
   import Chatbot from "$lib/components/ui/Chatbot.svelte";
-  import ParticleBackground from "$lib/components/ui/ParticleBackground.svelte";
   import DeviceShowcase from "$lib/components/ui/DeviceShowcase.svelte";
-  import FloatingGroup from "$lib/FloatingGroup.svelte";
-  import SectionNavDock from "$lib/components/ui/SectionNavDock.svelte";
+  import ParticleBackground from "$lib/components/ui/ParticleBackground.svelte";
   import ScrollProgressBar from "$lib/components/ui/ScrollProgressBar.svelte";
-  import HeroSection from "$lib/components/sections/HeroSection.svelte";
+  import SectionNavDock from "$lib/components/ui/SectionNavDock.svelte";
+  import FloatingGroup from "$lib/FloatingGroup.svelte";
   import {
-    Home,
-    FileText,
-    Settings,
-    Users,
-    Rocket,
-    Sparkles,
-    BarChart2,
-    Monitor,
-    Image,
-    ShoppingCart,
     AppWindow,
+    BarChart2,
     CalendarCheck,
+    FileText,
     HelpCircle,
+    Home,
+    Image,
     Mail,
     MessageCircle,
+    Monitor,
+    Rocket,
+    Settings,
+    ShoppingCart,
+    Sparkles,
+    Users,
     X,
   } from "@lucide/svelte";
 
-  import knowledge from "./knowledge.json";
-  import ScrollOverSection from "$lib/components/sections/ScrollOverSection.svelte";
-  import ScrollToTop from "$lib/components/ui/ScrollToTop.svelte";
-  import GradientBackground from "$lib/components/ui/GradientBackground.svelte";
   import Footer from "$lib/components/layout/Footer.svelte";
   import ProcessTimelineSection from "$lib/components/sections/ProcessTimelineSection.svelte";
-  import StarfieldBackground from "$lib/components/ui/StarfieldBackground.svelte";
-  import Spotlight from "$lib/components/ui/Spotlight.svelte";
+  import ScrollOverSection from "$lib/components/sections/ScrollOverSection.svelte";
+  import ScrollToTop from "$lib/components/ui/ScrollToTop.svelte";
+  import knowledge from "./knowledge.json";
 
   // Animated offer showcase shown in the hero (replaces the static cards)
   const offers = [

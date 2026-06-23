@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Component } from "svelte";
+  import type { Component, Snippet } from "svelte";
   import { Check } from "@lucide/svelte";
 
   let {
@@ -12,6 +12,7 @@
     icon: Icon,
     accent = "var(--primary)",
     reverse = false,
+    visual,
   }: {
     id?: string;
     /** Small label above the title (e.g. "Le plus demandé"). */
@@ -27,6 +28,8 @@
     accent?: string;
     /** Put the visual on the left instead of the right. */
     reverse?: boolean;
+    /** Custom illustration replacing the default browser mockup. */
+    visual?: Snippet;
   } = $props();
 </script>
 
@@ -60,23 +63,27 @@
       {/if}
     </div>
 
-    <!-- Visual: CSS browser mockup tinted with the accent -->
-    <div class="sd-visual" aria-hidden="true">
-      <div class="mockup">
-        <div class="mockup-bar">
-          <span></span><span></span><span></span>
-        </div>
-        <div class="mockup-body">
-          <div class="mk-line mk-w70"></div>
-          <div class="mk-line mk-w40"></div>
-          <div class="mk-hero"></div>
-          <div class="mk-cards">
-            <div class="mk-card"></div>
-            <div class="mk-card"></div>
-            <div class="mk-card"></div>
+    <!-- Visual: custom illustration if provided, else a default CSS browser mockup -->
+    <div class="sd-visual" aria-hidden={visual ? undefined : "true"}>
+      {#if visual}
+        {@render visual()}
+      {:else}
+        <div class="mockup">
+          <div class="mockup-bar">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="mockup-body">
+            <div class="mk-line mk-w70"></div>
+            <div class="mk-line mk-w40"></div>
+            <div class="mk-hero"></div>
+            <div class="mk-cards">
+              <div class="mk-card"></div>
+              <div class="mk-card"></div>
+              <div class="mk-card"></div>
+            </div>
           </div>
         </div>
-      </div>
+      {/if}
     </div>
   </div>
 </section>
