@@ -1,6 +1,6 @@
 {
 	"name": "@guillaumeg/ui",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"description": "Bibliothèque de composants Svelte 5 — UI, formulaires, layout, sections.",
 	"keywords": ["svelte", "svelte5", "components", "ui", "forms", "layout", "design-system"],
 	"author": "guillaumeG",
@@ -13,7 +13,6 @@
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package -i src/lib -o package",
 		"prepublishOnly": "npm run package",
-		"prepare": "svelte-kit sync && svelte-package -i src/lib -o package || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
