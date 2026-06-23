@@ -16,6 +16,7 @@
       | "left"
       | "left-edge"
       | "right"
+      | "right-edge"
       | "bottom-left"
       | "bottom"
       | "bottom-right";
@@ -109,6 +110,13 @@
   }
   .right {
     right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    align-items: flex-end;
+  }
+  /* Flush against the right edge of the screen */
+  .right-edge {
+    right: 0;
     top: 50%;
     transform: translateY(-50%);
     align-items: flex-end;

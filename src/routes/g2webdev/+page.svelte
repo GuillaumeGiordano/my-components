@@ -135,6 +135,9 @@
   ];
 
   let open = $state(false);
+
+  // User preference: which edge the section nav rail sits on (right/left-handed)
+  let railSide = $state<"left" | "right">("left");
 </script>
 
 <svelte:head>
@@ -391,8 +394,8 @@
   {/snippet}
 </Footer>
 
-<FloatingGroup position="left-edge">
-  <SectionNavRail sections={navItems} />
+<FloatingGroup position={railSide === "left" ? "left-edge" : "right-edge"}>
+  <SectionNavRail bind:side={railSide} sections={navItems} />
 </FloatingGroup>
 
 <FloatingGroup position="bottom-right">

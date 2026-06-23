@@ -4,8 +4,11 @@
 
   let {
     sections = [],
+    side = $bindable("left"),
   }: {
     sections?: ScrollSection[];
+    /** Which edge the rail sits on — mirrors the layout so labels slide inward. */
+    side?: "left" | "right";
   } = $props();
 
   let activeIndex = $state(0);
@@ -52,7 +55,7 @@
   }
 </script>
 
-<nav class="rail" aria-label="Navigation par sections">
+<nav class="rail rail--{side}" aria-label="Navigation par sections">
   <ul class="rail-list">
     {#each sections as section, i (section.href)}
       <li>
@@ -127,7 +130,7 @@
   /* Label hidden at rest, slides in when the rail is hovered/focused */
   .rail-label {
     max-width: 0;
-    margin-left: 0;
+    margin: 0;
     opacity: 0;
     overflow: hidden;
     white-space: nowrap;
@@ -136,7 +139,7 @@
     transform: translateX(-6px);
     transition:
       max-width 0.3s ease,
-      margin-left 0.3s ease,
+      margin 0.3s ease,
       opacity 0.2s ease,
       transform 0.3s ease;
   }
@@ -144,9 +147,27 @@
   .rail:hover .rail-label,
   .rail:focus-within .rail-label {
     max-width: 160px;
-    margin-left: 12px;
     opacity: 1;
     transform: none;
+  }
+
+  /* ── Right edge: mirror so the icon stays at the edge and labels slide inward ── */
+  .rail--right .rail-item {
+    flex-direction: row-reverse;
+  }
+
+  .rail--left:hover .rail-label,
+  .rail--left:focus-within .rail-label {
+    margin-left: 12px;
+  }
+
+  .rail--right .rail-label {
+    transform: translateX(6px);
+  }
+
+  .rail--right:hover .rail-label,
+  .rail--right:focus-within .rail-label {
+    margin-right: 12px;
   }
 
   @media (prefers-reduced-motion: reduce) {
