@@ -232,6 +232,26 @@ export const categories = [
                 description: 'Mockup CSS desktop + téléphone, titre/prix de l\'offre et bouton pour faire défiler les offres'
             },
             {
+                slug: 'website-showcase',
+                label: 'Website Showcase',
+                description: 'Fenêtre navigateur CSS avec une landing page (nav, hero, cartes) et un curseur de souris flottant — illustration de l\'offre site internet'
+            },
+            {
+                slug: 'portfolio-showcase',
+                label: 'Portfolio Showcase',
+                description: 'Fenêtre navigateur CSS avec galerie d\'images et badge icône image flottant — illustration de l\'offre portfolio'
+            },
+            {
+                slug: 'ecommerce-showcase',
+                label: 'Ecommerce Showcase',
+                description: 'Fenêtre navigateur CSS avec fiches produits, prix en € et panier flottant — illustration de l\'offre e-commerce'
+            },
+            {
+                slug: 'app-showcase',
+                label: 'App Showcase',
+                description: 'Fenêtre d\'application CSS avec sidebar, dashboard (stats + graphe) et roue crantée qui tourne — illustration de l\'offre application web'
+            },
+            {
                 slug: 'nav-section-wheel',
                 label: 'Nav Section Wheel',
                 description: 'Roue de navigation verticale fixée sur le bord droit — 3 sections visibles, coupée en haut/bas, synchronisée avec le scroll'

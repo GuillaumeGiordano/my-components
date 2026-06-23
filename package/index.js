@@ -95,6 +95,10 @@ export { default as CommandPalette } from './components/ui/CommandPalette.svelte
 export { default as Marquee } from './components/ui/Marquee.svelte';
 export { default as OfferShowcase } from './components/ui/OfferShowcase.svelte';
 export { default as DeviceShowcase } from './components/ui/DeviceShowcase.svelte';
+export { default as WebsiteShowcase } from './components/ui/WebsiteShowcase.svelte';
+export { default as PortfolioShowcase } from './components/ui/PortfolioShowcase.svelte';
+export { default as EcommerceShowcase } from './components/ui/EcommerceShowcase.svelte';
+export { default as AppShowcase } from './components/ui/AppShowcase.svelte';
 // ─── Scroll interactions ──────────────────────────────────────────────────────
 export { default as StickyStory } from './components/ui/StickyStory.svelte';
 export { default as TextReveal } from './components/ui/TextReveal.svelte';

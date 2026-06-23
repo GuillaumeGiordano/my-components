@@ -115,7 +115,7 @@ export const categories: ComponentCategory[] = [
 				label: 'Avatar',
 				description: 'Photo ou initiales, 5 tailles, formes circle/square, fallback automatique'
 			},
-{
+			{
 				slug: 'button-action',
 				label: 'Button Action',
 				description: 'Bouton d\'action avec icône et texte, 3 variantes visuelles'
@@ -274,8 +274,8 @@ export const categories: ComponentCategory[] = [
 				slug: 'speed-dial',
 				label: 'Speed Dial',
 				description: 'Bouton FAB fixe qui déploie un menu vertical vers le haut — items icône avec label au hover'
-				},
-				{
+			},
+			{
 				slug: 'speed-dial-bar',
 				label: 'Speed Dial Bar',
 				description: 'Barre fixe en bas avec scroll horizontal infini en boucle et sous-menus au-dessus'
@@ -613,20 +613,20 @@ export const categories: ComponentCategory[] = [
 		label: 'Backgrounds',
 		baseSlug: 'ui',
 		components: [
-			{ slug: 'gradient-background',  label: 'Gradient',  description: 'Dégradé animé CSS pur — background-size 400%, couleurs et vitesse configurables, zéro JS runtime' },
-			{ slug: 'aurora-background',    label: 'Aurora',    description: 'Aurore boréale CSS — 4 couches floues animées indépendamment, fond sombre recommandé' },
+			{ slug: 'gradient-background', label: 'Gradient', description: 'Dégradé animé CSS pur — background-size 400%, couleurs et vitesse configurables, zéro JS runtime' },
+			{ slug: 'aurora-background', label: 'Aurora', description: 'Aurore boréale CSS — 4 couches floues animées indépendamment, fond sombre recommandé' },
 			{ slug: 'geometric-background', label: 'Geometric', description: 'Formes géométriques flottantes CSS — positions déterministes (stable SSR), animations indépendantes' },
-			{ slug: 'noise-background',     label: 'Noise',     description: 'Blobs flous en mouvement lent — effet liquid noise / lava lamp coloré, canvas + blur' },
-			{ slug: 'particle-background',  label: 'Particles', description: 'Réseau de particules animées sur canvas — rebond sur les bords, connexions selon la distance' },
+			{ slug: 'noise-background', label: 'Noise', description: 'Blobs flous en mouvement lent — effet liquid noise / lava lamp coloré, canvas + blur' },
+			{ slug: 'particle-background', label: 'Particles', description: 'Réseau de particules animées sur canvas — rebond sur les bords, connexions selon la distance' },
 			{ slug: 'starfield-background', label: 'Starfield', description: 'Voyage dans les étoiles — projection 3D→2D avec traînées de motion blur sur canvas' },
-			{ slug: 'matrix-background',    label: 'Matrix',    description: 'Pluie de caractères katakana style Matrix — fond semi-transparent pour les traînées, canvas' },
-			{ slug: 'bubble-background',    label: 'Bubbles',   description: 'Bulles transparentes qui montent avec reflet spéculaire — dérive aléatoire, canvas' },
-			{ slug: 'ocean-background',     label: 'Ocean',     description: 'Fond marin animé — rayons lumineux, caustiques par interférence sinusoïdale, bulles flottantes' },
-			{ slug: 'fire-background',      label: 'Fire',      description: 'Flammes canvas — particules HSL jaune→orange→rouge avec turbulence sinusoïdale' },
-			{ slug: 'rain-background',      label: 'Rain',      description: 'Pluie canvas — gouttes diagonales (vent configurable), ripples elliptiques à l\'impact' },
-			{ slug: 'snow-background',      label: 'Snow',      description: 'Flocons canvas — oscillation sinusoïdale par phase individuelle, vent configurable' },
-			{ slug: 'thunder-background',   label: 'Thunder',   description: 'Orage canvas — éclairs par déplacement récursif, flash de scène, timing aléatoire' },
-			{ slug: 'sand-background',      label: 'Sand',      description: 'Tempête de sable canvas — grains elliptiques avec parallaxe de profondeur, turbulence sinusoïdale' },
+			{ slug: 'matrix-background', label: 'Matrix', description: 'Pluie de caractères katakana style Matrix — fond semi-transparent pour les traînées, canvas' },
+			{ slug: 'bubble-background', label: 'Bubbles', description: 'Bulles transparentes qui montent avec reflet spéculaire — dérive aléatoire, canvas' },
+			{ slug: 'ocean-background', label: 'Ocean', description: 'Fond marin animé — rayons lumineux, caustiques par interférence sinusoïdale, bulles flottantes' },
+			{ slug: 'fire-background', label: 'Fire', description: 'Flammes canvas — particules HSL jaune→orange→rouge avec turbulence sinusoïdale' },
+			{ slug: 'rain-background', label: 'Rain', description: 'Pluie canvas — gouttes diagonales (vent configurable), ripples elliptiques à l\'impact' },
+			{ slug: 'snow-background', label: 'Snow', description: 'Flocons canvas — oscillation sinusoïdale par phase individuelle, vent configurable' },
+			{ slug: 'thunder-background', label: 'Thunder', description: 'Orage canvas — éclairs par déplacement récursif, flash de scène, timing aléatoire' },
+			{ slug: 'sand-background', label: 'Sand', description: 'Tempête de sable canvas — grains elliptiques avec parallaxe de profondeur, turbulence sinusoïdale' },
 			{ slug: 'neon-grid-background', label: 'Neon Grid', description: 'Grille synthwave perspective animée — lignes convergentes, soleil rétro, glow canvas' },
 		]
 	}

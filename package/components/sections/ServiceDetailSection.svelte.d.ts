@@ -1,4 +1,4 @@
-import type { Component } from "svelte";
+import type { Component, Snippet } from "svelte";
 type $$ComponentProps = {
     id?: string;
     /** Small label above the title (e.g. "Le plus demandé"). */
@@ -17,6 +17,8 @@ type $$ComponentProps = {
     accent?: string;
     /** Put the visual on the left instead of the right. */
     reverse?: boolean;
+    /** Custom illustration replacing the default browser mockup. */
+    visual?: Snippet;
 };
 declare const ServiceDetailSection: Component<$$ComponentProps, {}, "">;
 type ServiceDetailSection = ReturnType<typeof ServiceDetailSection>;

@@ -133,6 +133,8 @@
     max-width: 560px;
     margin: auto;
     aspect-ratio: 5 / 4;
+    /* Let inner pieces respond to the component's own width, not the viewport */
+    container-type: inline-size;
   }
 
   /* ── Desktop ── */
@@ -314,6 +316,7 @@
     text-decoration: none;
     font-size: 14px;
     font-weight: 600;
+    white-space: nowrap;
     cursor: pointer;
     box-shadow: var(--shadow-md);
     transition:
@@ -331,5 +334,31 @@
   .ds-btn:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
+  }
+
+  /* ── Narrow container (e.g. mobile hero) ── */
+  @container (max-width: 440px) {
+    .ds-title {
+      max-width: 72%;
+    }
+    .ds-title-card {
+      padding: 10px 12px;
+      margin-right: 0;
+      gap: 2px;
+    }
+    .ds-name {
+      font-size: 15px;
+    }
+    .ds-price {
+      font-size: 11px;
+    }
+    .ds-price strong {
+      font-size: 13px;
+    }
+    .ds-btn {
+      padding: 7px 12px;
+      font-size: 12px;
+      gap: 5px;
+    }
   }
 </style>
