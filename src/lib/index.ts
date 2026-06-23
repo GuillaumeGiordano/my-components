@@ -142,6 +142,7 @@ export { default as AboutSectionV2 }      from './components/sections/AboutSecti
 export { default as AboutSectionV3 }      from './components/sections/AboutSectionV3.svelte';
 export { default as AnnouncementBar }     from './components/sections/AnnouncementBar.svelte';
 export { default as BlogGridSection }     from './components/sections/BlogGridSection.svelte';
+export { default as ChecklistSection }    from './components/sections/ChecklistSection.svelte';
 export { default as ComingSoonSection }   from './components/sections/ComingSoonSection.svelte';
 export { default as ComparisonSection }   from './components/sections/ComparisonSection.svelte';
 export { default as ContactSection }      from './components/sections/ContactSection.svelte';
@@ -166,6 +167,7 @@ export { default as PricingSection }      from './components/sections/PricingSec
 export { default as ProcessSection }      from './components/sections/ProcessSection.svelte';
 export { default as ProcessTimelineSection } from './components/sections/ProcessTimelineSection.svelte';
 export { default as ScrollOverSection }   from './components/sections/ScrollOverSection.svelte';
+export { default as ServiceDetailSection } from './components/sections/ServiceDetailSection.svelte';
 export { default as SplitFeatureSection } from './components/sections/SplitFeatureSection.svelte';
 export { default as StatsSection }        from './components/sections/StatsSection.svelte';
 export { default as TeamSection }         from './components/sections/TeamSection.svelte';

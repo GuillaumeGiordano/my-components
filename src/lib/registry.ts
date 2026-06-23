@@ -462,6 +462,11 @@ export const categories: ComponentCategory[] = [
 				description: 'Grille de chiffres clés avec animation au scroll et préfixe/suffixe'
 			},
 			{
+				slug: 'checklist',
+				label: 'Checklist',
+				description: 'Liste « ce qui est inclus » avec coches — 1 à 3 colonnes, libellé + description optionnelle'
+			},
+			{
 				slug: 'team',
 				label: 'Team',
 				description: 'Grille de membres avec avatar, bio et liens sociaux'
@@ -495,6 +500,11 @@ export const categories: ComponentCategory[] = [
 				slug: 'process-timeline',
 				label: 'Process Timeline',
 				description: 'Timeline verticale centrée : les étapes numérotées apparaissent en alternance gauche/droite au scroll'
+			},
+			{
+				slug: 'service-detail',
+				label: 'Service Detail',
+				description: 'Section explicative autonome : accroche, titre, description, points clés, CTA + mockup CSS teinté par accent'
 			},
 			{
 				slug: 'scroll-over',
