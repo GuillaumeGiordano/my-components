@@ -12,7 +12,7 @@
   import ParticleBackground from "$lib/components/ui/ParticleBackground.svelte";
   import Tilt3D from "$lib/components/ui/Tilt3D.svelte";
   import FloatingGroup from "$lib/FloatingGroup.svelte";
-  import SectionNavRail from "$lib/components/ui/SectionNavRail.svelte";
+  import SectionNavDock from "$lib/components/ui/SectionNavDock.svelte";
   import ScrollProgressBar from "$lib/components/ui/ScrollProgressBar.svelte";
   import HeroSection from "$lib/components/sections/HeroSection.svelte";
   import {
@@ -398,7 +398,7 @@
 </Footer>
 
 <FloatingGroup position={railSide === "left" ? "left" : "right"}>
-  <SectionNavRail bind:side={railSide} sections={navItems} />
+  <SectionNavDock bind:side={railSide} sections={navItems} />
 </FloatingGroup>
 
 <FloatingGroup position="bottom-right">
