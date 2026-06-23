@@ -84,7 +84,7 @@
   }
 </script>
 
-<section {id} class="contact variant-{variant} {withBackground}">
+<section {id} class="section contact variant-{variant} {withBackground}">
   <div class="contact-inner">
     {#if variant === "split"}
       <!-- Split layout: info on the left, form on the right -->

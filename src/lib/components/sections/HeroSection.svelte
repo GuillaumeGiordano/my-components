@@ -26,7 +26,7 @@
   } = $props();
 </script>
 
-<section {id} class="hero {withBackground} align-{align}">
+<section {id} class="hero radial {withBackground} align-{align}">
   <div class="hero-inner">
     <div class="hero-content">
       <h1 class="hero-title">
@@ -75,12 +75,8 @@
     justify-content: center;
   }
 
-  .withBackground {
-    background: var(--bg-base);
-  }
-
   /* Subtle radial gradient in the background */
-  .hero::before {
+  .radial::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -91,6 +87,10 @@
     );
     pointer-events: none;
     z-index: 0;
+  }
+
+  .bg-base {
+    background: var(--bg-base);
   }
 
   .hero-inner {

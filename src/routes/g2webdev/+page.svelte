@@ -12,6 +12,7 @@
   import ParticleBackground from "$lib/components/ui/ParticleBackground.svelte";
   import Tilt3D from "$lib/components/ui/Tilt3D.svelte";
   import FloatingGroup from "$lib/FloatingGroup.svelte";
+  import SectionNavRail from "$lib/components/ui/SectionNavRail.svelte";
   import HeroSection from "$lib/components/sections/HeroSection.svelte";
   import {
     Home,
@@ -28,6 +29,8 @@
     CalendarCheck,
     HelpCircle,
     Mail,
+    MessageCircle,
+    X,
   } from "@lucide/svelte";
 
   import knowledge from "./knowledge.json";
@@ -37,6 +40,7 @@
   import Footer from "$lib/components/layout/Footer.svelte";
   import ProcessTimelineSection from "$lib/components/sections/ProcessTimelineSection.svelte";
   import StarfieldBackground from "$lib/components/ui/StarfieldBackground.svelte";
+  import Spotlight from "$lib/components/ui/Spotlight.svelte";
 
   // Navbar items — anchors match each section's `id`; scroll spy is handled by <Navbar spy>
   const navItems = [
@@ -129,6 +133,8 @@
         "Mises à jour, sauvegardes et conseils pour faire évoluer votre site au rythme de votre activité.",
     },
   ];
+
+  let open = $state(false);
 </script>
 
 <svelte:head>
@@ -141,7 +147,7 @@
   {/snippet}
 
   {#snippet actionBtn()}
-    <Button size="sm" variant="primary" href="#">Commencer</Button>
+    <Button size="sm" variant="primary" href="#">Prendre rendez-vous</Button>
   {/snippet}
 </Navbar>
 
@@ -156,8 +162,8 @@
     title="Agence web dans le Var, création de sites sur mesure"
     highlight="création de sites"
     description="G2 Webdev conçoit des sites internet modernes, rapides et optimisés pour le référencement (SEO), et accompagne les entreprises, artisans et indépendants du Var dans leur croissance digitale. Une question ? Notre agent IA vous répond à tout moment, directement sur le site."
-    primaryCta={{ label: "Comment ca marche ?", href: "#" }}
-    secondaryCta={{ label: "Nous contacter", href: "#" }}
+    primaryCta={{ label: "Comment ca marche ?", href: "#process" }}
+    secondaryCta={{ label: "Nous contacter", href: "#contact" }}
     align="left"
   >
     {#snippet visual()}
@@ -324,6 +330,19 @@
     ]}
   />
 
+  <button
+    class="toggle-btn"
+    onclick={() => (open = !open)}
+    aria-label={open ? "Fermer le chat" : "Ouvrir le chat"}
+    aria-expanded={open}
+  >
+    {#if open}
+      <X size={22} />
+    {:else}
+      <MessageCircle size={22} />
+    {/if}
+  </button>
+
   <!-- FAQ Section -->
   <FAQSection
     id="faq"
@@ -372,10 +391,15 @@
   {/snippet}
 </Footer>
 
+<FloatingGroup position="left-edge">
+  <SectionNavRail sections={navItems} />
+</FloatingGroup>
+
 <FloatingGroup position="bottom-right">
   <ScrollToTop />
 
   <Chatbot
+    {open}
     {knowledge}
     title="G2webdev — Assistant"
     initialMessage="Bonjour ! Je peux vous renseigner sur G2webdev et les composants de la bibliothèque. Comment puis-je vous aider ?"

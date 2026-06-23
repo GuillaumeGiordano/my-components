@@ -62,7 +62,7 @@
 
 <section
   {id}
-  class="timeline-section {withBackground}"
+  class="section timeline-section {withBackground}"
   style="--row-gap: {gap}; --section-min-h: {minHeight}"
 >
   <div class="inner">

@@ -14,6 +14,7 @@
       | "top"
       | "top-right"
       | "left"
+      | "left-edge"
       | "right"
       | "bottom-left"
       | "bottom"
@@ -95,6 +96,13 @@
   }
   .left {
     left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    align-items: flex-start;
+  }
+  /* Flush against the left edge of the screen */
+  .left-edge {
+    left: 0;
     top: 50%;
     transform: translateY(-50%);
     align-items: flex-start;

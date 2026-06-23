@@ -48,3 +48,16 @@ body {
 .bg-primary {
   background: var(--primary);
 }
+
+.section {
+  display: flex;
+  background: radial-gradient(
+    ellipse 80% 50% at 50% -10%,
+    color-mix(in srgb, var(--primary) 12%, transparent),
+    transparent
+  );
+
+  &--full {
+    min-height: calc(100vh - var(--header-height));
+  }
+}

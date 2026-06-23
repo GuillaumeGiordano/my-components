@@ -65,6 +65,11 @@
   .features {
     display: flex;
     min-height: calc(100vh - var(--header-height));
+    background: radial-gradient(
+      ellipse 80% 50% at 50% -10%,
+      color-mix(in srgb, var(--primary) 12%, transparent),
+      transparent
+    );
   }
 
   .bg-base {

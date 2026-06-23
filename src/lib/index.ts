@@ -47,6 +47,7 @@ export { default as FloatingGroup }       from './FloatingGroup.svelte';
 export { default as NavSectionWheel }     from './components/ui/NavSectionWheel.svelte';
 export { default as SectionScrollbar }    from './components/ui/SectionScrollbar.svelte';
 export type { ScrollSection }             from './components/ui/SectionScrollbar.svelte';
+export { default as SectionNavRail }      from './components/ui/SectionNavRail.svelte';
 export type { SectionNavItem }            from './components/ui/NavSectionWheel.svelte';
 export { default as SpeedDial }           from './components/ui/SpeedDial.svelte';
 export type { SpeedDialItem }             from './components/ui/SpeedDial.svelte';

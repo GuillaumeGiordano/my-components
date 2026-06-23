@@ -226,6 +226,11 @@ export const categories: ComponentCategory[] = [
 				description: 'Barre de scroll verticale avec points de section cliquables et thumb draggable — synchronisée avec la page'
 			},
 			{
+				slug: 'section-nav-rail',
+				label: 'Section Nav Rail',
+				description: 'Rail vertical d\'icônes fixé à gauche — se déploie au survol pour révéler les libellés, clic = scroll vers la section'
+			},
+			{
 				slug: 'nav-section-wheel',
 				label: 'Nav Section Wheel',
 				description: 'Roue de navigation verticale fixée sur le bord droit — 3 sections visibles, coupée en haut/bas, synchronisée avec le scroll'

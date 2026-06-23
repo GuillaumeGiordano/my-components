@@ -58,21 +58,38 @@
       .filter((href): href is string => !!href && href.startsWith("#"))
       .map((href) => href.slice(1));
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) activeId = entry.target.id;
-        }
-      },
-      { rootMargin: "-50% 0px -50% 0px" },
-    );
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
 
-    for (const id of ids) {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    }
+    if (sections.length === 0) return;
 
-    return () => observer.disconnect();
+    // Active = the last section whose top has scrolled past the viewport center
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const center = window.innerHeight / 2;
+      let current = sections[0].id;
+      for (const el of sections) {
+        if (el.getBoundingClientRect().top <= center) current = el.id;
+      }
+      activeId = current;
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   });
 
   function close() {
