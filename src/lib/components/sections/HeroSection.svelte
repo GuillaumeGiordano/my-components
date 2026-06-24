@@ -96,11 +96,12 @@
   .hero-inner {
     position: relative;
     z-index: 1;
-    max-width: 1200px;
+    max-width: 1100px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 64px;
+    padding: 0 20px;
   }
 
   /* Center alignment */

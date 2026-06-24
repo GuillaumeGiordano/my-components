@@ -313,6 +313,13 @@
     .row.right {
       justify-content: flex-start;
       padding-left: 56px;
+      /* Stacked full-width cards must not overlap on mobile: override any negative
+         --row-gap used for the desktop alternating-overlap effect. */
+      margin-bottom: 32px;
+    }
+
+    .row:last-child {
+      margin-bottom: 0;
     }
 
     .card-wrap {

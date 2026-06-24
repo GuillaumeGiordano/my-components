@@ -152,7 +152,7 @@
   .stats-inner {
     max-width: 1100px;
     margin: auto;
-    padding: 60px 0;
+    padding: 60px 20px;
   }
 
   /* ---- Header ---- */
