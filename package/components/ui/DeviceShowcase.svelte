@@ -4,8 +4,8 @@
   import MorphText from "./MorphText.svelte";
   import ScrambleText from "./ScrambleText.svelte";
   import Tilt3D from "./Tilt3D.svelte";
+  import Button from "../buttons/Button.svelte";
 
-  // `price` may be a string (e.g. "Sur devis") for offers without a fixed price.
   type Offer = { label: string; price: number | string; accent?: string };
 
   let {
@@ -20,9 +20,7 @@
     prefix?: string;
     suffix?: string;
     buttonLabel?: string;
-    /** Where the call-to-action button links to (the page grouping every offer). */
     buttonHref?: string;
-    /** Delay between two offers in the automatic loop, in ms. */
     interval?: number;
   } = $props();
 
@@ -102,7 +100,8 @@
       <div class="ds-title-card">
         <span class="ds-name"><MorphText words={labels} {index} duration={500} /></span>
         <span class="ds-price">
-          {#if numericPrice}{prefix} {/if}
+          {#if numericPrice}{prefix}
+          {/if}
           <strong
             ><ScrambleText
               bind:this={scrambler}
@@ -119,21 +118,21 @@
 
   <!-- Button (bottom-right) — opens the page grouping every offer -->
   {#if buttonHref && offers.length > 1}
-    <a class="ds-btn" href={buttonHref}>
-      {buttonLabel}
-      <ArrowRight size={16} />
-    </a>
+    <span class="ds-btn">
+      <Button addClass="ds-btn" href={buttonHref} iconRight={ArrowRight}>
+        {buttonLabel}
+      </Button>
+    </span>
   {/if}
 </div>
 
 <style>
   .ds {
     position: relative;
-    width: 100%;
+    width: 80%;
     max-width: 560px;
     margin: auto;
     aspect-ratio: 5 / 4;
-    /* Let inner pieces respond to the component's own width, not the viewport */
     container-type: inline-size;
   }
 
@@ -305,24 +304,6 @@
     bottom: 0;
     right: 0;
     z-index: 3;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-full);
-    background: var(--bg-base);
-    color: var(--text-base);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    white-space: nowrap;
-    cursor: pointer;
-    box-shadow: var(--shadow-md);
-    transition:
-      border-color var(--transition-fast),
-      color var(--transition-fast),
-      transform var(--transition-fast);
   }
 
   .ds-btn:hover {

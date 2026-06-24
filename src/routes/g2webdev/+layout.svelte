@@ -20,6 +20,7 @@
     Sparkles,
   } from "@lucide/svelte";
   import knowledge from "./knowledge.json";
+  import ComponentPreview from "$lib/ComponentPreview.svelte";
 
   let { children } = $props();
 
@@ -50,63 +51,66 @@
   let railSide = $state<"left" | "right">("right");
 </script>
 
-<ScrollProgressBar />
+<ComponentPreview>
+  <ScrollProgressBar />
 
-<Navbar {items}>
-  {#snippet brand()}
-    <LogoGG width={36} height={36} open={false} />
-  {/snippet}
-  {#snippet actionBtn()}
-    <Button size="sm" variant="primary" href="/g2webdev#contact">Demander un devis</Button
-    >
-  {/snippet}
-</Navbar>
+  <Navbar {items}>
+    {#snippet brand()}
+      <LogoGG width={36} height={36} open={false} />
+    {/snippet}
+    {#snippet actionBtn()}
+      <Button size="sm" variant="primary" href="/g2webdev#contact"
+        >Demander un devis</Button
+      >
+    {/snippet}
+  </Navbar>
 
-{@render children()}
+  {@render children()}
 
-<Footer
-  tagline="Agence web dans le Var, création de sites sur mesure."
-  columns={[
-    {
-      heading: "Offres",
-      links: [
-        { label: "Site vitrine", href: "/g2webdev/offres/site-vitrine" },
-        { label: "Portfolio", href: "/g2webdev/offres/portfolio" },
-        { label: "E-commerce", href: "/g2webdev/offres/e-commerce" },
-        { label: "Application web", href: "/g2webdev/offres/application-web" },
-      ],
-    },
-    {
-      heading: "Navigation",
-      links: [
-        { label: "Accueil", href: "/g2webdev" },
-        { label: "Méthode", href: "/g2webdev#process" },
-        { label: "Contact", href: "/g2webdev#contact" },
-      ],
-    },
-  ]}
-  copyright={`© ${new Date().getFullYear()} G2 Webdev. Tous droits réservés.`}
->
-  {#snippet brand()}
-    <LogoGG width={32} height={32} open={true} />
-  {/snippet}
-</Footer>
+  <Footer
+    tagline="Agence web dans le Var, création de sites sur mesure."
+    columns={[
+      {
+        heading: "Offres",
+        links: [
+          { label: "Site vitrine", href: "/g2webdev/offres/site-vitrine" },
+          { label: "Portfolio", href: "/g2webdev/offres/portfolio" },
+          { label: "E-commerce", href: "/g2webdev/offres/e-commerce" },
+          { label: "Application web", href: "/g2webdev/offres/application-web" },
+        ],
+      },
+      {
+        heading: "Navigation",
+        links: [
+          { label: "Accueil", href: "/g2webdev" },
+          { label: "Méthode", href: "/g2webdev#process" },
+          { label: "Contact", href: "/g2webdev#contact" },
+        ],
+      },
+    ]}
+    copyright={`© ${new Date().getFullYear()} G2 Webdev. Tous droits réservés.`}
+  >
+    {#snippet brand()}
+      <LogoGG width={32} height={32} open={true} />
+    {/snippet}
+  </Footer>
 
-<FloatingGroup position={railSide === "left" ? "left" : "right"}>
-  <SectionNavDock
-    bind:side={railSide}
-    pages={dockPages}
-    home={{ icon: Home, label: "Accueil", href: "/g2webdev" }}
-    mode="auto"
-  />
-</FloatingGroup>
+  <FloatingGroup position={railSide === "left" ? "left" : "right"}>
+    <SectionNavDock
+      bind:side={railSide}
+      pages={dockPages}
+      home={{ icon: Home, label: "Accueil", href: "/g2webdev" }}
+      mode="auto"
+    />
+  </FloatingGroup>
 
-<FloatingGroup position="bottom-right">
-  <Chatbot
-    {open}
-    {knowledge}
-    title="G2webdev — Assistant"
-    initialMessage="Bonjour ! Je peux vous renseigner sur G2webdev et les composants de la bibliothèque. Comment puis-je vous aider ?"
-  />
-  <ScrollToTop />
-</FloatingGroup>
+  <FloatingGroup position="bottom-right">
+    <Chatbot
+      {open}
+      {knowledge}
+      title="G2webdev — Assistant"
+      initialMessage="Bonjour ! Je peux vous renseigner sur G2webdev et les composants de la bibliothèque. Comment puis-je vous aider ?"
+    />
+    <ScrollToTop />
+  </FloatingGroup>
+</ComponentPreview>
