@@ -12,6 +12,7 @@
     mode = "desktop",
     mobileBreakpoint = 768,
     mobileIcon: MobileIcon = List,
+    showFab = true,
     side = $bindable("left"),
     open = $bindable(false),
   }: {
@@ -29,8 +30,12 @@
     mobileBreakpoint?: number;
     /** Icon shown on the collapsed mobile FAB. */
     mobileIcon?: Component;
+    /** Show the built-in mobile FAB. Set false to open only from an external
+     *  trigger via `bind:open` (toggle it yourself). */
+    showFab?: boolean;
     /** Edge the dock sits on — controls which side the tooltips appear. */
     side?: "left" | "right";
+    /** Bindable open state of the mobile overlay (drive it from an external button). */
     open?: boolean;
   } = $props();
 
@@ -291,7 +296,7 @@
           {@render dockNav()}
         </div>
       </div>
-    {:else}
+    {:else if showFab}
       <button
         class="dock-fab"
         type="button"
