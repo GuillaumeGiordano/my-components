@@ -817,6 +817,12 @@
     justify-content: center;
   }
 
+  .cta-desktop {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
   /* .cta-mobile :global(.btn) { width: 100%; justify-content: center; } */
 
   /* ── Responsive ── */
