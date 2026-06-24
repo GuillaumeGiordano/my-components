@@ -91,7 +91,7 @@
   .faq-inner {
     max-width: 900px;
     margin: auto;
-    padding: 60px 0;
+    padding: 60px 20px;
   }
 
   .faq-inner:has(.faq-two-col) {
