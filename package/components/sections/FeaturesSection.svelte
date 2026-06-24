@@ -187,10 +187,6 @@
   }
 
   @media (max-width: 768px) {
-    .features {
-      padding: 64px 20px;
-    }
-
     .cols-2,
     .cols-3,
     .cols-4 {

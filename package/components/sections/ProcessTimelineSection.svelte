@@ -129,7 +129,7 @@
     max-width: 1000px;
     width: 100%;
     margin: auto;
-    padding: 60px 0;
+    padding: 60px 20px;
     display: flex;
     flex-direction: column;
     gap: 56px;

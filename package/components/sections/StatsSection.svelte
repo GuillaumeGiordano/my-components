@@ -264,10 +264,6 @@
   }
 
   @media (max-width: 520px) {
-    .stats {
-      padding: 56px 20px;
-    }
-
     .stats-grid {
       grid-template-columns: 1fr 1fr;
     }

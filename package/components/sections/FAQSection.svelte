@@ -169,10 +169,6 @@
   }
 
   @media (max-width: 720px) {
-    .faq {
-      padding: 64px 20px;
-    }
-
     .faq-two-col {
       grid-template-columns: 1fr;
     }

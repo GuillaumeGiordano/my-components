@@ -386,10 +386,6 @@
 
   /* ---- Responsive ---- */
   @media (max-width: 768px) {
-    .contact {
-      padding: 64px 16px;
-    }
-
     .split-layout {
       grid-template-columns: 1fr;
       gap: 40px;
