@@ -200,7 +200,7 @@
 
   @media (max-width: 768px) {
     .hero {
-      padding: 64px 20px 56px;
+      min-height: calc(100vh - 1px);
     }
 
     .align-left .hero-inner {
