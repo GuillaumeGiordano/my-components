@@ -12,6 +12,7 @@
     title = "Assistant",
     placeholder = "Posez une question…",
     initialMessage = "",
+    side = "right",
   }: {
     open?: boolean;
     onMessage?: (history: ChatMessage[]) => Promise<string>;
@@ -20,6 +21,8 @@
     title?: string;
     placeholder?: string;
     initialMessage?: string;
+    /** Edge the chatbot is anchored to — align it with its FloatingGroup position. */
+    side?: "left" | "right";
   } = $props();
 
   // let open = $state(false);
@@ -89,7 +92,7 @@
   }
 </script>
 
-<div class="chatbot-root">
+<div class="chatbot-root" class:left={side === "left"}>
   <!-- Floating toggle button -->
   <button
     class="toggle-btn"
@@ -172,6 +175,10 @@
     flex-direction: column-reverse;
     align-items: flex-end;
     gap: 12px;
+  }
+
+  .chatbot-root.left {
+    align-items: flex-start;
   }
 
   /* ── Toggle button ── */
