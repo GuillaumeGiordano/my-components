@@ -114,6 +114,11 @@
   .timeline-section {
     display: flex;
     min-height: var(--section-min-h, auto);
+    /* Contain the reveal animation: cards start shifted on the X axis (translateX),
+       which would otherwise push past the viewport and create a horizontal scrollbar
+       until the IntersectionObserver reveals them. `clip` avoids a scroll container
+       (keeps the parent sticky/vertical scroll intact). */
+    overflow-x: clip;
   }
 
   .bg-base {
