@@ -465,7 +465,37 @@
     }
   }
 
+  @container (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .content-col {
+      padding: 56px 24px;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .map-col {
+      min-height: 360px;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (max-width: 480px) {
+    .form-footer {
+      justify-content: stretch;
+    }
+
+    .form-footer :global(button) {
+      width: 100%;
+    }
+  }
+
+  @container (max-width: 480px) {
     .form-footer {
       justify-content: stretch;
     }

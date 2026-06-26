@@ -213,6 +213,22 @@
     }
   }
 
+  @container (max-width: 768px) {
+    .about {
+      padding: 64px 24px;
+    }
+    .about-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .about.image-left .text-side {
+      order: 1;
+    }
+    .about.image-left .visual-side {
+      order: 2;
+    }
+  }
+
   .bg-base {
     padding: 1rem 0;
     background: var(--bg-base);

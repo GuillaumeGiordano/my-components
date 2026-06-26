@@ -396,7 +396,28 @@
     }
   }
 
+  @container (max-width: 768px) {
+    .split-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media (max-width: 480px) {
+    .form-footer {
+      justify-content: stretch;
+    }
+
+    .form-footer :global(button) {
+      width: 100%;
+    }
+  }
+
+  @container (max-width: 480px) {
     .form-footer {
       justify-content: stretch;
     }

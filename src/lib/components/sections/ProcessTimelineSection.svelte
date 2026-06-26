@@ -340,6 +340,44 @@
     }
   }
 
+  @container (max-width: 768px) {
+    .timeline::before {
+      left: 19px;
+      transform: none;
+    }
+
+    .row,
+    .row.left,
+    .row.right {
+      justify-content: flex-start;
+      padding-left: 56px;
+      /* Stacked full-width cards must not overlap on mobile: override any negative
+         --row-gap used for the desktop alternating-overlap effect. */
+      margin-bottom: 32px;
+    }
+
+    .row:last-child {
+      margin-bottom: 0;
+    }
+
+    .card-wrap {
+      width: 100%;
+    }
+
+    .node {
+      left: 19px;
+    }
+
+    .is-enhanced .row.left .card-wrap,
+    .is-enhanced .row.right .card-wrap {
+      transform: translateX(24px);
+    }
+
+    .is-enhanced .row.visible .card-wrap {
+      transform: none;
+    }
+  }
+
   /* ---- Respect reduced-motion: reveal without sliding ---- */
   @media (prefers-reduced-motion: reduce) {
     .is-enhanced .card-wrap,

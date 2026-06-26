@@ -402,4 +402,10 @@
       grid-template-columns: 1fr !important;
     }
   }
+
+  @container (max-width: 640px) {
+    .sf-fields {
+      grid-template-columns: 1fr !important;
+    }
+  }
 </style>

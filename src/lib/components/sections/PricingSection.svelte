@@ -326,6 +326,31 @@
     }
   }
 
+  @container (max-width: 768px) {
+    .pricing {
+      padding: 64px 20px;
+    }
+
+    .plan-card {
+      max-width: 100%;
+    }
+
+    .plan-card.highlighted {
+      transform: none;
+    }
+
+    @keyframes fade-up-hl {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+
   .bg-base {
     padding: 1rem 0;
     background: var(--bg-base);

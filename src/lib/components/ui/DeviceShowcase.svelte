@@ -119,7 +119,12 @@
   <!-- Button (bottom-right) — opens the page grouping every offer -->
   {#if buttonHref && offers.length > 1}
     <span class="ds-btn">
-      <Button addClass="ds-btn" href={buttonHref} iconRight={ArrowRight}>
+      <Button
+        addClass="ds-btn"
+        style="background-color: var(--accent); border-color: var(--accent);"
+        href={buttonHref}
+        iconRight={ArrowRight}
+      >
         {buttonLabel}
       </Button>
     </span>

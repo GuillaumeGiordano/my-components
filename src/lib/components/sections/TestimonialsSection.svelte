@@ -209,7 +209,23 @@
     }
   }
 
+  @container (max-width: 900px) {
+    .testimonials-grid {
+      columns: 2;
+    }
+  }
+
   @media (max-width: 580px) {
+    .testimonials {
+      padding: 64px 20px;
+    }
+
+    .testimonials-grid {
+      columns: 1;
+    }
+  }
+
+  @container (max-width: 580px) {
     .testimonials {
       padding: 64px 20px;
     }

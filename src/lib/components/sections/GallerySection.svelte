@@ -288,7 +288,28 @@
     }
   }
 
+  @container (max-width: 900px) {
+    .cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .cols-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
   @media (max-width: 540px) {
+    .gallery {
+      padding: 64px 20px;
+    }
+
+    .cols-2,
+    .cols-3,
+    .cols-4 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @container (max-width: 540px) {
     .gallery {
       padding: 64px 20px;
     }

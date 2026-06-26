@@ -54,7 +54,7 @@
 <ComponentPreview>
   <ScrollProgressBar />
 
-  <Navbar {items}>
+  <Navbar burger={true} position="bottom" {items}>
     {#snippet brand()}
       <LogoGG width={36} height={36} open={false} />
     {/snippet}

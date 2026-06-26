@@ -27,7 +27,8 @@
     <h1>Navbar</h1>
     <p>
       Barre de navigation responsive avec items riches — icône, badge, sous-menu dropdown
-      au survol (desktop) ou collapsible (mobile). 3 variantes de menu mobile : drawer, popover, fullscreen.
+      au survol (desktop) ou collapsible (mobile). 3 variantes de menu mobile : drawer,
+      popover, fullscreen.
     </p>
   </div>
 
@@ -38,10 +39,12 @@
       <Navbar
         items={[
           { icon: LayoutDashboard, label: "Dashboard", href: "/", active: true },
-          { icon: FileText,        label: "Articles",  href: "/articles" },
-          { icon: Users,           label: "Équipe",    href: "/team" },
-          { icon: Settings,        label: "Paramètres",href: "/settings" },
+          { icon: FileText, label: "Articles", href: "/articles" },
+          { icon: Users, label: "Équipe", href: "/team" },
+          { icon: Settings, label: "Paramètres", href: "/settings" },
         ]}
+        burger={false}
+        position="bottom"
       >
         {#snippet brand()}
           <LogoGG width={28} height={28} open={false} />
@@ -65,21 +68,21 @@
             icon: ShoppingCart,
             label: "Catalogue",
             children: [
-              { icon: Package, label: "Produits",   href: "/products", active: true },
-              { icon: Tag,     label: "Catégories", href: "/categories" },
+              { icon: Package, label: "Produits", href: "/products", active: true },
+              { icon: Tag, label: "Catégories", href: "/categories" },
             ],
           },
           {
             icon: BarChart2,
             label: "Rapports",
             children: [
-              { label: "Ventes",      href: "/reports/sales" },
-              { label: "Trafic",      href: "/reports/traffic" },
+              { label: "Ventes", href: "/reports/sales" },
+              { label: "Trafic", href: "/reports/traffic" },
               { label: "Conversions", href: "/reports/conversions" },
             ],
           },
-          { icon: Bell,       label: "Alertes", href: "/alerts", badge: 4 },
-          { icon: HelpCircle, label: "Aide",    href: "/help" },
+          { icon: Bell, label: "Alertes", href: "/alerts", badge: 4 },
+          { icon: HelpCircle, label: "Aide", href: "/help" },
         ]}
       >
         {#snippet brand()}
@@ -92,7 +95,9 @@
   <!-- ─── Mobile : Drawer (défaut) ────────────────────────────────────── -->
   <section class="variant">
     <h2>Mobile — Drawer <code>mobileMenu="drawer"</code></h2>
-    <p class="hint">Panneau qui glisse depuis la droite avec backdrop. Variante par défaut.</p>
+    <p class="hint">
+      Panneau qui glisse depuis la droite avec backdrop. Variante par défaut.
+    </p>
     <ComponentPreview>
       <Navbar
         mobileMenu="drawer"
@@ -149,7 +154,9 @@
   <!-- ─── Mobile : Fullscreen ──────────────────────────────────────────── -->
   <section class="variant">
     <h2>Mobile — Fullscreen <code>mobileMenu="fullscreen"</code></h2>
-    <p class="hint">Overlay plein écran avec typographie agrandie. L'icône hamburger devient ✕.</p>
+    <p class="hint">
+      Overlay plein écran avec typographie agrandie. L'icône hamburger devient ✕.
+    </p>
     <ComponentPreview>
       <Navbar
         mobileMenu="fullscreen"
@@ -180,7 +187,8 @@
   <section class="variant">
     <h2>Usage</h2>
     <div class="code-block">
-      <pre><code>{`<Navbar
+      <pre><code
+          >{`<Navbar
   mobileMenu="drawer"
   items={[
     { icon: Home,    label: "Accueil",  href: "/",     active: true },
@@ -197,7 +205,8 @@
 >
   {#snippet brand()}<LogoGG />{/snippet}
   {#snippet actionBtn()}<Button>Connexion</Button>{/snippet}
-</Navbar>`}</code></pre>
+</Navbar>`}</code
+        ></pre>
     </div>
   </section>
 
@@ -205,7 +214,8 @@
   <section class="variant">
     <h2>Props</h2>
     <div class="code-block">
-      <pre><code>{`mobileMenu?: 'drawer' | 'popover' | 'fullscreen'  // défaut: 'drawer'
+      <pre><code
+          >{`mobileMenu?: 'drawer' | 'popover' | 'fullscreen'  // défaut: 'drawer'
 
 type NavItem = {
   icon?:     Component;
@@ -221,7 +231,8 @@ type NavSubItem = {
   href:    string;
   icon?:   Component;
   active?: boolean;
-};`}</code></pre>
+};`}</code
+        ></pre>
     </div>
   </section>
 
@@ -229,7 +240,10 @@ type NavSubItem = {
   <section class="variant">
     <h2>Comportements</h2>
     <ul class="notes">
-      <li>Desktop : dropdown au <strong>survol</strong> et au focus clavier (<kbd>Tab</kbd>).</li>
+      <li>
+        Desktop : dropdown au <strong>survol</strong> et au focus clavier (<kbd>Tab</kbd
+        >).
+      </li>
       <li>Mobile drawer : panneau 300px depuis la droite, backdrop avec blur.</li>
       <li>Mobile popover : panel compact flottant, sans backdrop.</li>
       <li>Mobile fullscreen : overlay plein écran, items en grande typographie.</li>
@@ -254,7 +268,10 @@ type NavSubItem = {
     overflow: auto;
   }
 
-  .code-block pre { margin: 0; padding: 20px; }
+  .code-block pre {
+    margin: 0;
+    padding: 20px;
+  }
 
   .code-block code {
     font-family: var(--font-mono);

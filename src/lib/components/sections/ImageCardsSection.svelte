@@ -213,7 +213,31 @@
     }
   }
 
+  @container (max-width: 900px) {
+    .cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .image-card {
+      min-height: 380px;
+    }
+  }
+
   @media (max-width: 560px) {
+    .cards-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .image-card {
+      min-height: 340px;
+    }
+
+    .card-content {
+      padding: 28px 24px;
+    }
+  }
+
+  @container (max-width: 560px) {
     .cards-grid {
       grid-template-columns: 1fr;
     }

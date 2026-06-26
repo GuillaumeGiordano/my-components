@@ -118,4 +118,10 @@
       padding: 64px 20px;
     }
   }
+
+  @container (max-width: 640px) {
+    .cta-banner {
+      padding: 64px 20px;
+    }
+  }
 </style>

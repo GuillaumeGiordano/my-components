@@ -221,6 +221,15 @@
     }
   }
 
+  @container (max-width: 480px) {
+    .cs-form {
+      flex-direction: column;
+    }
+    .count-unit {
+      min-width: 48px;
+    }
+  }
+
   .bg-base {
     padding: 1rem 0;
     background: var(--bg-base);

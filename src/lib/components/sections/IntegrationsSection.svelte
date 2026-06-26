@@ -269,7 +269,24 @@
     }
   }
 
+  @container (max-width: 768px) {
+    .integrations-section {
+      padding: 64px 16px;
+    }
+
+    .cols-3,
+    .cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
   @media (max-width: 480px) {
+    .cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @container (max-width: 480px) {
     .cols-2 {
       grid-template-columns: repeat(2, 1fr);
     }

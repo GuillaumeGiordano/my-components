@@ -292,6 +292,25 @@
     }
   }
 
+  @container (max-width: 540px) {
+    .newsletter {
+      padding: 64px 20px;
+    }
+
+    .input-group {
+      flex-direction: column;
+    }
+
+    .email-input {
+      height: 44px;
+    }
+
+    .input-group :global(.btn) {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
   .bg-base {
     padding: 1rem 0;
     background: var(--bg-base);

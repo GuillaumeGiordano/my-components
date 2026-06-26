@@ -173,4 +173,10 @@
       grid-template-columns: 1fr;
     }
   }
+
+  @container (max-width: 720px) {
+    .faq-two-col {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

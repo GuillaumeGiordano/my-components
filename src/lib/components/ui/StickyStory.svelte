@@ -146,6 +146,13 @@
     }
   }
 
+  @container (max-width: 640px) {
+    .ss-layout {
+      grid-template-columns: 1fr;
+      padding: 32px 24px;
+    }
+  }
+
   /* ── Left (text) ── */
   .ss-left {
     position: relative;

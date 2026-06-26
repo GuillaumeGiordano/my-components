@@ -291,6 +291,19 @@
     }
   }
 
+  @container (max-width: 860px) {
+    .sd-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .sd.reverse .sd-text {
+      order: 0;
+    }
+    .sd-visual {
+      order: -1;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .mockup {
       rotate: 0deg;

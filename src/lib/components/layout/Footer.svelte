@@ -150,4 +150,20 @@
       padding: 16px 20px;
     }
   }
+
+  @container (max-width: 640px) {
+    .footer-inner {
+      flex-direction: column;
+      gap: 32px;
+      padding: 32px 20px 28px;
+    }
+
+    .footer-columns {
+      gap: 28px;
+    }
+
+    .footer-bottom {
+      padding: 16px 20px;
+    }
+  }
 </style>

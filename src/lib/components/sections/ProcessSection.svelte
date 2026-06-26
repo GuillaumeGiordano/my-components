@@ -369,4 +369,26 @@
       transform: none;
     }
   }
+
+  @container (max-width: 768px) {
+    .process {
+      padding: 64px 16px;
+    }
+
+    .steps-horizontal {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 24px;
+    }
+
+    .connector {
+      display: none;
+    }
+
+    .step-number-badge {
+      top: -14px;
+      left: 20px;
+      transform: none;
+    }
+  }
 </style>
