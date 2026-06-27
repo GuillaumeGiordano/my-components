@@ -144,9 +144,6 @@
   ];
 
   let open = $state(false);
-
-  // User preference: which edge the section nav rail sits on (right/left-handed)
-  let railSide = $state<"left" | "right">("right");
 </script>
 
 <svelte:head>
@@ -303,7 +300,11 @@
   :global(#cta-banner),
   :global(#features),
   :global(#faq),
-  :global(#contact) {
+  :global(#contact),
+  :global(#site-vitrine),
+  :global(#portfolio),
+  :global(#e-commerce),
+  :global(#application-web) {
     scroll-margin-top: var(--header-height);
   }
 </style>

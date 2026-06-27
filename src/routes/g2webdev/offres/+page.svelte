@@ -95,3 +95,20 @@
     <AppShowcase />
   {/snippet}
 </ServiceDetailSection>
+
+<style lang="scss">
+  /* Offset anchor targets so they land below the sticky navbar */
+  :global(#hero),
+  :global(#stats),
+  :global(#process),
+  :global(#cta-banner),
+  :global(#features),
+  :global(#faq),
+  :global(#contact),
+  :global(#site-vitrine),
+  :global(#portfolio),
+  :global(#e-commerce),
+  :global(#application-web) {
+    scroll-margin-top: var(--header-height);
+  }
+</style>

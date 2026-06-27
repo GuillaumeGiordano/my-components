@@ -25,20 +25,29 @@
     collapsed = $bindable(false),
     activeHref = "",
     shortkey = "[",
+    collapsible = true,
+    fill = false,
     header,
     footer,
+    children,
   }: {
     groups?: SidebarGroup[];
     collapsed?: boolean;
     activeHref?: string;
     shortkey?: string | false;
+    /** Show the collapse toggle (and enable its shortcut). False = always expanded. */
+    collapsible?: boolean;
+    /** Make it a full-height sticky app shell with a scrollable nav. */
+    fill?: boolean;
     header?: Snippet;
     footer?: Snippet;
+    /** Extra content appended inside the nav, after the groups. */
+    children?: Snippet;
   } = $props();
 
   // Keyboard shortcut — ignored when focus is inside an input/textarea
   $effect(() => {
-    if (!browser || !shortkey) return;
+    if (!browser || !shortkey || !collapsible) return;
 
     function onKeydown(e: KeyboardEvent) {
       const tag = (e.target as HTMLElement)?.tagName;
@@ -59,20 +68,22 @@
   });
 </script>
 
-<aside class="sidebar" class:collapsed>
-  <button
-    class="collapse-btn"
-    aria-label="{collapsed ? 'Ouvrir' : 'Réduire'} le menu{shortkey
-      ? ` (${shortkey})`
-      : ''}"
-    title="{collapsed ? 'Ouvrir' : 'Réduire'} le menu{shortkey ? ` · ${shortkey}` : ''}"
-    onclick={() => (collapsed = !collapsed)}
-  >
-    <ChevronLeft size={14} />
-    {#if shortkey}
-      <span class="shortkey-hint">{shortkey}</span>
-    {/if}
-  </button>
+<aside class="sidebar" class:collapsed class:fill>
+  {#if collapsible}
+    <button
+      class="collapse-btn"
+      aria-label="{collapsed ? 'Ouvrir' : 'Réduire'} le menu{shortkey
+        ? ` (${shortkey})`
+        : ''}"
+      title="{collapsed ? 'Ouvrir' : 'Réduire'} le menu{shortkey ? ` · ${shortkey}` : ''}"
+      onclick={() => (collapsed = !collapsed)}
+    >
+      <ChevronLeft size={14} />
+      {#if shortkey}
+        <span class="shortkey-hint">{shortkey}</span>
+      {/if}
+    </button>
+  {/if}
 
   {#if header}
     <div class="sidebar-header">
@@ -83,7 +94,7 @@
   <nav class="sidebar-nav" aria-label="Navigation principale">
     {#each groups as group}
       <div class="group">
-        {#if !collapsed}
+        {#if !collapsed && group.label}
           <span class="group-label">{group.label}</span>
         {/if}
 
@@ -101,6 +112,8 @@
         {/each}
       </div>
     {/each}
+
+    {@render children?.()}
   </nav>
 
   {#if footer}
@@ -115,6 +128,7 @@
     display: flex;
     flex-direction: column;
     width: 220px;
+    flex-shrink: 0;
     background: var(--bg-subtle);
     border-right: 1px solid var(--border);
     transition:
@@ -128,6 +142,14 @@
 
   .sidebar.collapsed {
     width: 56px;
+  }
+
+  /* Full-height sticky app shell */
+  .sidebar.fill {
+    position: sticky;
+    top: 0;
+    height: 100dvh;
+    min-height: 0;
   }
 
   /* ── Toggle button ── */
@@ -225,7 +247,11 @@
     flex-direction: column;
     gap: 16px;
     padding: 8px;
-    overflow: hidden;
+    /* Clip labels horizontally during collapse, scroll vertically when content is tall */
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
     margin-top: 4px;
   }
 

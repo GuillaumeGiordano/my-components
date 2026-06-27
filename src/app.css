@@ -33,6 +33,7 @@ body {
   min-height: 100vh;
 }
 
+/* TODO : need to be organised */
 .bg-base {
   background: var(--bg-base);
 }
@@ -51,7 +52,6 @@ body {
 
 .section {
   display: flex;
-  /* Two mirrored glows: one bleeding in from the top, one from the bottom */
   background:
     radial-gradient(
       ellipse 80% 50% at 50% -10%,

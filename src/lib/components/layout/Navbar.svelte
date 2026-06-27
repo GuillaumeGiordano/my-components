@@ -872,13 +872,12 @@
     justify-content: center;
   }
 
-  .cta-desktop {
+  .cta-desktop,
+  .cta-mobile {
     display: flex;
     align-items: center;
     gap: 1rem;
   }
-
-  /* .cta-mobile :global(.btn) { width: 100%; justify-content: center; } */
 
   /* ── Responsive ── */
   @container (max-width: 640px) {
