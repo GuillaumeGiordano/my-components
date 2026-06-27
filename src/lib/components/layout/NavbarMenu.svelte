@@ -32,6 +32,100 @@
     document.getElementById(idOf(href))?.scrollIntoView({ behavior: "smooth" });
   }
 
+  // ── Geometry (px) ──
+  const ITEM = 44; // circle diameter
+  const GAP = 12; // gap between circles
+  const PAD = 6; // list padding
+  const SEP = 9; // separator height
+  // The burger + separator sit above the sections, shifting section rows down.
+  const headSpace = ITEM + 2 * GAP + SEP;
+
+  let activeIndex = $state(0);
+  let dragging = $state(false);
+  let dragTop = $state(0);
+  let listEl = $state<HTMLElement>();
+
+  const slotTop = (i: number) => PAD + headSpace + i * (ITEM + GAP);
+  const clampIndex = (i: number) => Math.max(0, Math.min(sections.length - 1, i));
+  const indexAt = (top: number) =>
+    clampIndex(Math.round((top - PAD - headSpace) / (ITEM + GAP)));
+
+  // Puck rests on the active section; while dragging it follows the pointer.
+  const restTop = $derived(slotTop(clampIndex(activeIndex)));
+  const puckTop = $derived(dragging ? dragTop : restTop);
+  const targetIndex = $derived(dragging ? indexAt(dragTop) : activeIndex);
+
+  // ── Puck drag ──
+  function onPuckDown(e: PointerEvent) {
+    dragging = true;
+    dragTop = restTop;
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  }
+  function onPuckMove(e: PointerEvent) {
+    if (!dragging || !listEl) return;
+    const rect = listEl.getBoundingClientRect();
+    const t = e.clientY - rect.top - ITEM / 2;
+    dragTop = Math.max(slotTop(0), Math.min(slotTop(sections.length - 1), t));
+  }
+  function onPuckUp() {
+    if (!dragging) return;
+    const s = sections[indexAt(dragTop)];
+    dragging = false;
+    if (s) goSection(s.href);
+  }
+  function onPuckKey(e: KeyboardEvent) {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const s = sections[clampIndex(activeIndex + 1)];
+      if (s) goSection(s.href);
+    }
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const s = sections[clampIndex(activeIndex - 1)];
+      if (s) goSection(s.href);
+    }
+  }
+
+  // ── Scroll spy: active = last section whose top passed the viewport center ──
+  $effect(() => {
+    if (!browser) return;
+    const els = sections.map((s) => document.getElementById(idOf(s.href)));
+    if (els.every((el) => el === null)) return;
+
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      if (dragging) return; // don't fight the user while dragging
+      const center = window.innerHeight / 2;
+      let current = 0;
+      for (let i = 0; i < els.length; i++) {
+        const el = els[i];
+        if (el && el.getBoundingClientRect().top <= center) current = i;
+      }
+      activeIndex = current;
+    };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  });
+
+  // ── Live scroll preview while dragging the puck ──
+  $effect(() => {
+    if (!browser || !dragging) return;
+    const s = sections[targetIndex];
+    if (s) document.getElementById(idOf(s.href))?.scrollIntoView({ behavior: "smooth" });
+  });
+
   // ── Pages menu (opened by the burger) ──
   let menuOpen = $state(false);
   let navEl = $state<HTMLElement>();
@@ -56,7 +150,7 @@
 
 {#if navItems.length}
   <nav class="dock dock--{side}" aria-label="Navigation" bind:this={navEl}>
-    <ul class="dock-list">
+    <ul class="dock-list" bind:this={listEl}>
       <!-- Burger: opens the pages menu -->
       <li>
         <button
@@ -78,14 +172,40 @@
       {/if}
 
       <!-- Current page sections: scroll to the anchor -->
-      {#each sections as s (s.href)}
+      {#each sections as s, i (s.href)}
         <li>
-          <button class="dock-item" onclick={() => goSection(s.href)} aria-label={s.label}>
+          <button
+            class="dock-item"
+            class:targeted={dragging && targetIndex === i}
+            onclick={() => goSection(s.href)}
+            aria-label={s.label}
+            aria-current={activeIndex === i ? "true" : undefined}
+          >
             {#if s.icon}<span class="dock-icon"><s.icon size={20} /></span>{/if}
             <span class="dock-label">{s.label}</span>
           </button>
         </li>
       {/each}
+
+      <!-- Draggable puck: rests on the active section, drop it on another to navigate -->
+      {#if sections.length}
+        <div
+          class="dock-puck"
+          class:dragging
+          style="top:{puckTop}px"
+          onpointerdown={onPuckDown}
+          onpointermove={onPuckMove}
+          onpointerup={onPuckUp}
+          onpointercancel={onPuckUp}
+          onkeydown={onPuckKey}
+          role="slider"
+          tabindex="0"
+          aria-label="Glisser pour naviguer entre les sections"
+          aria-valuemin={0}
+          aria-valuemax={sections.length - 1}
+          aria-valuenow={targetIndex}
+        ></div>
+      {/if}
     </ul>
 
     <!-- Pages menu panel — opens toward the screen center -->
@@ -246,12 +366,46 @@
     border-left-color: var(--text-heading);
   }
 
-  .dock-item:hover .dock-label {
+  .dock-item:hover .dock-label,
+  .dock-item.targeted .dock-label {
     opacity: 1;
   }
   .dock--left .dock-item:hover .dock-label,
-  .dock--right .dock-item:hover .dock-label {
+  .dock--left .dock-item.targeted .dock-label,
+  .dock--right .dock-item:hover .dock-label,
+  .dock--right .dock-item.targeted .dock-label {
     transform: translateY(-50%) translateX(0);
+  }
+
+  /* ── Draggable puck: empty ring that frames the section beneath it ── */
+  .dock-puck {
+    position: absolute;
+    left: 6px; /* = list padding */
+    width: 44px; /* = item size */
+    height: 44px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background: transparent;
+    border: 3px solid var(--primary);
+    cursor: grab;
+    touch-action: none;
+    transform: scale(1.2);
+    transition:
+      top 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast);
+    z-index: 3;
+  }
+
+  .dock-puck:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+  }
+
+  .dock-puck.dragging {
+    cursor: grabbing;
+    transform: scale(1.35);
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--primary) 40%, transparent);
   }
 
   /* ── Pages menu panel ── */
@@ -314,7 +468,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .dock-item {
+    .dock-item,
+    .dock-puck {
       transition: none;
     }
   }
