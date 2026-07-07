@@ -10,6 +10,7 @@
     loop = true,
     showDots = true,
     showArrows = true,
+    aspectRatios,
   }: {
     items: unknown[];
     item: Snippet<[unknown, number]>;
@@ -18,6 +19,12 @@
     loop?: boolean;
     showDots?: boolean;
     showArrows?: boolean;
+    /**
+     * Optional width/height ratio for each slide. When provided, the carousel
+     * height adapts to the current slide's real aspect ratio (media shown in
+     * its true format, no crop). Omit for the default fixed behavior.
+     */
+    aspectRatios?: number[];
   } = $props();
 
   let current = $state(0);
@@ -27,6 +34,12 @@
   const count = $derived(items.length);
   const canPrev = $derived(loop || current > 0);
   const canNext = $derived(loop || current < count - 1);
+
+  // Adaptive height mode: only active when ratios are supplied.
+  const adaptive = $derived(Array.isArray(aspectRatios) && aspectRatios.length > 0);
+  const currentRatio = $derived(
+    adaptive ? (aspectRatios![current] ?? aspectRatios![0]) : null,
+  );
 
   function prev() {
     if (!canPrev) return;
@@ -62,6 +75,8 @@
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
   class="carousel"
+  class:adaptive
+  style={currentRatio ? `aspect-ratio: ${currentRatio};` : undefined}
   role="region"
   aria-label="Carrousel"
   tabindex="0"
@@ -141,6 +156,16 @@
   .slide {
     flex: 0 0 100%;
     min-width: 0;
+  }
+
+  /* ── Adaptive height (opt-in via aspectRatios) ── */
+  .carousel.adaptive {
+    transition: aspect-ratio 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .carousel.adaptive .track,
+  .carousel.adaptive .slide {
+    height: 100%;
   }
 
   /* ── Arrows ── */
