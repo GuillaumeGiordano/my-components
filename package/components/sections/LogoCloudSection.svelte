@@ -266,6 +266,20 @@
     }
   }
 
+  @container (max-width: 600px) {
+    .logo-cloud {
+      padding: 56px 16px;
+    }
+
+    .logo-row {
+      gap: 24px 32px;
+    }
+
+    .logo-text {
+      font-size: 15px;
+    }
+  }
+
   .withBackground {
     background: var(--bg-base);
   }

@@ -229,6 +229,16 @@
     }
   }
 
+  @container (max-width: 768px) {
+    .about-v3 {
+      padding: 64px 24px;
+    }
+    .inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+
   @keyframes fade-in {
     from {
       opacity: 0;

@@ -164,4 +164,23 @@
 			to   { transform: translateY(calc(100% + 16px)); }
 		}
 	}
+
+	@container (max-width: 480px) {
+		.toaster {
+			bottom: 16px;
+			right: 16px;
+			left: 16px;
+			width: auto;
+		}
+
+		@keyframes toast-in {
+			from { transform: translateY(calc(100% + 16px)); }
+			to   { transform: none; }
+		}
+
+		@keyframes toast-out {
+			from { transform: none; }
+			to   { transform: translateY(calc(100% + 16px)); }
+		}
+	}
 </style>

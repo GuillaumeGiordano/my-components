@@ -212,4 +212,18 @@
       max-width: 100%;
     }
   }
+
+  @container (max-width: 768px) {
+    .hero {
+      min-height: calc(100vh - 1px);
+    }
+
+    .align-left .hero-inner {
+      flex-direction: column;
+    }
+
+    .align-left .hero-content {
+      max-width: 100%;
+    }
+  }
 </style>

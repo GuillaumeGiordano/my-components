@@ -723,7 +723,30 @@
     }
   }
 
+  @container (max-width: 900px) {
+    .premium {
+      padding: 80px 24px 90px;
+      min-height: auto;
+    }
+    .inner {
+      grid-template-columns: 1fr;
+      gap: 56px;
+    }
+    .desc {
+      max-width: 100%;
+    }
+  }
+
   @media (max-width: 500px) {
+    .bento {
+      grid-template-columns: 1fr;
+    }
+    .bento-card.large {
+      grid-row: auto;
+    }
+  }
+
+  @container (max-width: 500px) {
     .bento {
       grid-template-columns: 1fr;
     }

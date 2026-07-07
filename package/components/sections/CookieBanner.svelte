@@ -167,4 +167,8 @@
 	@media (max-width: 640px) {
 		.cookie__actions { width: 100%; justify-content: flex-end; }
 	}
+
+	@container (max-width: 640px) {
+		.cookie__actions { width: 100%; justify-content: flex-end; }
+	}
 </style>

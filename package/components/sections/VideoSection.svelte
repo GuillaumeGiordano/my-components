@@ -217,6 +217,12 @@
     }
   }
 
+  @container (max-width: 768px) {
+    .video-section {
+      padding: 64px 16px;
+    }
+  }
+
   .bg-base {
     padding: 1rem 0;
     background: var(--bg-base);

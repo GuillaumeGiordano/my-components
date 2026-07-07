@@ -48,7 +48,6 @@
   );
 
   // ── Display mode (desktop pill vs collapsible mobile FAB) ────────────────
-  // let open = $state(false);
   let isNarrow = $state(false);
   let popoverEl = $state<HTMLElement>();
 

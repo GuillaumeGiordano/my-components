@@ -97,7 +97,7 @@
   .sd-inner {
     max-width: 1100px;
     width: 100%;
-    padding: 80px 24px;
+    padding: 60px 24px;
     margin: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -282,6 +282,21 @@
     .sd-inner {
       grid-template-columns: 1fr;
       gap: 40px;
+      padding: 24px 24px;
+    }
+    .sd.reverse .sd-text {
+      order: 0;
+    }
+    .sd-visual {
+      order: -1;
+    }
+  }
+
+  @container (max-width: 860px) {
+    .sd-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 24px 24px;
     }
     .sd.reverse .sd-text {
       order: 0;

@@ -20,6 +20,10 @@ type $$ComponentProps = {
     mobileMenu?: "drawer" | "popover" | "fullscreen";
     /** Enable scroll spy: highlight the item whose `#anchor` section crosses the viewport center. */
     spy?: boolean;
+    /** Show the mobile hamburger button. Set false to hide the mobile menu trigger. */
+    burger?: boolean;
+    /** Anchor the bar at the top (sticky) or fixed to the bottom of the screen. */
+    position?: "top" | "bottom";
 };
 declare const Navbar: Component<$$ComponentProps, {}, "">;
 type Navbar = ReturnType<typeof Navbar>;

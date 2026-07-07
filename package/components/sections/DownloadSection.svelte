@@ -310,6 +310,21 @@
     }
   }
 
+  @container (max-width: 768px) {
+    .download-section {
+      padding: 64px 16px;
+    }
+
+    .split-layout {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .store-btn {
+      min-width: 150px;
+    }
+  }
+
   .bg-base {
     padding: 1rem 0;
     background: var(--bg-base);

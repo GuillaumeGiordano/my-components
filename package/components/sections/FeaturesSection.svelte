@@ -186,7 +186,21 @@
     }
   }
 
+  @container (max-width: 1024px) {
+    .cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
   @media (max-width: 768px) {
+    .cols-2,
+    .cols-3,
+    .cols-4 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @container (max-width: 768px) {
     .cols-2,
     .cols-3,
     .cols-4 {

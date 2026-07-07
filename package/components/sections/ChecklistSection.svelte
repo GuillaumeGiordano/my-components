@@ -139,4 +139,10 @@
       grid-template-columns: 1fr;
     }
   }
+
+  @container (max-width: 700px) {
+    .cl-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

@@ -173,6 +173,23 @@
     }
   }
 
+  @container (max-width: 768px) {
+    .feature-row {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 64px 24px;
+    }
+
+    /* On mobile: text always on top, visual always below */
+    .feature-row.image-left .text-side {
+      order: 1;
+    }
+
+    .feature-row.image-left .visual-side {
+      order: 2;
+    }
+  }
+
   .bg-base {
     padding: 1rem 0;
     background: var(--bg-base);

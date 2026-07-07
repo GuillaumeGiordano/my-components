@@ -184,4 +184,18 @@
 			gap: 6px;
 		}
 	}
+
+	@container (max-width: 600px) {
+		.announcement-bar {
+			height: auto;
+			min-height: 44px;
+			padding: 8px 44px 8px 16px;
+		}
+
+		.inner {
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 6px;
+		}
+	}
 </style>

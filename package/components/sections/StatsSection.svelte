@@ -263,7 +263,23 @@
     }
   }
 
+  @container (max-width: 900px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
   @media (max-width: 520px) {
+    .stats-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .stat-item {
+      padding: 28px 16px;
+    }
+  }
+
+  @container (max-width: 520px) {
     .stats-grid {
       grid-template-columns: 1fr 1fr;
     }

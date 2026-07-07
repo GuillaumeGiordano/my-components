@@ -4,6 +4,7 @@
   import { slide, fly, fade } from "svelte/transition";
   import { cubicOut } from "svelte/easing";
   import { browser } from "$app/environment";
+  import { page } from "$app/state";
 
   export type NavSubItem = {
     label: string;
@@ -27,6 +28,8 @@
     actionBtn,
     mobileMenu = "drawer",
     spy = false,
+    burger = true,
+    position = "top",
   }: {
     items?: NavItem[];
     brand?: Snippet;
@@ -34,6 +37,10 @@
     mobileMenu?: "drawer" | "popover" | "fullscreen";
     /** Enable scroll spy: highlight the item whose `#anchor` section crosses the viewport center. */
     spy?: boolean;
+    /** Show the mobile hamburger button. Set false to hide the mobile menu trigger. */
+    burger?: boolean;
+    /** Anchor the bar at the top (sticky) or fixed to the bottom of the screen. */
+    position?: "top" | "bottom";
   } = $props();
 
   let menuOpen = $state(false);
@@ -43,20 +50,39 @@
   // Id of the section currently crossing the viewport center (spy mode only)
   let activeId = $state<string | null>(null);
 
-  // True when an item's `#anchor` href points to the active section
+  // Extract the "#section" id from an href — works for "#x" and "/path#x".
+  const sectionId = (href?: string): string | null => {
+    if (!href) return null;
+    const i = href.indexOf("#");
+    return i === -1 ? null : href.slice(i + 1) || null;
+  };
+  const normalize = (p: string) => (p.length > 1 && p.endsWith("/") ? p.slice(0, -1) : p);
+
+  // True when an item points to the active section (spy mode). Handles both
+  // "#anchor" (same page) and "/path#anchor" (only highlights on that path).
   function isItemActive(item: NavItem | NavSubItem): boolean {
-    if (spy && item.href?.startsWith("#")) return item.href.slice(1) === activeId;
+    if (spy) {
+      const id = sectionId(item.href);
+      if (id) {
+        const path = item.href!.slice(0, item.href!.indexOf("#"));
+        const onThisPage =
+          path === "" || normalize(path) === normalize(page.url.pathname);
+        return onThisPage && id === activeId;
+      }
+    }
     return !!item.active;
   }
 
   $effect(() => {
     if (!browser || !spy) return;
 
-    // Collect section ids from every hash href (top-level items + children)
+    // Collect section ids from every href (top-level items + children),
+    // supporting both "#anchor" and "/path#anchor". Ids absent from the current
+    // page are filtered out below by getElementById.
     const ids = items
       .flatMap((item) => [item.href, ...(item.children?.map((c) => c.href) ?? [])])
-      .filter((href): href is string => !!href && href.startsWith("#"))
-      .map((href) => href.slice(1));
+      .map((href) => sectionId(href))
+      .filter((id): id is string => !!id);
 
     const sections = ids
       .map((id) => document.getElementById(id))
@@ -175,7 +201,7 @@
 
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 
-<header class="navbar">
+<header class="navbar" class:navbar--bottom={position === "bottom"}>
   <div class="navbar-inner">
     {@render brand?.()}
 
@@ -247,22 +273,24 @@
         {#if actionBtn}
           <span class="cta-mobile">{@render actionBtn()}</span>
         {/if}
-        <button
-          type="button"
-          class="hamburger"
-          onclick={() => {
-            menuOpen = !menuOpen;
-            mobileOpenIndex = null;
-          }}
-          aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          aria-expanded={menuOpen}
-        >
-          {#if menuOpen && mobileMenu === "fullscreen"}
-            <X size={20} />
-          {:else}
-            <Menu size={20} />
-          {/if}
-        </button>
+        {#if burger}
+          <button
+            type="button"
+            class="hamburger"
+            onclick={() => {
+              menuOpen = !menuOpen;
+              mobileOpenIndex = null;
+            }}
+            aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={menuOpen}
+          >
+            {#if menuOpen && mobileMenu === "fullscreen"}
+              <X size={20} />
+            {:else}
+              <Menu size={20} />
+            {/if}
+          </button>
+        {/if}
       </span>
     </div>
   </div>
@@ -301,6 +329,7 @@
 {#if menuOpen && mobileMenu === "popover"}
   <nav
     class="mobile-popover"
+    class:bottom={position === "bottom"}
     aria-label="Navigation mobile"
     transition:fly={{ y: -8, duration: 180 }}
   >
@@ -340,6 +369,32 @@
     transition:
       background var(--transition-base),
       border-color var(--transition-base);
+  }
+
+  /* ── Bottom bar ── fixed to the bottom edge of the screen */
+  .navbar--bottom {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-bottom: none;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Open desktop dropdowns upward, and anchor the mobile popover to the bottom */
+  .navbar--bottom .dropdown {
+    top: auto;
+    bottom: calc(100% + 6px);
+    transform: translateY(6px);
+  }
+  .navbar--bottom .nav-item-wrap.has-dropdown:hover .dropdown,
+  .navbar--bottom .nav-item-wrap.has-dropdown:focus-within .dropdown {
+    transform: translateY(0);
+  }
+  .mobile-popover.bottom {
+    top: auto;
+    bottom: 72px;
   }
 
   .navbar-inner {
@@ -817,13 +872,12 @@
     justify-content: center;
   }
 
-  .cta-desktop {
+  .cta-desktop,
+  .cta-mobile {
     display: flex;
     align-items: center;
     gap: 1rem;
   }
-
-  /* .cta-mobile :global(.btn) { width: 100%; justify-content: center; } */
 
   /* ── Responsive ── */
   @container (max-width: 640px) {

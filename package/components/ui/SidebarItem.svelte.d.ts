@@ -1,4 +1,4 @@
-import type { Component } from 'svelte';
+import type { Component, Snippet } from 'svelte';
 export type SidebarSubItem = {
     label: string;
     href: string;
@@ -13,6 +13,8 @@ type $$ComponentProps = {
     collapsed?: boolean;
     badge?: number | string;
     children?: SidebarSubItem[];
+    /** Custom expandable content (e.g. a picker). Toggles like sub-items. */
+    content?: Snippet;
     onclick?: () => void;
 };
 declare const SidebarItem: Component<$$ComponentProps, {}, "">;

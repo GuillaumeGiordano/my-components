@@ -344,6 +344,16 @@
     }
   }
 
+  @container (max-width: 640px) {
+    .comparison {
+      padding: 64px 12px;
+    }
+
+    .table-scroll {
+      border-radius: var(--radius-lg);
+    }
+  }
+
   .bg-base {
     padding: 1rem 0;
     background: var(--bg-base);

@@ -116,10 +116,17 @@
     </Tilt3D>
   </div>
 
-  <!-- Button (bottom-right) — opens the page grouping every offer -->
+  <!-- style="background-color: var(--accent); border-color: var(--accent);" -->
   {#if buttonHref && offers.length > 1}
     <span class="ds-btn">
-      <Button addClass="ds-btn" href={buttonHref} iconRight={ArrowRight}>
+      <Button
+        addClass="ds-btn"
+        type="button"
+        variant="outline"
+        style="border-color: var(--accent); color: var(--accent);"
+        href={buttonHref}
+        iconRight={ArrowRight}
+      >
         {buttonLabel}
       </Button>
     </span>

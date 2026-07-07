@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
+  import type { Component, Snippet } from 'svelte';
   import { ChevronRight } from '@lucide/svelte';
   import { slide } from 'svelte/transition';
 
@@ -18,6 +18,7 @@
     collapsed = false,
     badge,
     children,
+    content,
     onclick,
   }: {
     icon: Component;
@@ -27,12 +28,16 @@
     collapsed?: boolean;
     badge?: number | string;
     children?: SidebarSubItem[];
+    /** Custom expandable content (e.g. a picker). Toggles like sub-items. */
+    content?: Snippet;
     onclick?: () => void;
   } = $props();
 
   let open = $state(false);
 
   const hasChildren = $derived(!!children?.length);
+  // Either typed sub-items or a custom content snippet makes the item expandable.
+  const expandable = $derived(hasChildren || !!content);
   const hasActiveChild = $derived(children?.some(c => c.active) ?? false);
   const showBadge = $derived(badge !== undefined && badge !== null && badge !== '');
 
@@ -42,7 +47,7 @@
   });
 
   function handleClick() {
-    if (hasChildren) {
+    if (expandable) {
       open = !open;
     } else {
       onclick?.();
@@ -53,7 +58,7 @@
 <div class="sidebar-item-root" class:collapsed>
 
   <!-- ── Main button / link ── -->
-  {#if href && !hasChildren}
+  {#if href && !expandable}
     <a
       {href}
       class="item"
@@ -70,12 +75,12 @@
       class:active
       class:open
       onclick={handleClick}
-      aria-expanded={hasChildren ? open : undefined}
+      aria-expanded={expandable ? open : undefined}
     >
       {@render iconSlot()}
       {@render labelSlot()}
       {@render badgeSlot()}
-      {#if hasChildren && !collapsed}
+      {#if expandable && !collapsed}
         <span class="chevron" class:rotated={open}>
           <ChevronRight size={14} />
         </span>
@@ -83,25 +88,31 @@
     </button>
   {/if}
 
-  <!-- ── Sub-items ── -->
-  {#if hasChildren && open && !collapsed}
-    <div class="sub-items" transition:slide={{ duration: 200 }}>
-      {#each children! as child}
-        <a
-          href={child.href}
-          class="sub-item"
-          class:active={child.active}
-          aria-current={child.active ? 'page' : undefined}
-        >
-          {#if child.icon}
-            <span class="sub-icon"><child.icon size={14} /></span>
-          {:else}
-            <span class="sub-dot"></span>
-          {/if}
-          <span class="sub-label">{child.label}</span>
-        </a>
-      {/each}
-    </div>
+  <!-- ── Expandable: typed sub-items, or a custom content snippet ── -->
+  {#if expandable && open && !collapsed}
+    {#if hasChildren}
+      <div class="sub-items" transition:slide={{ duration: 200 }}>
+        {#each children! as child}
+          <a
+            href={child.href}
+            class="sub-item"
+            class:active={child.active}
+            aria-current={child.active ? 'page' : undefined}
+          >
+            {#if child.icon}
+              <span class="sub-icon"><child.icon size={14} /></span>
+            {:else}
+              <span class="sub-dot"></span>
+            {/if}
+            <span class="sub-label">{child.label}</span>
+          </a>
+        {/each}
+      </div>
+    {:else if content}
+      <div class="sub-content" transition:slide={{ duration: 200 }}>
+        {@render content()}
+      </div>
+    {/if}
   {/if}
 
   <!-- ── Collapsed tooltip ── -->
@@ -283,6 +294,12 @@
       color: var(--primary);
       font-weight: 500;
     }
+  }
+
+  /* ── Custom expandable content ── */
+  .sub-content {
+    padding: 8px 4px 4px;
+    overflow: hidden;
   }
 
   .sub-icon {

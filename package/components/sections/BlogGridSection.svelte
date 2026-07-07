@@ -370,7 +370,37 @@
     }
   }
 
+  @container (max-width: 900px) {
+    .cols-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
   @media (max-width: 640px) {
+    .blog-grid {
+      padding: 64px 16px;
+    }
+
+    .cols-3,
+    .cols-2 {
+      grid-template-columns: 1fr;
+    }
+
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .header-cta {
+      display: none;
+    }
+
+    .bottom-cta {
+      display: flex;
+    }
+  }
+
+  @container (max-width: 640px) {
     .blog-grid {
       padding: 64px 16px;
     }

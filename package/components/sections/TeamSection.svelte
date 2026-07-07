@@ -215,6 +215,16 @@
     }
   }
 
+  @container (max-width: 640px) {
+    .team {
+      padding: 64px 20px;
+    }
+
+    .members-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+  }
+
   .bg-base {
     padding: 1rem 0;
     background: var(--bg-base);

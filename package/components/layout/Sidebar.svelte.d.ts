@@ -18,8 +18,14 @@ type $$ComponentProps = {
     collapsed?: boolean;
     activeHref?: string;
     shortkey?: string | false;
+    /** Show the collapse toggle (and enable its shortcut). False = always expanded. */
+    collapsible?: boolean;
+    /** Make it a full-height sticky app shell with a scrollable nav. */
+    fill?: boolean;
     header?: Snippet;
     footer?: Snippet;
+    /** Extra content appended inside the nav, after the groups. */
+    children?: Snippet;
 };
 declare const Sidebar: Component<$$ComponentProps, {}, "collapsed">;
 type Sidebar = ReturnType<typeof Sidebar>;

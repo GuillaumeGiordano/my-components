@@ -47,6 +47,7 @@
 
 <style>
   .preview-root {
+    position: relative;
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border);
