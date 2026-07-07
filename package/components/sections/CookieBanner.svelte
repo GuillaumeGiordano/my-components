@@ -11,6 +11,7 @@
 		privacyHref,
 		cookieKey = 'cookie-consent',
 		position = 'bottom',
+		showDecline = true,
 		onaccept,
 		ondecline,
 		oncustomize,
@@ -23,6 +24,8 @@
 		privacyHref?: string;
 		cookieKey?: string;
 		position?: 'bottom' | 'bottom-left' | 'bottom-right';
+		/** Hide the decline button for an informational-only banner (essential cookies). */
+		showDecline?: boolean;
 		onaccept?: () => void;
 		ondecline?: () => void;
 		oncustomize?: () => void;
@@ -71,7 +74,9 @@
 				</p>
 			</div>
 			<div class="cookie__actions">
-				<Button variant="outline" size="sm" onclick={decline}>{declineLabel}</Button>
+				{#if showDecline}
+					<Button variant="outline" size="sm" onclick={decline}>{declineLabel}</Button>
+				{/if}
 				{#if oncustomize}
 					<Button variant="ghost" size="sm" onclick={oncustomize}>{customizeLabel}</Button>
 				{/if}

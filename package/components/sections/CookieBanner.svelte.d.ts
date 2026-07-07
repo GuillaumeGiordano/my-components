@@ -7,6 +7,8 @@ type $$ComponentProps = {
     privacyHref?: string;
     cookieKey?: string;
     position?: 'bottom' | 'bottom-left' | 'bottom-right';
+    /** Hide the decline button for an informational-only banner (essential cookies). */
+    showDecline?: boolean;
     onaccept?: () => void;
     ondecline?: () => void;
     oncustomize?: () => void;
