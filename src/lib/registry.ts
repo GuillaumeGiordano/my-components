@@ -611,7 +611,7 @@ export const categories: ComponentCategory[] = [
 	{
 		slug: 'backgrounds',
 		label: 'Backgrounds',
-		baseSlug: 'ui',
+		baseSlug: 'background',
 		components: [
 			{ slug: 'gradient-background', label: 'Gradient', description: 'Dégradé animé CSS pur — background-size 400%, couleurs et vitesse configurables, zéro JS runtime' },
 			{ slug: 'aurora-background', label: 'Aurora', description: 'Aurore boréale CSS — 4 couches floues animées indépendamment, fond sombre recommandé' },

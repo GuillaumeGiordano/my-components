@@ -5,18 +5,18 @@
   import { goto } from '$app/navigation';
 
   const items: CommandItem[] = [
-    { id: 'home',       label: 'Aller à l\'accueil',        icon: '🏠', group: 'Navigation',  action: () => goto('/') },
-    { id: 'ui',         label: 'Composants UI',              icon: '🎨', group: 'Navigation',  shortcut: 'G U', action: () => goto('/ui') },
-    { id: 'forms',      label: 'Composants formulaires',     icon: '📝', group: 'Navigation',  shortcut: 'G F', action: () => goto('/forms') },
+    { id: 'home',       label: 'Aller à l\'accueil',        icon: '🏠', group: 'Navigation',  action: () => goto('/showroom') },
+    { id: 'ui',         label: 'Composants UI',              icon: '🎨', group: 'Navigation',  shortcut: 'G U', action: () => goto('/showroom/ui') },
+    { id: 'forms',      label: 'Composants formulaires',     icon: '📝', group: 'Navigation',  shortcut: 'G F', action: () => goto('/showroom/forms') },
     { id: 'dark',       label: 'Activer le mode sombre',     icon: '🌙', group: 'Apparence',   action: () => document.documentElement.classList.toggle('dark') },
     { id: 'light',      label: 'Activer le mode clair',      icon: '☀️', group: 'Apparence',   action: () => document.documentElement.classList.remove('dark') },
-    { id: 'fire',       label: 'Fire Background',            icon: '🔥', group: 'Backgrounds', action: () => goto('/ui/fire-background') },
-    { id: 'ocean',      label: 'Ocean Background',           icon: '🌊', group: 'Backgrounds', action: () => goto('/ui/ocean-background') },
-    { id: 'matrix',     label: 'Matrix Background',          icon: '💻', group: 'Backgrounds', action: () => goto('/ui/matrix-background') },
-    { id: 'neon',       label: 'NeonGrid Background',        icon: '🕹', group: 'Backgrounds', action: () => goto('/ui/neon-grid-background') },
-    { id: 'confetti',   label: 'Confetti Button',            icon: '🎉', group: 'Interactions',action: () => goto('/ui/confetti-button') },
-    { id: 'scratch',    label: 'Scratch Card',               icon: '🎰', group: 'Interactions',action: () => goto('/ui/scratch-card') },
-    { id: 'glitch',     label: 'Glitch Text',                icon: '⚡', group: 'Texte',       action: () => goto('/ui/glitch-text') },
+    { id: 'fire',       label: 'Fire Background',            icon: '🔥', group: 'Backgrounds', action: () => goto('/showroom/background/fire-background') },
+    { id: 'ocean',      label: 'Ocean Background',           icon: '🌊', group: 'Backgrounds', action: () => goto('/showroom/background/ocean-background') },
+    { id: 'matrix',     label: 'Matrix Background',          icon: '💻', group: 'Backgrounds', action: () => goto('/showroom/background/matrix-background') },
+    { id: 'neon',       label: 'NeonGrid Background',        icon: '🕹', group: 'Backgrounds', action: () => goto('/showroom/background/neon-grid-background') },
+    { id: 'confetti',   label: 'Confetti Button',            icon: '🎉', group: 'Interactions',action: () => goto('/showroom/ui/confetti-button') },
+    { id: 'scratch',    label: 'Scratch Card',               icon: '🎰', group: 'Interactions',action: () => goto('/showroom/ui/scratch-card') },
+    { id: 'glitch',     label: 'Glitch Text',                icon: '⚡', group: 'Texte',       action: () => goto('/showroom/ui/glitch-text') },
   ];
 
   let open = $state(false);

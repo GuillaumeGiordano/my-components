@@ -40,11 +40,11 @@
         label: cat.label,
         icon: categoryIcons[cat.slug] ?? Layers,
         badge: cat.components.length,
-        active: page.url.pathname.startsWith(`/${base}`),
+        active: page.url.pathname.startsWith(`/showroom/${base}`),
         children: cat.components.map((comp) => ({
           label: comp.label,
-          href: `/${base}/${comp.slug}`,
-          active: page.url.pathname === `/${base}/${comp.slug}`,
+          href: `/showroom/${base}/${comp.slug}`,
+          active: page.url.pathname === `/showroom/${base}/${comp.slug}`,
         })),
       };
     }),

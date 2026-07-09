@@ -11,7 +11,7 @@
 
   <div class="component-grid">
     {#each category?.components ?? [] as component}
-      <a href="/forms/{component.slug}" class="component-card">
+      <a href="/showroom/forms/{component.slug}" class="component-card">
         <h2>{component.label}</h2>
         {#if component.description}<p>{component.description}</p>{/if}
       </a>

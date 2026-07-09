@@ -19,7 +19,7 @@
 	{:else}
 		<div class="category-grid">
 			{#each categories as category}
-				<a href="/{category.slug}" class="category-card">
+				<a href="/showroom/{category.baseSlug ?? category.slug}" class="category-card">
 					<h2>{category.label}</h2>
 					<span class="count">{category.components.length} composant{category.components.length > 1 ? 's' : ''}</span>
 					<ul>
