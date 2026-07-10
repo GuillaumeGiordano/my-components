@@ -28,7 +28,7 @@
   {#each features as feature, i}
     <!-- imageFirst prop takes priority; fallback: alternate by index (even = text left) -->
     {@const imageLeft = feature.imageFirst ?? i % 2 === 1}
-    <div class="feature-row" class:image-left={imageLeft}>
+    <div id={feature.id} class="feature-row" class:image-left={imageLeft}>
       <div class="text-side">
         {#if feature.badge}
           <div class="badge-wrap">
@@ -185,7 +185,7 @@
     .feature-row {
       grid-template-columns: 1fr;
       gap: 40px;
-      padding: 64px 24px;
+      padding: 24px 24px;
     }
 
     /* On mobile: text always on top, visual always below */
