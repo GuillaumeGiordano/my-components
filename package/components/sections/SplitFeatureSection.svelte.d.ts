@@ -1,5 +1,6 @@
 import type { Snippet } from "svelte";
 type Feature = {
+    id?: string;
     badge?: string;
     title: string;
     description: string;

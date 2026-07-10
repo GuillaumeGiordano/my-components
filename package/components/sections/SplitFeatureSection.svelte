@@ -24,11 +24,11 @@
   } = $props();
 </script>
 
-<section class="split-feature-section {withBackground}">
+<div class="split-feature-section {withBackground}">
   {#each features as feature, i}
     <!-- imageFirst prop takes priority; fallback: alternate by index (even = text left) -->
     {@const imageLeft = feature.imageFirst ?? i % 2 === 1}
-    <div id={feature.id} class="feature-row" class:image-left={imageLeft}>
+    <div class="feature-row" class:image-left={imageLeft}>
       <div class="text-side">
         {#if feature.badge}
           <div class="badge-wrap">
@@ -60,7 +60,7 @@
       </div>
     </div>
   {/each}
-</section>
+</div>
 
 <style>
   .split-feature-section {
