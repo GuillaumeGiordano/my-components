@@ -5,6 +5,7 @@
   import Button from "../buttons/Button.svelte";
 
   type Feature = {
+    id?: string;
     badge?: string;
     title: string;
     description: string;
@@ -23,11 +24,11 @@
   } = $props();
 </script>
 
-<div class="split-feature-section {withBackground}">
+<section class="split-feature-section {withBackground}">
   {#each features as feature, i}
     <!-- imageFirst prop takes priority; fallback: alternate by index (even = text left) -->
     {@const imageLeft = feature.imageFirst ?? i % 2 === 1}
-    <div class="feature-row" class:image-left={imageLeft}>
+    <div id={feature.id} class="feature-row" class:image-left={imageLeft}>
       <div class="text-side">
         {#if feature.badge}
           <div class="badge-wrap">
@@ -59,12 +60,16 @@
       </div>
     </div>
   {/each}
-</div>
+</section>
 
 <style>
   .split-feature-section {
     display: flex;
     flex-direction: column;
+    min-height: calc(100vh - var(--header-height) - 1px);
+  }
+
+  .bg-base {
     background: var(--bg-base);
   }
 
@@ -74,7 +79,10 @@
     grid-template-columns: 1fr 1fr;
     gap: 64px;
     align-items: center;
-    padding: 100px 64px;
+    max-width: 1100px;
+    width: 100%;
+    padding: 60px 24px;
+    margin: auto;
     border-top: 1px solid var(--border);
   }
 

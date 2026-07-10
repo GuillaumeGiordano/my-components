@@ -1,10 +1,11 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import { Check } from "@lucide/svelte";
-  import Badge from "$lib/components/ui/Badge.svelte";
-  import Button from "$lib/components/buttons/Button.svelte";
+  import Badge from "../ui/Badge.svelte";
+  import Button from "../buttons/Button.svelte";
 
   type Feature = {
+    id?: string;
     badge?: string;
     title: string;
     description: string;
@@ -65,6 +66,10 @@
   .split-feature-section {
     display: flex;
     flex-direction: column;
+    min-height: calc(100vh - var(--header-height) - 1px);
+  }
+
+  .bg-base {
     background: var(--bg-base);
   }
 
@@ -74,7 +79,10 @@
     grid-template-columns: 1fr 1fr;
     gap: 64px;
     align-items: center;
-    padding: 100px 64px;
+    max-width: 1100px;
+    width: 100%;
+    padding: 60px 24px;
+    margin: auto;
     border-top: 1px solid var(--border);
   }
 
