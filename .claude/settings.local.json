@@ -21,7 +21,9 @@
       "mcp__svelte__svelte-autofixer",
       "mcp__plugin_svelte_svelte__svelte-autofixer",
       "Bash(git add *)",
-      "PowerShell(pnpm run *)"
+      "PowerShell(pnpm run *)",
+      "Bash(node scripts/generate-themes.ts)",
+      "Bash(pnpm package *)"
     ]
   }
 }

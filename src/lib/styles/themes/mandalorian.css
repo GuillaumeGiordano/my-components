@@ -1,0 +1,61 @@
+/* ==========================================================================
+   Thème "mandalorian" — Mandalorian · Beskar cuivre · pierre · This is the Way
+   Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
+   Régénérer avec: pnpm generate:themes
+   ========================================================================== */
+
+:root {
+  --primary: #b5894a;
+  --primary-hover: #292524;
+  --primary-fg: #ffffff;
+  --primary-subtle: #fef3c7;
+  --primary-subtle-fg: #78350f;
+  --texture-color: rgba(100,83,60,0.05);
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --font-display: Impact, "Arial Narrow", "Franklin Gothic Medium", sans-serif;
+  --transition-fast: 0.04s ease;
+  --transition-base: 0.07s ease;
+  --tracking-body: -0.01em;
+  --heading-weight: 800;
+  --heading-tracking: -0.04em;
+  --leading-base: 1.45;
+}
+
+.dark {
+  --primary: #d4a96a;
+  --primary-hover: #a3a3a3;
+  --primary-fg: #0c0a09;
+  --primary-subtle: #1c1410;
+  --primary-subtle-fg: #d4a96a;
+  --bg-base: #0c0a09;
+  --bg-subtle: #1c1917;
+  --bg-muted: #1c1917;
+  --bg-hover: #292524;
+  --border: rgba(212,169,106,0.20);
+  --border-strong: rgba(212,169,106,0.38);
+  --texture-color: rgba(212,169,106,0.04);
+}
+
+h1, h2, h3, h4 {
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+}
+
+body, p {
+  line-height: 1.45;
+}
+
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: repeating-linear-gradient(0deg, var(--texture-color, rgba(0, 0, 0, 0.04)) 0px, var(--texture-color, rgba(0, 0, 0, 0.04)) 1px, transparent 1px, transparent 28px);
+}

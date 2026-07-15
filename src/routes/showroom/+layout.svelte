@@ -3,6 +3,7 @@
   import { onMount } from "svelte";
   import { categories } from "$lib/registry";
   import { theme, THEMES } from "$lib/theme.svelte";
+  import { themeStudio } from "$lib/themes/studio.svelte";
   import ThemeToggle from "$lib/components/ui/ThemeToggle.svelte";
   import ThemePicker from "$lib/components/ui/ThemePicker.svelte";
   import Toaster from "$lib/components/ui/Toaster.svelte";
@@ -21,7 +22,10 @@
 
   let { children } = $props();
 
-  onMount(() => theme.init());
+  onMount(() => {
+    theme.init();
+    themeStudio.init();
+  });
 
   const categoryIcons: Record<string, any> = {
     forms: FileText,

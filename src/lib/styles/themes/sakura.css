@@ -1,0 +1,59 @@
+/* ==========================================================================
+   Thème "sakura" — Sakura · Rose pétale · fond sakura · cerisier
+   Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
+   Régénérer avec: pnpm generate:themes
+   ========================================================================== */
+
+:root {
+  --primary: #be185d;
+  --primary-hover: #500724;
+  --primary-fg: #ffffff;
+  --primary-subtle: #fce7f3;
+  --primary-subtle-fg: #831843;
+  --bg-base: #fff8fb;
+  --bg-subtle: #fce7f3;
+  --bg-muted: #fad1e8;
+  --bg-hover: #fbcfe8;
+  --border: rgba(190,24,93,0.14);
+  --border-strong: rgba(190,24,93,0.28);
+  --texture-color: rgba(190,24,93,0.06);
+  --radius-sm: 10px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-xl: 48px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.22);
+  --transition-fast: 0.25s ease;
+  --transition-base: 0.4s ease;
+  --heading-weight: 600;
+  --heading-tracking: -0.01em;
+  --leading-base: 1.75;
+}
+
+.dark {
+  --primary: #f472b6;
+  --primary-hover: #fce7f3;
+  --primary-fg: #1a0010;
+  --primary-subtle: #3d0020;
+  --primary-subtle-fg: #fbcfe8;
+  --texture-color: rgba(244,114,182,0.05);
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+
+body, p {
+  line-height: 1.75;
+}
+
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: radial-gradient(circle, var(--texture-color, rgba(0, 0, 0, 0.055)) 1px, transparent 1px); background-size: 20px 20px;
+}

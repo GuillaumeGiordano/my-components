@@ -1,0 +1,67 @@
+/* ==========================================================================
+   Thème "art-deco" — Art Déco · Or 1920s → navy · géométrie stricte
+   Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
+   Régénérer avec: pnpm generate:themes
+   ========================================================================== */
+
+:root {
+  --primary: #b8860b;
+  --primary-hover: #1e1b4b;
+  --primary-fg: #ffffff;
+  --primary-subtle: #fef9e7;
+  --primary-subtle-fg: #713f12;
+  --bg-base: #faf6ec;
+  --bg-subtle: #f0e8cc;
+  --bg-muted: #e8d9b0;
+  --bg-hover: #d9c481;
+  --border: rgba(184,134,11,0.22);
+  --border-strong: rgba(184,134,11,0.45);
+  --texture-color: rgba(184,134,11,0.06);
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --font-display: Impact, "Arial Narrow", "Franklin Gothic Medium", sans-serif;
+  --transition-fast: 0.08s ease;
+  --transition-base: 0.13s ease;
+  --tracking-body: -0.01em;
+  --heading-weight: 800;
+  --heading-tracking: -0.04em;
+  --leading-base: 1.45;
+}
+
+.dark {
+  --primary: #e8c97a;
+  --primary-hover: #c7d2fe;
+  --primary-fg: #0a0900;
+  --primary-subtle: #1e1600;
+  --primary-subtle-fg: #e8c97a;
+  --bg-base: #0a0900;
+  --bg-subtle: #141200;
+  --bg-muted: #141200;
+  --bg-hover: #1e1a00;
+  --border: rgba(232,201,122,0.22);
+  --border-strong: rgba(232,201,122,0.45);
+  --texture-color: rgba(232,201,122,0.04);
+}
+
+h1, h2, h3, h4 {
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+}
+
+body, p {
+  line-height: 1.45;
+}
+
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: repeating-linear-gradient(0deg, var(--texture-color, rgba(0, 0, 0, 0.04)) 0px, var(--texture-color, rgba(0, 0, 0, 0.04)) 1px, transparent 1px, transparent 28px);
+}

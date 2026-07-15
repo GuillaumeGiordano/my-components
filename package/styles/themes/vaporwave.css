@@ -1,0 +1,65 @@
+/* ==========================================================================
+   Thème "vaporwave" — Vaporwave · Fuchsia → cyan · grille perspective · 80s
+   Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
+   Régénérer avec: pnpm generate:themes
+   ========================================================================== */
+
+:root {
+  --primary: #a21caf;
+  --primary-hover: #0e7490;
+  --primary-fg: #ffffff;
+  --primary-subtle: #fdf4ff;
+  --primary-subtle-fg: #701a75;
+  --texture-color: rgba(162,28,175,0.05);
+  --radius-sm: 10px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-xl: 48px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.22);
+  --font-display: "Trebuchet MS", "Century Gothic", Futura, sans-serif;
+  --font-body: "Trebuchet MS", "Century Gothic", Futura, sans-serif;
+  --transition-fast: 0.25s ease;
+  --transition-base: 0.4s ease;
+  --heading-weight: 600;
+  --heading-tracking: -0.01em;
+  --leading-base: 1.75;
+}
+
+.dark {
+  --primary: #e879f9;
+  --primary-hover: #22d3ee;
+  --primary-fg: #1a0020;
+  --primary-subtle: #2d0040;
+  --primary-subtle-fg: #f0abfc;
+  --bg-base: #0d0017;
+  --bg-subtle: #1a0028;
+  --bg-muted: #1a0028;
+  --bg-hover: #220038;
+  --border: rgba(232,121,249,0.18);
+  --border-strong: rgba(34,211,238,0.25);
+  --texture-color: rgba(232,121,249,0.05);
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+
+body, p {
+  line-height: 1.75;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: linear-gradient(var(--texture-color, rgba(0, 0, 0, 0.05)) 1px, transparent 1px), linear-gradient(90deg, var(--texture-color, rgba(0, 0, 0, 0.05)) 1px, transparent 1px); background-size: 24px 24px;
+}

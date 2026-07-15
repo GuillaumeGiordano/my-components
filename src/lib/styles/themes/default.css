@@ -1,0 +1,21 @@
+/* ==========================================================================
+   Thème "default" — Default · Bleu · classique · équilibré
+   Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
+   Régénérer avec: pnpm generate:themes
+   ========================================================================== */
+
+:root {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-fg: #ffffff;
+  --primary-subtle: #dbeafe;
+  --primary-subtle-fg: #1d4ed8;
+}
+
+.dark {
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-fg: #ffffff;
+  --primary-subtle: #1e3a8a;
+  --primary-subtle-fg: #93c5fd;
+}

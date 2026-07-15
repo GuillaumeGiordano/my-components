@@ -1,0 +1,36 @@
+/* ==========================================================================
+   Thème "warm" — Warm · Orange · arrondi · chaleureux
+   Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
+   Régénérer avec: pnpm generate:themes
+   ========================================================================== */
+
+:root {
+  --primary: #ea580c;
+  --primary-hover: #c2410c;
+  --primary-fg: #ffffff;
+  --primary-subtle: #ffedd5;
+  --primary-subtle-fg: #9a3412;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.22);
+  --font-display: "Trebuchet MS", "Century Gothic", Futura, sans-serif;
+  --font-body: "Trebuchet MS", "Century Gothic", Futura, sans-serif;
+  --transition-fast: 0.25s ease;
+  --transition-base: 0.4s ease;
+}
+
+.dark {
+  --primary: #fb923c;
+  --primary-hover: #f97316;
+  --primary-fg: #ffffff;
+  --primary-subtle: #431407;
+  --primary-subtle-fg: #fdba74;
+}
+
+body {
+  font-family: var(--font-body);
+}

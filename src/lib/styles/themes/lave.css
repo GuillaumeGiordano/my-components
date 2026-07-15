@@ -1,0 +1,50 @@
+/* ==========================================================================
+   Thème "lave" — Lave · Orange incandescent · obsidienne · volcanique
+   Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
+   Régénérer avec: pnpm generate:themes
+   ========================================================================== */
+
+:root {
+  --primary: #ea580c;
+  --primary-hover: #450a0a;
+  --primary-fg: #ffffff;
+  --primary-subtle: #fff7ed;
+  --primary-subtle-fg: #7c2d12;
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.22);
+  --font-display: Impact, "Arial Narrow", "Franklin Gothic Medium", sans-serif;
+  --transition-fast: 0.08s ease;
+  --transition-base: 0.13s ease;
+  --tracking-body: -0.01em;
+  --heading-weight: 800;
+  --heading-tracking: -0.04em;
+  --leading-base: 1.45;
+}
+
+.dark {
+  --primary: #fb923c;
+  --primary-hover: #ffd700;
+  --primary-fg: #0f0500;
+  --primary-subtle: #2d0c00;
+  --primary-subtle-fg: #fdba74;
+  --bg-base: #0f0500;
+  --bg-subtle: #1a0a00;
+  --bg-muted: #1a0a00;
+  --bg-hover: #2d1200;
+  --border: rgba(251,146,60,0.22);
+  --border-strong: rgba(251,146,60,0.45);
+}
+
+h1, h2, h3, h4 {
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+}
+
+body, p {
+  line-height: 1.45;
+}

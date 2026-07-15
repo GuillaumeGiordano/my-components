@@ -105,25 +105,38 @@ Dark mode: overridden via `.dark` class on `<html>`. Applied automatically by `t
 
 ## Theme setup in a consumer SvelteKit app
 
-### 1. `app.html` — anti-flash script (paste verbatim)
+**Model:** a theme is just static CSS. You get the **blue** theme by default (it lives
+in `tokens.css`). To use another look, import **one** theme file — nothing else.
+The `theme` store only handles light/dark mode; no JS injects colors. The full
+28-theme catalog lives in the library (showroom), never in your app.
+
+### 1. `app.html` — anti-flash script (paste verbatim, dark-mode only)
 ```html
-<script>(function(){var d=document.documentElement,dark;try{var m=localStorage.getItem('theme');if(m)dark=m==='dark';}catch(e){}if(dark==null)dark=matchMedia('(prefers-color-scheme: dark)').matches;if(dark)d.classList.add('dark');try{var cls=localStorage.getItem('theme-classes');if(cls)cls.split(' ').forEach(function(c){if(c)d.classList.add(c);});var vars=JSON.parse(localStorage.getItem('theme-vars')||'null');if(vars)vars.forEach(function(v){d.style.setProperty(v[0],v[1]);});}catch(e){}})();</script>
+<script>(function(){var d=document.documentElement,dark;try{var m=localStorage.getItem('theme');if(m)dark=m==='dark';}catch(e){}if(dark==null)dark=matchMedia('(prefers-color-scheme: dark)').matches;if(dark)d.classList.add('dark');})();</script>
 ```
+> Colors need no script — they come from the statically imported theme CSS.
 
 ### 2. `app.css`
 ```css
 @import "tailwindcss";
-@import "@guillaumeg/ui/styles/tokens.css";
+@import "@guillaumeg/ui/styles/tokens.css";   /* base + BLUE by default */
+/* Optional — pick ONE theme to override the look (omit = blue):        */
+@import "@guillaumeg/ui/themes/tron.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 ```
+Available ids (= filenames): `default`, `midnight`, `nature`, `corporate`, `warm`,
+`playful`, `dark-side`, `rebel`, `deadpool`, `man-of-steel`, `tron`, `delorean`,
+`gotham`, `versailles`, `barbie`, `matrix`, `alien`, `avatar`, `stranger-things`,
+`mandalorian`, `slytherin`, `art-deco`, `bauhaus`, `vaporwave`, `memphis`, `lave`,
+`abyssal`, `sakura`. **Change the theme = change that one import line.**
 
 ### 3. Root `+layout.svelte`
 ```svelte
 <script>
   import { onMount } from 'svelte';
   import { theme, Toaster } from '@guillaumeg/ui';
-  onMount(() => theme.init());
+  onMount(() => theme.init());  // light/dark only
 </script>
 {@render children()}
 <Toaster />
@@ -134,6 +147,11 @@ Dark mode: overridden via `.dark` class on `<html>`. Applied automatically by `t
 import { ThemeToggle } from '@guillaumeg/ui';
 <ThemeToggle />
 ```
+
+> **Runtime theme switching (optional):** to let end-users flip between all 28
+> themes live, import `{ ThemePicker, themeStudio }` and call `themeStudio.init()`
+> on mount + swap the anti-flash script for `THEME_STUDIO_INIT_SCRIPT`. This opts
+> the whole catalog into your bundle — most apps don't need it.
 
 ---
 
@@ -155,7 +173,11 @@ After updating the library, consuming projects must run `npm update @guillaumeg/
 ## Commands
 
 ```bash
-npm run dev       # Showcase app (localhost:5173)
-npm run check     # TypeScript check
-npm run package   # Build library → /package
+pnpm dev              # Showcase app (localhost:5173)
+pnpm check            # TypeScript check
+pnpm generate:themes  # Regenerate src/lib/styles/themes/*.css from THEMES
+pnpm package          # Build library → /package (runs generate:themes first)
 ```
+
+> To add/edit a theme: change `src/lib/themes/catalog.ts` (`THEMES`), then
+> `pnpm generate:themes`. The CSS files are generated — never edit them by hand.

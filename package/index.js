@@ -161,4 +161,7 @@ export { default as TestimonialsSection } from './components/sections/Testimonia
 export { default as VideoSection } from './components/sections/VideoSection.svelte';
 // ─── Stores & theme ──────────────────────────────────────────────────────────
 export { toast } from './stores/toast.svelte';
+// Consumer store: light/dark only. Apply a look via "@guillaumeg/ui/themes/<id>.css".
 export { theme, THEMES, COLOR_THEMES, THEME_INIT_SCRIPT } from './theme.svelte';
+// Opt-in runtime preview engine (powers <ThemePicker>). Pulls the full catalog.
+export { themeStudio, THEME_STUDIO_INIT_SCRIPT } from './themes/studio.svelte';

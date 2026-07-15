@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { theme, THEMES } from '../../theme.svelte';
+  import { THEMES } from '../../theme.svelte';
+  import { themeStudio } from '../../themes/studio.svelte';
   import { Check } from '@lucide/svelte';
 </script>
 
@@ -8,11 +9,11 @@
 
   <div class="themes-grid">
     {#each THEMES as t}
-      {@const active = theme.activeTheme.id === t.id}
+      {@const active = themeStudio.activeTheme.id === t.id}
       <button
         class="theme-card"
         class:active
-        onclick={() => theme.setTheme(t.id)}
+        onclick={() => themeStudio.setTheme(t.id)}
         title={t.description}
         aria-label={t.label}
         aria-pressed={active}

@@ -1,0 +1,28 @@
+/* ==========================================================================
+   Thème "rebel" — Rebel · Orange X-Wing · combatif · Rébellion
+   Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
+   Régénérer avec: pnpm generate:themes
+   ========================================================================== */
+
+:root {
+  --primary: #c2410c;
+  --primary-hover: #7c2d12;
+  --primary-fg: #ffffff;
+  --primary-subtle: #ffedd5;
+  --primary-subtle-fg: #7c2d12;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.22);
+}
+
+.dark {
+  --primary: #fb923c;
+  --primary-hover: #fed7aa;
+  --primary-fg: #1a0800;
+  --primary-subtle: #3a1500;
+  --primary-subtle-fg: #fed7aa;
+}

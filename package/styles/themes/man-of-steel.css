@@ -1,0 +1,48 @@
+/* ==========================================================================
+   Thème "man-of-steel" — Man of Steel · Bleu cape → rouge shield · angles du S
+   Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
+   Régénérer avec: pnpm generate:themes
+   ========================================================================== */
+
+:root {
+  --primary: #1565c0;
+  --primary-hover: #b91c1c;
+  --primary-fg: #ffffff;
+  --primary-subtle: #e3f2fd;
+  --primary-subtle-fg: #0a3069;
+  --border: rgba(21,101,192,0.18);
+  --border-strong: rgba(21,101,192,0.32);
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.22);
+  --font-display: Impact, "Arial Narrow", "Franklin Gothic Medium", sans-serif;
+  --transition-fast: 0.08s ease;
+  --transition-base: 0.13s ease;
+  --tracking-body: -0.01em;
+  --heading-weight: 800;
+  --heading-tracking: -0.04em;
+  --leading-base: 1.45;
+}
+
+.dark {
+  --primary: #3b82f6;
+  --primary-hover: #ef4444;
+  --primary-fg: #ffffff;
+  --primary-subtle: #0a1628;
+  --primary-subtle-fg: #93c5fd;
+  --border: rgba(59,130,246,0.20);
+  --border-strong: rgba(239,68,68,0.25);
+}
+
+h1, h2, h3, h4 {
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+}
+
+body, p {
+  line-height: 1.45;
+}

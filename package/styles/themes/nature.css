@@ -1,0 +1,56 @@
+/* ==========================================================================
+   Thème "nature" — Nature · Vert · arrondi · aéré
+   Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
+   Régénérer avec: pnpm generate:themes
+   ========================================================================== */
+
+:root {
+  --primary: #059669;
+  --primary-hover: #047857;
+  --primary-fg: #ffffff;
+  --primary-subtle: #d1fae5;
+  --primary-subtle-fg: #065f46;
+  --texture-color: rgba(5,150,105,0.06);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --font-display: "Trebuchet MS", "Century Gothic", Futura, sans-serif;
+  --font-body: "Trebuchet MS", "Century Gothic", Futura, sans-serif;
+  --transition-fast: 0.25s ease;
+  --transition-base: 0.4s ease;
+  --heading-weight: 600;
+  --heading-tracking: -0.01em;
+  --leading-base: 1.75;
+}
+
+.dark {
+  --primary: #34d399;
+  --primary-hover: #10b981;
+  --primary-fg: #022c22;
+  --primary-subtle: #022c22;
+  --primary-subtle-fg: #6ee7b7;
+  --texture-color: rgba(52,211,153,0.05);
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+
+body, p {
+  line-height: 1.75;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: radial-gradient(circle, var(--texture-color, rgba(0, 0, 0, 0.055)) 1px, transparent 1px); background-size: 20px 20px;
+}

@@ -1,0 +1,42 @@
+/* ==========================================================================
+   Thème "midnight" — Midnight · Violet · angulaire · dramatique
+   Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
+   Régénérer avec: pnpm generate:themes
+   ========================================================================== */
+
+:root {
+  --primary: #7c3aed;
+  --primary-hover: #6d28d9;
+  --primary-fg: #ffffff;
+  --primary-subtle: #ede9fe;
+  --primary-subtle-fg: #5b21b6;
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.22);
+  --transition-fast: 0.25s ease;
+  --transition-base: 0.4s ease;
+  --heading-weight: 800;
+  --heading-tracking: -0.04em;
+  --leading-base: 1.45;
+}
+
+.dark {
+  --primary: #a78bfa;
+  --primary-hover: #8b5cf6;
+  --primary-fg: #ffffff;
+  --primary-subtle: #2e1065;
+  --primary-subtle-fg: #c4b5fd;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+}
+
+body, p {
+  line-height: 1.45;
+}

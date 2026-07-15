@@ -14,7 +14,7 @@
     Link,
   } from "@lucide/svelte";
 
-  let isDark = $derived(theme.dark);
+  let isDark = $derived(theme.isDark);
 </script>
 
 <svelte:head>

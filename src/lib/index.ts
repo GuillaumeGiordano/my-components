@@ -183,5 +183,8 @@ export { default as VideoSection }        from './components/sections/VideoSecti
 // ─── Stores & theme ──────────────────────────────────────────────────────────
 export { toast }                          from './stores/toast.svelte';
 export type { Toast, ToastVariant }       from './stores/toast.svelte';
+// Consumer store: light/dark only. Apply a look via "@guillaumeg/ui/themes/<id>.css".
 export { theme, THEMES, COLOR_THEMES, THEME_INIT_SCRIPT } from './theme.svelte';
 export type { Theme, ColorTheme, ShapeVariant, ShadowVariant, TypographyVariant, FontVariant, TransitionVariant, TextureVariant, TrackingVariant } from './theme.svelte';
+// Opt-in runtime preview engine (powers <ThemePicker>). Pulls the full catalog.
+export { themeStudio, THEME_STUDIO_INIT_SCRIPT } from './themes/studio.svelte';

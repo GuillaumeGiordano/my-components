@@ -1,0 +1,61 @@
+/* ==========================================================================
+   Thème "slytherin" — Slytherin · Vert serpent → argent · donjons froids
+   Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
+   Régénérer avec: pnpm generate:themes
+   ========================================================================== */
+
+:root {
+  --primary: #166534;
+  --primary-hover: #6b7280;
+  --primary-fg: #ffffff;
+  --primary-subtle: #dcfce7;
+  --primary-subtle-fg: #14532d;
+  --texture-color: rgba(22,101,52,0.06);
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.22);
+  --font-display: Impact, "Arial Narrow", "Franklin Gothic Medium", sans-serif;
+  --transition-fast: 0.25s ease;
+  --transition-base: 0.4s ease;
+  --tracking-body: -0.01em;
+  --heading-weight: 800;
+  --heading-tracking: -0.04em;
+  --leading-base: 1.45;
+}
+
+.dark {
+  --primary: #22c55e;
+  --primary-hover: #d1d5db;
+  --primary-fg: #000000;
+  --primary-subtle: #032010;
+  --primary-subtle-fg: #86efac;
+  --bg-base: #030d07;
+  --bg-subtle: #071410;
+  --bg-muted: #071410;
+  --bg-hover: #0d2018;
+  --border: rgba(34,197,94,0.18);
+  --border-strong: rgba(34,197,94,0.32);
+  --texture-color: rgba(34,197,94,0.05);
+}
+
+h1, h2, h3, h4 {
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+}
+
+body, p {
+  line-height: 1.45;
+}
+
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: repeating-linear-gradient(0deg, var(--texture-color, rgba(0, 0, 0, 0.04)) 0px, var(--texture-color, rgba(0, 0, 0, 0.04)) 1px, transparent 1px, transparent 28px);
+}

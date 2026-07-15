@@ -1,6 +1,6 @@
 {
 	"name": "@guillaumeg/ui",
-	"version": "0.3.1",
+	"version": "0.4.0",
 	"description": "Bibliothèque de composants Svelte 5 — UI, formulaires, layout, sections.",
 	"keywords": ["svelte", "svelte5", "components", "ui", "forms", "layout", "design-system"],
 	"author": "guillaumeG",
@@ -11,7 +11,8 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"package": "svelte-kit sync && svelte-package -i src/lib -o package",
+		"generate:themes": "node scripts/generate-themes.ts",
+		"package": "node scripts/generate-themes.ts && svelte-kit sync && svelte-package -i src/lib -o package",
 		"prepublishOnly": "npm run package",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
@@ -25,7 +26,8 @@
 			"svelte": "./package/index.js",
 			"default": "./package/index.js"
 		},
-		"./styles/tokens.css": "./package/styles/tokens.css"
+		"./styles/tokens.css": "./package/styles/tokens.css",
+		"./themes/*.css": "./package/styles/themes/*.css"
 	},
 	"files": [
 		"package"

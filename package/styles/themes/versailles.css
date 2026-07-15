@@ -1,0 +1,71 @@
+/* ==========================================================================
+   Thème "versailles" — Versailles · Or royal · ivoire · Rococo
+   Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
+   Régénérer avec: pnpm generate:themes
+   ========================================================================== */
+
+:root {
+  --primary: #c9950c;
+  --primary-hover: #7b1f3a;
+  --primary-fg: #ffffff;
+  --primary-subtle: #fdf3dc;
+  --primary-subtle-fg: #7b4a00;
+  --bg-base: #faf3e0;
+  --bg-subtle: #f0e6c8;
+  --bg-muted: #e8d9b0;
+  --bg-hover: #dcc890;
+  --border: rgba(201,149,12,0.22);
+  --border-strong: rgba(201,149,12,0.40);
+  --texture-color: rgba(180,120,20,0.05);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.22);
+  --font-display: "Trebuchet MS", "Century Gothic", Futura, sans-serif;
+  --font-body: "Trebuchet MS", "Century Gothic", Futura, sans-serif;
+  --transition-fast: 0.25s ease;
+  --transition-base: 0.4s ease;
+  --heading-weight: 800;
+  --heading-tracking: -0.04em;
+  --leading-base: 1.45;
+}
+
+.dark {
+  --primary: #d4a843;
+  --primary-hover: #e8c97a;
+  --primary-fg: #12080e;
+  --primary-subtle: #2a1800;
+  --primary-subtle-fg: #e8c97a;
+  --bg-base: #12080e;
+  --bg-subtle: #1e0f16;
+  --bg-muted: #1e0f16;
+  --bg-hover: #2d1622;
+  --border: rgba(212,168,67,0.22);
+  --border-strong: rgba(212,168,67,0.42);
+  --texture-color: rgba(212,168,67,0.04);
+}
+
+h1, h2, h3, h4 {
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+}
+
+body, p {
+  line-height: 1.45;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: repeating-linear-gradient(0deg, var(--texture-color, rgba(0, 0, 0, 0.04)) 0px, var(--texture-color, rgba(0, 0, 0, 0.04)) 1px, transparent 1px, transparent 28px);
+}

@@ -1,0 +1,46 @@
+/* ==========================================================================
+   Thème "deadpool" — Deadpool · Rouge & noir · brutal · sans filtre
+   Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
+   Régénérer avec: pnpm generate:themes
+   ========================================================================== */
+
+:root {
+  --primary: #dc2626;
+  --primary-hover: #0a0a0a;
+  --primary-fg: #ffffff;
+  --primary-subtle: #fee2e2;
+  --primary-subtle-fg: #991b1b;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.22);
+  --font-display: Impact, "Arial Narrow", "Franklin Gothic Medium", sans-serif;
+  --transition-fast: 0.08s ease;
+  --transition-base: 0.13s ease;
+  --tracking-body: -0.01em;
+  --heading-weight: 800;
+  --heading-tracking: -0.04em;
+  --leading-base: 1.45;
+}
+
+.dark {
+  --primary: #ef4444;
+  --primary-hover: #111111;
+  --primary-fg: #ffffff;
+  --primary-subtle: #450a0a;
+  --primary-subtle-fg: #fca5a5;
+  --bg-base: #0f0000;
+  --bg-subtle: #150000;
+  --bg-muted: #150000;
+  --bg-hover: #200000;
+  --border: rgba(220,38,38,0.18);
+  --border-strong: rgba(220,38,38,0.32);
+}
+
+h1, h2, h3, h4 {
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+}
+
+body, p {
+  line-height: 1.45;
+}

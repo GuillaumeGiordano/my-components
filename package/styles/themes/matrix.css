@@ -1,0 +1,66 @@
+/* ==========================================================================
+   Thème "matrix" — Matrix · Vert code · terminal · pluie de caractères
+   Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
+   Régénérer avec: pnpm generate:themes
+   ========================================================================== */
+
+:root {
+  --primary: #15803d;
+  --primary-hover: #052e16;
+  --primary-fg: #ffffff;
+  --primary-subtle: #dcfce7;
+  --primary-subtle-fg: #14532d;
+  --texture-color: rgba(21,128,61,0.06);
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --font-display: ui-monospace, "Cascadia Code", Consolas, "Courier New", monospace;
+  --font-body: ui-monospace, "Cascadia Code", Consolas, "Courier New", monospace;
+  --transition-fast: 0.04s ease;
+  --transition-base: 0.07s ease;
+  --tracking-body: 0.04em;
+  --heading-weight: 800;
+  --heading-tracking: -0.04em;
+  --leading-base: 1.45;
+}
+
+.dark {
+  --primary: #4ade80;
+  --primary-hover: #86efac;
+  --primary-fg: #000000;
+  --primary-subtle: #001a00;
+  --primary-subtle-fg: #86efac;
+  --bg-base: #000800;
+  --bg-subtle: #001200;
+  --bg-muted: #001500;
+  --bg-hover: #002200;
+  --border: rgba(74,222,128,0.20);
+  --border-strong: rgba(74,222,128,0.38);
+  --texture-color: rgba(74,222,128,0.06);
+}
+
+h1, h2, h3, h4 {
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+}
+
+body, p {
+  line-height: 1.45;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: linear-gradient(var(--texture-color, rgba(0, 0, 0, 0.05)) 1px, transparent 1px), linear-gradient(90deg, var(--texture-color, rgba(0, 0, 0, 0.05)) 1px, transparent 1px); background-size: 24px 24px;
+}

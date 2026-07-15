@@ -170,3 +170,4 @@ export { toast } from './stores/toast.svelte';
 export type { Toast, ToastVariant } from './stores/toast.svelte';
 export { theme, THEMES, COLOR_THEMES, THEME_INIT_SCRIPT } from './theme.svelte';
 export type { Theme, ColorTheme, ShapeVariant, ShadowVariant, TypographyVariant, FontVariant, TransitionVariant, TextureVariant, TrackingVariant } from './theme.svelte';
+export { themeStudio, THEME_STUDIO_INIT_SCRIPT } from './themes/studio.svelte';

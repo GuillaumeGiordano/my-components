@@ -1,0 +1,66 @@
+/* ==========================================================================
+   Thème "tron" — Tron · Cyan néon · circuits 90° · glow électrique
+   Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
+   Régénérer avec: pnpm generate:themes
+   ========================================================================== */
+
+:root {
+  --primary: #0891b2;
+  --primary-hover: #164e63;
+  --primary-fg: #ffffff;
+  --primary-subtle: #cffafe;
+  --primary-subtle-fg: #155e75;
+  --texture-color: rgba(8,145,178,0.07);
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.22);
+  --font-display: ui-monospace, "Cascadia Code", Consolas, "Courier New", monospace;
+  --font-body: ui-monospace, "Cascadia Code", Consolas, "Courier New", monospace;
+  --transition-fast: 0.04s ease;
+  --transition-base: 0.07s ease;
+  --tracking-body: 0.04em;
+  --heading-weight: 800;
+  --heading-tracking: -0.04em;
+  --leading-base: 1.45;
+}
+
+.dark {
+  --primary: #22d3ee;
+  --primary-hover: #67e8f9;
+  --primary-fg: #001a1f;
+  --primary-subtle: #002b36;
+  --primary-subtle-fg: #67e8f9;
+  --bg-base: #001a1f;
+  --bg-subtle: #002b36;
+  --bg-muted: #003344;
+  --bg-hover: #004455;
+  --border: rgba(34,211,238,0.22);
+  --border-strong: rgba(34,211,238,0.45);
+  --texture-color: rgba(34,211,238,0.07);
+}
+
+h1, h2, h3, h4 {
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+}
+
+body, p {
+  line-height: 1.45;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: linear-gradient(var(--texture-color, rgba(0, 0, 0, 0.05)) 1px, transparent 1px), linear-gradient(90deg, var(--texture-color, rgba(0, 0, 0, 0.05)) 1px, transparent 1px); background-size: 24px 24px;
+}
