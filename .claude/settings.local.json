@@ -23,7 +23,13 @@
       "Bash(git add *)",
       "PowerShell(pnpm run *)",
       "Bash(node scripts/generate-themes.ts)",
-      "Bash(pnpm package *)"
+      "Bash(pnpm package *)",
+      "Read(//c/Users/guigo/Projet Web/test_project_my_component/g2-webdev/**)",
+      "Bash(node -e \"const p=require\\('./node_modules/@guillaumeg/ui/package.json'\\);console.log\\('version',p.version\\);console.log\\(JSON.stringify\\(p.exports,null,1\\)\\)\")",
+      "Read(//c/Users/guigo/Projet Web/test_project_my_component/share-moment/**)",
+      "Bash(node -e \"const p=require\\('./node_modules/@guillaumeg/ui/package.json'\\);console.log\\('version',p.version\\);console.log\\('exports:',JSON.stringify\\(p.exports\\)\\)\")",
+      "Bash(node -e \"console.log\\(JSON.stringify\\(require\\('./package.json'\\).scripts,null,1\\)\\)\")",
+      "Bash(pnpm install *)"
     ]
   }
 }

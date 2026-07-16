@@ -54,7 +54,7 @@ Dark mode: overridden via `.dark` class on `<html>`. Applied automatically by `t
 | `<DatePicker>` | `<input type="date">` | `label`, `name?` (renders hidden input), `bind:value` (ISO string), `min`, `max` — opens calendar |
 | `<Checkbox>` | `<input type="checkbox">` | `label`, `bind:checked`, `name?`, `disabled` |
 | `<Switch>` | `<input type="checkbox">` (toggle) | `label`, `bind:checked`, `disabled` |
-| `<RadioGroup>` | `<input type="radio">` group | `label`, `bind:value`, `options: {value,label}[]` |
+| `<RadioGroup>` | `<input type="radio">` group | `legend` (**not `label`**), `bind:value`, `options: {value,label}[]`, `orientation` |
 | `<SelectMulti>` | multiple `<select>` | `label`, `bind:value` (string[]), `options` |
 | `<SelectSearch>` | searchable `<select>` | `label`, `bind:value`, `options`, `placeholder` |
 | `<TagInput>` | custom tag field | `label`, `bind:tags` (string[]) |
@@ -71,22 +71,22 @@ Dark mode: overridden via `.dark` class on `<html>`. Applied automatically by `t
 
 | Component | Usage |
 |---|---|
-| `<Button>` | All clickable actions. Props: `variant` (primary/outline/ghost/danger), `size`, `icon`, `loading`, `href`, `type`, `disabled` |
+| `<Button>` | All clickable actions. Props: `variant` (primary/secondary/outline/ghost/danger), `size`, `icon`, `iconRight`, `loading`, `href`, `type`, `disabled` |
 | `<Card>` | Content panels. Snippets: `{#snippet header()}`, `{#snippet footer()}`. Props: `padding` (sm/md/lg) |
 | `<Badge>` | Status labels. Props: `label`, `variant` (default/primary/success/warning/danger/info) |
-| `<Alert>` | Inline messages. Props: `variant`, `title`, `description` |
-| `<Modal>` | Dialog. Props: `id`, `title`, `size`. Snippets: `{#snippet footer(close)}` |
-| `<Tabs>` | Tab navigation. Props: `tabs: {id,label}[]`, `bind:value` |
-| `<Table>` | Data table. Props: `columns`, `rows`, `loading`, `empty` |
-| `<Pagination>` | Page controls. Props: `bind:page`, `totalPages`, `total`, `perPage` — **always render, no condition needed** |
-| `<Breadcrumb>` | Navigation trail. Props: `items: {label,href?}[]` |
-| `<Avatar>` | User avatar. Props: `name`, `src?`, `size` |
-| `<Stepper>` | Step indicator. Props: `steps: string[]`, `current` |
-| `<Spinner>` | Loading spinner. Props: `size`, `color` |
-| `<EmptyState>` | Empty list placeholder. Props: `title`, `description`, `icon?` |
-| `<Skeleton>` | Loading placeholder. Props: `height`, `rounded` |
-| `<Progress>` | Progress bar. Props: `value`, `max`, `label?` |
-| `<Tooltip>` | Hover tooltip. Props: `text`, `position` |
+| `<Alert>` | Inline messages. Props: `variant`, `title`, `dismissible`, `icon`, `onclose`. **No `description` prop** — put the body text in the default children slot: `<Alert title="…">body</Alert>` |
+| `<Modal>` | Dialog. Props: `id`, `title`, `variant` (default/drawer/bottom-sheet), `size`, `overlayClose`. Snippets: `{#snippet footer(close)}` |
+| `<Tabs>` | Tab navigation. Props: `tabs: {id,label}[]`, `bind:value`, `variant`. Snippet `children` receives the active tab id: `{#snippet children(activeId)}` |
+| `<Table>` | Data table. Props: `columns`, `rows`, `selectable`, `striped`, `stickyHeader`, `emptyLabel` (**not `loading`/`empty`**), `bind:selected`, `onrowclick` |
+| `<Pagination>` | Page controls. Props: `bind:page`, `total`, `siblings`, `perPage`, `perPageOptions`, `onchange`, `onPerPageChange`. **No `totalPages` prop** — it derives pages from `total`/`perPage` |
+| `<Breadcrumb>` | Navigation trail. Props: `items: {label,href?}[]`, `showHome`, `maxItems` |
+| `<Avatar>` | User avatar. Props: `name`, `src?`, `alt`, `size`, `shape` |
+| `<Stepper>` | Step indicator. Props: `steps: {label,description?,icon?}[]` (**objects, not `string[]`**), `current`, `orientation`, `variant` |
+| `<Spinner>` | Loading spinner. Props: `size` (xs/sm/md/lg/xl), `color` (primary/white/muted) |
+| `<EmptyState>` | Empty list placeholder. Props: `title`, `description`, `icon?`, `cta`, `size` |
+| `<Skeleton>` | Loading placeholder. Props: `variant` (rect/text/circle), `width`, `height`, `lines`, `circle`. **No `rounded` prop** |
+| `<Progress>` | Progress bar. Props: `value`, `max`, `variant` (linear/circular), `label?`, `showValue`, `color` |
+| `<Tooltip>` | Hover tooltip. Props: `tip` (**not `text`**), `position` |
 | `<CopyButton>` | Copy to clipboard. Props: `text` |
 | `<Toaster>` | Toast container — add once in root layout |
 | `<ThemeToggle>` | Light/dark toggle button — no props |
@@ -97,7 +97,7 @@ Dark mode: overridden via `.dark` class on `<html>`. Applied automatically by `t
 | Component | Usage |
 |---|---|
 | `<Sidebar>` | Navigation sidebar. Props: `groups: SidebarGroup[]`, `bind:collapsed`, `activeHref`, `shortkey`. Snippets: `{#snippet header()}`, `{#snippet footer()}` — optionnels, rendus en haut/bas avec bordure séparatrice. |
-| `<Navbar>` | Top navigation bar. Props: `items: NavItem[]`, `logo?`, `spy` (scroll spy: auto-highlights the item whose `#anchor` section crosses the viewport center), snippets: `{#snippet actions()}` |
+| `<Navbar>` | Top navigation bar. Props: `items?: NavItem[]`, `mobileMenu` (drawer/popover/fullscreen), `spy` (scroll spy: auto-highlights the item whose `#anchor` section crosses the viewport center), `burger`, `position` (top/bottom). Snippets: `{#snippet brand()}` (**not a `logo` prop**), `{#snippet actionBtn()}` (**not `actions`**) |
 | `<Footer>` | Page footer |
 | `<StandardLayout>` | Full page layout wrapper |
 
