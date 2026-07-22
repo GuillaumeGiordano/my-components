@@ -147,9 +147,16 @@
 		position: absolute;
 		width: 1px;
 		height: 1px;
+		padding: 0;
+		/* margin:-1px + clip-path are what actually keep the box out of the
+		   layout: clip:rect() alone hides the text but the 1px box could still
+		   widen the document on mobile (visually-hidden pattern). */
+		margin: -1px;
 		overflow: hidden;
 		clip: rect(0, 0, 0, 0);
+		clip-path: inset(50%);
 		white-space: nowrap;
+		border: 0;
 	}
 
 	.label {
