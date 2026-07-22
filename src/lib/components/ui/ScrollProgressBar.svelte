@@ -56,8 +56,11 @@
   .spb {
     position: fixed;
     top: 0;
+    /* Anchor to both edges instead of width:100%: a fixed element's percentage
+       width can exceed the visible viewport on mobile (scrollbar / layout
+       viewport quirks) and create a page-wide horizontal scroll. */
     left: 0;
-    width: 100%;
+    right: 0;
     z-index: 200;
     pointer-events: none;
   }
