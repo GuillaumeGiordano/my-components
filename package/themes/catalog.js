@@ -145,9 +145,9 @@ export const THEMES = [
         preview: { primary: '#c9950c', radiusMd: '10px', shadowCss: '0 8px 28px rgba(201,149,12,0.38)' },
     },
     {
-        // Hot-pink fuchsia · tout arrondi · fond rose même en light mode
-        id: 'barbie', label: 'Barbie', description: 'Hot-pink · pill · pétillant',
-        shape: 'pill', shadow: 'elevated', typography: 'relaxed',
+        // Hot-pink fuchsia · arrondi modéré · fond rose même en light mode
+        id: 'barbie', label: 'Barbie', description: 'Hot-pink · arrondi · pétillant',
+        shape: 'rounded', shadow: 'elevated', typography: 'relaxed',
         font: 'geometric', transition: 'spring', texture: 'dots', tracking: 'default',
         light: { primary: '#e91e8c', primaryHover: '#c2185b', primaryFg: '#ffffff', primarySubtle: '#fce4ec', primarySubtleFg: '#880e4f' },
         dark: { primary: '#f72585', primaryHover: '#ff6eb4', primaryFg: '#ffffff', primarySubtle: '#3d0025', primarySubtleFg: '#ff9ecf' },
@@ -156,7 +156,7 @@ export const THEMES = [
         borderLight: { border: 'rgba(233,30,140,0.18)', borderStrong: 'rgba(233,30,140,0.32)' },
         borderDark: { border: 'rgba(247,37,133,0.22)', borderStrong: 'rgba(247,37,133,0.42)' },
         textureColor: { light: 'rgba(233,30,140,0.07)', dark: 'rgba(247,37,133,0.06)' },
-        preview: { primary: '#e91e8c', radiusMd: '20px', shadowCss: '0 8px 28px rgba(233,30,140,0.48)' },
+        preview: { primary: '#e91e8c', radiusMd: '10px', shadowCss: '0 8px 28px rgba(233,30,140,0.48)' },
     },
     {
         // Pluie de caractères verts · terminal · flat

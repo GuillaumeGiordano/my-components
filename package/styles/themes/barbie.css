@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Thème "barbie" — Barbie · Hot-pink · pill · pétillant
+   Thème "barbie" — Barbie · Hot-pink · arrondi · pétillant
    Généré depuis THEMES (src/lib/themes/catalog.ts) — NE PAS ÉDITER À LA MAIN.
    Régénérer avec: pnpm generate:themes
    ========================================================================== */
@@ -17,10 +17,10 @@
   --border: rgba(233,30,140,0.18);
   --border-strong: rgba(233,30,140,0.32);
   --texture-color: rgba(233,30,140,0.07);
-  --radius-sm: 10px;
-  --radius-md: 20px;
-  --radius-lg: 32px;
-  --radius-xl: 48px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.18);
   --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.22);
