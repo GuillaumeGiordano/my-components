@@ -1,6 +1,6 @@
 {
 	"name": "@guillaumeg/ui",
-	"version": "0.4.1",
+	"version": "0.4.2",
 	"description": "Bibliothèque de composants Svelte 5 — UI, formulaires, layout, sections.",
 	"keywords": ["svelte", "svelte5", "components", "ui", "forms", "layout", "design-system"],
 	"author": "guillaumeG",

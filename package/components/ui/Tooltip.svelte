@@ -42,18 +42,28 @@
 		font-family: var(--font-sans);
 		font-weight: 500;
 		line-height: 1.4;
-		white-space: nowrap;
+		/* Compact for short tips, but wrap long ones instead of nowrap: an
+		   unwrappable bubble can exceed the mobile viewport and widen the whole
+		   document (page-level horizontal scroll), even while opacity is 0. */
+		width: max-content;
+		max-width: min(90vw, 260px);
+		white-space: normal;
+		overflow-wrap: anywhere;
 		border-radius: var(--radius-md);
 		pointer-events: none;
-		/* Hidden by default */
+		/* Hidden by default (visibility keeps it out of the a11y/hover tree) */
 		opacity: 0;
-		transition: opacity var(--transition-fast);
+		visibility: hidden;
+		transition:
+			opacity var(--transition-fast),
+			visibility var(--transition-fast);
 	}
 
 	/* Show on hover or keyboard focus inside the wrapper */
 	.tooltip-wrapper:hover .bubble,
 	.tooltip-wrapper:focus-within .bubble {
 		opacity: 1;
+		visibility: visible;
 	}
 
 	/* ---- Positions ---- */
