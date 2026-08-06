@@ -63,8 +63,8 @@
 			<div class="demo-wide">
 				<DateRangePicker
 					label="Période de séjour"
-					bind:start={rangeStart}
-					bind:end={rangeEnd}
+					bind:startValue={rangeStart}
+					bind:endValue={rangeEnd}
 				/>
 				<p class="range-info">
 					Début&nbsp;: <strong>{rangeStart || '—'}</strong>
@@ -82,8 +82,8 @@
 			<div class="demo-wide">
 				<DateRangePicker
 					label="Période de formation"
-					bind:start={rangePreStart}
-					bind:end={rangePreEnd}
+					bind:startValue={rangePreStart}
+					bind:endValue={rangePreEnd}
 					hint="Modifiez le début ou la fin de la plage."
 				/>
 			</div>

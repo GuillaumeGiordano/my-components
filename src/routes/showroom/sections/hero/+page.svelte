@@ -1,5 +1,4 @@
 <script lang="ts">
-  import HeroSectionG2 from "$lib/components/g2-webdev/HeroSectionG2.svelte";
   import HeroSection from "$lib/components/sections/HeroSection.svelte";
 
   import Carousel from "$lib/components/ui/Carousel.svelte";
@@ -43,9 +42,7 @@
   </div>
 
   <!-- Example 1: centered hero with badge -->
-  <HeroSection
-    badge="Nouveau"
-    title="Créez des interfaces modernes en un rien de temps"
+  <HeroSection    title="Créez des interfaces modernes en un rien de temps"
     highlight="interfaces modernes"
     description="Une bibliothèque de composants Svelte 5 soignés, accessibles et prêts à l'emploi. Concentrez-vous sur votre produit, pas sur les détails d'implémentation."
     primaryCta={{ label: "Commencer gratuitement", href: "#" }}
@@ -88,7 +85,7 @@
 </div>
 
 <ParticleBackground>
-  <HeroSectionG2
+  <HeroSection
     title="Créez des interfaces modernes en un rien de temps"
     highlight="interfaces modernes"
     description="Une bibliothèque de composants Svelte 5 soignés, accessibles et prêts à l'emploi. Concentrez-vous sur votre produit, pas sur les détails d'implémentation."

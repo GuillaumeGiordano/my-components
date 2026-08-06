@@ -44,9 +44,7 @@
 
   <section class="variant">
     <h2>Disposition horizontale</h2>
-    <ProcessSection
-      badge="Comment ça marche"
-      title="Démarrez en quatre étapes simples"
+    <ProcessSection      title="Démarrez en quatre étapes simples"
       description="Notre processus d'intégration a été conçu pour être le plus fluide possible. Vous serez opérationnel en moins de dix minutes."
       steps={steps}
       layout="horizontal"
@@ -55,9 +53,7 @@
 
   <section class="variant">
     <h2>Disposition verticale</h2>
-    <ProcessSection
-      badge="Votre parcours"
-      title="Un onboarding pensé pour vous"
+    <ProcessSection      title="Un onboarding pensé pour vous"
       description="De la création de compte au lancement de votre premier projet, nous vous accompagnons à chaque étape."
       steps={steps}
       layout="vertical"

@@ -16,9 +16,7 @@
     </p>
   </div>
 
-  <FeaturesSection
-    badge="Fonctionnalités"
-    title="Tout ce dont votre équipe a besoin"
+  <FeaturesSection    title="Tout ce dont votre équipe a besoin"
     description="Une plateforme pensée pour les équipes modernes : rapide, sécurisée et facile à intégrer dans vos workflows existants."
     columns={3}
     features={[

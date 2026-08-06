@@ -13,9 +13,7 @@
     <p>Section de questions fréquentes basée sur le composant Collapse. Disponible en une ou deux colonnes.</p>
   </div>
 
-  <FAQSection
-    badge="FAQ"
-    title="Questions fréquentes"
+  <FAQSection    title="Questions fréquentes"
     description="Vous ne trouvez pas la réponse ? Contactez notre équipe, nous répondons en moins de 24 heures."
     columns={2}
     faqs={[

@@ -11,6 +11,8 @@
 		cell?: Snippet<[R]>;
 	};
 
+	type SortDir = 'asc' | 'desc';
+
 	let {
 		columns,
 		rows,
@@ -20,6 +22,10 @@
 		emptyLabel = 'Aucune donnée à afficher.',
 		selected = $bindable<T[]>([]),
 		onrowclick,
+		manualSort = false,
+		sortKey = $bindable<keyof T | null>(null),
+		sortDir = $bindable<SortDir>('asc'),
+		onsort,
 	}: {
 		columns: Column<T>[];
 		rows: T[];
@@ -29,22 +35,30 @@
 		emptyLabel?: string;
 		selected?: T[];
 		onrowclick?: (row: T) => void;
+		/**
+		 * Server-side ("manual") sorting. When true, the table does NOT sort `rows` itself
+		 * (the backend already returned them sorted); it only reflects `sortKey`/`sortDir`
+		 * and calls `onsort` on header click so the parent can refetch. Default: client sort.
+		 */
+		manualSort?: boolean;
+		/** Current sort column (bindable). In manual mode, controlled by the parent. */
+		sortKey?: keyof T | null;
+		/** Current sort direction (bindable). */
+		sortDir?: SortDir;
+		/** Fired when a sortable header is clicked, with the next sort state. */
+		onsort?: (key: keyof T, dir: SortDir) => void;
 	} = $props();
 
-	let sortKey   = $state<keyof T | null>(null);
-	let sortDir   = $state<'asc' | 'desc'>('asc');
-
 	function toggleSort(key: keyof T) {
-		if (sortKey === key) {
-			sortDir = sortDir === 'asc' ? 'desc' : 'asc';
-		} else {
-			sortKey = key;
-			sortDir = 'asc';
-		}
+		const dir: SortDir = sortKey === key && sortDir === 'asc' ? 'desc' : 'asc';
+		sortKey = key;
+		sortDir = dir;
+		onsort?.(key, dir);
 	}
 
+	// Manual mode: rows are already sorted by the backend. Otherwise, sort client-side.
 	const sorted = $derived.by((): T[] => {
-		if (!sortKey) return rows;
+		if (manualSort || !sortKey) return rows;
 		return [...rows].sort((a, b) => {
 			const av = a[sortKey!];
 			const bv = b[sortKey!];

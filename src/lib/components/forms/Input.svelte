@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Component } from 'svelte';
+	import type { HTMLInputAttributes } from 'svelte/elements';
 	import { AlertCircle, Eye, EyeOff } from '@lucide/svelte';
 	import { uniqueId } from '$lib/utils/id';
 
@@ -48,7 +49,7 @@
 		readonly?: boolean;
 		icon?: Component;
 		iconRight?: Component;
-		autocomplete?: string;
+		autocomplete?: HTMLInputAttributes['autocomplete'];
 		minlength?: number;
 		maxlength?: number;
 		min?: string | number;

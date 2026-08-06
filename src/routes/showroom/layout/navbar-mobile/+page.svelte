@@ -37,7 +37,7 @@
     <ComponentPreview>
       <div class="responsive-wrapper">
         <div class="show-desktop">
-          <Navbar {links} ctaLabel="Démarrer">
+          <Navbar items={links}>
             {#snippet brand()}
               <span class="brand">MyApp</span>
             {/snippet}

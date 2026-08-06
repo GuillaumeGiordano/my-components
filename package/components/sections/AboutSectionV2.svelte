@@ -46,7 +46,7 @@
     function tick(now: number) {
       const progress = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      displayValues[index] = (eased * target).toFixed(decimals);
+      displayValues[index] = (eased * target!).toFixed(decimals);
       if (progress < 1) requestAnimationFrame(tick);
       else displayValues[index] = targetStr;
     }

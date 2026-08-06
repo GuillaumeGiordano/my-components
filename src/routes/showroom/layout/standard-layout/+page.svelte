@@ -50,7 +50,7 @@
     <ComponentPreview>
       <StandardLayout>
         {#snippet header()}
-          <Navbar links={navLinks} ctaLabel="Action">
+          <Navbar items={navLinks}>
             {#snippet brand()}
               <span class="text-lg font-bold">Acme</span>
             {/snippet}
@@ -66,7 +66,9 @@
           </div>
         {/snippet}
         {#snippet footer()}
-          <Footer brand="Acme" columns={footerColumns} copyright="© 2026 Acme" />
+          <Footer columns={footerColumns} copyright="© 2026 Acme">
+            {#snippet brand()}Acme{/snippet}
+          </Footer>
         {/snippet}
       </StandardLayout>
     </ComponentPreview>
@@ -77,7 +79,7 @@
     <ComponentPreview>
       <StandardLayout hasSidebar={false}>
         {#snippet header()}
-          <Navbar links={navLinks}>
+          <Navbar items={navLinks}>
             {#snippet brand()}
               <span class="text-lg font-bold">Acme</span>
             {/snippet}
@@ -90,7 +92,9 @@
           </div>
         {/snippet}
         {#snippet footer()}
-          <Footer brand="Acme" copyright="© 2026 Acme" />
+          <Footer copyright="© 2026 Acme">
+            {#snippet brand()}Acme{/snippet}
+          </Footer>
         {/snippet}
       </StandardLayout>
     </ComponentPreview>

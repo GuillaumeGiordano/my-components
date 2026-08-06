@@ -15,9 +15,7 @@
     </p>
   </div>
 
-  <StatsSection
-    badge="En chiffres"
-    title="Des résultats qui parlent d'eux-mêmes"
+  <StatsSection    title="Des résultats qui parlent d'eux-mêmes"
     description="Des métriques mesurées en conditions réelles, sur l'ensemble de notre base d'utilisateurs actifs."
     stats={[
       {

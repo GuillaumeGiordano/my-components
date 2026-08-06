@@ -42,9 +42,7 @@
 
   <section class="variant">
     <h2>Disposition en deux colonnes (split)</h2>
-    <ContactSection
-      badge="Nous contacter"
-      title="Une question ? Parlons-en."
+    <ContactSection      title="Une question ? Parlons-en."
       description="Notre équipe est disponible du lundi au vendredi, de 9h à 18h. Nous vous répondrons dans les 24 heures ouvrées."
       info={contactInfo}
       onsubmit={handleSubmit}
@@ -54,9 +52,7 @@
 
   <section class="variant">
     <h2>Disposition centrée</h2>
-    <ContactSection
-      badge="Support"
-      title="Contactez notre équipe"
+    <ContactSection      title="Contactez notre équipe"
       description="Vous avez une question, un retour ou une demande spécifique ? Remplissez ce formulaire et nous vous répondrons rapidement."
       onsubmit={handleSubmit}
       variant="centered"

@@ -45,18 +45,21 @@
 		<h2>Complet</h2>
 		<ComponentPreview>
 			<Footer
-				brand="Acme"
 				tagline="Des produits simples pour des équipes ambitieuses."
 				{columns}
 				copyright="© 2026 Acme Corp. Tous droits réservés."
-			/>
+			>
+				{#snippet brand()}Acme{/snippet}
+			</Footer>
 		</ComponentPreview>
 	</section>
 
 	<section class="variant">
 		<h2>Minimaliste (sans colonnes)</h2>
 		<ComponentPreview>
-			<Footer brand="Acme" copyright="© 2026 Acme Corp." />
+			<Footer copyright="© 2026 Acme Corp.">
+				{#snippet brand()}Acme{/snippet}
+			</Footer>
 		</ComponentPreview>
 	</section>
 

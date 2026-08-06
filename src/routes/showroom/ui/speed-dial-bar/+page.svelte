@@ -75,7 +75,7 @@
       <div class="props-row header">
         <span>Champ</span><span>Type</span><span>Requis</span><span>Description</span>
       </div>
-      <div class="props-row type-header"><span colspan="4"><strong>SpeedDialBarItem</strong></span></div>
+      <div class="props-row type-header"><span><strong>SpeedDialBarItem</strong></span></div>
       {#each [
         ['icon',     'Component',              'oui', 'Icône Lucide'],
         ['label',    'string',                 'oui', 'Texte affiché sous l\'icône'],
@@ -87,7 +87,7 @@
           <code>{f}</code><code class="type">{t}</code><code class="req">{r}</code><span>{desc}</span>
         </div>
       {/each}
-      <div class="props-row type-header"><span colspan="4"><strong>SpeedDialBarAction</strong></span></div>
+      <div class="props-row type-header"><span><strong>SpeedDialBarAction</strong></span></div>
       {#each [
         ['icon',    'Component',  'oui', 'Icône Lucide'],
         ['label',   'string',     'oui', 'Label affiché au survol'],
@@ -97,7 +97,7 @@
           <code>{f}</code><code class="type">{t}</code><code class="req">{r}</code><span>{desc}</span>
         </div>
       {/each}
-      <div class="props-row type-header"><span colspan="4"><strong>SpeedDialBarSubItem</strong></span></div>
+      <div class="props-row type-header"><span><strong>SpeedDialBarSubItem</strong></span></div>
       {#each [
         ['icon',    'Component',  'oui', 'Icône Lucide'],
         ['label',   'string',     'oui', 'Texte de la pill'],

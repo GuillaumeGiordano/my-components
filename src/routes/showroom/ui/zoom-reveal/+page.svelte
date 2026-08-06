@@ -34,9 +34,9 @@
     <h2>Grid de features — <code>ZoomReveal</code> par carte</h2>
     <div class="features-grid">
       {#each features as f, i}
-        <ZoomReveal delay={i * 60}>
+        <ZoomReveal>
           <div class="feat-card">
-            <div class="feat-icon"><svelte:component this={f.icon} size={20} /></div>
+            <div class="feat-icon"><f.icon size={20} /></div>
             <h3>{f.title}</h3>
             <p>{f.body}</p>
           </div>

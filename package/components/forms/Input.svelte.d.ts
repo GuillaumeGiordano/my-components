@@ -1,4 +1,5 @@
 import type { Component } from 'svelte';
+import type { HTMLInputAttributes } from 'svelte/elements';
 type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search' | 'date' | 'time';
 type $$ComponentProps = {
     id?: string;
@@ -14,7 +15,7 @@ type $$ComponentProps = {
     readonly?: boolean;
     icon?: Component;
     iconRight?: Component;
-    autocomplete?: string;
+    autocomplete?: HTMLInputAttributes['autocomplete'];
     minlength?: number;
     maxlength?: number;
     min?: string | number;
