@@ -196,7 +196,7 @@
           />
 
           <div class="form-footer">
-            <Button variant="primary" size="md" icon={Send}>
+            <Button type="submit" variant="primary" size="md" icon={Send}>
               {#snippet children()}
                 {loading ? "Envoi en cours..." : "Envoyer le message"}
               {/snippet}
