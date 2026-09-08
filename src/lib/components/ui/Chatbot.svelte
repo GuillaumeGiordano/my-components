@@ -30,9 +30,9 @@
   let input = $state("");
   let messagesEl: HTMLDivElement | null = $state(null);
 
-  const messages = $derived<ChatMessage[]>(
-    initialMessage ? [{ role: "assistant", content: initialMessage }] : [],
-  );
+  // Conversation history. The greeting (`initialMessage`) is rendered separately in the
+  // markup, so it stays out of this mutable array.
+  let messages = $state<ChatMessage[]>([]);
 
   function scrollToBottom() {
     if (messagesEl) {
@@ -123,8 +123,15 @@
 
       <!-- Messages -->
       <div class="messages" bind:this={messagesEl}>
-        {#if messages.length === 0}
+        {#if !initialMessage && messages.length === 0}
           <p class="empty-hint">Posez votre première question ci-dessous.</p>
+        {/if}
+
+        {#if initialMessage}
+          <div class="message assistant">
+            <span class="avatar"><Bot size={14} /></span>
+            <div class="bubble">{initialMessage}</div>
+          </div>
         {/if}
 
         {#each messages as msg}
