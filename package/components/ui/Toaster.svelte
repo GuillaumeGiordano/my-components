@@ -22,9 +22,28 @@
 			dismissing = new Set([...dismissing].filter((id) => id !== t.id));
 		}
 	}
+
+	// A modal <dialog> (showModal) lives in the browser's TOP LAYER, above any z-index — a toast
+	// fired from a modal would sit under its backdrop. The toaster is therefore a manual popover,
+	// also in the top layer, re-shown on each NEW toast so it lands above any dialog opened since
+	// (the top layer is ordered by insertion). Hidden when empty. Re-runs when the toast count changes.
+	let shownCount = 0;
+	function topLayer(el: HTMLElement) {
+		const count = toast.list.length;
+		if (typeof el.showPopover === 'function') {
+			const open = el.matches(':popover-open');
+			if (count > shownCount) {
+				if (open) el.hidePopover();
+				el.showPopover();
+			} else if (count === 0 && open) {
+				el.hidePopover();
+			}
+		}
+		shownCount = count;
+	}
 </script>
 
-<div class="toaster" aria-live="polite" aria-atomic="false">
+<div class="toaster" popover="manual" aria-live="polite" aria-atomic="false" {@attach topLayer}>
 	{#each toast.list as t (t.id)}
 		{@const ToastIcon = icons[t.variant]}
 		<div
@@ -52,8 +71,14 @@
 <style>
 	.toaster {
 		position: fixed;
-		bottom: 24px;
-		right: 24px;
+		/* Reset the user-agent popover box (centered, bordered, padded, opaque). */
+		inset: auto 24px 24px auto;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		color: inherit;
+		overflow: visible;
 		z-index: 9999;
 		display: flex;
 		flex-direction: column;
