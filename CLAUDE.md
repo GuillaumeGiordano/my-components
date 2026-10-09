@@ -99,6 +99,7 @@ Dark mode: overridden via `.dark` class on `<html>`. Applied automatically by `t
 | `<Sidebar>` | Navigation sidebar. Props: `groups: SidebarGroup[]`, `bind:collapsed`, `activeHref`, `shortkey`. Snippets: `{#snippet header()}`, `{#snippet footer()}` — optionnels, rendus en haut/bas avec bordure séparatrice. |
 | `<Navbar>` | Top navigation bar. Props: `items?: NavItem[]`, `mobileMenu` (drawer/popover/fullscreen), `spy` (scroll spy: auto-highlights the item whose `#anchor` section crosses the viewport center), `burger`, `position` (top/bottom). Snippets: `{#snippet brand()}` (**not a `logo` prop**), `{#snippet actionBtn()}` (**not `actions`**) |
 | `<Footer>` | Page footer |
+| `<Grid>` + `<GridItem>` | Responsive layout grid (dashboards…), responsive on the GRID's width (container queries). `Grid` props: `cols` (number or per tier, default `{ base: 1, md: 2, lg: 5 }`), `gap` (`'20px'`), `rowHeight` (min row height = unit of `rows`, `'180px'`, `'auto'` to disable), `dense` (`true`), `class`. `GridItem` props: `span`, `rows`, `col`, `row` (number or per tier, clamped to the tier's column count; `rows` ignored on 1-column tiers), `fill` (child takes the cell height, `true`), `hideBelow` (`'sm'\|'md'\|'lg'\|'xl'`), `class`. Tiers (grid width, fixed): `sm` 480 · `md` 640 · `lg` 1000 · `xl` 1280px; a missing tier inherits the one below. |
 | `<StandardLayout>` | Full page layout wrapper |
 
 ---

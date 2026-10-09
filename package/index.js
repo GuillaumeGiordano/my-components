@@ -115,6 +115,9 @@ export { default as Tooltip } from './components/ui/Tooltip.svelte';
 export { default as LogoGG } from './components/logo/LogoGG.svelte';
 // ─── Layout ──────────────────────────────────────────────────────────────────
 export { default as Footer } from './components/layout/Footer.svelte';
+export { default as Grid } from './components/layout/Grid.svelte';
+export { GRID_BREAKPOINTS } from './components/layout/Grid.svelte';
+export { default as GridItem } from './components/layout/GridItem.svelte';
 export { default as Navbar } from './components/layout/Navbar.svelte';
 export { default as NavbarMobile } from './components/layout/NavbarMobile.svelte';
 export { default as NavbarMobileRadial } from './components/layout/NavbarMobileRadial.svelte';

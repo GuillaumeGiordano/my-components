@@ -425,6 +425,7 @@ export const categories = [
             { slug: 'navbar', label: 'Navbar', description: 'Barre de navigation responsive avec menu hamburger' },
             { slug: 'sidebar', label: 'Sidebar', description: 'Navigation latérale collapsible avec groupes' },
             { slug: 'footer', label: 'Footer', description: 'Pied de page avec colonnes de liens' },
+            { slug: 'grid', label: 'Grid', description: 'Grille responsive (container queries) — chaque item choisit sa largeur, sa hauteur et sa position' },
             { slug: 'standard-layout', label: 'Standard Layout', description: 'Combinaison Navbar + Sidebar + Main + Footer' },
             { slug: 'navbar-mobile', label: 'Navbar Mobile', description: 'Barre de navigation pour les appareils mobiles' },
             { slug: 'navbar-mobile-radial', label: 'Navbar Mobile Radial', description: 'Bouton flottant en bas à droite — menu radial en arc avec animation staggerée' },
